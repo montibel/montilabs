@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>montibel | Fotografía</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* 1. RESET Y ESTILOS BASE */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #ffffff;
+        color: #1a1a1a;
+        line-height: 1.6;
+        padding: 40px 20px;
+      }
+
+      /* 2. HEADER */
+      header {
+        max-width: 1200px;
+        margin: 0 auto 60px auto;
+        text-align: left;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      /* 3. GALERÍA (ESTILO FORMAT) */
+      .gallery {
+        display: grid;
+        max-width: 1200px;
+        margin: 0 auto;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 20px;
+      }
+
+      .gallery-item {
+        overflow: hidden;
+        background-color: #f9f9f9;
+        aspect-ratio: 3 / 2;
+        /* Animación de entrada */
+        animation: fadeIn 0.8s ease forwards;
+        opacity: 0;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition:
+          transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
+          opacity 0.4s ease;
+        cursor: pointer;
+        display: block;
+      }
+
+      .gallery-item img:hover {
+        opacity: 0.9;
+        transform: scale(1.03); /* Efecto zoom suave */
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 4. RESPONSIVE */
+      @media (max-width: 600px) {
+        .gallery {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        header {
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>montibel</h1>
+    </header>
+
+    <main class="gallery" id="photo-grid"></main>
+
+    <script>
+      // 1. Array de fotos: Asegúrate de que estos nombres coincidan con tus archivos en assets/img/
+      const misFotos = [
+        { src: "1.jpg", alt: "Descripción 1" },
+        { src: "2.jpg", alt: "Descripción 2" },
+        { src: "3.jpg", alt: "Descripción 3" },
+        { src: "4.jpg", alt: "Descripción 4" },
+        { src: "5.jpg", alt: "Descripción 5" },
+        { src: "6.jpg", alt: "Descripción 6" },
+        { src: "7.jpg", alt: "Descripción 7" },
+        { src: "8.jpg", alt: "Descripción 8" },
+        { src: "9.jpg", alt: "Descripción 9" },
+        { src: "10.jpg", alt: "Descripción 10" },
+        { src: "11.jpg", alt: "Descripción 1" },
+        { src: "12.jpg", alt: "Descripción 2" },
+        { src: "13.jpg", alt: "Descripción 3" },
+        { src: "14.jpg", alt: "Descripción 4" },
+        { src: "15.jpg", alt: "Descripción 5" },
+        { src: "16.jpg", alt: "Descripción 6" },
+        { src: "17.jpg", alt: "Descripción 7" },
+        { src: "18.jpg", alt: "Descripción 8" },
+        { src: "19.jpg", alt: "Descripción 9" },
+        { src: "20.jpg", alt: "Descripción 10" },
+        { src: "21.jpg", alt: "Descripción 8" },
+        { src: "22.jpg", alt: "Descripción 9" },
+        { src: "23.jpg", alt: "Descripción 10" },
+        // Puedes seguir añadiendo más aquí...
+      ];
+
+      const renderGallery = () => {
+        const grid = document.getElementById("photo-grid");
+        const path = "assets/img/"; // Ruta a tu carpeta de imágenes
+
+        if (!grid) return;
+
+        grid.innerHTML = "";
+
+        misFotos.forEach((foto) => {
+          const card = document.createElement("div");
+          card.className = "gallery-item";
+
+          card.innerHTML = `
+                <img src="${path}${foto.src}" alt="${foto.alt}" loading="lazy">
+            `;
+
+          grid.appendChild(card);
+        });
+      };
+
+      // Ejecutar cuando el DOM esté listo
+      document.addEventListener("DOMContentLoaded", renderGallery);
+    </script>
+  </body>
+</html>
