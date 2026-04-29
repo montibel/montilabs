@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>montibel | Fotografía</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
       rel="stylesheet"
     />
+
     <style>
-      /* 1. RESET Y ESTILOS BASE */
+      /* RESET */
       * {
         margin: 0;
         padding: 0;
@@ -21,55 +23,54 @@
         background-color: #ffffff;
         color: #1a1a1a;
         line-height: 1.6;
-        padding: 40px 20px;
+        padding: 60px 30px;
       }
 
-      /* 2. HEADER */
       header {
-        max-width: 1200px;
-        margin: 0 auto 60px auto;
-        text-align: left;
+        max-width: 1400px;
+        margin: 0 auto 80px auto;
       }
 
       header h1 {
-        font-size: 1.5rem;
-        letter-spacing: 2px;
+        font-size: 1.2rem;
+        letter-spacing: 3px;
         text-transform: uppercase;
         font-weight: 400;
       }
 
-      /* 3. GALERÍA (ESTILO FORMAT) */
+      /* GALERÍA TIPO FORMAT (MASONRY) */
       .gallery {
-        display: grid;
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 20px;
+        column-count: 3;
+        column-gap: 20px;
       }
 
       .gallery-item {
-        overflow: hidden;
-        background-color: #f9f9f9;
-        aspect-ratio: 3 / 2;
-        /* Animación de entrada */
-        animation: fadeIn 0.8s ease forwards;
+        break-inside: avoid;
+        margin-bottom: 20px;
         opacity: 0;
+        animation: fadeIn 0.8s ease forwards;
       }
 
       .gallery-item img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition:
-          transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1),
-          opacity 0.4s ease;
-        cursor: pointer;
+        height: auto;
         display: block;
+        cursor: pointer;
+        transition:
+          transform 0.4s ease,
+          opacity 0.3s ease;
       }
 
       .gallery-item img:hover {
+        transform: scale(1.02);
         opacity: 0.9;
-        transform: scale(1.03); /* Efecto zoom suave */
+      }
+
+      /* efecto editorial leve */
+      .gallery-item:nth-child(odd) {
+        margin-top: 10px;
       }
 
       @keyframes fadeIn {
@@ -83,18 +84,49 @@
         }
       }
 
-      /* 4. RESPONSIVE */
+      /* RESPONSIVE */
+      @media (max-width: 1000px) {
+        .gallery {
+          column-count: 2;
+        }
+      }
+
       @media (max-width: 600px) {
         .gallery {
-          grid-template-columns: 1fr;
-          gap: 15px;
+          column-count: 1;
         }
-        header {
-          margin-bottom: 30px;
-        }
+      }
+
+      /* LIGHTBOX */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .lightbox-img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .lightbox .close {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
       }
     </style>
   </head>
+
   <body>
     <header>
       <h1></h1>
@@ -102,29 +134,22 @@
 
     <main class="gallery" id="photo-grid"></main>
 
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+      <span class="close">&times;</span>
+      <img class="lightbox-img" id="lightbox-img" />
+    </div>
+
     <script>
-      // 1. Array de fotos: Asegúrate de que estos nombres coincidan con tus archivos en assets/img/
       const misFotos = [
-        { src: "1.jpg", alt: "Descripción 1" },
-        { src: "2.jpg", alt: "Descripción 2" },
-        { src: "3.jpg", alt: "Descripción 3" },
-        { src: "4.jpg", alt: "Descripción 4" },
-        { src: "5.jpg", alt: "Descripción 5" },
-        { src: "6.jpg", alt: "Descripción 6" },
-        { src: "7.jpg", alt: "Descripción 7" },
-        { src: "8.jpg", alt: "Descripción 8" },
-        { src: "9.jpg", alt: "Descripción 9" },
-        { src: "10.jpg", alt: "Descripción 10" },
-        { src: "12.jpg", alt: "Descripción 12" },
-        { src: "13.jpg", alt: "Descripción 13" },
-        { src: "14.jpg", alt: "Descripción 14" },
-        { src: "16.jpg", alt: "Descripción 6" },
-        { src: "17.jpg", alt: "Descripción 17" },
         { src: "18.jpg", alt: "Descripción 18" },
-        { src: "19.jpg", alt: "Descripción 19" },
         { src: "20.jpg", alt: "Descripción 20" },
         { src: "21.jpg", alt: "Descripción 21" },
         { src: "22.jpg", alt: "Descripción 22" },
+        { src: "39.jpg", alt: "Descripción 39" },
+        { src: "40.jpg", alt: "Descripción 40" },
+        { src: "41.jpg", alt: "Descripción 41" },
+        { src: "42.jpg", alt: "Descripción 42" },
         { src: "23.jpg", alt: "Descripción 23" },
         { src: "24.jpg", alt: "Descripción 24" },
         { src: "25.jpg", alt: "Descripción 25" },
@@ -138,14 +163,27 @@
         { src: "36.jpg", alt: "Descripción 36" },
         { src: "37.jpg", alt: "Descripción 37" },
         { src: "38.jpg", alt: "Descripción 38" },
-        // Puedes seguir añadiendo más aquí...
+        { src: "1.jpg", alt: "Descripción 1" },
+        { src: "2.jpg", alt: "Descripción 2" },
+        { src: "3.jpg", alt: "Descripción 3" },
+        { src: "4.jpg", alt: "Descripción 4" },
+        { src: "5.jpg", alt: "Descripción 5" },
+        { src: "6.jpg", alt: "Descripción 6" },
+        { src: "7.jpg", alt: "Descripción 7" },
+        { src: "8.jpg", alt: "Descripción 8" },
+        { src: "9.jpg", alt: "Descripción 9" },
+        { src: "10.jpg", alt: "Descripción 10" },
+        { src: "12.jpg", alt: "Descripción 12" },
+        { src: "13.jpg", alt: "Descripción 13" },
+        { src: "14.jpg", alt: "Descripción 14" },
+        { src: "16.jpg", alt: "Descripción 16" },
+        { src: "17.jpg", alt: "Descripción 17" },
+        { src: "19.jpg", alt: "Descripción 19" },
       ];
 
       const renderGallery = () => {
         const grid = document.getElementById("photo-grid");
-        const path = "assets/img/"; // Ruta a tu carpeta de imágenes
-
-        if (!grid) return;
+        const path = "assets/img/";
 
         grid.innerHTML = "";
 
@@ -154,15 +192,38 @@
           card.className = "gallery-item";
 
           card.innerHTML = `
-                <img src="${path}${foto.src}" alt="${foto.alt}" loading="lazy">
-            `;
+            <img src="${path}${foto.src}" alt="${foto.alt}" loading="lazy">
+          `;
+
+          const img = card.querySelector("img");
+
+          img.addEventListener("click", () => {
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.getElementById("lightbox-img");
+
+            lightboxImg.src = img.src;
+            lightbox.style.display = "flex";
+          });
 
           grid.appendChild(card);
         });
       };
 
-      // Ejecutar cuando el DOM esté listo
       document.addEventListener("DOMContentLoaded", renderGallery);
+
+      // cerrar lightbox
+      const lightbox = document.getElementById("lightbox");
+      const closeBtn = document.querySelector(".close");
+
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>
