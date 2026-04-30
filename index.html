@@ -26,6 +26,11 @@
         padding: 60px 30px;
       }
 
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
       header {
         max-width: 1400px;
         margin: 0 auto 80px auto;
@@ -38,24 +43,23 @@
         font-weight: 400;
       }
 
-      /* GALERÍA TIPO FORMAT (MASONRY) */
+      /* GALERÍA RESPONSIVE REAL */
       .gallery {
         max-width: 1400px;
         margin: 0 auto;
-        column-count: 3;
-        column-gap: 20px;
+        column-width: 380px;
+        column-gap: 24px;
       }
 
       .gallery-item {
         break-inside: avoid;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
         opacity: 0;
         animation: fadeIn 0.8s ease forwards;
       }
 
       .gallery-item img {
         width: 100%;
-        height: auto;
         display: block;
         cursor: pointer;
         transition:
@@ -68,7 +72,6 @@
         opacity: 0.9;
       }
 
-      /* efecto editorial leve */
       .gallery-item:nth-child(odd) {
         margin-top: 10px;
       }
@@ -84,16 +87,35 @@
         }
       }
 
-      /* RESPONSIVE */
-      @media (max-width: 1000px) {
+      /* TABLET */
+      @media (max-width: 768px) {
+        body {
+          padding: 40px 20px;
+        }
+
         .gallery {
-          column-count: 2;
+          column-width: 280px;
+          column-gap: 16px;
+        }
+
+        header {
+          margin-bottom: 50px;
         }
       }
 
-      @media (max-width: 600px) {
+      /* MOBILE */
+      @media (max-width: 480px) {
+        body {
+          padding: 30px 15px;
+        }
+
         .gallery {
-          column-count: 1;
+          column-width: 100%;
+          column-gap: 12px;
+        }
+
+        .gallery-item {
+          margin-bottom: 15px;
         }
       }
 
@@ -112,8 +134,8 @@
       }
 
       .lightbox-img {
-        max-width: 90%;
-        max-height: 90%;
+        max-width: 95%;
+        max-height: 85%;
       }
 
       .lightbox .close {
@@ -123,6 +145,14 @@
         font-size: 2rem;
         color: white;
         cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+        .lightbox .close {
+          top: 15px;
+          right: 20px;
+          font-size: 1.8rem;
+        }
       }
     </style>
   </head>
@@ -217,7 +247,6 @@
 
       document.addEventListener("DOMContentLoaded", renderGallery);
 
-      // cerrar lightbox
       const lightbox = document.getElementById("lightbox");
       const closeBtn = document.querySelector(".close");
 
