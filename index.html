@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>montibel | Fotografía</title>
 
+    <!-- PRELOAD (mejora carga inicial) -->
+    <link rel="preload" as="image" href="assets/img/1.jpg" />
+    <link rel="preload" as="image" href="assets/img/2.jpg" />
+    <link rel="preload" as="image" href="assets/img/3.jpg" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
       rel="stylesheet"
     />
 
     <style>
-      /* RESET */
       * {
         margin: 0;
         padding: 0;
@@ -20,7 +24,7 @@
 
       body {
         font-family: "Inter", sans-serif;
-        background-color: #ffffff;
+        background: #fff;
         color: #1a1a1a;
         line-height: 1.6;
         padding: 60px 30px;
@@ -43,27 +47,26 @@
         font-weight: 400;
       }
 
-      /* GALERÍA RESPONSIVE REAL */
+      /* MASONRY ESTABLE */
       .gallery {
         max-width: 1400px;
         margin: 0 auto;
-        column-width: 380px;
+        columns: 3;
         column-gap: 24px;
       }
 
       .gallery-item {
         break-inside: avoid;
         margin-bottom: 24px;
-        opacity: 0;
-        animation: fadeIn 0.8s ease forwards;
       }
 
       .gallery-item img {
         width: 100%;
         display: block;
         cursor: pointer;
+        background: #f3f3f3;
         transition:
-          transform 0.4s ease,
+          transform 0.3s ease,
           opacity 0.3s ease;
       }
 
@@ -72,61 +75,28 @@
         opacity: 0.9;
       }
 
-      .gallery-item:nth-child(odd) {
-        margin-top: 10px;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* TABLET */
-      @media (max-width: 768px) {
-        body {
-          padding: 40px 20px;
-        }
-
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
         .gallery {
-          column-width: 280px;
-          column-gap: 16px;
-        }
-
-        header {
-          margin-bottom: 50px;
+          columns: 2;
         }
       }
 
-      /* MOBILE */
-      @media (max-width: 480px) {
+      @media (max-width: 600px) {
         body {
           padding: 30px 15px;
         }
 
         .gallery {
-          column-width: 100%;
-          column-gap: 12px;
-        }
-
-        .gallery-item {
-          margin-bottom: 15px;
+          columns: 1;
         }
       }
 
       /* LIGHTBOX */
       .lightbox {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
         display: none;
         align-items: center;
         justify-content: center;
@@ -140,8 +110,8 @@
 
       .lightbox .close {
         position: absolute;
-        top: 30px;
-        right: 40px;
+        top: 25px;
+        right: 30px;
         font-size: 2rem;
         color: white;
         cursor: pointer;
@@ -170,7 +140,7 @@
       <img class="lightbox-img" id="lightbox-img" />
     </div>
 
-    <script
+    <script>
       const misFotos = [
         { src: "1.jpg", alt: "Foto 1" },
         { src: "2.jpg", alt: "Foto 2" },
@@ -191,25 +161,25 @@
         { src: "17.jpg", alt: "Foto 17" },
         { src: "18.jpg", alt: "Foto 18" },
         { src: "19.jpg", alt: "Foto 19" },
-        { src: "20.jpg", alt: "Foto 20" }, 
-        { src: "21.jpg", alt: "Foto 21" }, 
-        { src: "22.jpg", alt: "Foto 22" }, 
-        { src: "23.jpg", alt: "Foto 23" }, 
-        { src: "24.jpg", alt: "Foto 24" }, 
-        { src: "25.jpg", alt: "Foto 25" }, 
-        { src: "26.jpg", alt: "Foto 26" }, 
-        { src: "27.jpg", alt: "Foto 27" }, 
-        { src: "28.jpg", alt: "Foto 28" }, 
-        { src: "29.jpg", alt: "Foto 29" }, 
+        { src: "20.jpg", alt: "Foto 20" },
+        { src: "21.jpg", alt: "Foto 21" },
+        { src: "22.jpg", alt: "Foto 22" },
+        { src: "23.jpg", alt: "Foto 23" },
+        { src: "24.jpg", alt: "Foto 24" },
+        { src: "25.jpg", alt: "Foto 25" },
+        { src: "26.jpg", alt: "Foto 26" },
+        { src: "27.jpg", alt: "Foto 27" },
+        { src: "28.jpg", alt: "Foto 28" },
+        { src: "29.jpg", alt: "Foto 29" },
         { src: "30.jpg", alt: "Foto 30" },
-        { src: "31.jpg", alt: "Foto 31" }, 
-        { src: "32.jpg", alt: "Foto 32" }, 
-        { src: "33.jpg", alt: "Foto 33" }, 
-        { src: "34.jpg", alt: "Foto 34" }, 
-        { src: "35.jpg", alt: "Foto 35" }, 
-        { src: "36.jpg", alt: "Foto 36" }, 
-        { src: "37.jpg", alt: "Foto 37" }, 
-        { src: "38.jpg", alt: "Foto 38" }, 
+        { src: "31.jpg", alt: "Foto 31" },
+        { src: "32.jpg", alt: "Foto 32" },
+        { src: "33.jpg", alt: "Foto 33" },
+        { src: "34.jpg", alt: "Foto 34" },
+        { src: "35.jpg", alt: "Foto 35" },
+        { src: "36.jpg", alt: "Foto 36" },
+        { src: "37.jpg", alt: "Foto 37" },
+        { src: "38.jpg", alt: "Foto 38" },
         { src: "39.jpg", alt: "Foto 39" },
       ];
 
@@ -219,15 +189,28 @@
 
         grid.innerHTML = "";
 
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                obs.unobserve(img);
+              }
+            });
+          },
+          { rootMargin: "200px" },
+        );
+
         misFotos.forEach((foto) => {
           const card = document.createElement("div");
           card.className = "gallery-item";
 
-          card.innerHTML = `
-            <img src="${path}${foto.src}" alt="${foto.alt}" loading="lazy">
-          `;
-
-          const img = card.querySelector("img");
+          const img = document.createElement("img");
+          img.dataset.src = path + foto.src;
+          img.alt = foto.alt;
+          img.loading = "lazy";
+          img.decoding = "async";
 
           img.addEventListener("click", () => {
             const lightbox = document.getElementById("lightbox");
@@ -237,12 +220,16 @@
             lightbox.style.display = "flex";
           });
 
+          card.appendChild(img);
           grid.appendChild(card);
+
+          observer.observe(img);
         });
       };
 
       document.addEventListener("DOMContentLoaded", renderGallery);
 
+      // LIGHTBOX
       const lightbox = document.getElementById("lightbox");
       const closeBtn = document.querySelector(".close");
 
