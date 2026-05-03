@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>montibel | Fotografía</title>
 
-    <!-- PRELOAD (mejora carga inicial) -->
-    <link rel="preload" as="image" href="assets/img/1.jpg" />
-    <link rel="preload" as="image" href="assets/img/2.jpg" />
-    <link rel="preload" as="image" href="assets/img/3.jpg" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"
       rel="stylesheet"
@@ -26,70 +21,32 @@
         font-family: "Inter", sans-serif;
         background: #fff;
         color: #1a1a1a;
-        line-height: 1.6;
-        padding: 60px 30px;
+        overflow-x: hidden;
       }
 
-      img {
-        max-width: 100%;
-        height: auto;
+      /* SCROLL TIPO EXPOSICIÓN */
+      html {
+        scroll-snap-type: y mandatory;
       }
 
-      header {
-        max-width: 1400px;
-        margin: 0 auto 80px auto;
-      }
-
-      header h1 {
-        font-size: 1.2rem;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        font-weight: 400;
-      }
-
-      /* MASONRY ESTABLE */
       .gallery {
-        max-width: 1400px;
-        margin: 0 auto;
-        columns: 3;
-        column-gap: 24px;
+        width: 100%;
       }
 
       .gallery-item {
-        break-inside: avoid;
-        margin-bottom: 24px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        scroll-snap-align: start;
+        padding: 20px;
       }
 
       .gallery-item img {
-        width: 100%;
-        display: block;
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
         cursor: pointer;
-        background: #f3f3f3;
-        transition:
-          transform 0.3s ease,
-          opacity 0.3s ease;
-      }
-
-      .gallery-item img:hover {
-        transform: scale(1.02);
-        opacity: 0.9;
-      }
-
-      /* RESPONSIVE */
-      @media (max-width: 1024px) {
-        .gallery {
-          columns: 2;
-        }
-      }
-
-      @media (max-width: 600px) {
-        body {
-          padding: 30px 15px;
-        }
-
-        .gallery {
-          columns: 1;
-        }
       }
 
       /* LIGHTBOX */
@@ -110,28 +67,16 @@
 
       .lightbox .close {
         position: absolute;
-        top: 25px;
-        right: 30px;
+        top: 20px;
+        right: 25px;
         font-size: 2rem;
         color: white;
         cursor: pointer;
-      }
-
-      @media (max-width: 600px) {
-        .lightbox .close {
-          top: 15px;
-          right: 20px;
-          font-size: 1.8rem;
-        }
       }
     </style>
   </head>
 
   <body>
-    <header>
-      <h1></h1>
-    </header>
-
     <main class="gallery" id="photo-grid"></main>
 
     <!-- LIGHTBOX -->
@@ -177,30 +122,14 @@
         const grid = document.getElementById("photo-grid");
         const path = "assets/img/";
 
-        grid.innerHTML = "";
-
-        const observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                obs.unobserve(img);
-              }
-            });
-          },
-          { rootMargin: "200px" },
-        );
-
         misFotos.forEach((foto) => {
-          const card = document.createElement("div");
-          card.className = "gallery-item";
+          const item = document.createElement("div");
+          item.className = "gallery-item";
 
           const img = document.createElement("img");
-          img.dataset.src = path + foto.src;
+          img.src = path + foto.src;
           img.alt = foto.alt;
           img.loading = "lazy";
-          img.decoding = "async";
 
           img.addEventListener("click", () => {
             const lightbox = document.getElementById("lightbox");
@@ -210,16 +139,14 @@
             lightbox.style.display = "flex";
           });
 
-          card.appendChild(img);
-          grid.appendChild(card);
-
-          observer.observe(img);
+          item.appendChild(img);
+          grid.appendChild(item);
         });
       };
 
       document.addEventListener("DOMContentLoaded", renderGallery);
 
-      // LIGHTBOX
+      // cerrar lightbox
       const lightbox = document.getElementById("lightbox");
       const closeBtn = document.querySelector(".close");
 
