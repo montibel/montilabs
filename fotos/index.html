@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>montibel | Fotografía</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: "Inter", sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
+      html { scroll-snap-type: y mandatory; }
+      .gallery { width: 100%; }
+      .gallery-item { height: 100vh; display: flex; align-items: center; justify-content: center; scroll-snap-align: start; padding: 20px; }
+      .gallery-item img { max-width: 90%; max-height: 90%; object-fit: contain; cursor: pointer; }
+      .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); display: none; align-items: center; justify-content: center; z-index: 1000; }
+      .lightbox-img { max-width: 95%; max-height: 85%; }
+      .lightbox .close { position: absolute; top: 20px; right: 25px; font-size: 2rem; color: white; cursor: pointer; }
+      .back { position: fixed; top: 16px; left: 20px; font-size: 12px; color: #888; text-decoration: none; font-family: monospace; z-index: 999; }
+      .back:hover { color: #333; }
+    </style>
+  </head>
+  <body>
+    <a href="../" class="back">← volver</a>
+    <main class="gallery" id="photo-grid"></main>
+    <div id="lightbox" class="lightbox">
+      <span class="close">&times;</span>
+      <img class="lightbox-img" id="lightbox-img" />
+    </div>
+    <script>
+      const misFotos = [
+        { src: "1.jpg", alt: "Foto 1" }, { src: "2.jpg", alt: "Foto 2" },
+        { src: "3.jpg", alt: "Foto 3" }, { src: "4.jpg", alt: "Foto 4" },
+        { src: "5.jpg", alt: "Foto 5" }, { src: "6.jpg", alt: "Foto 6" },
+        { src: "7.jpg", alt: "Foto 7" }, { src: "8.jpg", alt: "Foto 8" },
+        { src: "9.jpg", alt: "Foto 9" }, { src: "10.jpg", alt: "Foto 10" },
+        { src: "11.jpg", alt: "Foto 11" }, { src: "12.jpg", alt: "Foto 12" },
+        { src: "13.jpg", alt: "Foto 13" }, { src: "14.jpg", alt: "Foto 14" },
+        { src: "15.jpg", alt: "Foto 15" }, { src: "16.jpg", alt: "Foto 16" },
+        { src: "17.jpg", alt: "Foto 17" }, { src: "18.jpg", alt: "Foto 18" },
+        { src: "19.jpg", alt: "Foto 19" }, { src: "20.jpg", alt: "Foto 20" },
+        { src: "21.jpg", alt: "Foto 21" }, { src: "22.jpg", alt: "Foto 22" },
+        { src: "23.jpg", alt: "Foto 23" }, { src: "24.jpg", alt: "Foto 24" },
+        { src: "25.jpg", alt: "Foto 25" }, { src: "26.jpg", alt: "Foto 26" },
+        { src: "27.jpg", alt: "Foto 27" }, { src: "28.jpg", alt: "Foto 28" },
+        { src: "29.jpg", alt: "Foto 29" },
+      ];
+
+      const renderGallery = () => {
+        const grid = document.getElementById("photo-grid");
+        const path = "../assets/img/";
+        misFotos.forEach((foto) => {
+          const item = document.createElement("div");
+          item.className = "gallery-item";
+          const img = document.createElement("img");
+          img.src = path + foto.src;
+          img.alt = foto.alt;
+          img.loading = "lazy";
+          img.addEventListener("click", () => {
+            document.getElementById("lightbox-img").src = img.src;
+            document.getElementById("lightbox").style.display = "flex";
+          });
+          item.appendChild(img);
+          grid.appendChild(item);
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", renderGallery);
+
+      const lightbox = document.getElementById("lightbox");
+      document.querySelector(".close").addEventListener("click", () => lightbox.style.display = "none");
+      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.style.display = "none"; });
+    </script>
+  </body>
+</html>
