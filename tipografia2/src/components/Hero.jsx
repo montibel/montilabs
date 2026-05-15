@@ -16,7 +16,7 @@ function GlassText({ text, position, colliderArgs, rigidRef }) {
       <CuboidCollider args={colliderArgs} />
       <Center>
         <Text3D
-          font="/fonts/helvetiker_bold.typeface.json"
+          font="./fonts/helvetiker_bold.typeface.json"
           size={1.4}
           height={0.4}
           curveSegments={32}
