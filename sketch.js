@@ -12,20 +12,122 @@ const C = {
   green: [0, 200, 0],
 };
 
-const BOOT_LINES = [
-  "MONTILABS OS  Version 1.0",
-  "Copyright (C) 2024 montilabs.",
-  "",
-  "  640K RAM OK",
-  "",
-  "  Iniciando MONTILABS OS...",
-];
+// --- Translations ---
+const T = {
+  es: {
+    boot: [
+      "MONTILABS OS  Version 1.0",
+      "Copyright (C) 2024 montilabs.",
+      "",
+      "  640K RAM OK",
+      "",
+      "  Iniciando MONTILABS OS...",
+    ],
+    loading:   "Iniciando MONTILABS OS...",
+    watermark: "Diseñado por montilabs",
+    start:     "▶ Inicio",
+    icons:     ["Mis Fotos", "Sobre mí", "Contacto", "Proyectos"],
+    winTitles: {
+      fotos:     "📷 Mis Fotos",
+      sobremi:   "📝 Sobre mí",
+      contacto:  "📧 Contacto",
+      proyectos: "💼 Proyectos",
+    },
+    galTitle:  "montilabs",
+    galSub:    "Fotografía análoga",
+    galBtn:    "Ver galería  →",
+    contact:   "✉  montibel@gmail.com",
+    sobremi: `Hola, soy Marce. Fundadora de montilabs.
+
+Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y mezclo código con diseño para armar cosas animadas, además de dedicarme a la edición de video.
+
+Mi fuerte es la tipografía animada, los efectos visuales y el diseño de interfaces. Actualmente estoy trabajando con arte generativo y mezclando inteligencia artificial con visuales.
+
+Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, leyendo algo o preparando un café con mis gatos cerca.`,
+    menuItems: [
+      "📁  Programas",
+      "📄  Documentos",
+      "⚙  Configuración",
+      "🔍  Buscar",
+      "❓  Ayuda",
+      "---",
+      "⏻  Apagar...",
+    ],
+    categories: ["Tipografía", "UI / UX"],
+    langBtn:    "EN",
+    langHint:   "Selecciona tu idioma",
+    langEs:     "Español",
+    langEn:     "English",
+  },
+  en: {
+    boot: [
+      "MONTILABS OS  Version 1.0",
+      "Copyright (C) 2024 montilabs.",
+      "",
+      "  640K RAM OK",
+      "",
+      "  Starting MONTILABS OS...",
+    ],
+    loading:   "Starting MONTILABS OS...",
+    watermark: "Designed by montilabs",
+    start:     "▶ Start",
+    icons:     ["My Photos", "About me", "Contact", "Projects"],
+    winTitles: {
+      fotos:     "📷 My Photos",
+      sobremi:   "📝 About me",
+      contacto:  "📧 Contact",
+      proyectos: "💼 Projects",
+    },
+    galTitle:  "montilabs",
+    galSub:    "Analog photography",
+    galBtn:    "View gallery  →",
+    contact:   "✉  montibel@gmail.com",
+    sobremi: `Hi, I'm Marce. Founder of montilabs.
+
+I'm a Creative Developer and Audiovisual Director based in Santiago, Chile. I blend code with design to build animated experiences, and I also work in video editing.
+
+My focus areas are animated typography, visual effects, and interface design. I'm currently exploring generative art and mixing AI with visuals.
+
+When I'm not at the computer, you'll probably find me at the cinema, reading, or making coffee with my cats nearby.`,
+    menuItems: [
+      "📁  Programs",
+      "📄  Documents",
+      "⚙  Settings",
+      "🔍  Search",
+      "❓  Help",
+      "---",
+      "⏻  Shut down...",
+    ],
+    categories: ["Typography", "UI / UX"],
+    langBtn:    "ES",
+    langHint:   "Choose your language",
+    langEs:     "Español",
+    langEn:     "English",
+  },
+};
 
 const ICONS = [
-  { id: "fotos", label: "Mis Fotos", emoji: "📷" },
-  { id: "sobremi", label: "Sobre mí", emoji: "📝" },
-  { id: "contacto", label: "Contacto", emoji: "📧" },
-  { id: "proyectos", label: "Proyectos", emoji: "💼" },
+  { id: "fotos",     emoji: "📷" },
+  { id: "sobremi",  emoji: "📝" },
+  { id: "contacto", emoji: "📧" },
+  { id: "proyectos",emoji: "💼" },
+];
+
+const PROYECTOS = [
+  {
+    categories: ["Tipografía", "Typography"],
+    items: [
+      { label: "Fluid Type", url: "tipografia/" },
+      { label: "Gravity",    url: "tipografia2/dist/" },
+    ],
+  },
+  {
+    categories: ["UI / UX", "UI / UX"],
+    items: [
+      { label: "Search Sequence", url: "uxsim/dist/" },
+      { label: "iPhone Home",     url: "iphone/dist/" },
+    ],
+  },
 ];
 
 // --- 3D helpers ---
@@ -79,12 +181,8 @@ class Win95Window {
     this._appId = null;
   }
 
-  get TB() {
-    return 18;
-  }
-  get B() {
-    return 3;
-  }
+  get TB() { return 18; }
+  get B()  { return 3; }
 
   isActive() {
     return wins.length > 0 && wins[wins.length - 1] === this;
@@ -117,7 +215,8 @@ class Win95Window {
     textSize(11);
     textStyle(BOLD);
     textAlign(LEFT, CENTER);
-    text(this.title, tx + 4, ty + this.TB / 2 + 1);
+    // Window title is dynamic per language
+    text(T[lang].winTitles[this._appId] || this.title, tx + 4, ty + this.TB / 2 + 1);
     textStyle(NORMAL);
 
     this._drawBtns(tx, ty, tw);
@@ -137,11 +236,10 @@ class Win95Window {
   }
 
   _drawBtns(tx, ty, tw) {
-    const S = 14,
-      by = ty + 2;
+    const S = 14, by = ty + 2;
     const closeX = tx + tw - S - 2;
-    const maxX = closeX - S - 2;
-    const minX = maxX - S - 2;
+    const maxX   = closeX - S - 2;
+    const minX   = maxX - S - 2;
 
     this._drawBtn(closeX, by, S);
     fill(...C.black);
@@ -182,19 +280,12 @@ class Win95Window {
   drawContent(x, y, w, h) {}
 
   onTitleBar(mx, my) {
-    const tx = this.x + this.B,
-      ty = this.y + this.B;
-    return (
-      mx > tx && mx < tx + this.w - this.B * 2 && my > ty && my < ty + this.TB
-    );
+    const tx = this.x + this.B, ty = this.y + this.B;
+    return mx > tx && mx < tx + this.w - this.B * 2 && my > ty && my < ty + this.TB;
   }
 
-  onClose(mx, my) {
-    return this._hitBtn(mx, my, this._btns.closeX);
-  }
-  onMin(mx, my) {
-    return this._hitBtn(mx, my, this._btns.minX);
-  }
+  onClose(mx, my) { return this._hitBtn(mx, my, this._btns.closeX); }
+  onMin(mx, my)   { return this._hitBtn(mx, my, this._btns.minX); }
 
   _hitBtn(mx, my, bx) {
     const { by, S } = this._btns;
@@ -202,35 +293,32 @@ class Win95Window {
   }
 
   hit(mx, my) {
-    return (
-      mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h
-    );
+    return mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h;
   }
 }
 
 // --- Fotos Window ---
 class FotosWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 300, 200, "📷 Mis Fotos");
+    super(x, y, 300, 200, "");
     this._galBtn = null;
   }
   drawContent(x, y, w, h) {
+    const t = T[lang];
     textFont("monospace");
     textAlign(CENTER, TOP);
     noStroke();
     fill(...C.black);
     textSize(13);
     textStyle(BOLD);
-    text("montilabs", x + w / 2, y + 10);
+    text(t.galTitle, x + w / 2, y + 10);
     textStyle(NORMAL);
     fill(...C.darkGray);
     textSize(11);
-    text("Fotografía análoga", x + w / 2, y + 30);
+    text(t.galSub, x + w / 2, y + 30);
 
-    const bw = 150,
-      bh = 28;
-    const bx = x + w / 2 - bw / 2,
-      by = y + h - bh - 10;
+    const bw = 150, bh = 28;
+    const bx = x + w / 2 - bw / 2, by = y + h - bh - 10;
     raised(bx, by, bw, bh);
     fill(...C.gray);
     noStroke();
@@ -238,7 +326,7 @@ class FotosWindow extends Win95Window {
     fill(...C.black);
     textSize(12);
     textAlign(CENTER, CENTER);
-    text("Ver galería  →", bx + bw / 2, by + bh / 2);
+    text(t.galBtn, bx + bw / 2, by + bh / 2);
 
     this._galBtn = { x: bx, y: by, w: bw, h: bh };
   }
@@ -251,9 +339,9 @@ class FotosWindow extends Win95Window {
 
 // --- Text Window (Notepad-style) ---
 class TextWindow extends Win95Window {
-  constructor(x, y, w, h, title, content) {
-    super(x, y, w, h, title);
-    this.content = content;
+  constructor(x, y, w, h, contentKey) {
+    super(x, y, w, h, "");
+    this.contentKey = contentKey;
   }
   drawContent(x, y, w, h) {
     fill(...C.black);
@@ -262,14 +350,14 @@ class TextWindow extends Win95Window {
     textSize(12);
     textAlign(LEFT, TOP);
     textStyle(NORMAL);
-    text(this.content, x, y, w, h);
+    text(T[lang][this.contentKey], x, y, w, h);
   }
 }
 
 // --- Contacto Window ---
 class ContactoWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 280, 120, "📧 Contacto");
+    super(x, y, 280, 120, "");
     this._mailBtn = null;
   }
   drawContent(x, y, w, h) {
@@ -278,8 +366,8 @@ class ContactoWindow extends Win95Window {
     textFont("monospace");
     textSize(12);
     textAlign(LEFT, CENTER);
-    text("✉  montibel@gmail.com", x + 4, y + h / 2);
-    this._mailBtn = { x: x, y: y + h / 2 - 10, w: w, h: 22 };
+    text(T[lang].contact, x + 4, y + h / 2);
+    this._mailBtn = { x, y: y + h / 2 - 10, w, h: 22 };
   }
   onMailBtn(mx, my) {
     if (!this._mailBtn) return false;
@@ -289,26 +377,9 @@ class ContactoWindow extends Win95Window {
 }
 
 // --- Proyectos Window ---
-const PROYECTOS = [
-  {
-    category: "Tipografía",
-    items: [
-      { label: "Fluid Type", url: "tipografia/" },
-      { label: "Gravity", url: "tipografia2/dist/" },
-    ],
-  },
-  {
-    category: "UI / UX",
-    items: [
-      { label: "Search Sequence", url: "uxsim/dist/" },
-      { label: "iPhone Home", url: "iphone/dist/" },
-    ],
-  },
-];
-
 class ProyectosWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 320, 300, "💼 Proyectos");
+    super(x, y, 320, 300, "");
     this._btnsP = [];
   }
   drawContent(x, y, w, h) {
@@ -316,15 +387,15 @@ class ProyectosWindow extends Win95Window {
     textFont("monospace");
     noStroke();
 
-    const bh = 28,
-      gap = 6;
+    const bh = 28, gap = 6;
     let cy = y;
+    const langIdx = lang === "es" ? 0 : 1;
 
     for (const group of PROYECTOS) {
       fill(...C.darkGray);
       textSize(10);
       textAlign(LEFT, TOP);
-      text(group.category.toUpperCase(), x + 2, cy);
+      text(group.categories[langIdx].toUpperCase(), x + 2, cy);
       stroke(...C.darkGray);
       strokeWeight(1);
       line(x, cy + 14, x + w, cy + 14);
@@ -347,8 +418,7 @@ class ProyectosWindow extends Win95Window {
   }
   hitProyecto(mx, my) {
     for (const b of this._btnsP) {
-      if (mx > b.x && mx < b.x + b.w && my > b.y && my < b.y + b.h)
-        return b.url;
+      if (mx > b.x && mx < b.x + b.w && my > b.y && my < b.y + b.h) return b.url;
     }
     return null;
   }
@@ -357,33 +427,22 @@ class ProyectosWindow extends Win95Window {
 // --- App definitions ---
 let windowCount = 0;
 const APP_DEFS = {
-  fotos: () => new FotosWindow(80, 60),
-  sobremi: () =>
-    new TextWindow(
-      120,
-      80,
-      400,
-      260,
-      "📝 Sobre mí",
-      `Hola, soy Marce. Fundadora de montilabs.
-
-Soy Desarrolladora Creativa y Realizadora Audiovisual. Entre muchas cosas, mezclo código con diseño para armar animaciones, además de dedicarme a la edición de video.
-
-Mi fuerte son los efectos visuales y el diseño de interfaces. Actualmente estoy utilizando arte generativo y mezclando inteligencia artificial con visuales.
-`,
-    ),
-  contacto: () => new ContactoWindow(160, 110),
+  fotos:     () => new FotosWindow(80, 60),
+  sobremi:   () => new TextWindow(120, 80, 400, 260, "sobremi"),
+  contacto:  () => new ContactoWindow(160, 110),
   proyectos: () => new ProyectosWindow(200, 130),
 };
 
 // --- Globals ---
 let wins = [];
-let dragging = null,
-  dragOX,
-  dragOY;
+let dragging = null, dragOX, dragOY;
 let startOpen = false;
-let appState = "boot";
+let appState = "lang";
 let stateFrame = 0;
+let lang = "es";
+
+// Store lang btn rects for click detection
+let _langBtnEs = null, _langBtnEn = null, _langToggleBtn = null;
 
 // --- Setup ---
 function setup() {
@@ -399,20 +458,68 @@ function windowResized() {
 // --- Draw ---
 function draw() {
   const f = frameCount - stateFrame;
-  if (appState === "boot") {
-    drawBoot(f);
-    return;
-  }
-  if (appState === "loading") {
-    drawLoading(f);
-    return;
-  }
+  if (appState === "lang")    { drawLangSelect(); return; }
+  if (appState === "boot")    { drawBoot(f); return; }
+  if (appState === "loading") { drawLoading(f); return; }
   drawOS();
 }
 
 function goTo(state) {
   appState = state;
   stateFrame = frameCount;
+}
+
+// --- Language Selection ---
+function drawLangSelect() {
+  background(0);
+  const t = T[lang];
+
+  fill(...C.green);
+  noStroke();
+  textFont("monospace");
+  textSize(13);
+  textAlign(CENTER, CENTER);
+  text("MONTILABS OS", width / 2, height / 2 - 90);
+
+  fill(...C.white);
+  textSize(11);
+  text(t.langHint, width / 2, height / 2 - 60);
+
+  // Buttons
+  const bw = 120, bh = 36, gap = 20;
+  const totalW = bw * 2 + gap;
+  const bx1 = width / 2 - totalW / 2;
+  const bx2 = bx1 + bw + gap;
+  const by  = height / 2 - 20;
+
+  _langBtnEs = { x: bx1, y: by, w: bw, h: bh };
+  _langBtnEn = { x: bx2, y: by, w: bw, h: bh };
+
+  // ES button
+  const esHover = mouseX > bx1 && mouseX < bx1 + bw && mouseY > by && mouseY < by + bh;
+  if (esHover) fill(...C.white); else fill(...C.gray);
+  noStroke();
+  rect(bx1, by, bw, bh);
+  raised(bx1, by, bw, bh);
+  if (esHover) fill(...C.blue1); else fill(...C.black);
+  textSize(13);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text("Español", bx1 + bw / 2, by + bh / 2);
+  textStyle(NORMAL);
+
+  // EN button
+  const enHover = mouseX > bx2 && mouseX < bx2 + bw && mouseY > by && mouseY < by + bh;
+  if (enHover) fill(...C.white); else fill(...C.gray);
+  noStroke();
+  rect(bx2, by, bw, bh);
+  raised(bx2, by, bw, bh);
+  if (enHover) fill(...C.blue1); else fill(...C.black);
+  textSize(13);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+  text("English", bx2 + bw / 2, by + bh / 2);
+  textStyle(NORMAL);
 }
 
 // --- Boot screen ---
@@ -424,34 +531,32 @@ function drawBoot(f) {
   textSize(14);
   textAlign(LEFT, TOP);
 
-  const linesVisible = min(floor(f / 8), BOOT_LINES.length);
-  const ox = width / 2 - 180,
-    oy = height / 2 - 80;
+  const lines = T[lang].boot;
+  const linesVisible = min(floor(f / 8), lines.length);
+  const ox = width / 2 - 180, oy = height / 2 - 80;
 
   for (let i = 0; i < linesVisible; i++) {
-    text(BOOT_LINES[i], ox, oy + i * 22);
+    text(lines[i], ox, oy + i * 22);
   }
-  if (f % 15 < 8 && linesVisible >= BOOT_LINES.length) {
+  if (f % 15 < 8 && linesVisible >= lines.length) {
     text("_", ox, oy + linesVisible * 22);
   }
-  if (f > BOOT_LINES.length * 8 + 25) goTo("loading");
+  if (f > lines.length * 8 + 25) goTo("loading");
 }
 
 // --- Loading screen ---
 function drawLoading(f) {
   background(0);
   const p = constrain(f / 40, 0, 1);
-  const bw = 240,
-    bh = 20;
-  const bx = width / 2 - bw / 2,
-    by = height / 2;
+  const bw = 240, bh = 20;
+  const bx = width / 2 - bw / 2, by = height / 2;
 
   fill(...C.green);
   noStroke();
   textFont("monospace");
   textSize(13);
   textAlign(CENTER, BOTTOM);
-  text("Iniciando MONTILABS OS...", width / 2, by - 12);
+  text(T[lang].loading, width / 2, by - 12);
 
   noFill();
   stroke(...C.green);
@@ -471,34 +576,52 @@ function drawOS() {
   for (const w of wins) w.draw();
   if (startOpen) drawStartMenu();
   drawTaskbar();
+  drawLangToggle();
+
   fill(0, 0, 0, 60);
   noStroke();
   textFont("monospace");
   textSize(10);
   textAlign(RIGHT, BOTTOM);
-  text("Diseñado por montilabs", width - 8, height - 42);
+  text(T[lang].watermark, width - 8, height - 42);
+}
+
+// --- Lang toggle button on desktop ---
+function drawLangToggle() {
+  const lbl = T[lang].langBtn;
+  const bw = 28, bh = 16;
+  const bx = width - 8 - bw, by = height - 42 - bh - 4;
+  _langToggleBtn = { x: bx, y: by, w: bw, h: bh };
+
+  fill(0, 0, 0, 50);
+  noStroke();
+  rect(bx, by, bw, bh, 3);
+  fill(255, 255, 255, 180);
+  textFont("monospace");
+  textSize(9);
+  textAlign(CENTER, CENTER);
+  text(lbl, bx + bw / 2, by + bh / 2);
 }
 
 // --- Desktop icons ---
 function drawIcons() {
+  const labels = T[lang].icons;
   for (let i = 0; i < ICONS.length; i++) {
-    const { label, emoji } = ICONS[i];
-    const ix = 16,
-      iy = 16 + i * 100;
+    const { emoji } = ICONS[i];
+    const ix = 16, iy = 16 + i * 100;
     textAlign(CENTER, TOP);
     noStroke();
     textSize(42);
     fill(...C.white);
     text(emoji, ix + 28, iy);
     textSize(13);
-    text(label, ix + 28, iy + 48);
+    text(labels[i], ix + 28, iy + 48);
   }
 }
 
 // --- Taskbar ---
 function drawTaskbar() {
-  const H = 38,
-    Y = height - H;
+  const H = 38, Y = height - H;
   fill(...C.gray);
   noStroke();
   rect(0, Y, width, H);
@@ -511,13 +634,12 @@ function drawTaskbar() {
   textSize(14);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
-  text("▶ Inicio", 40, Y + H / 2);
+  text(T[lang].start, 40, Y + H / 2);
   textStyle(NORMAL);
 
   const t = new Date();
   const ts = nf(t.getHours(), 2) + ":" + nf(t.getMinutes(), 2);
-  const cW = 56,
-    cX = width - cW - 4;
+  const cW = 56, cX = width - cW - 4;
   sunkenBlock(cX, Y + 3, cW, H - 6);
   fill(...C.black);
   textSize(13);
@@ -532,9 +654,10 @@ function drawTaskbar() {
     fill(...C.black);
     textSize(12);
     textAlign(LEFT, CENTER);
-    text(w.title.substring(0, 14), bx + 4, Y + H / 2);
+    const title = T[lang].winTitles[w._appId] || w.title;
+    text(title.substring(0, 14), bx + 4, Y + H / 2);
     w._taskX = bx;
-    bx += 116;
+    bx += 134;
   }
 }
 
@@ -567,10 +690,8 @@ function sunkenBlock(x, y, w, h) {
 
 // --- Start Menu ---
 function drawStartMenu() {
-  const mW = 180,
-    mH = 220;
-  const mX = 2,
-    mY = height - 38 - mH;
+  const mW = 180, mH = 220;
+  const mX = 2, mY = height - 38 - mH;
   raisedBlock(mX, mY, mW, mH);
 
   fill(...C.blue1);
@@ -588,15 +709,7 @@ function drawStartMenu() {
   textStyle(NORMAL);
   pop();
 
-  const items = [
-    "📁  Programas",
-    "📄  Documentos",
-    "⚙  Configuración",
-    "🔍  Buscar",
-    "❓  Ayuda",
-    "---",
-    "⏻  Apagar...",
-  ];
+  const items = T[lang].menuItems;
   for (let i = 0; i < items.length; i++) {
     if (items[i] === "---") {
       stroke(...C.darkGray);
@@ -605,12 +718,7 @@ function drawStartMenu() {
       continue;
     }
     const iy = mY + 4 + i * 28;
-    if (
-      mouseX > mX + 24 &&
-      mouseX < mX + mW &&
-      mouseY > iy &&
-      mouseY < iy + 28
-    ) {
+    if (mouseX > mX + 24 && mouseX < mX + mW && mouseY > iy && mouseY < iy + 28) {
       fill(...C.blue1);
       noStroke();
       rect(mX + 24, iy, mW - 26, 28);
@@ -626,8 +734,30 @@ function drawStartMenu() {
 
 // --- Mouse ---
 function mousePressed() {
+  // Language selection screen
+  if (appState === "lang") {
+    if (_langBtnEs && mouseX > _langBtnEs.x && mouseX < _langBtnEs.x + _langBtnEs.w &&
+        mouseY > _langBtnEs.y && mouseY < _langBtnEs.y + _langBtnEs.h) {
+      lang = "es"; goTo("boot"); return;
+    }
+    if (_langBtnEn && mouseX > _langBtnEn.x && mouseX < _langBtnEn.x + _langBtnEn.w &&
+        mouseY > _langBtnEn.y && mouseY < _langBtnEn.y + _langBtnEn.h) {
+      lang = "en"; goTo("boot"); return;
+    }
+    return;
+  }
+
   if (appState !== "desktop") {
     goTo("desktop");
+    return;
+  }
+
+  // Lang toggle button on desktop
+  if (_langToggleBtn && mouseX > _langToggleBtn.x && mouseX < _langToggleBtn.x + _langToggleBtn.w &&
+      mouseY > _langToggleBtn.y && mouseY < _langToggleBtn.y + _langToggleBtn.h) {
+    lang = lang === "es" ? "en" : "es";
+    wins = [];
+    startOpen = false;
     return;
   }
 
@@ -685,10 +815,7 @@ function mousePressed() {
     }
     if (w instanceof ProyectosWindow) {
       const url = w.hitProyecto(mouseX, mouseY);
-      if (url) {
-        window.open(url, "_blank");
-        return;
-      }
+      if (url) { window.open(url, "_blank"); return; }
     }
 
     if (w.onTitleBar(mouseX, mouseY)) {
@@ -701,8 +828,7 @@ function mousePressed() {
 
   // Desktop icon click
   for (let i = 0; i < ICONS.length; i++) {
-    const ix = 16,
-      iy = 16 + i * 100;
+    const ix = 16, iy = 16 + i * 100;
     if (mouseX > ix && mouseX < ix + 56 && mouseY > iy && mouseY < iy + 68) {
       openApp(ICONS[i].id);
       return;
