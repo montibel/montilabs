@@ -288,15 +288,49 @@ class ContactoWindow extends Win95Window {
   }
 }
 
+// --- Proyectos Window ---
+const PROYECTOS = [
+  { label: '🌊 Tipografía Generativa', url: 'tipografia/' },
+  { label: '⬡ Tipografía 2',           url: 'tipografia2/dist/' },
+];
+
+class ProyectosWindow extends Win95Window {
+  constructor(x, y) {
+    super(x, y, 320, 200, '💼 Proyectos');
+    this._btnsP = [];
+  }
+  drawContent(x, y, w, h) {
+    this._btnsP = [];
+    textFont('monospace'); noStroke();
+
+    fill(...C.darkGray); textSize(10); textAlign(LEFT, TOP);
+    text('Haz clic para abrir un proyecto:', x, y);
+
+    const bh = 30, gap = 8;
+    for (let i = 0; i < PROYECTOS.length; i++) {
+      const by = y + 20 + i * (bh + gap);
+      raised(x, by, w, bh);
+      fill(...C.gray); noStroke(); rect(x + 2, by + 2, w - 4, bh - 4);
+      fill(...C.black); textSize(12); textAlign(LEFT, CENTER);
+      text(PROYECTOS[i].label, x + 10, by + bh / 2);
+      this._btnsP.push({ x, y: by, w, h: bh, url: PROYECTOS[i].url });
+    }
+  }
+  hitProyecto(mx, my) {
+    for (const b of this._btnsP) {
+      if (mx > b.x && mx < b.x + b.w && my > b.y && my < b.y + b.h) return b.url;
+    }
+    return null;
+  }
+}
+
 // --- App definitions ---
 let windowCount = 0;
 const APP_DEFS = {
-  fotos: () => new FotosWindow(80, 60),
-  sobremi: () =>
-    new TextWindow(120, 80, 340, 180, "📝 Sobre mí", "En construcción..."),
-  contacto: () => new ContactoWindow(160, 110),
-  proyectos: () =>
-    new TextWindow(200, 130, 320, 200, "💼 Proyectos", "En construcción..."),
+  fotos:     () => new FotosWindow(80, 60),
+  sobremi:   () => new TextWindow(120, 80, 340, 180, '📝 Sobre mí', 'En construcción...'),
+  contacto:  () => new ContactoWindow(160, 110),
+  proyectos: () => new ProyectosWindow(200, 130),
 };
 
 // --- Globals ---
@@ -602,6 +636,10 @@ function mousePressed() {
     if (w instanceof ContactoWindow && w.onMailBtn(mouseX, mouseY)) {
       window.open("mailto:montibel@gmail.com");
       return;
+    }
+    if (w instanceof ProyectosWindow) {
+      const url = w.hitProyecto(mouseX, mouseY);
+      if (url) { window.open(url, "_blank"); return; }
     }
 
     if (w.onTitleBar(mouseX, mouseY)) {
