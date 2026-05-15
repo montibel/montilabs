@@ -287,7 +287,7 @@ function MessagesApp({ onClose }) {
       </div>
 
       {/* Input */}
-      <div className="shrink-0 flex items-center gap-2 px-4 py-3 pb-8" style={{ borderTop: '1px solid #2c2c2e' }}>
+      <div className="shrink-0 flex items-center gap-2 px-4 py-3" style={{ borderTop: '1px solid #2c2c2e', paddingBottom: 40 }}>
         <div className="flex-1 rounded-full px-4 py-2 text-sm text-white/30"
           style={{ border: '1px solid #3a3a3c' }}>
           Mensaje...
