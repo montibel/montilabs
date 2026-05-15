@@ -397,7 +397,7 @@ export default function IPhoneHome() {
   const OpenApp = openApp ? APP_MAP[openApp] : null
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center" style={{ background: '#e5e5ea' }}>
+    <div className="w-screen h-screen flex items-center justify-center" style={{ background: '#000' }}>
       <div className="relative overflow-hidden"
         style={{ width: 393, height: 852, borderRadius: 55, background: '#000',
           boxShadow: '0 0 0 10px #1c1c1e, 0 40px 100px rgba(0,0,0,.45), 0 0 0 11px #3a3a3c' }}>
