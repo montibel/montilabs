@@ -112,10 +112,6 @@ export default function Hero() {
         <pointLight position={[ 5, 3, 3]} intensity={30} color="#00f5ff" />
         <pointLight position={[ 0, 6, 2]} intensity={15} color="#bf5fff" />
 
-        <Suspense fallback={null}>
-          <Environment preset="sunset" />
-        </Suspense>
-
         <Stars radius={80} depth={50} count={4000} factor={4} fade speed={0.5} />
 
         <Grid
@@ -132,15 +128,16 @@ export default function Hero() {
           infiniteGrid
         />
 
-        <Physics gravity={[0, -2, 0]}>
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          <Environment preset="sunset" />
+          <Physics gravity={[0, -2, 0]}>
             <GlassText text="MONTILABS" position={[0, 3,   0]} colliderArgs={[4.8, 0.8, 0.3]} rigidRef={montilabsRef} />
             <GlassText text="CODE"      position={[0, 5.5, 0]} colliderArgs={[2.8, 0.8, 0.3]} rigidRef={codeRef} />
-          </Suspense>
-          <Ground />
-          <Walls />
-          <MousePusher letterRefs={[montilabsRef, codeRef]} />
-        </Physics>
+            <Ground />
+            <Walls />
+            <MousePusher letterRefs={[montilabsRef, codeRef]} />
+          </Physics>
+        </Suspense>
       </Canvas>
     </div>
   )
