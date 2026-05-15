@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Phone, MessageCircle, Camera, Globe,
@@ -18,6 +18,22 @@ const APPS = [
   { id: 'camera',  label: 'Cámara',   Icon: Camera,         bg: 'linear-gradient(145deg,#48484a,#1c1c1e)' },
   { id: 'safari',  label: 'Safari',   Icon: Globe,          bg: 'linear-gradient(145deg,#0a84ff,#0064d1)' },
 ]
+
+// ── Scale to fit viewport ────────────────────────────────────────────
+const W = 393, H = 852
+function useScale() {
+  const [scale, setScale] = useState(1)
+  useEffect(() => {
+    const calc = () => {
+      const s = Math.min((window.innerWidth - 24) / W, (window.innerHeight - 24) / H)
+      setScale(Math.min(1, s))
+    }
+    calc()
+    window.addEventListener('resize', calc)
+    return () => window.removeEventListener('resize', calc)
+  }, [])
+  return scale
+}
 
 // ── Clock ────────────────────────────────────────────────────────────
 function useClock() {
@@ -385,7 +401,8 @@ function AppIcon({ id, label, Icon, bg, onOpen }) {
 const APP_MAP = { phone: PhoneApp, messages: MessagesApp, camera: CameraApp, safari: SafariApp }
 
 export default function IPhoneHome() {
-  const now = useClock()
+  const now   = useClock()
+  const scale = useScale()
   const [screen,  setScreen]  = useState('locked')
   const [diMode,  setDiMode]  = useState('music')
   const [openApp, setOpenApp] = useState(null)
@@ -404,8 +421,11 @@ export default function IPhoneHome() {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center" style={{ background: '#000' }}>
+      {/* Scale wrapper — keeps layout box in sync with visual size */}
+      <div style={{ width: W * scale, height: H * scale, flexShrink: 0 }}>
       <div className="relative overflow-hidden"
-        style={{ width: 393, height: 852, borderRadius: 55, background: '#000',
+        style={{ width: W, height: H, borderRadius: 55, background: '#000',
+          transform: `scale(${scale})`, transformOrigin: 'top left',
           boxShadow: '0 0 0 10px #1c1c1e, 0 40px 100px rgba(0,0,0,.45), 0 0 0 11px #3a3a3c' }}>
 
         {/* Base wallpaper */}
@@ -515,6 +535,7 @@ export default function IPhoneHome() {
           )}
         </AnimatePresence>
 
+      </div>
       </div>
     </div>
   )
