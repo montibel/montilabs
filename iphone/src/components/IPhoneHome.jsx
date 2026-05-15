@@ -196,7 +196,7 @@ function PhoneApp({ onClose }) {
             MM
           </div>
         </div>
-        <p className="text-white text-3xl font-light">Marce Montiel</p>
+        <p className="text-white text-3xl font-light">montilabs</p>
       </div>
 
       <div className="flex justify-center gap-20 pb-20">
@@ -267,6 +267,14 @@ function MessagesApp({ onClose }) {
 function CameraApp({ onClose }) {
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: '#0a0a0a' }}>
+      {/* Close button */}
+      <div className="absolute top-14 right-5 z-20">
+        <motion.button whileTap={{ scale: 0.88 }} onClick={onClose}
+          className="rounded-full flex items-center justify-center"
+          style={{ width: 32, height: 32, background: 'rgba(255,255,255,0.15)' }}>
+          <X size={16} color="white" />
+        </motion.button>
+      </div>
       <div className="flex-1 relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ opacity: 0.25 }}>
           <line x1="33%" y1="0" x2="33%" y2="100%" stroke="white" strokeWidth="0.5" />
@@ -308,7 +316,7 @@ function CameraApp({ onClose }) {
             <div className="rounded-full bg-white" style={{ width: 58, height: 58 }} />
           </div>
         </motion.button>
-        <button onClick={onClose} className="text-white text-2xl font-light" style={{ opacity: 0.8 }}>⟳</button>
+        <div style={{ width: 48 }} />
       </div>
     </div>
   )
