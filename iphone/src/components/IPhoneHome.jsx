@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Phone, MessageCircle, Camera, Globe,
+  Phone, MessageCircle, Camera, Globe, Search,
   Play, Pause, SkipForward, X, Lock, ChevronUp,
 } from 'lucide-react'
 
@@ -358,35 +358,68 @@ function CameraApp({ onClose }) {
 
 // ── App: Safari ───────────────────────────────────────────────────────
 function SafariApp({ onClose }) {
+  const query = 'montilabs.com'
+
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: '#f2f2f7' }}>
-      <div style={{ background: '#f2f2f7' }} className="pt-14 pb-2 px-4">
-        <div className="rounded-xl bg-white px-4 py-2 flex items-center gap-2 shadow-sm">
-          <div className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
-          <p className="text-gray-500 text-sm flex-1 text-center">montilabs.com</p>
-          <button onClick={onClose}><X size={14} className="text-gray-400" /></button>
+
+      {/* Top bar */}
+      <div className="shrink-0 px-3 pb-2" style={{ paddingTop: 58, background: '#f2f2f7' }}>
+        {/* Address bar row */}
+        <div className="flex items-center gap-2">
+          <button onClick={onClose} className="font-light text-blue-500 shrink-0" style={{ fontSize: 26, lineHeight: 1 }}>‹</button>
+          <div className="flex-1 rounded-xl bg-white flex items-center gap-2 px-3 py-2 shadow-sm">
+            <div className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+            <span className="flex-1 text-center text-sm text-gray-600 font-medium">{query}</span>
+            <Search size={13} className="text-gray-400 shrink-0" />
+          </div>
+          <button className="text-blue-500 text-xl shrink-0">⤴</button>
         </div>
       </div>
-      <div className="flex-1 bg-white overflow-y-auto px-6 py-8">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-          className="flex flex-col gap-5">
-          <p className="text-2xl font-light text-gray-900 tracking-tight">montilabs</p>
-          <p className="text-sm text-gray-500 leading-relaxed">
-            Estudio creativo especializado en diseño de interfaces, animación y arte generativo.
-          </p>
-          <div className="h-36 rounded-2xl" style={{ background: WALLPAPER }} />
-          <div className="flex flex-col gap-2">
-            {[100, 75, 90, 60].map((w, i) => (
-              <div key={i} className="h-2 bg-gray-200 rounded-full" style={{ width: `${w}%` }} />
-            ))}
+
+      {/* Webpage */}
+      <div className="flex-1 bg-white overflow-y-auto" style={{ minHeight: 0 }}>
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
+          className="flex flex-col"
+        >
+          {/* Hero banner */}
+          <div className="flex items-end px-6 pb-6 pt-10"
+            style={{ background: WALLPAPER, minHeight: 160 }}>
+            <div>
+              <p className="text-white text-2xl font-thin tracking-widest uppercase">montilabs</p>
+              <p className="text-white/60 text-xs mt-1">Interfaces · Animación · Código</p>
+            </div>
           </div>
-          <div className="h-28 rounded-2xl bg-gray-100" />
+
+          {/* Content blocks */}
+          <div className="px-5 py-5 flex flex-col gap-4">
+            <p className="text-gray-900 text-sm font-semibold">Creamos interfaces que viven</p>
+            <p className="text-gray-500 text-xs leading-relaxed">
+              Fusionamos código y herramientas no-code para dar vida a productos digitales únicos.
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              {['UI / UX', 'Motion', 'Tipografía', 'Generativo'].map(tag => (
+                <div key={tag} className="rounded-xl px-3 py-3 text-xs font-medium text-gray-600"
+                  style={{ background: '#f2f2f7' }}>
+                  {tag}
+                </div>
+              ))}
+            </div>
+            <div className="h-px bg-gray-100" />
+            <p className="text-gray-400 text-xs">montilabs.com · Santiago, Chile</p>
+          </div>
         </motion.div>
       </div>
-      <div className="bg-white border-t border-gray-200 flex justify-around px-8 py-3">
-        {['←', '→', '⤴', '⧉', '⋯'].map(icon => (
-          <button key={icon} className="text-blue-500 text-lg">{icon}</button>
-        ))}
+
+      {/* Bottom nav */}
+      <div className="shrink-0 flex items-center justify-around px-6 py-3 pb-8 bg-white"
+        style={{ borderTop: '1px solid #e5e5ea' }}>
+        <button onClick={onClose} className="text-blue-500 text-2xl font-light">‹</button>
+        <button className="text-gray-300 text-2xl font-light">›</button>
+        <button className="text-blue-500 text-xl">⤴</button>
+        <button className="text-blue-500 text-xl">⧉</button>
+        <button className="text-blue-500 text-xl">⋯</button>
       </div>
     </div>
   )
