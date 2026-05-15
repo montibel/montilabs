@@ -291,43 +291,50 @@ class ContactoWindow extends Win95Window {
 // --- Proyectos Window ---
 const PROYECTOS = [
   {
-    category: 'Tipografía',
+    category: "Tipografía",
     items: [
-      { label: 'Fluid Type', url: 'tipografia/' },
-      { label: 'Gravity',    url: 'tipografia2/dist/' },
-    ]
+      { label: "Fluid Type", url: "tipografia/" },
+      { label: "Gravity", url: "tipografia2/dist/" },
+    ],
   },
   {
-    category: 'UI / UX',
-    items: [
-      { label: 'Search Sequence', url: 'uxsim/dist/' },
-    ]
+    category: "UI / UX",
+    items: [{ label: "Search Sequence", url: "uxsim/dist/" }],
   },
 ];
 
 class ProyectosWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 320, 300, '💼 Proyectos');
+    super(x, y, 320, 300, "💼 Proyectos");
     this._btnsP = [];
   }
   drawContent(x, y, w, h) {
     this._btnsP = [];
-    textFont('monospace'); noStroke();
+    textFont("monospace");
+    noStroke();
 
-    const bh = 28, gap = 6;
+    const bh = 28,
+      gap = 6;
     let cy = y;
 
     for (const group of PROYECTOS) {
-      fill(...C.darkGray); textSize(10); textAlign(LEFT, TOP);
+      fill(...C.darkGray);
+      textSize(10);
+      textAlign(LEFT, TOP);
       text(group.category.toUpperCase(), x + 2, cy);
-      stroke(...C.darkGray); strokeWeight(1);
+      stroke(...C.darkGray);
+      strokeWeight(1);
       line(x, cy + 14, x + w, cy + 14);
       cy += 20;
 
       for (const item of group.items) {
         raised(x, cy, w, bh);
-        fill(...C.gray); noStroke(); rect(x + 2, cy + 2, w - 4, bh - 4);
-        fill(...C.black); textSize(12); textAlign(LEFT, CENTER);
+        fill(...C.gray);
+        noStroke();
+        rect(x + 2, cy + 2, w - 4, bh - 4);
+        fill(...C.black);
+        textSize(12);
+        textAlign(LEFT, CENTER);
         text(item.label, x + 10, cy + bh / 2);
         this._btnsP.push({ x, y: cy, w, h: bh, url: item.url });
         cy += bh + gap;
@@ -337,7 +344,8 @@ class ProyectosWindow extends Win95Window {
   }
   hitProyecto(mx, my) {
     for (const b of this._btnsP) {
-      if (mx > b.x && mx < b.x + b.w && my > b.y && my < b.y + b.h) return b.url;
+      if (mx > b.x && mx < b.x + b.w && my > b.y && my < b.y + b.h)
+        return b.url;
     }
     return null;
   }
@@ -346,15 +354,23 @@ class ProyectosWindow extends Win95Window {
 // --- App definitions ---
 let windowCount = 0;
 const APP_DEFS = {
-  fotos:     () => new FotosWindow(80, 60),
-  sobremi:   () => new TextWindow(120, 80, 400, 260, '📝 Sobre mí', `Hola, soy Marce. Fundadora de montilabs.
+  fotos: () => new FotosWindow(80, 60),
+  sobremi: () =>
+    new TextWindow(
+      120,
+      80,
+      400,
+      260,
+      "📝 Sobre mí",
+      `Hola, soy Marce. Fundadora de montilabs.
 
-Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y, entre muchas cosas, mezclo código con diseño para armar cosas animadas, además de dedicarme a la edición de video.
+Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y, entre muchas cosas, mezclo código con diseño para armar animaciones, además de dedicarme a la edición de video.
 
-Mi fuerte es la tipografía animada, los efectos visuales y el diseño de interfaces. Actualmente estoy utilizando arte generativo y mezclando inteligencia artificial con visuales.
+Mi fuerte son los efectos visuales y el diseño de interfaces. Actualmente estoy utilizando arte generativo y mezclando inteligencia artificial con visuales.
 
-Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, leyendo algo o preparando un café con mis gatos cerca.`),
-  contacto:  () => new ContactoWindow(160, 110),
+Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, leyendo algo o preparando un café con mis gatos cerca.`,
+    ),
+  contacto: () => new ContactoWindow(160, 110),
   proyectos: () => new ProyectosWindow(200, 130),
 };
 
@@ -453,9 +469,12 @@ function drawOS() {
   for (const w of wins) w.draw();
   if (startOpen) drawStartMenu();
   drawTaskbar();
-  fill(0, 0, 0, 60); noStroke();
-  textFont('monospace'); textSize(10); textAlign(RIGHT, BOTTOM);
-  text('Diseñado por montilabs', width - 8, height - 42);
+  fill(0, 0, 0, 60);
+  noStroke();
+  textFont("monospace");
+  textSize(10);
+  textAlign(RIGHT, BOTTOM);
+  text("Diseñado por montilabs", width - 8, height - 42);
 }
 
 // --- Desktop icons ---
@@ -664,7 +683,10 @@ function mousePressed() {
     }
     if (w instanceof ProyectosWindow) {
       const url = w.hitProyecto(mouseX, mouseY);
-      if (url) { window.open(url, "_blank"); return; }
+      if (url) {
+        window.open(url, "_blank");
+        return;
+      }
     }
 
     if (w.onTitleBar(mouseX, mouseY)) {
