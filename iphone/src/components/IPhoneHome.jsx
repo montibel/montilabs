@@ -378,48 +378,59 @@ function SafariApp({ onClose }) {
       </div>
 
       {/* Webpage */}
-      <div className="flex-1 bg-white overflow-y-auto" style={{ minHeight: 0 }}>
+      <div className="flex-1 overflow-y-auto" style={{ minHeight: 0, background: '#0a0a0a' }}>
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
           className="flex flex-col"
         >
-          {/* Hero banner */}
-          <div className="flex items-end px-6 pb-6 pt-10"
-            style={{ background: WALLPAPER, minHeight: 160 }}>
-            <div>
-              <p className="text-white text-2xl font-thin tracking-widest uppercase">montilabs</p>
-              <p className="text-white/60 text-xs mt-1">Interfaces · Animación · Código</p>
-            </div>
+          {/* Hero */}
+          <div className="px-6 pt-10 pb-8 flex flex-col gap-3">
+            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase">Studio</p>
+            <p className="text-white font-light leading-tight" style={{ fontSize: 28 }}>
+              Interfaces que<br />cobran vida.
+            </p>
+            <p className="text-white/40 text-xs leading-relaxed">
+              Fusionamos código y diseño para crear experiencias digitales únicas.
+            </p>
           </div>
 
-          {/* Content blocks */}
-          <div className="px-5 py-5 flex flex-col gap-4">
-            <p className="text-gray-900 text-sm font-semibold">Creamos interfaces que viven</p>
-            <p className="text-gray-500 text-xs leading-relaxed">
-              Fusionamos código y herramientas no-code para dar vida a productos digitales únicos.
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-              {['UI / UX', 'Motion', 'Tipografía', 'Generativo'].map(tag => (
-                <div key={tag} className="rounded-xl px-3 py-3 text-xs font-medium text-gray-600"
-                  style={{ background: '#f2f2f7' }}>
-                  {tag}
-                </div>
-              ))}
-            </div>
-            <div className="h-px bg-gray-100" />
-            <p className="text-gray-400 text-xs">montilabs.com</p>
+          {/* Divider */}
+          <div className="h-px mx-6" style={{ background: 'rgba(255,255,255,0.07)' }} />
+
+          {/* Services */}
+          <div className="px-6 py-6 flex flex-col gap-3">
+            {[
+              { name: 'UI / UX', desc: 'Interfaces animadas' },
+              { name: 'Motion',  desc: 'Animación interactiva' },
+              { name: 'Código',  desc: 'Arte generativo' },
+            ].map((s, i) => (
+              <motion.div key={s.name}
+                initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 + i * 0.08 }}
+                className="flex items-center justify-between py-3"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                <span className="text-white text-sm">{s.name}</span>
+                <span className="text-white/30 text-xs">{s.desc}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Footer */}
+          <div className="px-6 py-4">
+            <p className="text-white/20 text-[10px] tracking-widest uppercase">montilabs.com</p>
           </div>
         </motion.div>
       </div>
 
       {/* Bottom nav */}
-      <div className="shrink-0 flex items-center justify-around px-6 py-3 pb-8 bg-white"
-        style={{ borderTop: '1px solid #e5e5ea' }}>
-        <button onClick={onClose} className="text-blue-500 text-2xl font-light">‹</button>
-        <button className="text-gray-300 text-2xl font-light">›</button>
-        <button className="text-blue-500 text-xl">⤴</button>
-        <button className="text-blue-500 text-xl">⧉</button>
-        <button className="text-blue-500 text-xl">⋯</button>
+      <div className="shrink-0 flex items-center justify-around px-6 py-3 pb-8"
+        style={{ background: '#111', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <button onClick={onClose} className="text-2xl font-light" style={{ color: '#0a84ff' }}>‹</button>
+        <button className="text-2xl font-light" style={{ color: 'rgba(255,255,255,0.2)' }}>›</button>
+        <button className="text-xl" style={{ color: '#0a84ff' }}>⤴</button>
+        <button className="text-xl" style={{ color: '#0a84ff' }}>⧉</button>
+        <button className="text-xl" style={{ color: '#0a84ff' }}>⋯</button>
       </div>
     </div>
   )
