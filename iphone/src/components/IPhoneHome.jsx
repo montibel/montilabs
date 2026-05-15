@@ -21,12 +21,17 @@ const APPS = [
 
 // ── Scale to fit viewport ────────────────────────────────────────────
 const W = 393, H = 852
+const PAD = 40
 function useScale() {
   const [scale, setScale] = useState(1)
   useEffect(() => {
     const calc = () => {
-      const s = Math.min((window.innerWidth - 24) / W, (window.innerHeight - 24) / H)
-      setScale(Math.min(1, s))
+      const s = Math.min(
+        1,
+        (window.innerWidth  - PAD * 2) / W,
+        (window.innerHeight - PAD * 2) / H,
+      )
+      setScale(s)
     }
     calc()
     window.addEventListener('resize', calc)
