@@ -290,30 +290,43 @@ class ContactoWindow extends Win95Window {
 
 // --- Proyectos Window ---
 const PROYECTOS = [
-  { label: '🌊 Tipografía Generativa', url: 'tipografia/' },
-  { label: '⬡ Tipografía 2',           url: 'tipografia2/dist/' },
+  {
+    category: 'Tipografía',
+    items: [
+      { label: 'Fluid Type', url: 'tipografia/' },
+      { label: 'Gravity',    url: 'tipografia2/dist/' },
+    ]
+  },
 ];
 
 class ProyectosWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 320, 200, '💼 Proyectos');
+    super(x, y, 320, 220, '💼 Proyectos');
     this._btnsP = [];
   }
   drawContent(x, y, w, h) {
     this._btnsP = [];
     textFont('monospace'); noStroke();
 
-    fill(...C.darkGray); textSize(10); textAlign(LEFT, TOP);
-    text('Haz clic para abrir un proyecto:', x, y);
+    const bh = 28, gap = 6;
+    let cy = y;
 
-    const bh = 30, gap = 8;
-    for (let i = 0; i < PROYECTOS.length; i++) {
-      const by = y + 20 + i * (bh + gap);
-      raised(x, by, w, bh);
-      fill(...C.gray); noStroke(); rect(x + 2, by + 2, w - 4, bh - 4);
-      fill(...C.black); textSize(12); textAlign(LEFT, CENTER);
-      text(PROYECTOS[i].label, x + 10, by + bh / 2);
-      this._btnsP.push({ x, y: by, w, h: bh, url: PROYECTOS[i].url });
+    for (const group of PROYECTOS) {
+      fill(...C.darkGray); textSize(10); textAlign(LEFT, TOP);
+      text(group.category.toUpperCase(), x + 2, cy);
+      stroke(...C.darkGray); strokeWeight(1);
+      line(x, cy + 14, x + w, cy + 14);
+      cy += 20;
+
+      for (const item of group.items) {
+        raised(x, cy, w, bh);
+        fill(...C.gray); noStroke(); rect(x + 2, cy + 2, w - 4, bh - 4);
+        fill(...C.black); textSize(12); textAlign(LEFT, CENTER);
+        text(item.label, x + 10, cy + bh / 2);
+        this._btnsP.push({ x, y: cy, w, h: bh, url: item.url });
+        cy += bh + gap;
+      }
+      cy += 8;
     }
   }
   hitProyecto(mx, my) {
