@@ -407,7 +407,7 @@ function SafariApp({ onClose }) {
               ))}
             </div>
             <div className="h-px bg-gray-100" />
-            <p className="text-gray-400 text-xs">montilabs.com · Santiago, Chile</p>
+            <p className="text-gray-400 text-xs">montilabs.com</p>
           </div>
         </motion.div>
       </div>
