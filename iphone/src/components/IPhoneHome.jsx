@@ -548,7 +548,7 @@ export default function IPhoneHome() {
                   style={{ fontSize: 88, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
                   {timeStr}
                 </span>
-                <span className="text-white/80 text-lg mt-2 capitalize select-none">{dateStr}</span>
+                <span className="text-white/80 text-lg mt-2 select-none">{dateStr.charAt(0).toUpperCase() + dateStr.slice(1)}</span>
               </div>
 
               <motion.div className="absolute bottom-14 z-10 flex flex-col items-center gap-1"
@@ -570,13 +570,16 @@ export default function IPhoneHome() {
               transition={{ duration: 0.5, ease: [0, 0, 0.2, 1] }}
               className="absolute inset-0 z-10"
             >
-              {/* Status bar */}
-              <div className="flex items-center justify-between px-7 pt-4 relative z-10">
-                <span className="text-white text-sm font-semibold" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              {/* Status bar — absolute layout so island expansion doesn't push time/icons */}
+              <div className="relative z-10" style={{ height: 60 }}>
+                <span className="absolute text-white text-sm font-semibold"
+                  style={{ left: 32, top: 22, fontVariantNumeric: 'tabular-nums' }}>
                   {timeStr}
                 </span>
-                <DynamicIsland mode={diMode} onNotifDone={onNotifDone} />
-                <div className="flex items-center gap-1.5">
+                <div className="absolute left-1/2 -translate-x-1/2" style={{ top: 12 }}>
+                  <DynamicIsland mode={diMode} onNotifDone={onNotifDone} />
+                </div>
+                <div className="absolute flex items-center gap-1.5" style={{ right: 28, top: 24 }}>
                   <SignalBars /><Wifi /><Battery />
                 </div>
               </div>
@@ -587,7 +590,7 @@ export default function IPhoneHome() {
                   style={{ fontSize: 88, lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>
                   {timeStr}
                 </span>
-                <span className="text-white/82 text-lg mt-2 capitalize select-none">{dateStr}</span>
+                <span className="text-white/82 text-lg mt-2 select-none">{dateStr.charAt(0).toUpperCase() + dateStr.slice(1)}</span>
               </div>
 
               {/* Dock */}
@@ -608,7 +611,7 @@ export default function IPhoneHome() {
               {/* Reset */}
               <button
                 onClick={() => { setScreen('locked'); setDiMode('music') }}
-                className="absolute top-16 right-5 z-10 text-white/30 text-xs select-none"
+                className="absolute top-16 right-5 z-10 text-white/10 text-xs select-none"
               >
                 ↺
               </button>
