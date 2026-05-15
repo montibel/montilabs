@@ -2,20 +2,36 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import { MousePointer2, Search } from 'lucide-react'
 
-const TEXT = 'Cómo animar interfaces con código'
+const QUERY = 'tendencias creativas 2025'
 
 const RESULTS = [
-  { title: 'Framer Motion – Guía completa de animaciones', url: 'framer.com/motion' },
-  { title: 'CSS vs JavaScript: ¿cuándo usar cada uno?',    url: 'css-tricks.com' },
-  { title: 'Principios de UX en motion design',            url: 'nngroup.com' },
-  { title: 'React Spring: física en interfaces',           url: 'react-spring.dev' },
+  {
+    title: 'El regreso del diseño expresivo en marcas globales',
+    url: 'itsnicethat.com',
+    desc: 'Las identidades visuales más potentes del año abandonan la sobriedad y apuestan por el carácter.',
+  },
+  {
+    title: 'Motion design como lenguaje de marca',
+    url: 'awwwards.com',
+    desc: 'Cómo las animaciones definen la personalidad de una marca mejor que cualquier manual de imagen.',
+  },
+  {
+    title: 'Campañas que rompieron el ruido en 2025',
+    url: 'adweek.com',
+    desc: 'Un análisis de las piezas que lograron atención real en un ecosistema saturado de contenido.',
+  },
+  {
+    title: 'Creatividad generativa: IA al servicio del arte',
+    url: 'creativereview.co.uk',
+    desc: 'Herramientas, casos reales y el debate sobre dónde termina la máquina y empieza el diseñador.',
+  },
 ]
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
 export default function SearchSequence() {
-  const [typed, setTyped]       = useState('')
-  const [phase, setPhase]       = useState('idle')
+  const [typed, setTyped]     = useState('')
+  const [phase, setPhase]     = useState('idle')
   const [iteration, setIteration] = useState(0)
 
   const cursorCtrl  = useAnimationControls()
@@ -30,7 +46,7 @@ export default function SearchSequence() {
     setPhase('idle')
     cursorCtrl.set({ x: 0, y: 0 })
     btnCtrl.set({ scale: 1 })
-    searchCtrl.set({ opacity: 1, y: 0 })
+    searchCtrl.set({ opacity: 1, y: 0, pointerEvents: 'auto' })
     resultsCtrl.set({ opacity: 0, y: 30 })
     setIteration((i) => i + 1)
   }
@@ -39,29 +55,26 @@ export default function SearchSequence() {
     let cancelled = false
 
     const run = async () => {
-      await wait(500)
+      await wait(600)
       if (cancelled) return
 
-      // 1 — typewriter
       setPhase('typing')
-      for (let i = 1; i <= TEXT.length; i++) {
+      for (let i = 1; i <= QUERY.length; i++) {
         if (cancelled) return
-        await wait(52)
-        setTyped(TEXT.slice(0, i))
+        await wait(55)
+        setTyped(QUERY.slice(0, i))
       }
 
       await wait(700)
       if (cancelled) return
 
-      // 2 — cursor moves to button
       setPhase('moving')
       if (btnRef.current) {
         const rect = btnRef.current.getBoundingClientRect()
         const targetX = rect.left + rect.width / 2 - (window.innerWidth - 20)
         const targetY = rect.top + rect.height / 2 - (window.innerHeight - 20)
         await cursorCtrl.start({
-          x: targetX,
-          y: targetY,
+          x: targetX, y: targetY,
           transition: { type: 'spring', stiffness: 65, damping: 14, mass: 1 },
         })
       }
@@ -69,26 +82,21 @@ export default function SearchSequence() {
       if (cancelled) return
       await wait(120)
 
-      // 3 — click simulation
       setPhase('clicking')
       await btnCtrl.start({ scale: 0.88, transition: { duration: 0.08 } })
       await btnCtrl.start({ scale: 1,    transition: { duration: 0.12 } })
 
-      await wait(200)
+      await wait(250)
       if (cancelled) return
 
-      // 4 — search collapses
       setPhase('revealing')
       await searchCtrl.start({
-        opacity: 0,
-        y: -50,
-        transition: { duration: 0.45, ease: [0.4, 0, 0.2, 1] },
+        opacity: 0, y: -50,
+        transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
       })
 
-      // 5 — results appear
       await resultsCtrl.start({
-        opacity: 1,
-        y: 0,
+        opacity: 1, y: 0,
         transition: { duration: 0.5, ease: [0, 0, 0.2, 1] },
       })
 
@@ -102,7 +110,7 @@ export default function SearchSequence() {
   return (
     <div className="relative w-screen h-screen bg-white overflow-hidden flex items-center justify-center">
 
-      {/* Search section */}
+      {/* Search */}
       <motion.div
         animate={searchCtrl}
         className="absolute flex flex-col items-center gap-8 w-full max-w-2xl px-6"
@@ -142,7 +150,7 @@ export default function SearchSequence() {
       >
         <p className="text-sm text-gray-400 mb-5">
           Resultados para:{' '}
-          <span className="italic text-gray-500">"{TEXT}"</span>
+          <span className="italic text-gray-500">"{QUERY}"</span>
         </p>
 
         {RESULTS.map((r, i) => (
@@ -157,9 +165,7 @@ export default function SearchSequence() {
             <span className="text-blue-600 text-lg leading-snug hover:underline cursor-pointer">
               {r.title}
             </span>
-            <span className="text-gray-400 text-sm">
-              Una guía práctica con ejemplos reales de implementación y animaciones fluidas...
-            </span>
+            <span className="text-gray-400 text-sm">{r.desc}</span>
           </motion.div>
         ))}
 

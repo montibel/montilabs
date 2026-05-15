@@ -455,28 +455,28 @@ function drawOS() {
   drawTaskbar();
   fill(0, 0, 0, 60); noStroke();
   textFont('monospace'); textSize(10); textAlign(RIGHT, BOTTOM);
-  text('Diseñado por montilabs', width - 8, height - 32);
+  text('Diseñado por montilabs', width - 8, height - 42);
 }
 
 // --- Desktop icons ---
 function drawIcons() {
   for (let i = 0; i < ICONS.length; i++) {
     const { label, emoji } = ICONS[i];
-    const ix = 14,
-      iy = 14 + i * 76;
+    const ix = 16,
+      iy = 16 + i * 100;
     textAlign(CENTER, TOP);
     noStroke();
-    textSize(28);
+    textSize(42);
     fill(...C.white);
-    text(emoji, ix + 20, iy);
-    textSize(11);
-    text(label, ix + 20, iy + 32);
+    text(emoji, ix + 28, iy);
+    textSize(13);
+    text(label, ix + 28, iy + 48);
   }
 }
 
 // --- Taskbar ---
 function drawTaskbar() {
-  const H = 28,
+  const H = 38,
     Y = height - H;
   fill(...C.gray);
   noStroke();
@@ -485,31 +485,31 @@ function drawTaskbar() {
   strokeWeight(1);
   line(0, Y, width, Y);
 
-  raisedBlock(2, Y + 2, 56, H - 4);
+  raisedBlock(2, Y + 2, 76, H - 4);
   fill(...C.black);
-  textSize(12);
+  textSize(14);
   textAlign(CENTER, CENTER);
   textStyle(BOLD);
-  text("▶ Inicio", 30, Y + H / 2);
+  text("▶ Inicio", 40, Y + H / 2);
   textStyle(NORMAL);
 
   const t = new Date();
   const ts = nf(t.getHours(), 2) + ":" + nf(t.getMinutes(), 2);
-  const cW = 48,
+  const cW = 56,
     cX = width - cW - 4;
   sunkenBlock(cX, Y + 3, cW, H - 6);
   fill(...C.black);
-  textSize(11);
+  textSize(13);
   textAlign(CENTER, CENTER);
   text(ts, cX + cW / 2, Y + H / 2);
 
-  let bx = 64;
+  let bx = 82;
   for (const w of wins) {
     const isTop = wins[wins.length - 1] === w;
-    if (w.minimized || !isTop) raisedBlock(bx, Y + 3, 110, H - 6);
-    else sunkenBlock(bx, Y + 3, 110, H - 6);
+    if (w.minimized || !isTop) raisedBlock(bx, Y + 3, 130, H - 6);
+    else sunkenBlock(bx, Y + 3, 130, H - 6);
     fill(...C.black);
-    textSize(11);
+    textSize(12);
     textAlign(LEFT, CENTER);
     text(w.title.substring(0, 14), bx + 4, Y + H / 2);
     w._taskX = bx;
@@ -549,7 +549,7 @@ function drawStartMenu() {
   const mW = 180,
     mH = 220;
   const mX = 2,
-    mY = height - 28 - mH;
+    mY = height - 38 - mH;
   raisedBlock(mX, mY, mW, mH);
 
   fill(...C.blue1);
@@ -610,9 +610,9 @@ function mousePressed() {
     return;
   }
 
-  const tbY = height - 28;
+  const tbY = height - 38;
 
-  if (mouseX >= 2 && mouseX <= 58 && mouseY >= tbY) {
+  if (mouseX >= 2 && mouseX <= 78 && mouseY >= tbY) {
     startOpen = !startOpen;
     return;
   }
@@ -623,7 +623,7 @@ function mousePressed() {
 
   if (mouseY >= tbY) {
     for (const w of wins) {
-      if (mouseX >= w._taskX && mouseX <= w._taskX + 110) {
+      if (mouseX >= w._taskX && mouseX <= w._taskX + 130) {
         const isTop = wins[wins.length - 1] === w;
         if (w.minimized) {
           w.minimized = false;
@@ -677,9 +677,9 @@ function mousePressed() {
 
   // Desktop icon click
   for (let i = 0; i < ICONS.length; i++) {
-    const ix = 14,
-      iy = 14 + i * 76;
-    if (mouseX > ix && mouseX < ix + 40 && mouseY > iy && mouseY < iy + 50) {
+    const ix = 16,
+      iy = 16 + i * 100;
+    if (mouseX > ix && mouseX < ix + 56 && mouseY > iy && mouseY < iy + 68) {
       openApp(ICONS[i].id);
       return;
     }
@@ -689,7 +689,7 @@ function mousePressed() {
 function mouseDragged() {
   if (!dragging) return;
   dragging.x = constrain(mouseX - dragOX, 0, width - dragging.w);
-  dragging.y = constrain(mouseY - dragOY, 0, height - 28 - dragging.h);
+  dragging.y = constrain(mouseY - dragOY, 0, height - 38 - dragging.h);
 }
 
 function mouseReleased() {
