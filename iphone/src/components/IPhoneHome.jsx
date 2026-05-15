@@ -249,19 +249,24 @@ const CHAT = [
 function MessagesApp({ onClose }) {
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: '#1c1c1e' }}>
-      <div className="flex items-center px-4 pt-14 pb-3" style={{ borderBottom: '1px solid #2c2c2e' }}>
-        <button onClick={onClose} className="text-blue-400 text-sm font-medium">‹ Mensajes</button>
+      {/* Header */}
+      <div className="shrink-0 flex items-center px-4 pb-3" style={{ paddingTop: 60, borderBottom: '1px solid #2c2c2e' }}>
+        <button onClick={onClose} className="text-blue-400 text-sm font-medium w-16">‹ Atrás</button>
         <div className="flex-1 flex flex-col items-center">
           <p className="text-white text-sm font-semibold">montilabs Studio</p>
           <p className="text-white/40 text-xs">En línea</p>
         </div>
-        <motion.button whileTap={{ scale: 0.88 }} onClick={onClose}
-          className="rounded-full flex items-center justify-center"
-          style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.1)' }}>
-          <X size={14} color="white" />
-        </motion.button>
+        <div className="w-16 flex justify-end">
+          <motion.button whileTap={{ scale: 0.88 }} onClick={onClose}
+            className="rounded-full flex items-center justify-center"
+            style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.1)' }}>
+            <X size={14} color="white" />
+          </motion.button>
+        </div>
       </div>
-      <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3">
+
+      {/* Chat — minHeight:0 lets flex-1 shrink properly */}
+      <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3" style={{ minHeight: 0 }}>
         {CHAT.map((m, i) => (
           <motion.div key={m.id}
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -280,7 +285,9 @@ function MessagesApp({ onClose }) {
           </motion.div>
         ))}
       </div>
-      <div className="flex items-center gap-2 px-4 py-3" style={{ borderTop: '1px solid #2c2c2e' }}>
+
+      {/* Input */}
+      <div className="shrink-0 flex items-center gap-2 px-4 py-3 pb-8" style={{ borderTop: '1px solid #2c2c2e' }}>
         <div className="flex-1 rounded-full px-4 py-2 text-sm text-white/30"
           style={{ border: '1px solid #3a3a3c' }}>
           Mensaje...
