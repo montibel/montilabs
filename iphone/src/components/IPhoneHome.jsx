@@ -227,13 +227,18 @@ const CHAT = [
 
 function MessagesApp({ onClose }) {
   return (
-    <div className="absolute inset-0 flex flex-col bg-white">
-      <div className="flex items-center gap-3 px-4 pt-14 pb-3 border-b border-gray-100">
-        <button onClick={onClose} className="text-blue-500 text-sm font-medium">‹ Mensajes</button>
+    <div className="absolute inset-0 flex flex-col" style={{ background: '#1c1c1e' }}>
+      <div className="flex items-center px-4 pt-14 pb-3" style={{ borderBottom: '1px solid #2c2c2e' }}>
+        <button onClick={onClose} className="text-blue-400 text-sm font-medium">‹ Mensajes</button>
         <div className="flex-1 flex flex-col items-center">
-          <p className="text-black text-sm font-semibold">montilabs Studio</p>
-          <p className="text-gray-400 text-xs">En línea</p>
+          <p className="text-white text-sm font-semibold">montilabs Studio</p>
+          <p className="text-white/40 text-xs">En línea</p>
         </div>
+        <motion.button whileTap={{ scale: 0.88 }} onClick={onClose}
+          className="rounded-full flex items-center justify-center"
+          style={{ width: 28, height: 28, background: 'rgba(255,255,255,0.1)' }}>
+          <X size={14} color="white" />
+        </motion.button>
       </div>
       <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3">
         {CHAT.map((m, i) => (
@@ -244,8 +249,8 @@ function MessagesApp({ onClose }) {
           >
             <div className="max-w-[75%] rounded-2xl px-3 py-2 text-sm"
               style={{
-                background: m.from === 'me' ? '#0a84ff' : '#e9e9eb',
-                color: m.from === 'me' ? 'white' : 'black',
+                background: m.from === 'me' ? '#0a84ff' : '#2c2c2e',
+                color: 'white',
                 borderBottomRightRadius: m.from === 'me' ? 4 : undefined,
                 borderBottomLeftRadius:  m.from === 'them' ? 4 : undefined,
               }}>
@@ -254,8 +259,9 @@ function MessagesApp({ onClose }) {
           </motion.div>
         ))}
       </div>
-      <div className="flex items-center gap-2 px-4 py-3 border-t border-gray-100">
-        <div className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-400">
+      <div className="flex items-center gap-2 px-4 py-3" style={{ borderTop: '1px solid #2c2c2e' }}>
+        <div className="flex-1 rounded-full px-4 py-2 text-sm text-white/30"
+          style={{ border: '1px solid #3a3a3c' }}>
           Mensaje...
         </div>
       </div>
