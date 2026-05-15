@@ -37,13 +37,11 @@ const T = {
     galSub:    "Fotografía análoga",
     galBtn:    "Ver galería  →",
     contact:   "✉  montibel@gmail.com",
-    sobremi: `Hola, soy Marce. Fundadora de montilabs.
+    sobremi: `Somos Montilabs.
 
-Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y mezclo código con diseño para armar cosas animadas, además de dedicarme a la edición de video.
+Creamos interfaces dinámicas y animaciones interactivas fusionando código y las herramientas no-code.
 
-Mi fuerte es la tipografía animada, los efectos visuales y el diseño de interfaces. Actualmente estoy trabajando con arte generativo y mezclando inteligencia artificial con visuales.
-
-Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, leyendo algo o preparando un café con mis gatos cerca.`,
+Rompemos la barrera entre el diseño y el desarrollo para dar vida a productos digitales únicos.`,
     menuItems: [
       "📁  Programas",
       "📄  Documentos",
@@ -82,13 +80,11 @@ Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, l
     galSub:    "Analog photography",
     galBtn:    "View gallery  →",
     contact:   "✉  montibel@gmail.com",
-    sobremi: `Hi, I'm Marce. Founder of montilabs.
+    sobremi: `We are Montilabs.
 
-I'm a Creative Developer and Audiovisual Director based in Santiago, Chile. I blend code with design to build animated experiences, and I also work in video editing.
+We create dynamic interfaces and interactive animations by fusing code with no-code tools.
 
-My focus areas are animated typography, visual effects, and interface design. I'm currently exploring generative art and mixing AI with visuals.
-
-When I'm not at the computer, you'll probably find me at the cinema, reading, or making coffee with my cats nearby.`,
+We break the barrier between design and development to bring unique digital products to life.`,
     menuItems: [
       "📁  Programs",
       "📄  Documents",
