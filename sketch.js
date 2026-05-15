@@ -301,7 +301,7 @@ const PROYECTOS = [
     category: "UI / UX",
     items: [
       { label: "Search Sequence", url: "uxsim/dist/" },
-      { label: "iPhone Home",     url: "iphone/dist/" },
+      { label: "iPhone Home", url: "iphone/dist/" },
     ],
   },
 ];
@@ -367,7 +367,7 @@ const APP_DEFS = {
       "📝 Sobre mí",
       `Hola, soy Marce. Fundadora de montilabs.
 
-Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y, entre muchas cosas, mezclo código con diseño para armar animaciones, además de dedicarme a la edición de video.
+Soy Desarrolladora Creativa y Realizadora Audiovisual. Entre muchas cosas, mezclo código con diseño para armar animaciones, además de dedicarme a la edición de video.
 
 Mi fuerte son los efectos visuales y el diseño de interfaces. Actualmente estoy utilizando arte generativo y mezclando inteligencia artificial con visuales.
 `,
