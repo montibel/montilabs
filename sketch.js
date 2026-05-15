@@ -347,7 +347,13 @@ class ProyectosWindow extends Win95Window {
 let windowCount = 0;
 const APP_DEFS = {
   fotos:     () => new FotosWindow(80, 60),
-  sobremi:   () => new TextWindow(120, 80, 340, 180, '📝 Sobre mí', 'En construcción...'),
+  sobremi:   () => new TextWindow(120, 80, 400, 260, '📝 Sobre mí', `Hola, soy Marce. Fundadora de montilabs.
+
+Soy Desarrolladora Creativa y Realizadora Audiovisual. Vivo actualmente en Santiago de Chile y, entre muchas cosas, mezclo código con diseño para armar cosas animadas, además de dedicarme a la edición de video.
+
+Mi fuerte es la tipografía animada, los efectos visuales y el diseño de interfaces. Actualmente estoy utilizando arte generativo y mezclando inteligencia artificial con visuales.
+
+Cuando no estoy en el compu, lo más probable es que me encuentres en el cine, leyendo algo o preparando un café con mis gatos cerca.`),
   contacto:  () => new ContactoWindow(160, 110),
   proyectos: () => new ProyectosWindow(200, 130),
 };
