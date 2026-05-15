@@ -358,7 +358,7 @@ function CameraApp({ onClose }) {
 
 // ── App: Safari ───────────────────────────────────────────────────────
 function SafariApp({ onClose }) {
-  const query = 'montilabs.com'
+  const query = 'montibel.github.io/montilabs'
 
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: '#f2f2f7' }}>
@@ -377,60 +377,100 @@ function SafariApp({ onClose }) {
         </div>
       </div>
 
-      {/* Webpage */}
-      <div className="flex-1 overflow-y-auto" style={{ minHeight: 0, background: '#0a0a0a' }}>
+      {/* Webpage — simula el desktop Windows 95 */}
+      <div className="flex-1 overflow-hidden relative" style={{ minHeight: 0, background: '#008080' }}>
         <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-          className="flex flex-col"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          className="absolute inset-0 flex flex-col"
         >
-          {/* Hero */}
-          <div className="px-6 pt-10 pb-8 flex flex-col gap-3">
-            <p className="text-white/30 text-[10px] tracking-[0.25em] uppercase">Studio</p>
-            <p className="text-white font-light leading-tight" style={{ fontSize: 28 }}>
-              Interfaces que<br />cobran vida.
-            </p>
-            <p className="text-white/40 text-xs leading-relaxed">
-              Fusionamos código y diseño para crear experiencias digitales únicas.
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px mx-6" style={{ background: 'rgba(255,255,255,0.07)' }} />
-
-          {/* Services */}
-          <div className="px-6 py-6 flex flex-col gap-3">
+          {/* Desktop icons */}
+          <div className="flex-1 relative p-2">
             {[
-              { name: 'UI / UX', desc: 'Interfaces animadas' },
-              { name: 'Motion',  desc: 'Animación interactiva' },
-              { name: 'Código',  desc: 'Arte generativo' },
-            ].map((s, i) => (
-              <motion.div key={s.name}
-                initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.35 + i * 0.08 }}
-                className="flex items-center justify-between py-3"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+              { emoji: '📷', label: 'Mis Fotos' },
+              { emoji: '📝', label: 'Sobre mí' },
+              { emoji: '📧', label: 'Contacto' },
+              { emoji: '💼', label: 'Proyectos' },
+            ].map((icon, i) => (
+              <motion.div
+                key={icon.label}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 + i * 0.07 }}
+                className="flex flex-col items-center mb-3 select-none"
+                style={{ width: 56 }}
               >
-                <span className="text-white text-sm">{s.name}</span>
-                <span className="text-white/30 text-xs">{s.desc}</span>
+                <span style={{ fontSize: 22 }}>{icon.emoji}</span>
+                <span className="text-white text-center leading-tight mt-0.5"
+                  style={{ fontSize: 9, textShadow: '1px 1px 0 #000' }}>
+                  {icon.label}
+                </span>
               </motion.div>
             ))}
+
+            {/* Small open window */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              className="absolute"
+              style={{ top: 20, left: 64, right: 8,
+                background: '#c0c0c0',
+                border: '2px solid #fff',
+                boxShadow: '2px 2px 0 #000' }}
+            >
+              {/* Title bar */}
+              <div className="flex items-center px-1 py-0.5"
+                style={{ background: 'linear-gradient(90deg,#000080,#1084d0)', height: 14 }}>
+                <span className="text-white flex-1" style={{ fontSize: 8, fontFamily: 'monospace' }}>
+                  📝 Sobre mí
+                </span>
+                <div className="flex gap-px">
+                  {['_','□','✕'].map(b => (
+                    <div key={b} className="flex items-center justify-center bg-gray-300"
+                      style={{ width: 10, height: 10, fontSize: 6, fontFamily: 'monospace' }}>
+                      {b}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Content */}
+              <div className="p-2 bg-white" style={{ fontSize: 7, fontFamily: 'monospace', lineHeight: 1.5, color: '#000' }}>
+                Somos Montilabs.{'\n'}
+                Creamos interfaces dinámicas{'\n'}
+                y animaciones interactivas.
+              </div>
+            </motion.div>
           </div>
 
-          {/* Footer */}
-          <div className="px-6 py-4">
-            <p className="text-white/20 text-[10px] tracking-widest uppercase">montilabs.com</p>
+          {/* Taskbar */}
+          <div className="shrink-0 flex items-center px-1 gap-1"
+            style={{ height: 22, background: '#c0c0c0',
+              borderTop: '2px solid #fff',
+              boxShadow: 'inset 0 1px 0 #dfdfdf' }}>
+            <div className="flex items-center px-2 h-4 font-bold"
+              style={{ background: '#c0c0c0', border: '1px solid',
+                borderColor: '#fff #808080 #808080 #fff',
+                fontSize: 9, fontFamily: 'monospace' }}>
+              ▶ Inicio
+            </div>
+            <div className="flex-1" />
+            <div className="flex items-center px-2 h-4"
+              style={{ border: '1px solid', borderColor: '#808080 #fff #fff #808080',
+                fontSize: 9, fontFamily: 'monospace' }}>
+              {new Date().getHours().toString().padStart(2,'0')}:{new Date().getMinutes().toString().padStart(2,'0')}
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* Bottom nav */}
       <div className="shrink-0 flex items-center justify-around px-6 py-3 pb-8"
-        style={{ background: '#111', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-        <button onClick={onClose} className="text-2xl font-light" style={{ color: '#0a84ff' }}>‹</button>
-        <button className="text-2xl font-light" style={{ color: 'rgba(255,255,255,0.2)' }}>›</button>
-        <button className="text-xl" style={{ color: '#0a84ff' }}>⤴</button>
-        <button className="text-xl" style={{ color: '#0a84ff' }}>⧉</button>
-        <button className="text-xl" style={{ color: '#0a84ff' }}>⋯</button>
+        style={{ background: '#f2f2f7', borderTop: '1px solid #e5e5ea' }}>
+        <button onClick={onClose} className="text-blue-500 text-2xl font-light">‹</button>
+        <button className="text-gray-300 text-2xl font-light">›</button>
+        <button className="text-blue-500 text-xl">⤴</button>
+        <button className="text-blue-500 text-xl">⧉</button>
+        <button className="text-blue-500 text-xl">⋯</button>
       </div>
     </div>
   )
