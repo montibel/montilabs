@@ -297,11 +297,17 @@ const PROYECTOS = [
       { label: 'Gravity',    url: 'tipografia2/dist/' },
     ]
   },
+  {
+    category: 'UI / UX',
+    items: [
+      { label: 'Search Sequence', url: 'uxsim/dist/' },
+    ]
+  },
 ];
 
 class ProyectosWindow extends Win95Window {
   constructor(x, y) {
-    super(x, y, 320, 220, '💼 Proyectos');
+    super(x, y, 320, 300, '💼 Proyectos');
     this._btnsP = [];
   }
   drawContent(x, y, w, h) {
