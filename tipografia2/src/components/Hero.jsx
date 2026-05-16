@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Text3D, Center, Grid, Stars, useProgress } from '@react-three/drei'
@@ -77,6 +77,18 @@ function Letter({ char, index }) {
       </Center>
     </RigidBody>
   )
+}
+
+// Moves camera back on narrow screens so all letters stay visible
+function CameraAdjuster() {
+  const { camera, size } = useThree()
+  useEffect(() => {
+    const aspect = size.width / size.height
+    // z=11 works for desktop (aspect ~1.78). Scale inversely so horizontal view stays constant.
+    camera.position.z = Math.max(11, 11 / aspect)
+    camera.updateProjectionMatrix()
+  }, [camera, size])
+  return null
 }
 
 function Ground() {
@@ -214,6 +226,7 @@ export default function Hero() {
           infiniteGrid
         />
 
+        <CameraAdjuster />
         <Suspense fallback={null}>
           <Scene resetKey={resetKey} />
         </Suspense>
