@@ -1,21 +1,10 @@
 let pts = []
-let flows = []
+const GRID = 28
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
   pixelDensity(1)
   sampleText()
-  for (let i = 0; i < 700; i++) flows.push(mkFlow())
-}
-
-function mkFlow() {
-  return {
-    x: random(width),
-    y: random(height),
-    life: random(80, 220),
-    speed: random(0.9, 2.2),
-    bright: random(0.3, 1.0),
-  }
 }
 
 function sampleText() {
@@ -40,40 +29,31 @@ function sampleText() {
 }
 
 function draw() {
-  noStroke()
-  fill(11, 11, 11, 30)
-  rect(0, 0, width, height)
+  background(11, 11, 11)
 
-  drawFlowField()
+  drawGrid()
   drawParticles()
 }
 
-function drawFlowField() {
-  const t = frameCount * 0.0025
+function drawGrid() {
+  const t = frameCount * 0.003
   noStroke()
 
-  for (const p of flows) {
-    let angle = noise(p.x * 0.0025, p.y * 0.0025, t) * TWO_PI * 2.5
+  for (let x = GRID; x < width; x += GRID) {
+    for (let y = GRID; y < height; y += GRID) {
+      // Mouse influence: dots near cursor get brighter
+      const dx = x - mouseX
+      const dy = y - mouseY
+      const d  = sqrt(dx * dx + dy * dy)
+      const mouseBright = d < 160 ? (1 - d / 160) * 0.6 : 0
 
-    // Mouse distorts the flow field
-    const dx = p.x - mouseX
-    const dy = p.y - mouseY
-    const d  = sqrt(dx * dx + dy * dy)
-    if (d < 200 && d > 1) {
-      angle += (1 - d / 200) * TWO_PI * 1.2
+      const n = noise(x * 0.004, y * 0.004, t)
+      const a = map(n, 0, 1, 20, 160) + mouseBright * 180
+      const r = map(n, 0, 1, 1.5, 4)
+
+      fill(200, 255, 62, a)
+      ellipse(x, y, r)
     }
-
-    p.x += cos(angle) * p.speed
-    p.y += sin(angle) * p.speed
-    p.life--
-
-    if (p.life <= 0 || p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
-      Object.assign(p, mkFlow())
-    }
-
-    const a = map(p.life, 0, 80, 0, 1) * p.bright
-    fill(80, 50, 160, a * 30)
-    ellipse(p.x, p.y, 2)
   }
 }
 
@@ -100,12 +80,10 @@ function drawParticles() {
 
     const sz = map(n1, 0, 1, 1, 2.5)
 
-    // Glow layer — #c8ff3e (200, 255, 62)
     fill(200, 255, 62, 16)
     ellipse(px, py, sz * 6)
     fill(200, 255, 62, 55)
     ellipse(px, py, sz * 2)
-    // Bright core
     fill(230, 255, 180, 210)
     ellipse(px, py, sz)
   }
