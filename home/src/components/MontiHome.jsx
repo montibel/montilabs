@@ -199,7 +199,7 @@ function ProjectCard({ project, lang, index, onHover }) {
 
 // ── Main ─────────────────────────────────────────────────────────────
 export default function MontiHome() {
-  const [lang, setLang] = useState('es')
+  const [lang, setLang] = useState(() => localStorage.getItem('ml_lang') || 'es')
   const [hovering, setHovering] = useState(false)
   const projectsRef = useRef(null)
   const wide = useWide(820)
@@ -230,7 +230,7 @@ export default function MontiHome() {
         </motion.a>
 
         <button
-          onClick={() => setLang(l => l === 'es' ? 'en' : 'es')}
+          onClick={() => setLang(l => { const n = l === 'es' ? 'en' : 'es'; localStorage.setItem('ml_lang', n); return n })}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
           style={{

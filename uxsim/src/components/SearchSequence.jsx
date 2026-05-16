@@ -114,7 +114,7 @@ function CursorIcon() {
 }
 
 export default function SearchSequence() {
-  const [lang, setLang]           = useState('es')
+  const [lang, setLang]           = useState(() => localStorage.getItem('ml_lang') || 'es')
   const [typed, setTyped]         = useState('')
   const [phase, setPhase]         = useState('idle')
   const [iteration, setIteration] = useState(0)
@@ -138,7 +138,7 @@ export default function SearchSequence() {
   }
 
   const switchLang = () => {
-    setLang(l => l === 'es' ? 'en' : 'es')
+    setLang(l => { const n = l === 'es' ? 'en' : 'es'; localStorage.setItem('ml_lang', n); return n })
     setTyped('')
     setPhase('idle')
     cursorCtrl.set({ x: 0, y: 0 })

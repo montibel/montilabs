@@ -12,12 +12,60 @@ const WALLPAPER = `
   radial-gradient(ellipse at 75% 85%, rgba(59,130,246,.30) 0%, transparent 55%),
   linear-gradient(160deg, #0a0015 0%, #1a0533 40%, #2d1b69 70%, #0f3460 100%)`
 
-const APPS = [
-  { id: 'phone',    label: 'Teléfono', Icon: Phone,         bg: 'linear-gradient(145deg,#30d158,#25a244)' },
-  { id: 'messages', label: 'Mensajes', Icon: MessageCircle, bg: 'linear-gradient(145deg,#30d158,#0ab87e)' },
-  { id: 'camera',  label: 'Cámara',   Icon: Camera,         bg: 'linear-gradient(145deg,#48484a,#1c1c1e)' },
-  { id: 'safari',  label: 'Safari',   Icon: Globe,          bg: 'linear-gradient(145deg,#0a84ff,#0064d1)' },
+// ── Translations ──────────────────────────────────────────────────────
+const T = {
+  es: {
+    apps: ['Teléfono', 'Mensajes', 'Cámara', 'Safari'],
+    calling: 'iPhone · Llamando...', inCall: 'En llamada · 0:07',
+    reject: 'Rechazar', accept: 'Aceptar',
+    back: '‹ Atrás', online: 'En línea', placeholder: 'Mensaje...',
+    notifApp: 'Mensajes', notifTime: 'ahora', notifText: 'El cliente aprobó los conceptos ✓',
+    unlock: 'Toca para desbloquear',
+    safariIcons: ['Mis Fotos', 'Sobre mí', 'Contacto', 'Proyectos'],
+    safariWinTitle: '📝 Sobre mí',
+    safariContent: 'Somos Montilabs.\nCreamos interfaces dinámicas\ny animaciones interactivas.',
+    safariStart: '▶ Inicio',
+    chat: [
+      { id: 1, from: 'them', text: 'Hola! ¿cómo va el proyecto?' },
+      { id: 2, from: 'me',   text: 'Todo listo para el viernes 🚀' },
+      { id: 3, from: 'them', text: 'El cliente aprobó los conceptos ✓' },
+      { id: 4, from: 'me',   text: 'Buenas noticias! Enviamos el reel esta tarde.' },
+    ],
+  },
+  en: {
+    apps: ['Phone', 'Messages', 'Camera', 'Safari'],
+    calling: 'iPhone · Calling...', inCall: 'In call · 0:07',
+    reject: 'Decline', accept: 'Accept',
+    back: '‹ Back', online: 'Online', placeholder: 'Message...',
+    notifApp: 'Messages', notifTime: 'now', notifText: 'Client approved the concepts ✓',
+    unlock: 'Tap to unlock',
+    safariIcons: ['My Photos', 'About me', 'Contact', 'Projects'],
+    safariWinTitle: '📝 About me',
+    safariContent: 'We are Montilabs.\nWe create dynamic interfaces\nand interactive animations.',
+    safariStart: '▶ Start',
+    chat: [
+      { id: 1, from: 'them', text: "Hey! How's the project going?" },
+      { id: 2, from: 'me',   text: 'All ready for Friday 🚀' },
+      { id: 3, from: 'them', text: 'Client approved the concepts ✓' },
+      { id: 4, from: 'me',   text: 'Great news! Sending the reel this afternoon.' },
+    ],
+  },
+}
+
+function useLang() {
+  const [lang, setLang] = useState(() => localStorage.getItem('ml_lang') || 'es')
+  const toggle = () => setLang(l => { const n = l === 'es' ? 'en' : 'es'; localStorage.setItem('ml_lang', n); return n })
+  return [lang, toggle]
+}
+
+const APP_BG = [
+  'linear-gradient(145deg,#30d158,#25a244)',
+  'linear-gradient(145deg,#30d158,#0ab87e)',
+  'linear-gradient(145deg,#48484a,#1c1c1e)',
+  'linear-gradient(145deg,#0a84ff,#0064d1)',
 ]
+const APP_ICONS = [Phone, MessageCircle, Camera, Globe]
+const APP_IDS   = ['phone', 'messages', 'camera', 'safari']
 
 // ── Scale to fit viewport ────────────────────────────────────────────
 const W = 393, H = 852
@@ -81,7 +129,8 @@ function Battery() {
 }
 
 // ── Dynamic Island ───────────────────────────────────────────────────
-function DynamicIsland({ mode, onNotifDone }) {
+function DynamicIsland({ mode, onNotifDone, lang }) {
+  const t = T[lang] || T.es
   const [hovering, setHovering] = useState(false)
   const [playing, setPlaying]   = useState(true)
   const [progress, setProgress] = useState(0.3)
@@ -122,11 +171,11 @@ function DynamicIsland({ mode, onNotifDone }) {
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <p className="text-white text-[11px] font-semibold">Mensajes</p>
-                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10 }}>ahora</p>
+                <p className="text-white text-[11px] font-semibold">{t.notifApp}</p>
+                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 10 }}>{t.notifTime}</p>
               </div>
               <p className="text-xs truncate" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                El cliente aprobó los conceptos ✓
+                {t.notifText}
               </p>
             </div>
           </motion.div>
@@ -193,14 +242,15 @@ function DynamicIsland({ mode, onNotifDone }) {
 }
 
 // ── App: Phone ───────────────────────────────────────────────────────
-function PhoneApp({ onClose }) {
+function PhoneApp({ onClose, lang }) {
   const [connected, setConnected] = useState(false)
+  const t = T[lang] || T.es
 
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: WALLPAPER }}>
       <div className="flex flex-col items-center flex-1 justify-center gap-5">
         <p className="text-white/60 text-sm">
-          {connected ? 'En llamada · 0:07' : 'iPhone · Llamando...'}
+          {connected ? t.inCall : t.calling}
         </p>
         <div className="relative flex items-center justify-center" style={{ width: 130, height: 130 }}>
           {!connected && [1, 2, 3].map(i => (
@@ -225,13 +275,13 @@ function PhoneApp({ onClose }) {
           <div className="rounded-full flex items-center justify-center" style={{ width: 68, height: 68, background: '#ff3b30' }}>
             <Phone size={28} color="white" style={{ transform: 'rotate(135deg)' }} />
           </div>
-          <span className="text-white/60 text-xs">Rechazar</span>
+          <span className="text-white/60 text-xs">{t.reject}</span>
         </motion.button>
         <motion.button whileTap={{ scale: 0.88 }} onClick={() => setConnected(true)} className="flex flex-col items-center gap-2">
           <div className="rounded-full flex items-center justify-center" style={{ width: 68, height: 68, background: '#30d158' }}>
             <Phone size={28} color="white" />
           </div>
-          <span className="text-white/60 text-xs">Aceptar</span>
+          <span className="text-white/60 text-xs">{t.accept}</span>
         </motion.button>
       </div>
     </div>
@@ -239,22 +289,16 @@ function PhoneApp({ onClose }) {
 }
 
 // ── App: Messages ────────────────────────────────────────────────────
-const CHAT = [
-  { id: 1, from: 'them', text: 'Hola! ¿cómo va el proyecto?' },
-  { id: 2, from: 'me',   text: 'Todo listo para el viernes 🚀' },
-  { id: 3, from: 'them', text: 'El cliente aprobó los conceptos ✓' },
-  { id: 4, from: 'me',   text: 'Buenas noticias! Enviamos el reel esta tarde.' },
-]
-
-function MessagesApp({ onClose }) {
+function MessagesApp({ onClose, lang }) {
+  const t = T[lang] || T.es
   return (
     <div className="absolute inset-0 flex flex-col" style={{ background: '#1c1c1e' }}>
       {/* Header */}
       <div className="shrink-0 flex items-center px-4 pb-3" style={{ paddingTop: 60, borderBottom: '1px solid #2c2c2e' }}>
-        <button onClick={onClose} className="text-blue-400 text-sm font-medium w-16">‹ Atrás</button>
+        <button onClick={onClose} className="text-blue-400 text-sm font-medium w-16">{t.back}</button>
         <div className="flex-1 flex flex-col items-center">
           <p className="text-white text-sm font-semibold">montilabs Studio</p>
-          <p className="text-white/40 text-xs">En línea</p>
+          <p className="text-white/40 text-xs">{t.online}</p>
         </div>
         <div className="w-16 flex justify-end">
           <motion.button whileTap={{ scale: 0.88 }} onClick={onClose}
@@ -267,7 +311,7 @@ function MessagesApp({ onClose }) {
 
       {/* Chat — minHeight:0 lets flex-1 shrink properly */}
       <div className="flex-1 overflow-y-auto px-4 py-5 flex flex-col gap-3" style={{ minHeight: 0 }}>
-        {CHAT.map((m, i) => (
+        {t.chat.map((m, i) => (
           <motion.div key={m.id}
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.12 }}
@@ -290,7 +334,7 @@ function MessagesApp({ onClose }) {
       <div className="shrink-0 flex items-center gap-2 px-4 py-3" style={{ borderTop: '1px solid #2c2c2e', paddingBottom: 40 }}>
         <div className="flex-1 rounded-full px-4 py-2 text-sm text-white/30"
           style={{ border: '1px solid #3a3a3c' }}>
-          Mensaje...
+          {t.placeholder}
         </div>
       </div>
     </div>
@@ -357,7 +401,8 @@ function CameraApp({ onClose }) {
 }
 
 // ── App: Safari ───────────────────────────────────────────────────────
-function SafariApp({ onClose }) {
+function SafariApp({ onClose, lang }) {
+  const t = T[lang] || T.es
   const query = 'montibel.github.io/montilabs'
 
   return (
@@ -385,12 +430,7 @@ function SafariApp({ onClose }) {
         >
           {/* Desktop icons */}
           <div className="flex-1 relative p-2">
-            {[
-              { emoji: '📷', label: 'Mis Fotos' },
-              { emoji: '📝', label: 'Sobre mí' },
-              { emoji: '📧', label: 'Contacto' },
-              { emoji: '💼', label: 'Proyectos' },
-            ].map((icon, i) => (
+            {['📷','📝','📧','💼'].map((emoji, i) => ({ emoji, label: t.safariIcons[i] })).map((icon, i) => (
               <motion.div
                 key={icon.label}
                 initial={{ opacity: 0, y: 6 }}
@@ -422,7 +462,7 @@ function SafariApp({ onClose }) {
               <div className="flex items-center px-1 py-0.5"
                 style={{ background: 'linear-gradient(90deg,#000080,#1084d0)', height: 14 }}>
                 <span className="text-white flex-1" style={{ fontSize: 8, fontFamily: 'monospace' }}>
-                  📝 Sobre mí
+                  {t.safariWinTitle}
                 </span>
                 <div className="flex gap-px">
                   {['_','□','✕'].map(b => (
@@ -434,10 +474,8 @@ function SafariApp({ onClose }) {
                 </div>
               </div>
               {/* Content */}
-              <div className="p-2 bg-white" style={{ fontSize: 7, fontFamily: 'monospace', lineHeight: 1.5, color: '#000' }}>
-                Somos Montilabs.{'\n'}
-                Creamos interfaces dinámicas{'\n'}
-                y animaciones interactivas.
+              <div className="p-2 bg-white" style={{ fontSize: 7, fontFamily: 'monospace', lineHeight: 1.5, color: '#000', whiteSpace: 'pre-line' }}>
+                {t.safariContent}
               </div>
             </motion.div>
           </div>
@@ -451,7 +489,7 @@ function SafariApp({ onClose }) {
               style={{ background: '#c0c0c0', border: '1px solid',
                 borderColor: '#fff #808080 #808080 #fff',
                 fontSize: 9, fontFamily: 'monospace' }}>
-              ▶ Inicio
+              {t.safariStart}
             </div>
             <div className="flex-1" />
             <div className="flex items-center px-2 h-4"
@@ -494,17 +532,21 @@ function AppIcon({ id, label, Icon, bg, onOpen }) {
 }
 
 // ── Main ──────────────────────────────────────────────────────────────
-const APP_MAP = { phone: PhoneApp, messages: MessagesApp, camera: CameraApp, safari: SafariApp }
-
 export default function IPhoneHome() {
   const now   = useClock()
   const scale = useScale()
+  const [lang, toggleLang] = useLang()
   const [screen,  setScreen]  = useState('locked')
   const [diMode,  setDiMode]  = useState('music')
   const [openApp, setOpenApp] = useState(null)
 
-  const timeStr = now.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit', hour12: false })
-  const dateStr = now.toLocaleDateString('es-CL', { weekday: 'long', day: 'numeric', month: 'long' })
+  const locale  = lang === 'es' ? 'es-CL' : 'en-US'
+  const timeStr = now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12: false })
+  const dateStr = now.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long' })
+
+  const t    = T[lang] || T.es
+  const APPS = APP_IDS.map((id, i) => ({ id, label: t.apps[i], Icon: APP_ICONS[i], bg: APP_BG[i] }))
+  const OpenAppComponent = openApp ? { phone: PhoneApp, messages: MessagesApp, camera: CameraApp, safari: SafariApp }[openApp] : null
 
   useEffect(() => {
     if (screen !== 'home') return
@@ -513,10 +555,24 @@ export default function IPhoneHome() {
   }, [screen])
 
   const onNotifDone = useCallback(() => setDiMode('music'), [])
-  const OpenApp = openApp ? APP_MAP[openApp] : null
 
   return (
     <div className="w-screen h-screen flex items-center justify-center" style={{ background: '#000' }}>
+      {/* Lang toggle */}
+      <button
+        onClick={toggleLang}
+        style={{
+          position: 'fixed', top: 20, right: 20, zIndex: 100,
+          padding: '6px 14px', borderRadius: 99,
+          border: '1px solid rgba(255,255,255,0.15)', background: 'transparent',
+          color: 'rgba(255,255,255,0.5)', fontSize: 11, fontWeight: 500,
+          letterSpacing: '0.15em', textTransform: 'uppercase',
+          cursor: 'pointer', fontFamily: 'inherit',
+        }}
+      >
+        {lang === 'es' ? 'EN' : 'ES'}
+      </button>
+
       {/* Scale wrapper — keeps layout box in sync with visual size */}
       <div style={{ width: W * scale, height: H * scale, flexShrink: 0 }}>
       <div className="relative overflow-hidden"
@@ -555,7 +611,7 @@ export default function IPhoneHome() {
                 animate={{ opacity: [0.4, 0.85, 0.4], y: [0, -4, 0] }}
                 transition={{ repeat: Infinity, duration: 2 }}>
                 <ChevronUp size={20} color="rgba(255,255,255,0.7)" />
-                <span className="text-white/65 text-xs">Toca para desbloquear</span>
+                <span className="text-white/65 text-xs">{t.unlock}</span>
               </motion.div>
             </motion.div>
           )}
@@ -577,7 +633,7 @@ export default function IPhoneHome() {
                   {timeStr}
                 </span>
                 <div className="absolute left-1/2 -translate-x-1/2" style={{ top: 12 }}>
-                  <DynamicIsland mode={diMode} onNotifDone={onNotifDone} />
+                  <DynamicIsland mode={diMode} onNotifDone={onNotifDone} lang={lang} />
                 </div>
                 <div className="absolute flex items-center gap-1.5" style={{ right: 28, top: 24 }}>
                   <SignalBars /><Wifi /><Battery />
@@ -621,7 +677,7 @@ export default function IPhoneHome() {
 
         {/* ── App Overlay ── */}
         <AnimatePresence>
-          {openApp && OpenApp && (
+          {openApp && OpenAppComponent && (
             <motion.div key={openApp}
               initial={{ y: '100%', borderRadius: 55 }}
               animate={{ y: 0, borderRadius: 0 }}
@@ -629,7 +685,7 @@ export default function IPhoneHome() {
               transition={{ type: 'spring', stiffness: 280, damping: 34 }}
               className="absolute inset-0 z-30 overflow-hidden"
             >
-              <OpenApp onClose={() => setOpenApp(null)} />
+              <OpenAppComponent onClose={() => setOpenApp(null)} lang={lang} />
             </motion.div>
           )}
         </AnimatePresence>
