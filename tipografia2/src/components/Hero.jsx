@@ -1,6 +1,7 @@
 import { Suspense, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Text3D, Center, Grid, Stars } from '@react-three/drei'
+import { Text3D, Center, Grid, Stars, useProgress } from '@react-three/drei'
 import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 
 const BG      = '#0a0018'
@@ -9,6 +10,38 @@ const CHARS   = WORD.split('')
 const SPACING = 1.13
 const TOTAL_W = (CHARS.length - 1) * SPACING
 const START_X = -TOTAL_W / 2
+
+function LoadingOverlay() {
+  const { active, progress } = useProgress()
+  return (
+    <AnimatePresence>
+      {active && (
+        <motion.div
+          key="loading"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.7 }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 200, background: BG,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            fontFamily: 'system-ui, sans-serif',
+          }}
+        >
+          <p style={{ color: '#7fff00', fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: 28 }}>
+            montilabs
+          </p>
+          <div style={{ width: 120, height: 1, background: 'rgba(127,255,0,0.15)', borderRadius: 1 }}>
+            <motion.div
+              style={{ height: '100%', background: '#7fff00', borderRadius: 1 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.2 }}
+            />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
 
 // Module-level ref objects — one per letter (single instance of this component)
 const LETTER_REFS = CHARS.map(() => ({ current: null }))
@@ -115,6 +148,8 @@ export default function Hero() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: BG, position: 'relative' }}>
+
+      <LoadingOverlay />
 
       {/* Back link */}
       <a href="../../" style={{
