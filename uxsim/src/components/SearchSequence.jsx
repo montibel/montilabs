@@ -204,6 +204,17 @@ export default function SearchSequence() {
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none',
         background: 'radial-gradient(ellipse at 50% 40%, rgba(200,255,62,.04) 0%, transparent 65%)' }} />
 
+      {/* Back link */}
+      <a href="../../" style={{
+        position: 'fixed', top: 20, left: 20, zIndex: 100,
+        fontSize: 11, fontWeight: 500, letterSpacing: '0.18em',
+        textTransform: 'uppercase', color: 'rgba(240,240,240,0.3)',
+        textDecoration: 'none', fontFamily: "'Space Grotesk', system-ui, sans-serif",
+      }}
+        onMouseEnter={e => e.target.style.color = ACCENT}
+        onMouseLeave={e => e.target.style.color = 'rgba(240,240,240,0.3)'}
+      >← {lang === 'es' ? 'volver' : 'back'}</a>
+
       {/* Lang toggle */}
       <button onClick={switchLang} style={S.langBtn}>
         <AnimatePresence mode="wait">

@@ -558,6 +558,17 @@ export default function IPhoneHome() {
 
   return (
     <div className="w-screen h-screen flex items-center justify-center" style={{ background: '#000' }}>
+      {/* Back link */}
+      <a href="../../" style={{
+        position: 'fixed', top: 20, left: 20, zIndex: 100,
+        fontSize: 11, fontWeight: 500, letterSpacing: '0.18em',
+        textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)',
+        textDecoration: 'none', fontFamily: 'system-ui, sans-serif',
+      }}
+        onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
+        onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.3)'}
+      >← {lang === 'es' ? 'volver' : 'back'}</a>
+
       {/* Lang toggle */}
       <button
         onClick={toggleLang}

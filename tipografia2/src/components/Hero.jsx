@@ -116,6 +116,18 @@ export default function Hero() {
   return (
     <div style={{ width: '100vw', height: '100vh', background: BG, position: 'relative' }}>
 
+      {/* Back link */}
+      <a href="../../" style={{
+        position: 'fixed', top: 20, left: 20, zIndex: 100,
+        fontSize: 11, fontWeight: 500, letterSpacing: '0.18em',
+        textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)',
+        textDecoration: 'none', fontFamily: 'system-ui, sans-serif',
+        transition: 'color 0.2s',
+      }}
+        onMouseEnter={e => e.target.style.color = '#7fff00'}
+        onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.3)'}
+      >← volver</a>
+
       {/* HTML overlay */}
       <div style={{
         position: 'absolute', bottom: 28, left: 0, right: 0, zIndex: 10,
