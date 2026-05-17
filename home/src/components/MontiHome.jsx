@@ -117,8 +117,8 @@ function Cursor({ hovering }) {
 // ── Hero tiles (right side) ──────────────────────────────────────────
 function HeroTiles({ lang }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, width: 290 }}>
-      {PROJECTS.map((p, i) => (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, width: 320 }}>
+      {PROJECTS.slice(0, 4).map((p, i) => (
         <motion.a
           key={p.id}
           href={p.url}
@@ -126,15 +126,16 @@ function HeroTiles({ lang }) {
           rel="noreferrer"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ scale: 1.04, borderColor: p.color + '55' }}
           style={{
             display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-            padding: 14, borderRadius: 18, height: 130,
+            padding: 16, borderRadius: 16, height: 140,
             background: p.bg,
             border: '1px solid rgba(255,255,255,0.07)',
             textDecoration: 'none',
             cursor: 'none',
+            position: 'relative',
           }}
         >
           <span style={{ fontSize: 9, fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(240,240,240,0.35)', display: 'block', marginBottom: 4 }}>
@@ -144,7 +145,7 @@ function HeroTiles({ lang }) {
             {p.title}
           </span>
           <motion.div
-            style={{ width: 6, height: 6, borderRadius: '50%', background: p.color, position: 'absolute', top: 12, right: 12 }}
+            style={{ width: 6, height: 6, borderRadius: '50%', background: ACCENT, position: 'absolute', top: 14, right: 14 }}
             animate={{ opacity: [1, 0.35, 1] }}
             transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.4 }}
           />
@@ -231,11 +232,13 @@ export default function MontiHome() {
       }}>
         <motion.a
           href="#"
-          style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em', color: '#f0f0f0', textDecoration: 'none', cursor: 'none' }}
+          onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          style={{ fontSize: 18, fontWeight: 400, color: 'rgba(240,240,240,0.4)', textDecoration: 'none', cursor: 'none', lineHeight: 1 }}
           onHoverStart={() => setHovering(true)}
           onHoverEnd={() => setHovering(false)}
+          whileHover={{ color: '#f0f0f0' }}
         >
-          montilabs
+          ↑
         </motion.a>
 
         <button
@@ -270,31 +273,63 @@ export default function MontiHome() {
         display: 'flex',
         flexDirection: wide ? 'row' : 'column',
         alignItems: 'center',
-        paddingTop: 88,
-        paddingLeft: 64,
-        paddingRight: 64,
-        gap: wide ? 64 : 48,
+        paddingTop: 96,
+        paddingBottom: 64,
+        paddingLeft: wide ? 72 : 32,
+        paddingRight: wide ? 72 : 32,
+        gap: wide ? 56 : 52,
       }}>
 
         {/* Left — text */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+          {/* Brand — neon logotype */}
           <motion.p
-            style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.2em', textTransform: 'uppercase', color: ACCENT, marginBottom: 28 }}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              marginBottom: 20,
+              fontSize: 'clamp(56px, 8.5vw, 116px)',
+              fontWeight: 900,
+              letterSpacing: '-0.04em',
+              color: ACCENT,
+              lineHeight: 0.88,
+            }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{
+              opacity: 1, y: 0,
+              textShadow: [
+                `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
+                `0 0 6px ${ACCENT}88, 0 0 16px ${ACCENT}44, 0 0 32px ${ACCENT}22, 0 0 60px ${ACCENT}11`,
+                `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
+              ],
+            }}
+            transition={{
+              opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+              y: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+              textShadow: { repeat: Infinity, duration: 3.2, ease: 'easeInOut', delay: 0.7 },
+            }}
+          >
+            montilabs
+          </motion.p>
+
+          {/* Eyebrow */}
+          <motion.p
+            style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(240,240,240,0.35)', marginBottom: 18 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
             {t.eyebrow}
           </motion.p>
 
-          <h1 style={{ fontWeight: 700, lineHeight: 1, letterSpacing: '-0.03em', color: '#f0f0f0', fontSize: 'clamp(48px, 6vw, 82px)', marginBottom: '2.5rem' }}>
+          {/* Tagline — light weight, contrasts with heavy brand */}
+          <h1 style={{ fontWeight: 300, lineHeight: 1.2, letterSpacing: '-0.02em', color: 'rgba(240,240,240,0.75)', fontSize: 'clamp(26px, 3vw, 42px)', marginBottom: '2.5rem', maxWidth: 480 }}>
             {t.h1.map((line, i) => (
               <motion.span
                 key={line}
                 style={{ display: 'block' }}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.09, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ delay: 0.25 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
                 {i === 2
                   ? <>{line.replace('.', '')}<span style={{ color: ACCENT }}>.</span></>
@@ -304,26 +339,28 @@ export default function MontiHome() {
             ))}
           </h1>
 
+          {/* CTA */}
           <motion.button
             onClick={scrollToProjects}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 12,
-              padding: '14px 28px', borderRadius: 99, border: 'none',
-              background: ACCENT, color: '#0b0b0b', fontSize: 14, fontWeight: 600,
+              padding: '15px 32px', borderRadius: 99, border: 'none',
+              background: ACCENT, color: '#0b0b0b', fontSize: 14, fontWeight: 700,
               alignSelf: 'flex-start', cursor: 'none', fontFamily: 'inherit',
+              letterSpacing: '-0.01em',
             }}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.42, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.48, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
           >
             {t.cta}
             <motion.span
-              animate={{ x: [0, 4, 0] }}
-              transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+              animate={{ x: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
             >
               ↓
             </motion.span>
@@ -333,10 +370,10 @@ export default function MontiHome() {
         {/* Right — tiles */}
         {wide && (
           <motion.div
-            style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <HeroTiles lang={lang} />
           </motion.div>
