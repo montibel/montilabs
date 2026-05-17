@@ -4,7 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Windows 95 — Template</title>
-  <style>:root{--color-desktop:#008080;--color-window-bg:#c0c0c0;--color-window-bg-dark:#a0a0a0;--color-titlebar-active:#000080;--color-titlebar-inactive:#808080;--color-titlebar-text:#ffffff;--color-bevel-light:#ffffff;--color-bevel-mid-light:#dfdfdf;--color-bevel-mid-shadow:#808080;--color-bevel-shadow:#404040;--color-text:#000000;--color-text-disabled:#808080;--color-text-selected:#ffffff;--color-selection-bg:#000080;--color-taskbar-bg:#c0c0c0;--font-ui:"Arial","Helvetica",sans-serif;--font-mono:"Courier New","Courier",monospace;--font-size-base:11px;--space-xs:2px;--space-sm:4px;--space-md:8px;--space-lg:16px;--titlebar-height:22px;--taskbar-height:32px;--border-width:2px}.bevel-raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.bevel-sunken{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.bevel-well{border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}*,::after,::before{box-sizing:border-box;margin:0;padding:0}body,html{height:100%;overflow:hidden}body{font-family:var(--font-ui);font-size:var(--font-size-base);color:var(--color-text);background:var(--color-desktop);user-select:none;cursor:default}button{font-family:inherit;font-size:inherit;cursor:default;color:var(--color-text)}ol,ul{list-style:none}img{display:block;max-width:100%}.desktop{position:relative;width:100vw;height:calc(100vh - var(--taskbar-height));overflow:hidden}.desktop__icons{position:absolute;top:var(--space-lg);left:var(--space-md)}.desktop__icons ul{display:flex;flex-direction:column;gap:var(--space-lg)}.window{position:absolute;display:flex;flex-direction:column;min-width:200px;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.window__titlebar{display:flex;align-items:center;gap:var(--space-sm);height:var(--titlebar-height);padding:0 var(--space-sm);background:var(--color-titlebar-active);color:var(--color-titlebar-text);flex-shrink:0}.window__titlebar--inactive{background:var(--color-titlebar-inactive)}.window__icon{flex-shrink:0;width:16px;height:16px;display:flex;align-items:center}.window__title{flex:1;font-size:var(--font-size-base);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.window__controls{display:flex;gap:var(--space-xs);flex-shrink:0}.window__btn{display:flex;align-items:center;justify-content:center;width:16px;height:14px;font-size:10px;line-height:1;background:var(--color-window-bg);color:var(--color-text);border-top:1px solid var(--color-bevel-light);border-left:1px solid var(--color-bevel-light);border-right:1px solid var(--color-bevel-shadow);border-bottom:1px solid var(--color-bevel-shadow)}.window__btn:active{border-top:1px solid var(--color-bevel-shadow);border-left:1px solid var(--color-bevel-shadow);border-right:1px solid var(--color-bevel-light);border-bottom:1px solid var(--color-bevel-light)}.window__btn--close{font-size:9px}.window__menubar{display:flex;align-items:center;height:20px;padding:0 var(--space-xs);background:var(--color-window-bg);border-bottom:1px solid var(--color-bevel-mid-shadow)}.menubar__item{padding:0 var(--space-md);height:100%;background:0 0;border:none;font-size:var(--font-size-base)}.menubar__item:focus,.menubar__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.window__body{flex:1;padding:var(--space-md);overflow:auto;line-height:1.5}.window__body--explorer{padding:var(--space-sm)}.window__statusbar{display:flex;height:20px;border-top:1px solid var(--color-bevel-mid-shadow);padding:0 var(--space-xs);gap:var(--space-xs);align-items:center;flex-shrink:0}.statusbar__cell{padding:0 var(--space-sm);height:14px;font-size:var(--font-size-base);display:flex;align-items:center;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.btn{display:inline-flex;align-items:center;justify-content:center;min-width:75px;height:23px;padding:0 var(--space-md);background:var(--color-window-bg)}.btn--raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.btn--raised:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.btn--raised:focus-visible{outline:1px dotted var(--color-text);outline-offset:-4px}.btn--raised:disabled{color:var(--color-text-disabled);cursor:default;box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.button-row{display:flex;gap:var(--space-md);margin-top:var(--space-lg);justify-content:flex-end}.icon-grid{display:flex;flex-wrap:wrap;gap:var(--space-lg);padding:var(--space-sm)}.icon-item{display:flex;flex-direction:column;align-items:center;gap:var(--space-xs);width:72px;padding:var(--space-xs);border:1px solid transparent}.icon-item__glyph{font-size:32px;line-height:1}.icon-item__label{font-size:var(--font-size-base);text-align:center;word-break:break-word;line-height:1.2}.icon-item--desktop .icon-item__label{color:#fff;text-shadow:1px 1px 1px #000}.icon-item--selected,.icon-item:focus{outline:0;border:1px dotted var(--color-text);background:var(--color-selection-bg)}.icon-item--selected .icon-item__label,.icon-item:focus .icon-item__label{background:var(--color-selection-bg);color:var(--color-text-selected)}.taskbar{position:fixed;bottom:0;left:0;right:0;height:var(--taskbar-height);display:flex;align-items:center;padding:0 var(--space-xs);gap:var(--space-sm);background:var(--color-taskbar-bg);border-top:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 0 1px 0 var(--color-bevel-mid-light)}.taskbar__start{display:flex;align-items:center;gap:var(--space-sm);height:24px;padding:0 var(--space-md);font-size:var(--font-size-base);background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__start:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.taskbar__divider{width:2px;height:24px;border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);flex-shrink:0}.taskbar__apps{flex:1;display:flex;gap:var(--space-xs);overflow:hidden}.taskbar__app-btn{height:24px;padding:0 var(--space-md);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--font-size-base);text-align:left;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__app-btn--active{border-top:var(--border-width) solid var(--color-bevel-mid-shadow);border-left:var(--border-width) solid var(--color-bevel-mid-shadow);border-right:var(--border-width) solid var(--color-bevel-mid-light);border-bottom:var(--border-width) solid var(--color-bevel-mid-light);box-shadow:none;background:var(--color-window-bg-dark)}.taskbar__tray{display:flex;align-items:center;height:24px;padding:0 var(--space-sm);flex-shrink:0;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.tray__clock{font-size:var(--font-size-base);font-family:var(--font-ui);padding:0 var(--space-xs)}.start-logo{display:inline-grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:13px;height:13px;flex-shrink:0}.start-logo span:first-child{background:red}.start-logo span:nth-child(2){background:#0a0}.start-logo span:nth-child(3){background:#00e}.start-logo span:nth-child(4){background:#fa0}.taskbar__start[aria-expanded=true]{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.start-menu{position:fixed;bottom:var(--taskbar-height);left:0;display:none;width:210px;z-index:9999;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.start-menu.is-open{display:flex}.start-menu__brand{width:22px;flex-shrink:0;background:linear-gradient(to top,#1084d0 0,navy 100%);display:flex;align-items:center;justify-content:center}.start-menu__brand-text{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;font-style:italic;color:#fff;letter-spacing:2px;white-space:nowrap;text-shadow:1px 1px 0 rgba(0,0,0,.4)}.start-menu__list{flex:1;padding:var(--space-xs) 0}.start-menu__item{display:flex;align-items:center;height:26px;padding:0 var(--space-sm);gap:var(--space-sm);cursor:default}.start-menu__item:focus,.start-menu__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.start-menu__icon{width:20px;font-size:14px;text-align:center;flex-shrink:0}.start-menu__label{flex:1;font-size:12px}.start-menu__arrow{font-size:8px;flex-shrink:0}.start-menu__separator{margin:var(--space-xs) var(--space-sm);height:0;border-top:1px solid var(--color-bevel-mid-shadow);border-bottom:1px solid var(--color-bevel-mid-light)}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99999;background:repeating-linear-gradient(to bottom,transparent 0,transparent 1px,rgba(0,0,0,.03) 1px,rgba(0,0,0,.03) 2px)}</style>
+  <meta name="description" content="Windows 95 Retro Template — A lightweight, fully interactive web template built with Vanilla JS, HTML5 and pure CSS. No frameworks." />
+  <meta property="og:title"       content="Windows 95 Retro Template" />
+  <meta property="og:description" content="A lightweight, fully interactive retro web template. No frameworks, no dependencies — just clean code and 90s nostalgia." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='7' height='7' fill='%23FF0000'/%3E%3Crect x='9' width='7' height='7' fill='%2300AA00'/%3E%3Crect y='9' width='7' height='7' fill='%230000EE'/%3E%3Crect x='9' y='9' width='7' height='7' fill='%23FFAA00'/%3E%3C/svg%3E" />
+  <style>:root{--color-desktop:#008080;--color-window-bg:#c0c0c0;--color-window-bg-dark:#a0a0a0;--color-titlebar-active:#000080;--color-titlebar-inactive:#808080;--color-titlebar-text:#ffffff;--color-bevel-light:#ffffff;--color-bevel-mid-light:#dfdfdf;--color-bevel-mid-shadow:#808080;--color-bevel-shadow:#404040;--color-text:#000000;--color-text-disabled:#808080;--color-text-selected:#ffffff;--color-selection-bg:#000080;--color-taskbar-bg:#c0c0c0;--font-ui:"Arial","Helvetica",sans-serif;--font-mono:"Courier New","Courier",monospace;--font-size-base:11px;--space-xs:2px;--space-sm:4px;--space-md:8px;--space-lg:16px;--titlebar-height:22px;--taskbar-height:32px;--border-width:2px}.bevel-raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.bevel-sunken{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.bevel-well{border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}*,::after,::before{box-sizing:border-box;margin:0;padding:0}body,html{height:100%;overflow:hidden}body{font-family:var(--font-ui);font-size:var(--font-size-base);color:var(--color-text);background:var(--color-desktop);user-select:none;cursor:default}button{font-family:inherit;font-size:inherit;cursor:default;color:var(--color-text)}ol,ul{list-style:none}img{display:block;max-width:100%}.desktop{position:relative;width:100vw;height:calc(100vh - var(--taskbar-height));overflow:hidden}.desktop__icons{position:absolute;top:var(--space-lg);left:var(--space-md)}.desktop__icons ul{display:flex;flex-direction:column;gap:var(--space-lg)}.window{position:absolute;display:flex;flex-direction:column;min-width:200px;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.window__titlebar{display:flex;align-items:center;gap:var(--space-sm);height:var(--titlebar-height);padding:0 var(--space-sm);background:var(--color-titlebar-active);color:var(--color-titlebar-text);flex-shrink:0}.window__titlebar--inactive{background:var(--color-titlebar-inactive)}.window__icon{flex-shrink:0;width:16px;height:16px;font-size:13px;line-height:1;display:flex;align-items:center;overflow:hidden}.window__title{flex:1;font-size:var(--font-size-base);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.window__controls{display:flex;gap:var(--space-xs);flex-shrink:0}.window__btn{display:flex;align-items:center;justify-content:center;width:16px;height:14px;font-size:10px;line-height:1;background:var(--color-window-bg);color:var(--color-text);border-top:1px solid var(--color-bevel-light);border-left:1px solid var(--color-bevel-light);border-right:1px solid var(--color-bevel-shadow);border-bottom:1px solid var(--color-bevel-shadow)}.window__btn:active{border-top:1px solid var(--color-bevel-shadow);border-left:1px solid var(--color-bevel-shadow);border-right:1px solid var(--color-bevel-light);border-bottom:1px solid var(--color-bevel-light)}.window__btn--close{font-size:9px}.window__menubar{display:flex;align-items:center;height:20px;padding:0 var(--space-xs);background:var(--color-window-bg);border-bottom:1px solid var(--color-bevel-mid-shadow)}.menubar__item{padding:0 var(--space-md);height:100%;background:0 0;border:none;font-size:var(--font-size-base)}.menubar__item:focus,.menubar__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.window__body{flex:1;padding:var(--space-md);overflow:auto;line-height:1.5}.window__body--explorer{padding:var(--space-sm)}.window__statusbar{display:flex;height:20px;border-top:1px solid var(--color-bevel-mid-shadow);padding:0 var(--space-xs);gap:var(--space-xs);align-items:center;flex-shrink:0}.statusbar__cell{padding:0 var(--space-sm);height:14px;font-size:var(--font-size-base);display:flex;align-items:center;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.btn{display:inline-flex;align-items:center;justify-content:center;min-width:75px;height:23px;padding:0 var(--space-md);background:var(--color-window-bg)}.btn--raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.btn--raised:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.btn--raised:focus-visible{outline:1px dotted var(--color-text);outline-offset:-4px}.btn--raised:disabled{color:var(--color-text-disabled);cursor:default;box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.button-row{display:flex;gap:var(--space-md);margin-top:var(--space-lg);justify-content:flex-end}.icon-grid{display:flex;flex-wrap:wrap;gap:var(--space-lg);padding:var(--space-sm)}.icon-item{display:flex;flex-direction:column;align-items:center;gap:var(--space-xs);width:72px;padding:var(--space-xs);border:1px solid transparent}.icon-item__glyph{font-size:32px;line-height:1}.icon-item__label{font-size:var(--font-size-base);text-align:center;word-break:break-word;line-height:1.2}.icon-item--desktop .icon-item__label{color:#fff;text-shadow:1px 1px 1px #000}.icon-item--selected,.icon-item:focus{outline:0;border:1px dotted var(--color-text);background:var(--color-selection-bg)}.icon-item--selected .icon-item__label,.icon-item:focus .icon-item__label{background:var(--color-selection-bg);color:var(--color-text-selected)}.taskbar{position:fixed;bottom:0;left:0;right:0;height:var(--taskbar-height);display:flex;align-items:center;padding:0 var(--space-xs);gap:var(--space-sm);background:var(--color-taskbar-bg);border-top:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 0 1px 0 var(--color-bevel-mid-light)}.taskbar__start{display:flex;align-items:center;gap:var(--space-sm);height:24px;padding:0 var(--space-md);font-size:var(--font-size-base);background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__start:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.taskbar__divider{width:2px;height:24px;border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);flex-shrink:0}.taskbar__apps{flex:1;display:flex;gap:var(--space-xs);overflow:hidden}.taskbar__app-btn{height:24px;padding:0 var(--space-md);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--font-size-base);text-align:left;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__app-btn--active{border-top:var(--border-width) solid var(--color-bevel-mid-shadow);border-left:var(--border-width) solid var(--color-bevel-mid-shadow);border-right:var(--border-width) solid var(--color-bevel-mid-light);border-bottom:var(--border-width) solid var(--color-bevel-mid-light);box-shadow:none;background:var(--color-window-bg-dark)}.taskbar__tray{display:flex;align-items:center;height:24px;padding:0 var(--space-sm);flex-shrink:0;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.tray__clock{font-size:var(--font-size-base);font-family:var(--font-ui);padding:0 var(--space-xs)}.start-logo{display:inline-grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:13px;height:13px;flex-shrink:0}.start-logo span:first-child{background:red}.start-logo span:nth-child(2){background:#0a0}.start-logo span:nth-child(3){background:#00e}.start-logo span:nth-child(4){background:#fa0}.taskbar__start[aria-expanded=true]{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.start-menu{position:fixed;bottom:var(--taskbar-height);left:0;display:none;width:210px;z-index:9999;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.start-menu.is-open{display:flex;animation:120ms ease-out menu-slide-up}.start-menu__brand{width:22px;flex-shrink:0;background:linear-gradient(to top,#1084d0 0,navy 100%);display:flex;align-items:center;justify-content:center}.start-menu__brand-text{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;font-style:italic;color:#fff;letter-spacing:2px;white-space:nowrap;text-shadow:1px 1px 0 rgba(0,0,0,.4)}.start-menu__list{flex:1;padding:var(--space-xs) 0}.start-menu__item{display:flex;align-items:center;height:26px;padding:0 var(--space-sm);gap:var(--space-sm);cursor:default}.start-menu__item:focus,.start-menu__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.start-menu__icon{width:20px;font-size:14px;text-align:center;flex-shrink:0}.start-menu__label{flex:1;font-size:12px}.start-menu__arrow{font-size:8px;flex-shrink:0}.start-menu__separator{margin:var(--space-xs) var(--space-sm);height:0;border-top:1px solid var(--color-bevel-mid-shadow);border-bottom:1px solid var(--color-bevel-mid-light)}.form-input,.form-textarea,.notepad-textarea{cursor:text;user-select:text}.window__body--flush{padding:0}.window__body--notepad{padding:0;display:flex;flex-direction:column}.contact-form{display:flex;flex-direction:column;gap:var(--space-md)}.form-group{display:flex;flex-direction:column;gap:var(--space-xs)}.form-label{font-size:var(--font-size-base);font-weight:700}.form-input,.form-textarea{font-family:var(--font-ui);font-size:var(--font-size-base);padding:var(--space-xs) var(--space-sm);background:#fff;color:var(--color-text);outline:0;border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow)}.form-textarea{height:80px;resize:none;line-height:1.5}.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--space-md);padding:var(--space-md)}.project-card{display:flex;flex-direction:column;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.project-card__thumb{height:72px;background:var(--color-selection-bg);display:flex;align-items:center;justify-content:center;font-size:32px}.project-card__info{padding:var(--space-sm) var(--space-md);display:flex;flex-direction:column;gap:var(--space-xs);flex:1}.project-card__title{font-size:var(--font-size-base);font-weight:700}.project-card__desc{font-size:var(--font-size-base);color:var(--color-text-disabled);line-height:1.4;flex:1}.project-card__link{align-self:flex-start;text-decoration:none;font-size:var(--font-size-base);margin-top:var(--space-xs);cursor:pointer}.service-item{display:flex;align-items:flex-start;gap:var(--space-md);padding:var(--space-md);border-bottom:1px solid var(--color-bevel-mid-shadow)}.service-item:last-child{border-bottom:none}.service-item__icon{font-size:18px;flex-shrink:0;width:24px;text-align:center;margin-top:1px}.service-item__title{font-size:var(--font-size-base);font-weight:700}.service-item__desc{font-size:var(--font-size-base);color:var(--color-text-disabled);margin-top:var(--space-xs);line-height:1.4}.notepad-textarea{flex:1;width:100%;min-height:180px;padding:var(--space-sm);font-family:var(--font-mono);font-size:var(--font-size-base);line-height:1.6;background:#fff;color:#000;border:none;outline:0;resize:none}.window--maximized{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:calc(100vh - var(--taskbar-height))!important}.window__resize{position:absolute;bottom:0;right:0;width:14px;height:14px;cursor:se-resize;background-image:radial-gradient(circle,var(--color-bevel-mid-shadow) 1px,transparent 1px);background-size:4px 4px;background-position:2px 2px}.window--maximized .window__resize{display:none}@media (max-width:768px){.window__resize{display:none}}.error-body{display:flex;align-items:flex-start;gap:var(--space-lg);padding:var(--space-lg)}.error-body__icon{font-size:32px;flex-shrink:0;line-height:1}.error-body__msg{font-size:var(--font-size-base);line-height:1.5}@media (max-width:768px){.window{position:fixed!important;top:0!important;left:0!important;width:100%!important;height:calc(100vh - var(--taskbar-height))}.start-menu{width:100%}.taskbar__app-btn{flex:1;max-width:none}.desktop__icons,.window__btn--maximize{display:none}}::-webkit-scrollbar{width:16px;height:16px}::-webkit-scrollbar-corner{background:var(--color-window-bg)}::-webkit-scrollbar-track{background-color:#fff;background-image:linear-gradient(45deg,var(--color-window-bg) 25%,transparent 25%,transparent 75%,var(--color-window-bg) 75%),linear-gradient(45deg,var(--color-window-bg) 25%,transparent 25%,transparent 75%,var(--color-window-bg) 75%);background-size:4px 4px;background-position:0 0,2px 2px}::-webkit-scrollbar-thumb{background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}::-webkit-scrollbar-button{display:block;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow)}::-webkit-scrollbar-button:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light)}*{scrollbar-color:var(--color-window-bg) var(--color-window-bg-dark)}@keyframes win-open{from{transform:scale(.88);opacity:0}to{transform:scale(1);opacity:1}}@keyframes win-close{from{transform:scale(1);opacity:1}to{transform:scale(.88);opacity:0}}@keyframes menu-slide-up{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}.window--opening{animation:150ms ease-out both win-open}.window--closing{animation:.1s ease-in both win-close;pointer-events:none}@media (prefers-reduced-motion:reduce){.start-menu.is-open,.window--closing,.window--opening{animation:none}}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99999;background:repeating-linear-gradient(to bottom,transparent 0,transparent 1px,rgba(0,0,0,.03) 1px,rgba(0,0,0,.03) 2px)}</style>
 </head>
 <body>
 
@@ -14,14 +19,12 @@
     <!-- Window: About -->
     <article class="window" style="top: 40px; left: 60px; width: 420px;">
       <header class="window__titlebar" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">
-          <img src="" alt="" width="16" height="16" />
-        </span>
+        <span class="window__icon" aria-hidden="true">ℹ️</span>
         <h1 class="window__title">About This Template</h1>
         <nav class="window__controls" aria-label="Window controls">
           <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
           <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
         </nav>
       </header>
 
@@ -34,6 +37,7 @@
 
       <section class="window__body">
         <p>Welcome to the Windows 95 web template. This is a fully semantic, framework-free implementation using pure HTML, CSS, and Vanilla JS.</p>
+        <p>Responsive hybrid mode included: full desktop experience on screens wider than 768px, and full-screen panels on mobile.</p>
 
         <div class="button-row">
           <button class="btn btn--raised">OK</button>
@@ -51,14 +55,12 @@
     <!-- Window: File Explorer -->
     <article class="window" style="top: 120px; left: 520px; width: 360px;">
       <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">
-          <img src="" alt="" width="16" height="16" />
-        </span>
+        <span class="window__icon" aria-hidden="true">🖥️</span>
         <h2 class="window__title">My Computer</h2>
         <nav class="window__controls" aria-label="Window controls">
           <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
           <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
         </nav>
       </header>
 
@@ -102,18 +104,238 @@
       </footer>
     </article>
 
+    <!-- Window: Contact -->
+    <article class="window" style="top: 60px; left: 500px; width: 340px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">✉️</span>
+        <h2 class="window__title">Contact</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body">
+        <form class="contact-form" onsubmit="return false;" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Name:</label>
+            <input class="form-input" type="text" id="contact-name" placeholder="Your name" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-email">E-mail:</label>
+            <input class="form-input" type="email" id="contact-email" placeholder="you@example.com" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-msg">Message:</label>
+            <textarea class="form-textarea" id="contact-msg" placeholder="Type your message…"></textarea>
+          </div>
+          <div class="button-row">
+            <button class="btn btn--raised" type="submit">Send</button>
+            <button class="btn btn--raised" type="reset">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">Ready</span>
+      </footer>
+    </article>
+
+    <!-- Window: Portfolio -->
+    <article class="window" style="top: 180px; left: 60px; width: 560px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">📁</span>
+        <h2 class="window__title">Portfolio</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--explorer">
+        <div class="project-grid" role="list">
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">🌐</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project One</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">🎨</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Two</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">📱</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Three</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">⚡</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Four</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">4 project(s)</span>
+      </footer>
+    </article>
+
+    <!-- Window: Services -->
+    <article class="window" style="top: 70px; left: 200px; width: 370px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">🛠️</span>
+        <h2 class="window__title">Services</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--flush">
+        <ul class="service-list" role="list">
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">💻</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Web Development</p>
+              <p class="service-item__desc">Custom websites built with modern web standards.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">🎨</span>
+            <div class="service-item__info">
+              <p class="service-item__title">UI / UX Design</p>
+              <p class="service-item__desc">User-centered design and interactive prototypes.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">📱</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Mobile Development</p>
+              <p class="service-item__desc">Responsive apps that work on any device.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">⚡</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Performance Audit</p>
+              <p class="service-item__desc">Speed optimisation and Core Web Vitals improvements.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">4 service(s)</span>
+      </footer>
+    </article>
+
+    <!-- Window: Notepad -->
+    <article class="window" style="top: 200px; left: 480px; width: 420px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">📝</span>
+        <h2 class="window__title">Notepad</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">Format</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--notepad">
+        <textarea class="notepad-textarea" spellcheck="false" aria-label="Text editor">Hello! I'm [Your Name], a developer & designer based in [City].
+
+I build clean, fast, and accessible web experiences.
+This Notepad window is the perfect spot for your bio,
+a short manifesto, or any free-form content you want
+visitors to read first.
+
+— Replace this text with your own story.</textarea>
+      </section>
+    </article>
+
+    <!-- Window: System Error -->
+    <article class="window" data-system="true" style="top: 240px; left: 320px; width: 320px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">⚠️</span>
+        <h2 class="window__title">System Error</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <section class="window__body error-body">
+        <span class="error-body__icon" aria-hidden="true">⚠️</span>
+        <div>
+          <p class="error-body__msg">An unexpected error has occurred.<br>The operation could not be completed.</p>
+          <div class="button-row">
+            <button class="btn btn--raised">OK</button>
+            <button class="btn btn--raised">Cancel</button>
+          </div>
+        </div>
+      </section>
+    </article>
+
     <!-- Desktop icons -->
     <aside class="desktop__icons" aria-label="Desktop icons">
       <ul role="list">
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" data-window="My Computer">
           <span class="icon-item__glyph" aria-hidden="true">🖥️</span>
           <span class="icon-item__label">My Computer</span>
         </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="recycle-icon">
           <span class="icon-item__glyph" aria-hidden="true">🗑️</span>
           <span class="icon-item__label">Recycle Bin</span>
         </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="ie-icon">
           <span class="icon-item__glyph" aria-hidden="true">🌐</span>
           <span class="icon-item__label">Internet Explorer</span>
         </li>
@@ -131,29 +353,29 @@
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">📁</span>
         <span class="start-menu__label">Programs</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">📄</span>
         <span class="start-menu__label">Documents</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">⚙️</span>
         <span class="start-menu__label">Settings</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">🔍</span>
         <span class="start-menu__label">Find</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">❓</span>
         <span class="start-menu__label">Help</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">🚀</span>
+        <span class="start-menu__icon" aria-hidden="true">📂</span>
         <span class="start-menu__label">Run…</span>
       </li>
       <li class="start-menu__separator" role="separator" aria-hidden="true"></li>
@@ -179,6 +401,11 @@
     <nav class="taskbar__apps" aria-label="Open applications">
       <button class="taskbar__app-btn taskbar__app-btn--active" aria-pressed="true">About This Template</button>
       <button class="taskbar__app-btn" aria-pressed="false">My Computer</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Contact</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Portfolio</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Services</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Notepad</button>
+      <button class="taskbar__app-btn" aria-pressed="false">System Error</button>
     </nav>
 
     <div class="taskbar__tray" role="complementary" aria-label="System tray">
@@ -188,6 +415,6 @@
     </div>
   </footer>
 
-  <script>function t(){const t=new Date,e=String(t.getHours()).padStart(2,"0"),n=String(t.getMinutes()).padStart(2,"0");document.getElementById("clock").textContent=`${e}:${n}`}t(),setInterval(t,1e3);let e=10;function n(t){document.querySelectorAll(".window__titlebar").forEach(t=>{t.classList.add("window__titlebar--inactive")}),t.querySelector(".window__titlebar").classList.remove("window__titlebar--inactive"),t.style.zIndex=++e,r(t)}function o(t){const e=t.querySelector(".window__titlebar"),n=document.querySelector(".desktop");e.addEventListener("mousedown",e=>{if(e.target.closest(".window__controls"))return;const o=e.clientX-t.offsetLeft,i=e.clientY-t.offsetTop;function s(e){const s=n.clientWidth-t.offsetWidth,c=n.clientHeight-t.offsetHeight;t.style.left=`${Math.max(0,Math.min(e.clientX-o,s))}px`,t.style.top=`${Math.max(0,Math.min(e.clientY-i,c))}px`}document.addEventListener("mousemove",s),document.addEventListener("mouseup",function t(){document.removeEventListener("mousemove",s),document.removeEventListener("mouseup",t)})})}function i(t){t.querySelector(".window__btn--close").addEventListener("click",()=>{t.remove(),a(t)}),t.querySelector(".window__btn--minimize").addEventListener("click",()=>{t.style.display="none";const e=c(t);e&&(e.setAttribute("aria-pressed","false"),e.classList.remove("taskbar__app-btn--active"))})}const s=new Map([...document.querySelectorAll(".taskbar__app-btn")].map(t=>[t.textContent.trim(),t]));function c(t){const e=t.querySelector(".window__title").textContent.trim();return s.get(e)??null}function a(t){const e=c(t);e&&e.remove()}function r(t){s.forEach(t=>{t.setAttribute("aria-pressed","false"),t.classList.remove("taskbar__app-btn--active")});const e=c(t);e&&(e.setAttribute("aria-pressed","true"),e.classList.add("taskbar__app-btn--active"))}function d(){s.forEach((t,e)=>{t.addEventListener("click",()=>{const t=[...document.querySelectorAll(".window")].find(t=>t.querySelector(".window__title").textContent.trim()===e);t&&("none"===t.style.display&&(t.style.display="flex"),n(t))})})}document.querySelectorAll(".window").forEach(t=>{t.addEventListener("mousedown",()=>n(t)),o(t),i(t)});const l=document.querySelector(".window__titlebar:not(.window__titlebar--inactive)");l&&n(l.closest(".window")),d();const u=document.querySelector(".taskbar__start"),m=document.getElementById("startMenu");function w(){m.classList.add("is-open"),u.setAttribute("aria-expanded","true")}function _(){m.classList.remove("is-open"),u.setAttribute("aria-expanded","false")}u.addEventListener("click",()=>{m.classList.contains("is-open")?_():w()}),document.addEventListener("click",t=>{m.classList.contains("is-open")&&(m.contains(t.target)||u.contains(t.target)||_())}),document.addEventListener("keydown",t=>{"Escape"===t.key&&m.classList.contains("is-open")&&(_(),u.focus())});</script>
+  <script>const e=window.matchMedia("(max-width: 768px)");function t(){return e.matches}const n=(()=>{let e=null;function t(){return e||(e=new(window.AudioContext||window.webkitAudioContext)),"suspended"===e.state&&e.resume(),e}function n(e,n,o,i="square",s=.07){const r=t(),a=r.createOscillator(),c=r.createGain();a.connect(c),c.connect(r.destination),a.type=i,a.frequency.setValueAtTime(e,n),c.gain.setValueAtTime(s,n),c.gain.exponentialRampToValueAtTime(.001,n+o),a.start(n),a.stop(n+o+.01)}return{open(){const e=t().currentTime;n(523.25,e,.12,"square",.07),n(659.25,e+.08,.18,"square",.07)},close(){const e=t().currentTime;n(440,e,.1,"square",.06),n(330,e+.06,.14,"square",.06)},error(){const e=t().currentTime;n(493.88,e,.35,"sine",.09),n(369.99,e+.04,.35,"sine",.06)},menu(){const e=t().currentTime;n(880,e,.05,"square",.04),n(1100,e+.04,.07,"square",.04)}}})();function o(e){const t=[...document.querySelectorAll(".window")].find(e=>"System Error"===e.querySelector(".window__title")?.textContent.trim());t&&(t.querySelector(".error-body__msg").innerHTML=e,"none"===t.style.display&&(t.style.display="flex",r(t,"window--opening")),a(t))}function i(){const e=new Date,t=String(e.getHours()).padStart(2,"0"),n=String(e.getMinutes()).padStart(2,"0");document.getElementById("clock").textContent=`${t}:${n}`}i(),setInterval(i,1e3);let s=10;function r(e,t,n){if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return e.classList.remove(t),void n?.();e.classList.add(t),e.addEventListener("animationend",()=>{e.classList.remove(t),n?.()},{once:!0})}function a(e){const t=e.querySelector(".window__titlebar"),o=t.classList.contains("window__titlebar--inactive");document.querySelectorAll(".window__titlebar").forEach(e=>{e.classList.add("window__titlebar--inactive")}),t.classList.remove("window__titlebar--inactive"),e.style.zIndex=++s,p(e),o&&"System Error"===e.querySelector(".window__title").textContent.trim()&&n.error()}function c(e){const n=e.querySelector(".window__titlebar"),o=document.querySelector(".desktop");n.addEventListener("mousedown",n=>{if(n.target.closest(".window__controls"))return;if(t())return;const i=n.clientX-e.offsetLeft,s=n.clientY-e.offsetTop;function r(t){const n=o.clientWidth-e.offsetWidth,r=o.clientHeight-e.offsetHeight;e.style.left=`${Math.max(0,Math.min(t.clientX-i,n))}px`,e.style.top=`${Math.max(0,Math.min(t.clientY-s,r))}px`}document.addEventListener("mousemove",r),document.addEventListener("mouseup",function e(){document.removeEventListener("mousemove",r),document.removeEventListener("mouseup",e)})})}function d(e){const n=e.querySelector(".window__btn--maximize");function o(){t()||(e.classList.contains("window--maximized")?(e.classList.remove("window--maximized"),e.style.top=e.dataset.restoreTop||"",e.style.left=e.dataset.restoreLeft||"",e.style.width=e.dataset.restoreWidth||"",e.style.height=e.dataset.restoreHeight||"",n.textContent="□",n.setAttribute("aria-label","Maximize")):(e.dataset.restoreTop=e.style.top,e.dataset.restoreLeft=e.style.left,e.dataset.restoreWidth=e.style.width,e.dataset.restoreHeight=e.style.height,e.classList.add("window--maximized"),n.textContent="❐",n.setAttribute("aria-label","Restore Down")),a(e))}n.addEventListener("click",o),e.querySelector(".window__titlebar").addEventListener("dblclick",e=>{e.target.closest(".window__controls")||o()})}function l(e){const n=document.createElement("div");n.className="window__resize",n.setAttribute("aria-hidden","true"),e.appendChild(n),n.addEventListener("mousedown",n=>{if(t()||e.classList.contains("window--maximized"))return;n.stopPropagation();const o=n.clientX,i=n.clientY,s=e.offsetWidth,r=e.offsetHeight;function a(t){e.style.width=`${Math.max(200,s+t.clientX-o)}px`,e.style.height=`${Math.max(150,r+t.clientY-i)}px`}document.addEventListener("mousemove",a),document.addEventListener("mouseup",function e(){document.removeEventListener("mousemove",a),document.removeEventListener("mouseup",e)})})}function u(e){e.querySelector(".window__btn--close").addEventListener("click",()=>{n.close(),e.dataset.system?r(e,"window--closing",()=>{e.style.display="none";const t=w(e);t&&(t.setAttribute("aria-pressed","false"),t.classList.remove("taskbar__app-btn--active"))}):r(e,"window--closing",()=>{e.remove(),y(e)})}),e.querySelector(".window__btn--minimize").addEventListener("click",()=>{n.close(),r(e,"window--closing",()=>{e.style.display="none";const t=w(e);t&&(t.setAttribute("aria-pressed","false"),t.classList.remove("taskbar__app-btn--active"))})})}const m=new Map([...document.querySelectorAll(".taskbar__app-btn")].map(e=>[e.textContent.trim(),e]));function w(e){const t=e.querySelector(".window__title").textContent.trim();return m.get(t)??null}function y(e){const t=w(e);t&&t.remove()}function p(e){m.forEach(e=>{e.setAttribute("aria-pressed","false"),e.classList.remove("taskbar__app-btn--active")});const t=w(e);t&&(t.setAttribute("aria-pressed","true"),t.classList.add("taskbar__app-btn--active"))}function f(){m.forEach((e,t)=>{e.addEventListener("click",()=>{const e=[...document.querySelectorAll(".window")].find(e=>e.querySelector(".window__title").textContent.trim()===t);e&&("none"===e.style.display&&(e.style.display="flex",n.open(),r(e,"window--opening")),a(e))})})}document.querySelectorAll(".window").forEach(e=>{e.addEventListener("mousedown",()=>a(e)),c(e),u(e),d(e),l(e)});const v=document.querySelector(".window__titlebar:not(.window__titlebar--inactive)");v&&a(v.closest(".window")),f(),document.querySelectorAll(".window").forEach((e,t)=>{e.style.animationDelay=80*t+"ms",r(e,"window--opening",()=>{e.style.animationDelay=""})}),document.querySelectorAll(".icon-item--desktop[data-window]").forEach(e=>{e.addEventListener("dblclick",()=>{const t=e.dataset.window,o=[...document.querySelectorAll(".window")].find(e=>e.querySelector(".window__title").textContent.trim()===t);o&&("none"===o.style.display&&(o.style.display="flex",n.open(),r(o,"window--opening")),a(o))})});const _=document.querySelector(".contact-form");_&&_.addEventListener("submit",e=>{e.preventDefault();const t=document.getElementById("contact-name").value.trim(),n=document.getElementById("contact-email").value.trim(),i=document.getElementById("contact-msg").value.trim();if(!t||!n||!i)return void o("All fields are required.<br>Please fill in Name, E-mail and Message.");if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(n))return void o("The e-mail address entered is not valid.<br>Please check and try again.");const s=_.closest(".window").querySelector(".statusbar__cell");s.textContent="Message sent!",_.reset(),setTimeout(()=>{s.textContent="Ready"},3e3)}),document.getElementById("ie-icon")?.addEventListener("dblclick",()=>{o("IEXPLORE.EXE has performed an illegal operation<br>and will be shut down.")}),document.getElementById("recycle-icon")?.addEventListener("dblclick",()=>{o("Cannot empty Recycle Bin.<br>Access is denied.")});const b=[...document.querySelectorAll(".window")].find(e=>"System Error"===e.querySelector(".window__title")?.textContent.trim());b&&b.querySelectorAll(".error-body .btn").forEach(e=>{e.addEventListener("click",()=>{n.close(),r(b,"window--closing",()=>{b.style.display="none";const e=w(b);e&&(e.setAttribute("aria-pressed","false"),e.classList.remove("taskbar__app-btn--active"))})})});const h={Programs:()=>E("Portfolio"),Documents:()=>E("Notepad"),Settings:()=>E("About This Template"),Find:()=>o("Find: feature not available<br>in this version."),Help:()=>E("About This Template"),"Run…":()=>o("The name specified is not recognized<br>as a program or command."),"Shut Down…":()=>o("Access is denied.<br>You cannot shut down this computer.")};function E(e){const t=[...document.querySelectorAll(".window")].find(t=>t.querySelector(".window__title").textContent.trim()===e);t&&("none"===t.style.display&&(t.style.display="flex",n.open(),r(t,"window--opening")),a(t),S())}document.querySelectorAll(".start-menu__item").forEach(e=>{const t=e.querySelector(".start-menu__label")?.textContent.trim(),n=h[t];n&&e.addEventListener("click",n)});const L=document.querySelector(".taskbar__start"),g=document.getElementById("startMenu");function q(){n.menu(),g.classList.add("is-open"),L.setAttribute("aria-expanded","true")}function S(){g.classList.remove("is-open"),L.setAttribute("aria-expanded","false")}L.addEventListener("click",()=>{g.classList.contains("is-open")?S():q()}),document.addEventListener("click",e=>{g.classList.contains("is-open")&&(g.contains(e.target)||L.contains(e.target)||S())}),document.addEventListener("keydown",e=>{"Escape"===e.key&&g.classList.contains("is-open")&&(S(),L.focus())});</script>
 </body>
 </html>

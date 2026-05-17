@@ -191,10 +191,13 @@ img {
 
 .window__icon {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  display: flex;
+  width:       16px;
+  height:      16px;
+  font-size:   13px;
+  line-height: 1;
+  display:     flex;
   align-items: center;
+  overflow:    hidden;
 }
 
 .window__title {
@@ -206,7 +209,7 @@ img {
   text-overflow: ellipsis;
 }
 
-/* --- Window control buttons (_ □ ×) --- */
+/* --- Window control buttons (─ □ ✕) --- */
 .window__controls {
   display: flex;
   gap: var(--space-xs);
@@ -348,6 +351,7 @@ img {
 .btn--raised:disabled {
   color: var(--color-text-disabled);
   cursor: default;
+  /* Keep raised look — Windows 95 disabled buttons don't go flat */
   box-shadow:
     inset 1px 1px 0 var(--color-bevel-mid-light),
     inset -1px -1px 0 var(--color-bevel-mid-shadow);
@@ -545,10 +549,18 @@ img {
   flex-shrink: 0;
 }
 
-.start-logo span:nth-child(1) { background: #ff0000; } /* top-left:     red    */
-.start-logo span:nth-child(2) { background: #00aa00; } /* top-right:    green  */
-.start-logo span:nth-child(3) { background: #0000ee; } /* bottom-left:  blue   */
-.start-logo span:nth-child(4) { background: #ffaa00; } /* bottom-right: yellow */
+.start-logo span:nth-child(1) {
+  background: #ff0000;
+} /* top-left:     red    */
+.start-logo span:nth-child(2) {
+  background: #00aa00;
+} /* top-right:    green  */
+.start-logo span:nth-child(3) {
+  background: #0000ee;
+} /* bottom-left:  blue   */
+.start-logo span:nth-child(4) {
+  background: #ffaa00;
+} /* bottom-right: yellow */
 
 /* Pressed / open state — mirrors :active bevel but stays while menu is open */
 .taskbar__start[aria-expanded="true"] {
@@ -654,6 +666,378 @@ img {
 }
 
 /* ============================================================
+   13. TEMPLATE COMPONENTS
+   ============================================================
+   Ready-to-use content patterns: Contact form, Portfolio grid,
+   Services list, Notepad textarea, and Error dialog.
+   ============================================================ */
+
+/* Allow text input inside forms and the notepad */
+.form-input,
+.form-textarea,
+.notepad-textarea {
+  cursor:      text;
+  user-select: text;
+}
+
+/* Window body: no padding — content bleeds to the frame edge */
+.window__body--flush {
+  padding: 0;
+}
+
+/* Window body: flex column so child fills remaining height */
+.window__body--notepad {
+  padding:        0;
+  display:        flex;
+  flex-direction: column;
+}
+
+/* ---- CONTACT FORM ----------------------------------------- */
+.contact-form {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-md);
+}
+
+.form-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-xs);
+}
+
+.form-label {
+  font-size:   var(--font-size-base);
+  font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+  font-family: var(--font-ui);
+  font-size:   var(--font-size-base);
+  padding:     var(--space-xs) var(--space-sm);
+  background:  #ffffff;
+  color:       var(--color-text);
+  outline:     none;
+
+  /* Sunken bevel matches the Win95 input look */
+  border-top:    var(--border-width) solid var(--color-bevel-shadow);
+  border-left:   var(--border-width) solid var(--color-bevel-shadow);
+  border-right:  var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+  box-shadow:    inset 1px 1px 0 var(--color-bevel-mid-shadow);
+}
+
+.form-textarea {
+  height:      80px;
+  resize:      none;
+  line-height: 1.5;
+}
+
+/* ---- PORTFOLIO GRID --------------------------------------- */
+.project-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap:                   var(--space-md);
+  padding:               var(--space-md);
+}
+
+.project-card {
+  display:        flex;
+  flex-direction: column;
+  background:     var(--color-window-bg);
+
+  border-top:    var(--border-width) solid var(--color-bevel-light);
+  border-left:   var(--border-width) solid var(--color-bevel-light);
+  border-right:  var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+.project-card__thumb {
+  height:          72px;
+  background:      var(--color-selection-bg);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       32px;
+}
+
+.project-card__info {
+  padding:        var(--space-sm) var(--space-md);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-xs);
+  flex:           1;
+}
+
+.project-card__title {
+  font-size:   var(--font-size-base);
+  font-weight: bold;
+}
+
+.project-card__desc {
+  font-size:   var(--font-size-base);
+  color:       var(--color-text-disabled);
+  line-height: 1.4;
+  flex:        1;
+}
+
+.project-card__link {
+  align-self:      flex-start;
+  text-decoration: none;
+  font-size:       var(--font-size-base);
+  margin-top:      var(--space-xs);
+  cursor:          pointer;
+}
+
+/* ---- SERVICES LIST ---------------------------------------- */
+.service-item {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           var(--space-md);
+  padding:       var(--space-md);
+  border-bottom: 1px solid var(--color-bevel-mid-shadow);
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-item__icon {
+  font-size:   18px;
+  flex-shrink: 0;
+  width:       24px;
+  text-align:  center;
+  margin-top:  1px;
+}
+
+.service-item__title {
+  font-size:   var(--font-size-base);
+  font-weight: bold;
+}
+
+.service-item__desc {
+  font-size:   var(--font-size-base);
+  color:       var(--color-text-disabled);
+  margin-top:  var(--space-xs);
+  line-height: 1.4;
+}
+
+/* ---- NOTEPAD ---------------------------------------------- */
+.notepad-textarea {
+  flex:        1;
+  width:       100%;
+  min-height:  180px;
+  padding:     var(--space-sm);
+  font-family: var(--font-mono);
+  font-size:   var(--font-size-base);
+  line-height: 1.6;
+  background:  #ffffff;
+  color:       #000000;
+  border:      none;
+  outline:     none;
+  resize:      none;
+}
+
+/* ---- MAXIMIZE STATE --------------------------------------- */
+.window--maximized {
+  position: fixed  !important;
+  top:      0      !important;
+  left:     0      !important;
+  width:    100%   !important;
+  height:   calc(100vh - var(--taskbar-height)) !important;
+}
+
+/* ---- RESIZE HANDLE ---------------------------------------- */
+/* Injected dynamically by JS — positioned at the bottom-right corner */
+.window__resize {
+  position:   absolute;
+  bottom:     0;
+  right:      0;
+  width:      14px;
+  height:     14px;
+  cursor:     se-resize;
+
+  /* Dotted grip pattern matching the Win95 resize corner */
+  background-image:    radial-gradient(circle, var(--color-bevel-mid-shadow) 1px, transparent 1px);
+  background-size:     4px 4px;
+  background-position: 2px 2px;
+}
+
+/* Hide the handle when the window is maximized */
+.window--maximized .window__resize { display: none; }
+
+/* Hide the handle on mobile (windows are already full-screen) */
+@media (max-width: 768px) {
+  .window__resize { display: none; }
+}
+
+/* ---- ERROR DIALOG ----------------------------------------- */
+.error-body {
+  display:     flex;
+  align-items: flex-start;
+  gap:         var(--space-lg);
+  padding:     var(--space-lg);
+}
+
+.error-body__icon {
+  font-size:   32px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.error-body__msg {
+  font-size:   var(--font-size-base);
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   11. RESPONSIVE — HYBRID MODE
+   ============================================================
+   Breakpoint: 768px.
+   Below it, floating windows are replaced by full-screen panels
+   that behave like native mobile screens.
+
+   !important is required on top/left/width because the JS window
+   manager writes those as inline styles; media queries cannot
+   override inline styles without it.
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Each window becomes a full-viewport panel above the taskbar */
+  .window {
+    position: fixed  !important;
+    top:      0      !important;
+    left:     0      !important;
+    width:    100%   !important;
+    height:   calc(100vh - var(--taskbar-height));
+  }
+
+  /* Start menu spans the full screen width for easy thumb reach */
+  .start-menu {
+    width: 100%;
+  }
+
+  /* Taskbar buttons share available space so none gets truncated */
+  .taskbar__app-btn {
+    flex:      1;
+    max-width: none;
+  }
+
+  /* Desktop icons make no sense in mobile panel mode — hide them */
+  .desktop__icons { display: none; }
+
+  /* Maximize button is irrelevant when windows are already full-screen */
+  .window__btn--maximize { display: none; }
+}
+
+
+/* ============================================================
+   14. SCROLLBARS — Win95 style
+   ============================================================
+   Webkit (Chrome, Edge, Safari): full custom styling.
+   Firefox: minimal hint via scrollbar-color.
+   ============================================================ */
+
+/* Track: classic 2×2 checkerboard of white + face colour */
+::-webkit-scrollbar              { width: 16px; height: 16px; }
+::-webkit-scrollbar-corner       { background: var(--color-window-bg); }
+
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(45deg, var(--color-window-bg) 25%, transparent 25%, transparent 75%, var(--color-window-bg) 75%),
+    linear-gradient(45deg, var(--color-window-bg) 25%, transparent 25%, transparent 75%, var(--color-window-bg) 75%);
+  background-size:     4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+/* Thumb: raised bevel — same as a Win95 button */
+::-webkit-scrollbar-thumb {
+  background:    var(--color-window-bg);
+  border-top:    var(--border-width) solid var(--color-bevel-light);
+  border-left:   var(--border-width) solid var(--color-bevel-light);
+  border-right:  var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+/* Arrow buttons: raised bevel squares */
+::-webkit-scrollbar-button {
+  display:       block;
+  background:    var(--color-window-bg);
+  border-top:    var(--border-width) solid var(--color-bevel-light);
+  border-left:   var(--border-width) solid var(--color-bevel-light);
+  border-right:  var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+}
+
+::-webkit-scrollbar-button:active {
+  border-top:    var(--border-width) solid var(--color-bevel-shadow);
+  border-left:   var(--border-width) solid var(--color-bevel-shadow);
+  border-right:  var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+}
+
+/* Firefox fallback */
+* { scrollbar-color: var(--color-window-bg) var(--color-window-bg-dark); }
+
+
+/* ============================================================
+   12. ANIMATIONS
+   ============================================================
+   Windows materialise/dematerialise with a quick scale + fade.
+   The Start Menu slides up from the taskbar edge.
+   All animations are disabled for users who prefer reduced motion.
+   ============================================================ */
+
+@keyframes win-open {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes win-close {
+  from { transform: scale(1);    opacity: 1; }
+  to   { transform: scale(0.88); opacity: 0; }
+}
+
+@keyframes menu-slide-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+
+/* Opening — used on first render (staggered) and on restore */
+.window--opening {
+  animation: win-open 150ms ease-out both;
+}
+
+/* Closing — pointer-events disabled so the user can't re-click during fade */
+.window--closing {
+  animation:      win-close 100ms ease-in both;
+  pointer-events: none;
+}
+
+/* Start Menu entrance */
+.start-menu.is-open {
+  animation: menu-slide-up 120ms ease-out;
+}
+
+/* Respect the OS-level "reduce motion" accessibility setting */
+@media (prefers-reduced-motion: reduce) {
+  .window--opening,
+  .window--closing,
+  .start-menu.is-open {
+    animation: none;
+  }
+}
+
+
+/* ============================================================
    10. EFFECTS — CRT SCANLINES
    ============================================================
    A fixed pseudo-element covers the entire browser viewport.
@@ -668,10 +1052,16 @@ img {
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
-  pointer-events: none;
+  inset: 0; /* top/right/bottom/left: 0 — covers the full viewport */
+  pointer-events: none; /* ← CRITICAL: does not block any user interactions    */
   z-index: 99999;
 
+  /*
+   * repeating-linear-gradient draws 2 px horizontal bands:
+   *   px 0–1  → transparent  ("lit" scanline)
+   *   px 1–2  → black at 3%  (beam separator)
+   * Opacity is intentionally low to avoid darkening the content.
+   */
   background: repeating-linear-gradient(
     to bottom,
     transparent 0px,

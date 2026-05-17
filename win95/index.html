@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Windows 95 — Template</title>
+  <meta name="description" content="Windows 95 Retro Template — A lightweight, fully interactive web template built with Vanilla JS, HTML5 and pure CSS. No frameworks." />
+  <meta property="og:title"       content="Windows 95 Retro Template" />
+  <meta property="og:description" content="A lightweight, fully interactive retro web template. No frameworks, no dependencies — just clean code and 90s nostalgia." />
+  <meta property="og:type"        content="website" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='7' height='7' fill='%23FF0000'/%3E%3Crect x='9' width='7' height='7' fill='%2300AA00'/%3E%3Crect y='9' width='7' height='7' fill='%230000EE'/%3E%3Crect x='9' y='9' width='7' height='7' fill='%23FFAA00'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -14,14 +19,12 @@
     <!-- Window: About -->
     <article class="window" style="top: 40px; left: 60px; width: 420px;">
       <header class="window__titlebar" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">
-          <img src="" alt="" width="16" height="16" />
-        </span>
+        <span class="window__icon" aria-hidden="true">ℹ️</span>
         <h1 class="window__title">About This Template</h1>
         <nav class="window__controls" aria-label="Window controls">
           <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
           <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
         </nav>
       </header>
 
@@ -34,6 +37,7 @@
 
       <section class="window__body">
         <p>Welcome to the Windows 95 web template. This is a fully semantic, framework-free implementation using pure HTML, CSS, and Vanilla JS.</p>
+        <p>Responsive hybrid mode included: full desktop experience on screens wider than 768px, and full-screen panels on mobile.</p>
 
         <div class="button-row">
           <button class="btn btn--raised">OK</button>
@@ -51,14 +55,12 @@
     <!-- Window: File Explorer -->
     <article class="window" style="top: 120px; left: 520px; width: 360px;">
       <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">
-          <img src="" alt="" width="16" height="16" />
-        </span>
+        <span class="window__icon" aria-hidden="true">🖥️</span>
         <h2 class="window__title">My Computer</h2>
         <nav class="window__controls" aria-label="Window controls">
           <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
           <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
         </nav>
       </header>
 
@@ -102,18 +104,238 @@
       </footer>
     </article>
 
+    <!-- Window: Contact -->
+    <article class="window" style="top: 60px; left: 500px; width: 340px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">✉️</span>
+        <h2 class="window__title">Contact</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body">
+        <form class="contact-form" onsubmit="return false;" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="contact-name">Name:</label>
+            <input class="form-input" type="text" id="contact-name" placeholder="Your name" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-email">E-mail:</label>
+            <input class="form-input" type="email" id="contact-email" placeholder="you@example.com" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contact-msg">Message:</label>
+            <textarea class="form-textarea" id="contact-msg" placeholder="Type your message…"></textarea>
+          </div>
+          <div class="button-row">
+            <button class="btn btn--raised" type="submit">Send</button>
+            <button class="btn btn--raised" type="reset">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">Ready</span>
+      </footer>
+    </article>
+
+    <!-- Window: Portfolio -->
+    <article class="window" style="top: 180px; left: 60px; width: 560px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">📁</span>
+        <h2 class="window__title">Portfolio</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--explorer">
+        <div class="project-grid" role="list">
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">🌐</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project One</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">🎨</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Two</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">📱</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Three</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+          <article class="project-card" role="listitem">
+            <div class="project-card__thumb" aria-hidden="true">⚡</div>
+            <div class="project-card__info">
+              <h3 class="project-card__title">Project Four</h3>
+              <p class="project-card__desc">Brief description of what this project is about.</p>
+              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">4 project(s)</span>
+      </footer>
+    </article>
+
+    <!-- Window: Services -->
+    <article class="window" style="top: 70px; left: 200px; width: 370px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">🛠️</span>
+        <h2 class="window__title">Services</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--flush">
+        <ul class="service-list" role="list">
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">💻</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Web Development</p>
+              <p class="service-item__desc">Custom websites built with modern web standards.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">🎨</span>
+            <div class="service-item__info">
+              <p class="service-item__title">UI / UX Design</p>
+              <p class="service-item__desc">User-centered design and interactive prototypes.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">📱</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Mobile Development</p>
+              <p class="service-item__desc">Responsive apps that work on any device.</p>
+            </div>
+          </li>
+          <li class="service-item" role="listitem">
+            <span class="service-item__icon" aria-hidden="true">⚡</span>
+            <div class="service-item__info">
+              <p class="service-item__title">Performance Audit</p>
+              <p class="service-item__desc">Speed optimisation and Core Web Vitals improvements.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">4 service(s)</span>
+      </footer>
+    </article>
+
+    <!-- Window: Notepad -->
+    <article class="window" style="top: 200px; left: 480px; width: 420px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">📝</span>
+        <h2 class="window__title">Notepad</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">Format</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body window__body--notepad">
+        <textarea class="notepad-textarea" spellcheck="false" aria-label="Text editor">Hello! I'm [Your Name], a developer & designer based in [City].
+
+I build clean, fast, and accessible web experiences.
+This Notepad window is the perfect spot for your bio,
+a short manifesto, or any free-form content you want
+visitors to read first.
+
+— Replace this text with your own story.</textarea>
+      </section>
+    </article>
+
+    <!-- Window: System Error -->
+    <article class="window" data-system="true" style="top: 240px; left: 320px; width: 320px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">⚠️</span>
+        <h2 class="window__title">System Error</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
+        </nav>
+      </header>
+
+      <section class="window__body error-body">
+        <span class="error-body__icon" aria-hidden="true">⚠️</span>
+        <div>
+          <p class="error-body__msg">An unexpected error has occurred.<br>The operation could not be completed.</p>
+          <div class="button-row">
+            <button class="btn btn--raised">OK</button>
+            <button class="btn btn--raised">Cancel</button>
+          </div>
+        </div>
+      </section>
+    </article>
+
     <!-- Desktop icons -->
     <aside class="desktop__icons" aria-label="Desktop icons">
       <ul role="list">
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" data-window="My Computer">
           <span class="icon-item__glyph" aria-hidden="true">🖥️</span>
           <span class="icon-item__label">My Computer</span>
         </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="recycle-icon">
           <span class="icon-item__glyph" aria-hidden="true">🗑️</span>
           <span class="icon-item__label">Recycle Bin</span>
         </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="ie-icon">
           <span class="icon-item__glyph" aria-hidden="true">🌐</span>
           <span class="icon-item__label">Internet Explorer</span>
         </li>
@@ -131,29 +353,29 @@
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">📁</span>
         <span class="start-menu__label">Programs</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">📄</span>
         <span class="start-menu__label">Documents</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">⚙️</span>
         <span class="start-menu__label">Settings</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">🔍</span>
         <span class="start-menu__label">Find</span>
-        <span class="start-menu__arrow" aria-hidden="true">►</span>
+        <span class="start-menu__arrow" aria-hidden="true">▶</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
         <span class="start-menu__icon" aria-hidden="true">❓</span>
         <span class="start-menu__label">Help</span>
       </li>
       <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">🚀</span>
+        <span class="start-menu__icon" aria-hidden="true">📂</span>
         <span class="start-menu__label">Run…</span>
       </li>
       <li class="start-menu__separator" role="separator" aria-hidden="true"></li>
@@ -179,6 +401,11 @@
     <nav class="taskbar__apps" aria-label="Open applications">
       <button class="taskbar__app-btn taskbar__app-btn--active" aria-pressed="true">About This Template</button>
       <button class="taskbar__app-btn" aria-pressed="false">My Computer</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Contact</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Portfolio</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Services</button>
+      <button class="taskbar__app-btn" aria-pressed="false">Notepad</button>
+      <button class="taskbar__app-btn" aria-pressed="false">System Error</button>
     </nav>
 
     <div class="taskbar__tray" role="complementary" aria-label="System tray">
