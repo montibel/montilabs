@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows 95 — Template</title>
+  <style>:root{--color-desktop:#008080;--color-window-bg:#c0c0c0;--color-window-bg-dark:#a0a0a0;--color-titlebar-active:#000080;--color-titlebar-inactive:#808080;--color-titlebar-text:#ffffff;--color-bevel-light:#ffffff;--color-bevel-mid-light:#dfdfdf;--color-bevel-mid-shadow:#808080;--color-bevel-shadow:#404040;--color-text:#000000;--color-text-disabled:#808080;--color-text-selected:#ffffff;--color-selection-bg:#000080;--color-taskbar-bg:#c0c0c0;--font-ui:"Arial","Helvetica",sans-serif;--font-mono:"Courier New","Courier",monospace;--font-size-base:11px;--space-xs:2px;--space-sm:4px;--space-md:8px;--space-lg:16px;--titlebar-height:22px;--taskbar-height:32px;--border-width:2px}.bevel-raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.bevel-sunken{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.bevel-well{border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}*,::after,::before{box-sizing:border-box;margin:0;padding:0}body,html{height:100%;overflow:hidden}body{font-family:var(--font-ui);font-size:var(--font-size-base);color:var(--color-text);background:var(--color-desktop);user-select:none;cursor:default}button{font-family:inherit;font-size:inherit;cursor:default;color:var(--color-text)}ol,ul{list-style:none}img{display:block;max-width:100%}.desktop{position:relative;width:100vw;height:calc(100vh - var(--taskbar-height));overflow:hidden}.desktop__icons{position:absolute;top:var(--space-lg);left:var(--space-md)}.desktop__icons ul{display:flex;flex-direction:column;gap:var(--space-lg)}.window{position:absolute;display:flex;flex-direction:column;min-width:200px;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.window__titlebar{display:flex;align-items:center;gap:var(--space-sm);height:var(--titlebar-height);padding:0 var(--space-sm);background:var(--color-titlebar-active);color:var(--color-titlebar-text);flex-shrink:0}.window__titlebar--inactive{background:var(--color-titlebar-inactive)}.window__icon{flex-shrink:0;width:16px;height:16px;display:flex;align-items:center}.window__title{flex:1;font-size:var(--font-size-base);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.window__controls{display:flex;gap:var(--space-xs);flex-shrink:0}.window__btn{display:flex;align-items:center;justify-content:center;width:16px;height:14px;font-size:10px;line-height:1;background:var(--color-window-bg);color:var(--color-text);border-top:1px solid var(--color-bevel-light);border-left:1px solid var(--color-bevel-light);border-right:1px solid var(--color-bevel-shadow);border-bottom:1px solid var(--color-bevel-shadow)}.window__btn:active{border-top:1px solid var(--color-bevel-shadow);border-left:1px solid var(--color-bevel-shadow);border-right:1px solid var(--color-bevel-light);border-bottom:1px solid var(--color-bevel-light)}.window__btn--close{font-size:9px}.window__menubar{display:flex;align-items:center;height:20px;padding:0 var(--space-xs);background:var(--color-window-bg);border-bottom:1px solid var(--color-bevel-mid-shadow)}.menubar__item{padding:0 var(--space-md);height:100%;background:0 0;border:none;font-size:var(--font-size-base)}.menubar__item:focus,.menubar__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.window__body{flex:1;padding:var(--space-md);overflow:auto;line-height:1.5}.window__body--explorer{padding:var(--space-sm)}.window__statusbar{display:flex;height:20px;border-top:1px solid var(--color-bevel-mid-shadow);padding:0 var(--space-xs);gap:var(--space-xs);align-items:center;flex-shrink:0}.statusbar__cell{padding:0 var(--space-sm);height:14px;font-size:var(--font-size-base);display:flex;align-items:center;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.btn{display:inline-flex;align-items:center;justify-content:center;min-width:75px;height:23px;padding:0 var(--space-md);background:var(--color-window-bg)}.btn--raised{border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.btn--raised:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.btn--raised:focus-visible{outline:1px dotted var(--color-text);outline-offset:-4px}.btn--raised:disabled{color:var(--color-text-disabled);cursor:default;box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.button-row{display:flex;gap:var(--space-md);margin-top:var(--space-lg);justify-content:flex-end}.icon-grid{display:flex;flex-wrap:wrap;gap:var(--space-lg);padding:var(--space-sm)}.icon-item{display:flex;flex-direction:column;align-items:center;gap:var(--space-xs);width:72px;padding:var(--space-xs);border:1px solid transparent}.icon-item__glyph{font-size:32px;line-height:1}.icon-item__label{font-size:var(--font-size-base);text-align:center;word-break:break-word;line-height:1.2}.icon-item--desktop .icon-item__label{color:#fff;text-shadow:1px 1px 1px #000}.icon-item--selected,.icon-item:focus{outline:0;border:1px dotted var(--color-text);background:var(--color-selection-bg)}.icon-item--selected .icon-item__label,.icon-item:focus .icon-item__label{background:var(--color-selection-bg);color:var(--color-text-selected)}.taskbar{position:fixed;bottom:0;left:0;right:0;height:var(--taskbar-height);display:flex;align-items:center;padding:0 var(--space-xs);gap:var(--space-sm);background:var(--color-taskbar-bg);border-top:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 0 1px 0 var(--color-bevel-mid-light)}.taskbar__start{display:flex;align-items:center;gap:var(--space-sm);height:24px;padding:0 var(--space-md);font-size:var(--font-size-base);background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__start:active{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.taskbar__divider{width:2px;height:24px;border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);flex-shrink:0}.taskbar__apps{flex:1;display:flex;gap:var(--space-xs);overflow:hidden}.taskbar__app-btn{height:24px;padding:0 var(--space-md);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--font-size-base);text-align:left;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.taskbar__app-btn--active{border-top:var(--border-width) solid var(--color-bevel-mid-shadow);border-left:var(--border-width) solid var(--color-bevel-mid-shadow);border-right:var(--border-width) solid var(--color-bevel-mid-light);border-bottom:var(--border-width) solid var(--color-bevel-mid-light);box-shadow:none;background:var(--color-window-bg-dark)}.taskbar__tray{display:flex;align-items:center;height:24px;padding:0 var(--space-sm);flex-shrink:0;border-top:1px solid var(--color-bevel-mid-shadow);border-left:1px solid var(--color-bevel-mid-shadow);border-right:1px solid var(--color-bevel-mid-light);border-bottom:1px solid var(--color-bevel-mid-light)}.tray__clock{font-size:var(--font-size-base);font-family:var(--font-ui);padding:0 var(--space-xs)}.start-logo{display:inline-grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:13px;height:13px;flex-shrink:0}.start-logo span:first-child{background:red}.start-logo span:nth-child(2){background:#0a0}.start-logo span:nth-child(3){background:#00e}.start-logo span:nth-child(4){background:#fa0}.taskbar__start[aria-expanded=true]{border-top:var(--border-width) solid var(--color-bevel-shadow);border-left:var(--border-width) solid var(--color-bevel-shadow);border-right:var(--border-width) solid var(--color-bevel-light);border-bottom:var(--border-width) solid var(--color-bevel-light);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-shadow),inset -1px -1px 0 var(--color-bevel-mid-light)}.start-menu{position:fixed;bottom:var(--taskbar-height);left:0;display:none;width:210px;z-index:9999;background:var(--color-window-bg);border-top:var(--border-width) solid var(--color-bevel-light);border-left:var(--border-width) solid var(--color-bevel-light);border-right:var(--border-width) solid var(--color-bevel-shadow);border-bottom:var(--border-width) solid var(--color-bevel-shadow);box-shadow:inset 1px 1px 0 var(--color-bevel-mid-light),inset -1px -1px 0 var(--color-bevel-mid-shadow)}.start-menu.is-open{display:flex}.start-menu__brand{width:22px;flex-shrink:0;background:linear-gradient(to top,#1084d0 0,navy 100%);display:flex;align-items:center;justify-content:center}.start-menu__brand-text{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:700;font-style:italic;color:#fff;letter-spacing:2px;white-space:nowrap;text-shadow:1px 1px 0 rgba(0,0,0,.4)}.start-menu__list{flex:1;padding:var(--space-xs) 0}.start-menu__item{display:flex;align-items:center;height:26px;padding:0 var(--space-sm);gap:var(--space-sm);cursor:default}.start-menu__item:focus,.start-menu__item:hover{background:var(--color-selection-bg);color:var(--color-text-selected);outline:0}.start-menu__icon{width:20px;font-size:14px;text-align:center;flex-shrink:0}.start-menu__label{flex:1;font-size:12px}.start-menu__arrow{font-size:8px;flex-shrink:0}.start-menu__separator{margin:var(--space-xs) var(--space-sm);height:0;border-top:1px solid var(--color-bevel-mid-shadow);border-bottom:1px solid var(--color-bevel-mid-light)}body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99999;background:repeating-linear-gradient(to bottom,transparent 0,transparent 1px,rgba(0,0,0,.03) 1px,rgba(0,0,0,.03) 2px)}</style>
+</head>
+<body>
+
+  <!-- Desktop surface -->
+  <main class="desktop" role="main" aria-label="Desktop">
+
+    <!-- Window: About -->
+    <article class="window" style="top: 40px; left: 60px; width: 420px;">
+      <header class="window__titlebar" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">
+          <img src="" alt="" width="16" height="16" />
+        </span>
+        <h1 class="window__title">About This Template</h1>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body">
+        <p>Welcome to the Windows 95 web template. This is a fully semantic, framework-free implementation using pure HTML, CSS, and Vanilla JS.</p>
+
+        <div class="button-row">
+          <button class="btn btn--raised">OK</button>
+          <button class="btn btn--raised">Cancel</button>
+          <button class="btn btn--raised" disabled>Apply</button>
+        </div>
+      </section>
+
+      <footer class="window__statusbar" role="status" aria-live="polite">
+        <span class="statusbar__cell">Ready</span>
+        <span class="statusbar__cell">Objects: 3</span>
+      </footer>
+    </article>
+
+    <!-- Window: File Explorer -->
+    <article class="window" style="top: 120px; left: 520px; width: 360px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">
+          <img src="" alt="" width="16" height="16" />
+        </span>
+        <h2 class="window__title">My Computer</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">View</button>
+      </div>
+
+      <section class="window__body window__body--explorer">
+        <ul class="icon-grid" role="list">
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">📁</span>
+            <span class="icon-item__label">Documents</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">📁</span>
+            <span class="icon-item__label">Downloads</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">💾</span>
+            <span class="icon-item__label">Floppy (A:)</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">💿</span>
+            <span class="icon-item__label">CD-ROM (D:)</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">🖨️</span>
+            <span class="icon-item__label">Printers</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">🌐</span>
+            <span class="icon-item__label">Network</span>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">6 object(s)</span>
+      </footer>
+    </article>
+
+    <!-- Desktop icons -->
+    <aside class="desktop__icons" aria-label="Desktop icons">
+      <ul role="list">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🖥️</span>
+          <span class="icon-item__label">My Computer</span>
+        </li>
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🗑️</span>
+          <span class="icon-item__label">Recycle Bin</span>
+        </li>
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🌐</span>
+          <span class="icon-item__label">Internet Explorer</span>
+        </li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <!-- Start Menu (toggled via JS) -->
+  <nav class="start-menu" id="startMenu" aria-label="Start menu">
+    <div class="start-menu__brand" aria-hidden="true">
+      <span class="start-menu__brand-text">Windows 95</span>
+    </div>
+    <ul class="start-menu__list" role="menu">
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">📁</span>
+        <span class="start-menu__label">Programs</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">📄</span>
+        <span class="start-menu__label">Documents</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">⚙️</span>
+        <span class="start-menu__label">Settings</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🔍</span>
+        <span class="start-menu__label">Find</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">❓</span>
+        <span class="start-menu__label">Help</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🚀</span>
+        <span class="start-menu__label">Run…</span>
+      </li>
+      <li class="start-menu__separator" role="separator" aria-hidden="true"></li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🔌</span>
+        <span class="start-menu__label">Shut Down…</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Taskbar -->
+  <footer class="taskbar" role="contentinfo" aria-label="Taskbar">
+    <button class="taskbar__start" aria-label="Start menu" aria-expanded="false">
+      <span class="start-logo" aria-hidden="true">
+        <span></span><span></span>
+        <span></span><span></span>
+      </span>
+      <strong>Start</strong>
+    </button>
+
+    <div class="taskbar__divider" aria-hidden="true"></div>
+
+    <nav class="taskbar__apps" aria-label="Open applications">
+      <button class="taskbar__app-btn taskbar__app-btn--active" aria-pressed="true">About This Template</button>
+      <button class="taskbar__app-btn" aria-pressed="false">My Computer</button>
+    </nav>
+
+    <div class="taskbar__tray" role="complementary" aria-label="System tray">
+      <div class="tray__clock" role="timer" aria-label="System clock">
+        <time id="clock">00:00</time>
+      </div>
+    </div>
+  </footer>
+
+  <script>function t(){const t=new Date,e=String(t.getHours()).padStart(2,"0"),n=String(t.getMinutes()).padStart(2,"0");document.getElementById("clock").textContent=`${e}:${n}`}t(),setInterval(t,1e3);let e=10;function n(t){document.querySelectorAll(".window__titlebar").forEach(t=>{t.classList.add("window__titlebar--inactive")}),t.querySelector(".window__titlebar").classList.remove("window__titlebar--inactive"),t.style.zIndex=++e,r(t)}function o(t){const e=t.querySelector(".window__titlebar"),n=document.querySelector(".desktop");e.addEventListener("mousedown",e=>{if(e.target.closest(".window__controls"))return;const o=e.clientX-t.offsetLeft,i=e.clientY-t.offsetTop;function s(e){const s=n.clientWidth-t.offsetWidth,c=n.clientHeight-t.offsetHeight;t.style.left=`${Math.max(0,Math.min(e.clientX-o,s))}px`,t.style.top=`${Math.max(0,Math.min(e.clientY-i,c))}px`}document.addEventListener("mousemove",s),document.addEventListener("mouseup",function t(){document.removeEventListener("mousemove",s),document.removeEventListener("mouseup",t)})})}function i(t){t.querySelector(".window__btn--close").addEventListener("click",()=>{t.remove(),a(t)}),t.querySelector(".window__btn--minimize").addEventListener("click",()=>{t.style.display="none";const e=c(t);e&&(e.setAttribute("aria-pressed","false"),e.classList.remove("taskbar__app-btn--active"))})}const s=new Map([...document.querySelectorAll(".taskbar__app-btn")].map(t=>[t.textContent.trim(),t]));function c(t){const e=t.querySelector(".window__title").textContent.trim();return s.get(e)??null}function a(t){const e=c(t);e&&e.remove()}function r(t){s.forEach(t=>{t.setAttribute("aria-pressed","false"),t.classList.remove("taskbar__app-btn--active")});const e=c(t);e&&(e.setAttribute("aria-pressed","true"),e.classList.add("taskbar__app-btn--active"))}function d(){s.forEach((t,e)=>{t.addEventListener("click",()=>{const t=[...document.querySelectorAll(".window")].find(t=>t.querySelector(".window__title").textContent.trim()===e);t&&("none"===t.style.display&&(t.style.display="flex"),n(t))})})}document.querySelectorAll(".window").forEach(t=>{t.addEventListener("mousedown",()=>n(t)),o(t),i(t)});const l=document.querySelector(".window__titlebar:not(.window__titlebar--inactive)");l&&n(l.closest(".window")),d();const u=document.querySelector(".taskbar__start"),m=document.getElementById("startMenu");function w(){m.classList.add("is-open"),u.setAttribute("aria-expanded","true")}function _(){m.classList.remove("is-open"),u.setAttribute("aria-expanded","false")}u.addEventListener("click",()=>{m.classList.contains("is-open")?_():w()}),document.addEventListener("click",t=>{m.classList.contains("is-open")&&(m.contains(t.target)||u.contains(t.target)||_())}),document.addEventListener("keydown",t=>{"Escape"===t.key&&m.classList.contains("is-open")&&(_(),u.focus())});</script>
+</body>
+</html>

@@ -1,0 +1,682 @@
+/* ============================================================
+   =========================================================
+  * Windows 95 Retro Template - v1.0.0
+  =========================================================
+  * Product Page: https://montibel.github.io/montilabs
+  * Coded by Montilabs
+  =========================================================
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS (Windows 95 color system)
+   ------------------------------------------------------------ */
+:root {
+  /* Surface colors */
+  --color-desktop: #008080; /* Classic teal desktop */
+  --color-window-bg: #c0c0c0; /* Window / button face */
+  --color-window-bg-dark: #a0a0a0; /* Slightly darker panel */
+
+  /* Title bar */
+  --color-titlebar-active: #000080; /* Active title — dark navy */
+  --color-titlebar-inactive: #808080; /* Inactive title — gray */
+  --color-titlebar-text: #ffffff;
+
+  /* Bevel system — four tones create the 3D illusion */
+  --color-bevel-light: #ffffff; /* Top / left highlight */
+  --color-bevel-mid-light: #dfdfdf; /* Inner top / left */
+  --color-bevel-mid-shadow: #808080; /* Inner bottom / right */
+  --color-bevel-shadow: #404040; /* Outer bottom / right */
+
+  /* Text */
+  --color-text: #000000;
+  --color-text-disabled: #808080;
+  --color-text-selected: #ffffff;
+  --color-selection-bg: #000080;
+
+  /* Taskbar */
+  --color-taskbar-bg: #c0c0c0;
+
+  /* Typography */
+  --font-ui: "Arial", "Helvetica", sans-serif;
+  --font-mono: "Courier New", "Courier", monospace;
+  --font-size-base: 11px;
+
+  /* Spacing */
+  --space-xs: 2px;
+  --space-sm: 4px;
+  --space-md: 8px;
+  --space-lg: 16px;
+
+  /* Window chrome */
+  --titlebar-height: 22px;
+  --taskbar-height: 32px;
+  --border-width: 2px;
+}
+
+/* ------------------------------------------------------------
+   2. BEVEL UTILITY MIXINS (reusable border sets)
+      Applied via classes — kept DRY through custom properties.
+   ------------------------------------------------------------ */
+
+/* Raised surface: button default, window frame, panels */
+.bevel-raised {
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+/* Sunken surface: pressed button, input fields, status cells */
+.bevel-sunken {
+  border-top: var(--border-width) solid var(--color-bevel-shadow);
+  border-left: var(--border-width) solid var(--color-bevel-shadow);
+  border-right: var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-shadow),
+    inset -1px -1px 0 var(--color-bevel-mid-light);
+}
+
+/* Flat / well — inner container with a subtle depression */
+.bevel-well {
+  border-top: 1px solid var(--color-bevel-mid-shadow);
+  border-left: 1px solid var(--color-bevel-mid-shadow);
+  border-right: 1px solid var(--color-bevel-mid-light);
+  border-bottom: 1px solid var(--color-bevel-mid-light);
+}
+
+/* ------------------------------------------------------------
+   3. RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* Desktop never scrolls */
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-desktop);
+  user-select: none;
+  cursor: default;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: default;
+  color: var(--color-text);
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------
+   4. DESKTOP
+   ------------------------------------------------------------ */
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - var(--taskbar-height));
+  overflow: hidden;
+}
+
+.desktop__icons {
+  position: absolute;
+  top: var(--space-lg);
+  left: var(--space-md);
+}
+
+.desktop__icons ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ------------------------------------------------------------
+   5. WINDOW
+   ------------------------------------------------------------ */
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  background: var(--color-window-bg);
+
+  /* Window outer raised bevel */
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+/* --- Title bar --- */
+.window__titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: var(--titlebar-height);
+  padding: 0 var(--space-sm);
+  background: var(--color-titlebar-active);
+  color: var(--color-titlebar-text);
+  flex-shrink: 0;
+}
+
+.window__titlebar--inactive {
+  background: var(--color-titlebar-inactive);
+}
+
+.window__icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.window__title {
+  flex: 1;
+  font-size: var(--font-size-base);
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Window control buttons (_ □ ×) --- */
+.window__controls {
+  display: flex;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.window__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 14px;
+  font-size: 10px;
+  line-height: 1;
+  background: var(--color-window-bg);
+  color: var(--color-text);
+
+  /* Raised bevel for chrome buttons */
+  border-top: 1px solid var(--color-bevel-light);
+  border-left: 1px solid var(--color-bevel-light);
+  border-right: 1px solid var(--color-bevel-shadow);
+  border-bottom: 1px solid var(--color-bevel-shadow);
+}
+
+.window__btn:active {
+  border-top: 1px solid var(--color-bevel-shadow);
+  border-left: 1px solid var(--color-bevel-shadow);
+  border-right: 1px solid var(--color-bevel-light);
+  border-bottom: 1px solid var(--color-bevel-light);
+}
+
+.window__btn--close {
+  font-size: 9px;
+}
+
+/* --- Menu bar --- */
+.window__menubar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--space-xs);
+  background: var(--color-window-bg);
+  border-bottom: 1px solid var(--color-bevel-mid-shadow);
+}
+
+.menubar__item {
+  padding: 0 var(--space-md);
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-base);
+}
+
+.menubar__item:hover,
+.menubar__item:focus {
+  background: var(--color-selection-bg);
+  color: var(--color-text-selected);
+  outline: none;
+}
+
+/* --- Window body --- */
+.window__body {
+  flex: 1;
+  padding: var(--space-md);
+  overflow: auto;
+  line-height: 1.5;
+}
+
+.window__body--explorer {
+  padding: var(--space-sm);
+}
+
+/* --- Status bar --- */
+.window__statusbar {
+  display: flex;
+  height: 20px;
+  border-top: 1px solid var(--color-bevel-mid-shadow);
+  padding: 0 var(--space-xs);
+  gap: var(--space-xs);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.statusbar__cell {
+  padding: 0 var(--space-sm);
+  height: 14px;
+  font-size: var(--font-size-base);
+  display: flex;
+  align-items: center;
+
+  /* Sunken bevel on each cell */
+  border-top: 1px solid var(--color-bevel-mid-shadow);
+  border-left: 1px solid var(--color-bevel-mid-shadow);
+  border-right: 1px solid var(--color-bevel-mid-light);
+  border-bottom: 1px solid var(--color-bevel-mid-light);
+}
+
+/* ------------------------------------------------------------
+   6. BUTTONS
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 75px;
+  height: 23px;
+  padding: 0 var(--space-md);
+  background: var(--color-window-bg);
+}
+
+/* Raised button (default) */
+.btn--raised {
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+.btn--raised:active {
+  border-top: var(--border-width) solid var(--color-bevel-shadow);
+  border-left: var(--border-width) solid var(--color-bevel-shadow);
+  border-right: var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-shadow),
+    inset -1px -1px 0 var(--color-bevel-mid-light);
+}
+
+/* Default button gets extra outer focus border */
+.btn--raised:focus-visible {
+  outline: 1px dotted var(--color-text);
+  outline-offset: -4px;
+}
+
+/* Disabled state */
+.btn--raised:disabled {
+  color: var(--color-text-disabled);
+  cursor: default;
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+/* Row of buttons with consistent spacing */
+.button-row {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  justify-content: flex-end;
+}
+
+/* ------------------------------------------------------------
+   7. ICON GRID  (file explorer & desktop icons)
+   ------------------------------------------------------------ */
+.icon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  padding: var(--space-sm);
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 72px;
+  padding: var(--space-xs);
+  border: 1px solid transparent;
+}
+
+.icon-item__glyph {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.icon-item__label {
+  font-size: var(--font-size-base);
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+/* Desktop icons: white text on teal */
+.icon-item--desktop .icon-item__label {
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+/* Selected state */
+.icon-item:focus,
+.icon-item--selected {
+  outline: none;
+  border: 1px dotted var(--color-text);
+  background: var(--color-selection-bg);
+}
+
+.icon-item:focus .icon-item__label,
+.icon-item--selected .icon-item__label {
+  background: var(--color-selection-bg);
+  color: var(--color-text-selected);
+}
+
+/* ------------------------------------------------------------
+   8. TASKBAR
+   ------------------------------------------------------------ */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--taskbar-height);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-xs);
+  gap: var(--space-sm);
+  background: var(--color-taskbar-bg);
+
+  /* Raised top edge only */
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  box-shadow: inset 0 1px 0 var(--color-bevel-mid-light);
+}
+
+/* --- Start button --- */
+.taskbar__start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  height: 24px;
+  padding: 0 var(--space-md);
+  font-size: var(--font-size-base);
+  background: var(--color-window-bg);
+
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+.taskbar__start:active {
+  border-top: var(--border-width) solid var(--color-bevel-shadow);
+  border-left: var(--border-width) solid var(--color-bevel-shadow);
+  border-right: var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-shadow),
+    inset -1px -1px 0 var(--color-bevel-mid-light);
+}
+
+/* --- Taskbar divider --- */
+.taskbar__divider {
+  width: 2px;
+  height: 24px;
+  border-left: 1px solid var(--color-bevel-mid-shadow);
+  border-right: 1px solid var(--color-bevel-mid-light);
+  flex-shrink: 0;
+}
+
+/* --- Open app buttons --- */
+.taskbar__apps {
+  flex: 1;
+  display: flex;
+  gap: var(--space-xs);
+  overflow: hidden;
+}
+
+.taskbar__app-btn {
+  height: 24px;
+  padding: 0 var(--space-md);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-base);
+  text-align: left;
+  background: var(--color-window-bg);
+
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+/* Active (current window) — sunken state */
+.taskbar__app-btn--active {
+  border-top: var(--border-width) solid var(--color-bevel-mid-shadow);
+  border-left: var(--border-width) solid var(--color-bevel-mid-shadow);
+  border-right: var(--border-width) solid var(--color-bevel-mid-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-mid-light);
+  box-shadow: none;
+  background: var(--color-window-bg-dark);
+}
+
+/* --- System tray --- */
+.taskbar__tray {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 var(--space-sm);
+  flex-shrink: 0;
+
+  /* Sunken tray panel */
+  border-top: 1px solid var(--color-bevel-mid-shadow);
+  border-left: 1px solid var(--color-bevel-mid-shadow);
+  border-right: 1px solid var(--color-bevel-mid-light);
+  border-bottom: 1px solid var(--color-bevel-mid-light);
+}
+
+.tray__clock {
+  font-size: var(--font-size-base);
+  font-family: var(--font-ui);
+  padding: 0 var(--space-xs);
+}
+
+/* ------------------------------------------------------------
+   9. START BUTTON LOGO & START MENU
+   ------------------------------------------------------------ */
+
+/* Four-pane Windows flag inside the Start button */
+.start-logo {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.start-logo span:nth-child(1) { background: #ff0000; } /* top-left:     red    */
+.start-logo span:nth-child(2) { background: #00aa00; } /* top-right:    green  */
+.start-logo span:nth-child(3) { background: #0000ee; } /* bottom-left:  blue   */
+.start-logo span:nth-child(4) { background: #ffaa00; } /* bottom-right: yellow */
+
+/* Pressed / open state — mirrors :active bevel but stays while menu is open */
+.taskbar__start[aria-expanded="true"] {
+  border-top: var(--border-width) solid var(--color-bevel-shadow);
+  border-left: var(--border-width) solid var(--color-bevel-shadow);
+  border-right: var(--border-width) solid var(--color-bevel-light);
+  border-bottom: var(--border-width) solid var(--color-bevel-light);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-shadow),
+    inset -1px -1px 0 var(--color-bevel-mid-light);
+}
+
+/* Start Menu panel */
+.start-menu {
+  position: fixed;
+  bottom: var(--taskbar-height);
+  left: 0;
+  display: none; /* hidden by default; .is-open shows it */
+  width: 210px;
+  z-index: 9999;
+  background: var(--color-window-bg);
+
+  border-top: var(--border-width) solid var(--color-bevel-light);
+  border-left: var(--border-width) solid var(--color-bevel-light);
+  border-right: var(--border-width) solid var(--color-bevel-shadow);
+  border-bottom: var(--border-width) solid var(--color-bevel-shadow);
+  box-shadow:
+    inset 1px 1px 0 var(--color-bevel-mid-light),
+    inset -1px -1px 0 var(--color-bevel-mid-shadow);
+}
+
+.start-menu.is-open {
+  display: flex;
+}
+
+/* Vertical gradient brand strip on the left */
+.start-menu__brand {
+  width: 22px;
+  flex-shrink: 0;
+  background: linear-gradient(to top, #1084d0 0%, #000080 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-menu__brand-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg); /* bottom-to-top reading direction */
+  font-size: 13px;
+  font-weight: bold;
+  font-style: italic;
+  color: #ffffff;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Menu item list */
+.start-menu__list {
+  flex: 1;
+  padding: var(--space-xs) 0;
+}
+
+.start-menu__item {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 var(--space-sm);
+  gap: var(--space-sm);
+  cursor: default;
+}
+
+.start-menu__item:hover,
+.start-menu__item:focus {
+  background: var(--color-selection-bg);
+  color: var(--color-text-selected);
+  outline: none;
+}
+
+.start-menu__icon {
+  width: 20px;
+  font-size: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.start-menu__label {
+  flex: 1;
+  font-size: 12px;
+}
+
+.start-menu__arrow {
+  font-size: 8px;
+  flex-shrink: 0;
+}
+
+/* Horizontal rule between Run and Shut Down */
+.start-menu__separator {
+  margin: var(--space-xs) var(--space-sm);
+  height: 0;
+  border-top: 1px solid var(--color-bevel-mid-shadow);
+  border-bottom: 1px solid var(--color-bevel-mid-light);
+}
+
+/* ============================================================
+   10. EFFECTS — CRT SCANLINES
+   ============================================================
+   A fixed pseudo-element covers the entire browser viewport.
+
+   CRITICAL: pointer-events: none ensures this decorative layer is
+   completely invisible to the mouse — no click, hover, or drag
+   is blocked by it.
+
+   z-index: 99999 places it above everything (windows: 10+,
+   Start menu: 9999) without touching the HTML.
+   ============================================================ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 0, 0, 0.03) 1px,
+    rgba(0, 0, 0, 0.03) 2px
+  );
+}

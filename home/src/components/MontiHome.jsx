@@ -40,6 +40,15 @@ const PROJECTS = [
     color: '#bf5af2',
     bg: 'radial-gradient(ellipse at 60% 30%, rgba(191,90,242,.18) 0%, transparent 70%), #111',
   },
+  {
+    id: 'win95',
+    title: 'Windows 95',
+    cat: { es: 'UI / UX', en: 'UI / UX' },
+    desc: { es: 'Template retro interactivo con ventanas arrastrables, menú Inicio y efecto CRT.', en: 'Interactive retro template with draggable windows, Start menu, and CRT effect.' },
+    url: '../../win95/',
+    color: '#1084d0',
+    bg: 'radial-gradient(ellipse at 30% 70%, rgba(16,132,208,.18) 0%, transparent 70%), #111',
+  },
 ]
 
 const COPY = {

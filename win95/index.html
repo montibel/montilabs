@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows 95 — Template</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Desktop surface -->
+  <main class="desktop" role="main" aria-label="Desktop">
+
+    <!-- Window: About -->
+    <article class="window" style="top: 40px; left: 60px; width: 420px;">
+      <header class="window__titlebar" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">
+          <img src="" alt="" width="16" height="16" />
+        </span>
+        <h1 class="window__title">About This Template</h1>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">View</button>
+        <button class="menubar__item" role="menuitem">Help</button>
+      </div>
+
+      <section class="window__body">
+        <p>Welcome to the Windows 95 web template. This is a fully semantic, framework-free implementation using pure HTML, CSS, and Vanilla JS.</p>
+
+        <div class="button-row">
+          <button class="btn btn--raised">OK</button>
+          <button class="btn btn--raised">Cancel</button>
+          <button class="btn btn--raised" disabled>Apply</button>
+        </div>
+      </section>
+
+      <footer class="window__statusbar" role="status" aria-live="polite">
+        <span class="statusbar__cell">Ready</span>
+        <span class="statusbar__cell">Objects: 3</span>
+      </footer>
+    </article>
+
+    <!-- Window: File Explorer -->
+    <article class="window" style="top: 120px; left: 520px; width: 360px;">
+      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
+        <span class="window__icon" aria-hidden="true">
+          <img src="" alt="" width="16" height="16" />
+        </span>
+        <h2 class="window__title">My Computer</h2>
+        <nav class="window__controls" aria-label="Window controls">
+          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
+          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
+          <button class="window__btn window__btn--close"    aria-label="Close">×</button>
+        </nav>
+      </header>
+
+      <div class="window__menubar" role="menubar">
+        <button class="menubar__item" role="menuitem">File</button>
+        <button class="menubar__item" role="menuitem">Edit</button>
+        <button class="menubar__item" role="menuitem">View</button>
+      </div>
+
+      <section class="window__body window__body--explorer">
+        <ul class="icon-grid" role="list">
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">📁</span>
+            <span class="icon-item__label">Documents</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">📁</span>
+            <span class="icon-item__label">Downloads</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">💾</span>
+            <span class="icon-item__label">Floppy (A:)</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">💿</span>
+            <span class="icon-item__label">CD-ROM (D:)</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">🖨️</span>
+            <span class="icon-item__label">Printers</span>
+          </li>
+          <li class="icon-item" role="listitem">
+            <span class="icon-item__glyph" aria-hidden="true">🌐</span>
+            <span class="icon-item__label">Network</span>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="window__statusbar" role="status">
+        <span class="statusbar__cell">6 object(s)</span>
+      </footer>
+    </article>
+
+    <!-- Desktop icons -->
+    <aside class="desktop__icons" aria-label="Desktop icons">
+      <ul role="list">
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🖥️</span>
+          <span class="icon-item__label">My Computer</span>
+        </li>
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🗑️</span>
+          <span class="icon-item__label">Recycle Bin</span>
+        </li>
+        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0">
+          <span class="icon-item__glyph" aria-hidden="true">🌐</span>
+          <span class="icon-item__label">Internet Explorer</span>
+        </li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <!-- Start Menu (toggled via JS) -->
+  <nav class="start-menu" id="startMenu" aria-label="Start menu">
+    <div class="start-menu__brand" aria-hidden="true">
+      <span class="start-menu__brand-text">Windows 95</span>
+    </div>
+    <ul class="start-menu__list" role="menu">
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">📁</span>
+        <span class="start-menu__label">Programs</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">📄</span>
+        <span class="start-menu__label">Documents</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">⚙️</span>
+        <span class="start-menu__label">Settings</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🔍</span>
+        <span class="start-menu__label">Find</span>
+        <span class="start-menu__arrow" aria-hidden="true">►</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">❓</span>
+        <span class="start-menu__label">Help</span>
+      </li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🚀</span>
+        <span class="start-menu__label">Run…</span>
+      </li>
+      <li class="start-menu__separator" role="separator" aria-hidden="true"></li>
+      <li class="start-menu__item" role="menuitem" tabindex="0">
+        <span class="start-menu__icon" aria-hidden="true">🔌</span>
+        <span class="start-menu__label">Shut Down…</span>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Taskbar -->
+  <footer class="taskbar" role="contentinfo" aria-label="Taskbar">
+    <button class="taskbar__start" aria-label="Start menu" aria-expanded="false">
+      <span class="start-logo" aria-hidden="true">
+        <span></span><span></span>
+        <span></span><span></span>
+      </span>
+      <strong>Start</strong>
+    </button>
+
+    <div class="taskbar__divider" aria-hidden="true"></div>
+
+    <nav class="taskbar__apps" aria-label="Open applications">
+      <button class="taskbar__app-btn taskbar__app-btn--active" aria-pressed="true">About This Template</button>
+      <button class="taskbar__app-btn" aria-pressed="false">My Computer</button>
+    </nav>
+
+    <div class="taskbar__tray" role="complementary" aria-label="System tray">
+      <div class="tray__clock" role="timer" aria-label="System clock">
+        <time id="clock">00:00</time>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
