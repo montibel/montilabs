@@ -3,6 +3,7 @@ import {
   motion,
   useMotionValue,
   useSpring,
+  useAnimation,
   AnimatePresence,
 } from "framer-motion";
 
@@ -170,76 +171,170 @@ function Cursor({ hovering }) {
   );
 }
 
-// ── Hero tiles (right side) ──────────────────────────────────────────
-function HeroTiles({ lang }) {
+// ── Hero logo reveal (right side) ───────────────────────────────────
+function HeroLogo({ onHover }) {
+  const PATH =
+    "M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z";
+  const glowCtrl = useAnimation();
+  const fillCtrl = useAnimation();
+  const [isOn, setIsOn] = useState(true);
+  const [revealed, setRevealed] = useState(false);
+
+  const startFlicker = () => {
+    fillCtrl.start({
+      opacity: [1, 0.88, 1, 0.91, 0.72, 1, 0.94, 0.79, 1, 0.87, 0.66, 1, 0.83, 1, 0.92, 0.75, 1, 0.86, 0.97, 1],
+      transition: {
+        duration: 6.5,
+        times: [0, 0.04, 0.09, 0.15, 0.23, 0.29, 0.36, 0.44, 0.5, 0.57, 0.64, 0.7, 0.75, 0.8, 0.85, 0.89, 0.93, 0.96, 0.99, 1],
+        repeat: Infinity,
+        ease: "linear",
+      },
+    });
+  };
+
+  useEffect(() => {
+    const run = async () => {
+      await new Promise((r) => setTimeout(r, 1850));
+      fillCtrl.start({ opacity: 1, transition: { duration: 0.15 } });
+      await glowCtrl.start({ opacity: 0.9, scale: 1.5, transition: { duration: 0.25 } });
+      await glowCtrl.start({ opacity: 0.4, scale: 1, transition: { duration: 0.9, ease: "easeOut" } });
+      setRevealed(true);
+      startFlicker();
+      glowCtrl.start({
+        opacity: [0.4, 0.72],
+        scale: [1, 1.12],
+        transition: { duration: 2.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" },
+      });
+    };
+    run();
+  }, []);
+
+  useEffect(() => {
+    if (!revealed) return;
+    if (isOn) {
+      fillCtrl.start({ opacity: 1, transition: { duration: 0.12 } }).then(startFlicker);
+      glowCtrl.start({
+        opacity: [0.4, 0.72],
+        scale: [1, 1.12],
+        transition: { duration: 2.8, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" },
+      });
+    } else {
+      fillCtrl.stop();
+      fillCtrl.start({
+        opacity: [1, 0.12, 0.82, 0.06, 0.55, 0.07],
+        transition: { duration: 0.55, times: [0, 0.1, 0.28, 0.48, 0.72, 1], ease: "linear" },
+      });
+      glowCtrl.start({ opacity: 0, scale: 1, transition: { duration: 0.6 } });
+    }
+  }, [isOn, revealed]);
+
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 12,
-        width: 320,
-      }}
-    >
-      {PROJECTS.slice(0, 4).map((p, i) => (
-        <motion.a
-          key={p.id}
-          href={p.url}
-          target="_blank"
-          rel="noreferrer"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+    <div style={{ position: "relative", width: 280, height: 280 }}>
+
+      {/* Outer glow */}
+      <motion.div
+        animate={glowCtrl}
+        initial={{ opacity: 0, scale: 1 }}
+        style={{
+          position: "absolute", top: "50%", left: "50%",
+          translateX: "-50%", translateY: "-50%",
+          width: 300, height: 300, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(200,255,62,.32) 0%, transparent 65%)",
+          filter: "blur(36px)",
+          pointerEvents: "none",
+        }}
+      />
+      {/* Inner glow */}
+      <motion.div
+        animate={glowCtrl}
+        initial={{ opacity: 0, scale: 1 }}
+        style={{
+          position: "absolute", top: "50%", left: "50%",
+          translateX: "-50%", translateY: "-50%",
+          width: 150, height: 150, borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(200,255,62,.7) 0%, transparent 60%)",
+          filter: "blur(14px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Flash */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.22, 0] }}
+        transition={{ delay: 1.85, duration: 0.6, times: [0, 0.08, 1] }}
+        style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "radial-gradient(circle at 50% 50%, rgba(200,255,62,.5) 0%, transparent 55%)",
+          filter: "blur(18px)",
+        }}
+      />
+
+      {/* Lightning bolt SVG */}
+      <svg
+        viewBox="0 0 48 46"
+        style={{ position: "absolute", top: "50%", left: "50%",
+          translateX: "-50%", translateY: "-50%",
+          width: 130, height: 125, overflow: "visible" }}
+      >
+        <motion.path
+          d={PATH} fill="none" stroke="#c8ff3e"
+          strokeWidth={0.5} strokeLinecap="round" strokeLinejoin="round"
+          style={{ filter: "drop-shadow(0 0 2px #c8ff3e) drop-shadow(0 0 7px rgba(200,255,62,.6))" }}
+          initial={{ pathLength: 0, opacity: 1 }}
+          animate={{ pathLength: 1, opacity: 0 }}
           transition={{
-            delay: 0.4 + i * 0.1,
-            duration: 0.6,
-            ease: [0.16, 1, 0.3, 1],
+            pathLength: { delay: 0.4, duration: 1.4, ease: [0.42, 0, 0.58, 1] },
+            opacity:    { delay: 1.75, duration: 0.2 },
           }}
-          whileHover={{ scale: 1.04, borderColor: p.color + "55" }}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-end",
-            padding: 16,
-            borderRadius: 16,
-            height: 140,
-            background: p.bg,
-            border: "1px solid rgba(255,255,255,0.07)",
-            textDecoration: "none",
-            cursor: "none",
-            position: "relative",
-          }}
-        >
-          <span
-            style={{
-              fontSize: 9,
-              fontWeight: 500,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "rgba(240,240,240,0.35)",
-              display: "block",
-              marginBottom: 4,
-            }}
-          >
-            {p.cat[lang]}
-          </span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: "#f0f0f0" }}>
-            {p.title}
-          </span>
+        />
+        <motion.path
+          d={PATH} fill="#c8ff3e"
+          animate={fillCtrl}
+          initial={{ opacity: 0 }}
+          style={{ filter: "drop-shadow(0 0 3px #c8ff3e) drop-shadow(0 0 10px rgba(200,255,62,.8)) drop-shadow(0 0 22px rgba(200,255,62,.5))" }}
+        />
+      </svg>
+
+      {/* Toggle switch */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: revealed ? 1 : 0 }}
+        transition={{ duration: 0.5 }}
+        onClick={() => setIsOn((v) => !v)}
+        onMouseEnter={() => onHover?.(true)}
+        onMouseLeave={() => onHover?.(false)}
+        style={{
+          position: "absolute", bottom: 8, left: "50%", translateX: "-50%",
+          background: "none", border: "none", cursor: "none",
+          display: "flex", alignItems: "center", gap: 8, padding: "4px 0",
+        }}
+      >
+        <div style={{
+          width: 32, height: 18, borderRadius: 9,
+          background: isOn ? ACCENT : "rgba(255,255,255,0.1)",
+          border: isOn ? "none" : "1px solid rgba(255,255,255,0.15)",
+          position: "relative", transition: "background 0.3s, border 0.3s", flexShrink: 0,
+        }}>
           <motion.div
+            animate={{ x: isOn ? 15 : 2 }}
+            transition={{ type: "spring", stiffness: 500, damping: 28 }}
             style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: ACCENT,
-              position: "absolute",
-              top: 14,
-              right: 14,
+              position: "absolute", top: 2, left: 0,
+              width: 14, height: 14, borderRadius: "50%",
+              background: isOn ? "#080808" : "rgba(255,255,255,0.35)",
             }}
-            animate={{ opacity: [1, 0.35, 1] }}
-            transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.4 }}
           />
-        </motion.a>
-      ))}
+        </div>
+        <span style={{
+          fontFamily: "-apple-system, sans-serif",
+          fontSize: 10, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+          color: isOn ? "rgba(200,255,62,.5)" : "rgba(255,255,255,.2)",
+          transition: "color 0.3s", userSelect: "none",
+        }}>
+          {isOn ? "on" : "off"}
+        </span>
+      </motion.button>
     </div>
   );
 }
@@ -593,7 +688,7 @@ export default function MontiHome() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <HeroTiles lang={lang} />
+            <HeroLogo onHover={setHovering} />
           </motion.div>
         )}
       </section>
