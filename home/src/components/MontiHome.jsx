@@ -62,7 +62,7 @@ const PROJECTS = [
     title: "Windows 95",
     cat: { es: "UI / UX", en: "UI / UX" },
     desc: {
-      es: "Template retro de Windows 95",
+      es: "Plantilla retro de Windows 95",
       en: "Retro Windows 95 template.",
     },
     url: "win95/",
