@@ -1,420 +1,674 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Windows 95 — Template</title>
-  <meta name="description" content="Windows 95 Retro Template — A lightweight, fully interactive web template built with Vanilla JS, HTML5 and pure CSS. No frameworks." />
-  <meta property="og:title"       content="Windows 95 Retro Template" />
-  <meta property="og:description" content="A lightweight, fully interactive retro web template. No frameworks, no dependencies — just clean code and 90s nostalgia." />
-  <meta property="og:type"        content="website" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='7' height='7' fill='%23FF0000'/%3E%3Crect x='9' width='7' height='7' fill='%2300AA00'/%3E%3Crect y='9' width='7' height='7' fill='%230000EE'/%3E%3Crect x='9' y='9' width='7' height='7' fill='%23FFAA00'/%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 95 Desktop</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;font-size:11px;overflow:hidden;user-select:none;-webkit-user-select:none;cursor:default}
+#desktop{position:relative;width:100vw;height:100vh;overflow:hidden}
+#desktop-area{position:absolute;inset:0 0 32px 0;overflow:hidden}
+#desktop-icons{position:absolute;top:16px;left:8px;display:flex;flex-direction:column;gap:6px}
+.d-icon{display:flex;flex-direction:column;align-items:center;gap:2px;width:72px;padding:4px 2px;cursor:default}
+.d-icon-lbl{font-size:11px;text-align:center;color:#fff;text-shadow:1px 1px 2px rgba(0,0,0,.9);padding:0 2px}
+#taskbar{position:absolute;bottom:0;left:0;right:0;height:32px;background:#c0c0c0;border-top:2px solid #fff;box-shadow:inset 0 1px 0 #dfdfdf;display:flex;align-items:center;padding:0 2px;gap:4px;z-index:9998}
+#start-menu{position:absolute;bottom:32px;left:0;width:210px;z-index:9999;background:#c0c0c0;display:none;flex-direction:row;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080}
+.win{position:absolute;display:flex;flex-direction:column;background:#c0c0c0;min-width:200px;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080}
+.win-tb{display:flex;align-items:center;gap:4px;height:22px;padding:0 4px;color:#fff;flex-shrink:0;cursor:default;touch-action:none}
+.win-ctrl{display:flex;align-items:center;justify-content:center;width:16px;height:14px;font-size:10px;line-height:1;background:#c0c0c0;color:#000;cursor:default;border-top:1px solid #fff;border-left:1px solid #fff;border-right:1px solid #404040;border-bottom:1px solid #404040;flex-shrink:0;padding:0}
+.win-ctrl-close{font-size:9px}
+.win-menu{display:flex;height:20px;padding:0 2px;background:#c0c0c0;border-bottom:1px solid #808080;flex-shrink:0}
+.win-menu button{padding:0 8px;height:100%;background:transparent;border:none;font-family:inherit;font-size:11px;cursor:default;color:#000}
+.win-content{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.win-status{display:flex;height:20px;border-top:1px solid #808080;padding:0 2px;gap:2px;align-items:center;flex-shrink:0}
+.status-cell{padding:0 4px;height:14px;font-size:11px;display:flex;align-items:center;border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf}
+.resize-handle{position:absolute;bottom:0;right:0;width:14px;height:14px;cursor:se-resize;background-image:radial-gradient(circle,#808080 1px,transparent 1px);background-size:4px 4px;background-position:2px 2px;touch-action:none}
+.w95-btn{display:inline-flex;align-items:center;justify-content:center;min-width:75px;height:23px;padding:0 8px;background:#c0c0c0;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#000;cursor:default;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080}
+.w95-input{font-family:Arial,Helvetica,sans-serif;font-size:11px;padding:2px 4px;background:#fff;color:#000;outline:none;cursor:text;user-select:text;-webkit-user-select:text;border-top:2px solid #404040;border-left:2px solid #404040;border-right:2px solid #fff;border-bottom:2px solid #fff;box-shadow:inset 1px 1px 0 #808080}
+.pcard{display:flex;flex-direction:column;background:#c0c0c0;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080}
+@keyframes w95open{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+</style>
 </head>
 <body>
-
-  <!-- Desktop surface -->
-  <main class="desktop" role="main" aria-label="Desktop">
-
-    <!-- Window: About -->
-    <article class="window" style="top: 40px; left: 60px; width: 420px;">
-      <header class="window__titlebar" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">ℹ️</span>
-        <h1 class="window__title">About This Template</h1>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">Edit</button>
-        <button class="menubar__item" role="menuitem">View</button>
-        <button class="menubar__item" role="menuitem">Help</button>
-      </div>
-
-      <section class="window__body">
-        <p>Welcome to the Windows 95 web template. This is a fully semantic, framework-free implementation using pure HTML, CSS, and Vanilla JS.</p>
-        <p>Responsive hybrid mode included: full desktop experience on screens wider than 768px, and full-screen panels on mobile.</p>
-
-        <div class="button-row">
-          <button class="btn btn--raised">OK</button>
-          <button class="btn btn--raised">Cancel</button>
-          <button class="btn btn--raised" disabled>Apply</button>
-        </div>
-      </section>
-
-      <footer class="window__statusbar" role="status" aria-live="polite">
-        <span class="statusbar__cell">Ready</span>
-        <span class="statusbar__cell">Objects: 3</span>
-      </footer>
-    </article>
-
-    <!-- Window: File Explorer -->
-    <article class="window" style="top: 120px; left: 520px; width: 360px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">🖥️</span>
-        <h2 class="window__title">My Computer</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">Edit</button>
-        <button class="menubar__item" role="menuitem">View</button>
-      </div>
-
-      <section class="window__body window__body--explorer">
-        <ul class="icon-grid" role="list">
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">📁</span>
-            <span class="icon-item__label">Documents</span>
-          </li>
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">📁</span>
-            <span class="icon-item__label">Downloads</span>
-          </li>
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">💾</span>
-            <span class="icon-item__label">Floppy (A:)</span>
-          </li>
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">💿</span>
-            <span class="icon-item__label">CD-ROM (D:)</span>
-          </li>
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">🖨️</span>
-            <span class="icon-item__label">Printers</span>
-          </li>
-          <li class="icon-item" role="listitem">
-            <span class="icon-item__glyph" aria-hidden="true">🌐</span>
-            <span class="icon-item__label">Network</span>
-          </li>
-        </ul>
-      </section>
-
-      <footer class="window__statusbar" role="status">
-        <span class="statusbar__cell">6 object(s)</span>
-      </footer>
-    </article>
-
-    <!-- Window: Contact -->
-    <article class="window" style="top: 60px; left: 500px; width: 340px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">✉️</span>
-        <h2 class="window__title">Contact</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">Edit</button>
-        <button class="menubar__item" role="menuitem">Help</button>
-      </div>
-
-      <section class="window__body">
-        <form class="contact-form" onsubmit="return false;" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="contact-name">Name:</label>
-            <input class="form-input" type="text" id="contact-name" placeholder="Your name" autocomplete="off" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="contact-email">E-mail:</label>
-            <input class="form-input" type="email" id="contact-email" placeholder="you@example.com" autocomplete="off" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="contact-msg">Message:</label>
-            <textarea class="form-textarea" id="contact-msg" placeholder="Type your message…"></textarea>
-          </div>
-          <div class="button-row">
-            <button class="btn btn--raised" type="submit">Send</button>
-            <button class="btn btn--raised" type="reset">Clear</button>
-          </div>
-        </form>
-      </section>
-
-      <footer class="window__statusbar" role="status">
-        <span class="statusbar__cell">Ready</span>
-      </footer>
-    </article>
-
-    <!-- Window: Portfolio -->
-    <article class="window" style="top: 180px; left: 60px; width: 560px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">📁</span>
-        <h2 class="window__title">Portfolio</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">View</button>
-        <button class="menubar__item" role="menuitem">Help</button>
-      </div>
-
-      <section class="window__body window__body--explorer">
-        <div class="project-grid" role="list">
-
-          <article class="project-card" role="listitem">
-            <div class="project-card__thumb" aria-hidden="true">🌐</div>
-            <div class="project-card__info">
-              <h3 class="project-card__title">Project One</h3>
-              <p class="project-card__desc">Brief description of what this project is about.</p>
-              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
-            </div>
-          </article>
-
-          <article class="project-card" role="listitem">
-            <div class="project-card__thumb" aria-hidden="true">🎨</div>
-            <div class="project-card__info">
-              <h3 class="project-card__title">Project Two</h3>
-              <p class="project-card__desc">Brief description of what this project is about.</p>
-              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
-            </div>
-          </article>
-
-          <article class="project-card" role="listitem">
-            <div class="project-card__thumb" aria-hidden="true">📱</div>
-            <div class="project-card__info">
-              <h3 class="project-card__title">Project Three</h3>
-              <p class="project-card__desc">Brief description of what this project is about.</p>
-              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
-            </div>
-          </article>
-
-          <article class="project-card" role="listitem">
-            <div class="project-card__thumb" aria-hidden="true">⚡</div>
-            <div class="project-card__info">
-              <h3 class="project-card__title">Project Four</h3>
-              <p class="project-card__desc">Brief description of what this project is about.</p>
-              <a class="project-card__link btn btn--raised" href="#" target="_blank" rel="noopener">View →</a>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <footer class="window__statusbar" role="status">
-        <span class="statusbar__cell">4 project(s)</span>
-      </footer>
-    </article>
-
-    <!-- Window: Services -->
-    <article class="window" style="top: 70px; left: 200px; width: 370px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">🛠️</span>
-        <h2 class="window__title">Services</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">View</button>
-        <button class="menubar__item" role="menuitem">Help</button>
-      </div>
-
-      <section class="window__body window__body--flush">
-        <ul class="service-list" role="list">
-          <li class="service-item" role="listitem">
-            <span class="service-item__icon" aria-hidden="true">💻</span>
-            <div class="service-item__info">
-              <p class="service-item__title">Web Development</p>
-              <p class="service-item__desc">Custom websites built with modern web standards.</p>
-            </div>
-          </li>
-          <li class="service-item" role="listitem">
-            <span class="service-item__icon" aria-hidden="true">🎨</span>
-            <div class="service-item__info">
-              <p class="service-item__title">UI / UX Design</p>
-              <p class="service-item__desc">User-centered design and interactive prototypes.</p>
-            </div>
-          </li>
-          <li class="service-item" role="listitem">
-            <span class="service-item__icon" aria-hidden="true">📱</span>
-            <div class="service-item__info">
-              <p class="service-item__title">Mobile Development</p>
-              <p class="service-item__desc">Responsive apps that work on any device.</p>
-            </div>
-          </li>
-          <li class="service-item" role="listitem">
-            <span class="service-item__icon" aria-hidden="true">⚡</span>
-            <div class="service-item__info">
-              <p class="service-item__title">Performance Audit</p>
-              <p class="service-item__desc">Speed optimisation and Core Web Vitals improvements.</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <footer class="window__statusbar" role="status">
-        <span class="statusbar__cell">4 service(s)</span>
-      </footer>
-    </article>
-
-    <!-- Window: Notepad -->
-    <article class="window" style="top: 200px; left: 480px; width: 420px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">📝</span>
-        <h2 class="window__title">Notepad</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <div class="window__menubar" role="menubar">
-        <button class="menubar__item" role="menuitem">File</button>
-        <button class="menubar__item" role="menuitem">Edit</button>
-        <button class="menubar__item" role="menuitem">Format</button>
-        <button class="menubar__item" role="menuitem">Help</button>
-      </div>
-
-      <section class="window__body window__body--notepad">
-        <textarea class="notepad-textarea" spellcheck="false" aria-label="Text editor">Hello! I'm [Your Name], a developer & designer based in [City].
-
-I build clean, fast, and accessible web experiences.
-This Notepad window is the perfect spot for your bio,
-a short manifesto, or any free-form content you want
-visitors to read first.
-
-— Replace this text with your own story.</textarea>
-      </section>
-    </article>
-
-    <!-- Window: System Error -->
-    <article class="window" data-system="true" style="top: 240px; left: 320px; width: 320px;">
-      <header class="window__titlebar window__titlebar--inactive" aria-label="Window title bar">
-        <span class="window__icon" aria-hidden="true">⚠️</span>
-        <h2 class="window__title">System Error</h2>
-        <nav class="window__controls" aria-label="Window controls">
-          <button class="window__btn window__btn--minimize" aria-label="Minimize">_</button>
-          <button class="window__btn window__btn--maximize" aria-label="Maximize">□</button>
-          <button class="window__btn window__btn--close"    aria-label="Close">✕</button>
-        </nav>
-      </header>
-
-      <section class="window__body error-body">
-        <span class="error-body__icon" aria-hidden="true">⚠️</span>
-        <div>
-          <p class="error-body__msg">An unexpected error has occurred.<br>The operation could not be completed.</p>
-          <div class="button-row">
-            <button class="btn btn--raised">OK</button>
-            <button class="btn btn--raised">Cancel</button>
-          </div>
-        </div>
-      </section>
-    </article>
-
-    <!-- Desktop icons -->
-    <aside class="desktop__icons" aria-label="Desktop icons">
-      <ul role="list">
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" data-window="My Computer">
-          <span class="icon-item__glyph" aria-hidden="true">🖥️</span>
-          <span class="icon-item__label">My Computer</span>
-        </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="recycle-icon">
-          <span class="icon-item__glyph" aria-hidden="true">🗑️</span>
-          <span class="icon-item__label">Recycle Bin</span>
-        </li>
-        <li class="icon-item icon-item--desktop" role="listitem" tabindex="0" id="ie-icon">
-          <span class="icon-item__glyph" aria-hidden="true">🌐</span>
-          <span class="icon-item__label">Internet Explorer</span>
-        </li>
-      </ul>
-    </aside>
-
-  </main>
-
-  <!-- Start Menu (toggled via JS) -->
-  <nav class="start-menu" id="startMenu" aria-label="Start menu">
-    <div class="start-menu__brand" aria-hidden="true">
-      <span class="start-menu__brand-text">Windows 95</span>
+<div id="desktop">
+  <div id="crt-overlay" style="position:absolute;inset:0;pointer-events:none;z-index:99999;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 1px,rgba(0,0,0,.03) 1px,rgba(0,0,0,.03) 2px)"></div>
+  <div id="desktop-area">
+    <div id="desktop-icons"></div>
+  </div>
+  <div id="start-menu">
+    <div style="width:22px;flex-shrink:0;background:linear-gradient(to top,#1084d0,#000080);display:flex;align-items:center;justify-content:center">
+      <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;font-weight:bold;font-style:italic;color:#fff;letter-spacing:2px;text-shadow:1px 1px 0 rgba(0,0,0,.4)">Windows 95</span>
     </div>
-    <ul class="start-menu__list" role="menu">
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">📁</span>
-        <span class="start-menu__label">Programs</span>
-        <span class="start-menu__arrow" aria-hidden="true">▶</span>
-      </li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">📄</span>
-        <span class="start-menu__label">Documents</span>
-        <span class="start-menu__arrow" aria-hidden="true">▶</span>
-      </li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">⚙️</span>
-        <span class="start-menu__label">Settings</span>
-        <span class="start-menu__arrow" aria-hidden="true">▶</span>
-      </li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">🔍</span>
-        <span class="start-menu__label">Find</span>
-        <span class="start-menu__arrow" aria-hidden="true">▶</span>
-      </li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">❓</span>
-        <span class="start-menu__label">Help</span>
-      </li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">📂</span>
-        <span class="start-menu__label">Run…</span>
-      </li>
-      <li class="start-menu__separator" role="separator" aria-hidden="true"></li>
-      <li class="start-menu__item" role="menuitem" tabindex="0">
-        <span class="start-menu__icon" aria-hidden="true">🔌</span>
-        <span class="start-menu__label">Shut Down…</span>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Taskbar -->
-  <footer class="taskbar" role="contentinfo" aria-label="Taskbar">
-    <button class="taskbar__start" aria-label="Start menu" aria-expanded="false">
-      <span class="start-logo" aria-hidden="true">
-        <span></span><span></span>
-        <span></span><span></span>
-      </span>
+    <div id="sm-items" style="flex:1;padding:2px 0"></div>
+  </div>
+  <div id="taskbar">
+    <button id="start-btn" type="button" style="display:flex;align-items:center;gap:4px;height:24px;padding:0 8px;font-family:inherit;font-size:11px;font-weight:bold;background:#c0c0c0;cursor:default;color:#000;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080">
+      <div style="display:inline-grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;width:13px;height:13px;flex-shrink:0">
+        <span style="background:#f00"></span><span style="background:#0a0"></span>
+        <span style="background:#00e"></span><span style="background:#fa0"></span>
+      </div>
       <strong>Start</strong>
     </button>
+    <div style="width:2px;height:24px;border-left:1px solid #808080;border-right:1px solid #dfdfdf;flex-shrink:0"></div>
+    <div id="task-btns" style="flex:1;display:flex;gap:2px;overflow:hidden"></div>
+    <div style="display:flex;align-items:center;height:24px;padding:0 6px;flex-shrink:0;border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #dfdfdf;border-bottom:1px solid #dfdfdf">
+      <time id="clock" style="font-size:11px"></time>
+    </div>
+  </div>
+</div>
+<script>
+// ── CONFIG ── edit to customize ──────────────────────────────────────────
+const CFG = {
+  userName:     "Your Name",
+  userTitle:    "Developer & Designer",
+  tagline:      "Available for freelance",
+  userCity:     "Your City",
+  userBio:      "Hello! I'm a developer & designer.\n\nI build clean, fast, and accessible web experiences.\n\n— Replace this text with your own story.",
+  avatarEmoji:  "👤",
+  skills:       "React · TypeScript · Figma",
+  githubUrl:    "",
+  linkedinUrl:  "",
+  instagramUrl: "",
+  websiteUrl:   "",
+  contactEmail: "you@example.com",
+  desktopColor: "#008080",
+  fontFamily:   "Arial, Helvetica, sans-serif",
+  enableSounds: true,
+  showCrt:      true,
+  showAnimations: true,
+  portfolio: [
+    { icon:"🌐", title:"Web App",        desc:"A fast, responsive web application built with modern tech.", url:"https://example.com" },
+    { icon:"🎨", title:"Brand Identity", desc:"Logo and visual system designed for a growing startup.",    url:"https://example.com" },
+    { icon:"📱", title:"Mobile App",     desc:"Cross-platform mobile experience for iOS & Android.",       url:"https://example.com" },
+    { icon:"⚡", title:"Landing Page",   desc:"High-converting product page with custom animations.",      url:"https://example.com" },
+  ],
+  services: [
+    { icon:"💻", title:"Web Development",    desc:"Custom websites built with modern web standards." },
+    { icon:"🎨", title:"UI / UX Design",     desc:"User-centered design and interactive prototypes." },
+    { icon:"📱", title:"Mobile Development", desc:"Responsive apps that work on any device." },
+    { icon:"⚡", title:"Performance Audit",  desc:"Speed optimisation and Core Web Vitals improvements." },
+  ],
+};
 
-    <div class="taskbar__divider" aria-hidden="true"></div>
+// ── SOUNDS ───────────────────────────────────────────────────────────────
+let _ctx = null;
+function getCtx() {
+  try {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state === "suspended") _ctx.resume();
+    return _ctx;
+  } catch { return null; }
+}
+function tone(ac, freq, t, dur, type="square", vol=0.07) {
+  const o = ac.createOscillator(), g = ac.createGain();
+  o.connect(g); g.connect(ac.destination);
+  o.type = type; o.frequency.setValueAtTime(freq, t);
+  g.gain.setValueAtTime(vol, t);
+  g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  o.start(t); o.stop(t + dur + 0.01);
+}
+const SFX = {
+  open()  { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,523.25,t,.12); tone(ac,659.25,t+.08,.18); },
+  close() { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,440,t,.1,"square",.06); tone(ac,330,t+.06,.14,"square",.06); },
+  error() { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,493.88,t,.35,"sine",.09); tone(ac,369.99,t+.04,.35,"sine",.06); },
+  menu()  { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,880,t,.05,"square",.04); tone(ac,1100,t+.04,.07,"square",.04); },
+};
 
-    <nav class="taskbar__apps" aria-label="Open applications">
-      <button class="taskbar__app-btn taskbar__app-btn--active" aria-pressed="true">About This Template</button>
-      <button class="taskbar__app-btn" aria-pressed="false">My Computer</button>
-      <button class="taskbar__app-btn" aria-pressed="false">Contact</button>
-      <button class="taskbar__app-btn" aria-pressed="false">Portfolio</button>
-      <button class="taskbar__app-btn" aria-pressed="false">Services</button>
-      <button class="taskbar__app-btn" aria-pressed="false">Notepad</button>
-      <button class="taskbar__app-btn" aria-pressed="false">System Error</button>
-    </nav>
+// ── WINDOW DEFINITIONS ───────────────────────────────────────────────────
+const WINS = [
+  { id:"notepad",   title:"Notepad",      icon:"📝", ix:220, iy:230, iw:400, ih:250, menu:["File","Edit","Format","Help"] },
+  { id:"computer",  title:"My Computer",  icon:"🖥️", ix:530, iy:170, iw:330, ih:250, menu:["File","Edit","View"],        status:true },
+  { id:"services",  title:"Services",     icon:"🛠️", ix:410, iy: 24, iw:360, ih:280, menu:["File","View","Help"],        status:true },
+  { id:"contact",   title:"Contact",      icon:"✉️", ix:490, iy: 55, iw:330, ih:320, menu:["File","Edit","Help"],        status:true },
+  { id:"portfolio", title:"Portfolio",    icon:"📁", ix: 24, iy:190, iw:540, ih:250, menu:["File","View","Help"],        status:true },
+  { id:"about",     title:"About Me",     icon:"👤", ix: 24, iy: 24, iw:370, ih:310, menu:["File","Edit","View","Help"], status:true },
+  { id:"error",     title:"System Error", icon:"⚠️", ix:280, iy:225, iw:320, ih:150, system:true },
+];
 
-    <div class="taskbar__tray" role="complementary" aria-label="System tray">
-      <div class="tray__clock" role="timer" aria-label="System clock">
-        <time id="clock">00:00</time>
+function mkState() {
+  const r = {};
+  WINS.forEach((c,i) => {
+    r[c.id] = { x:c.ix, y:c.iy, w:c.iw, h:c.ih,
+      visible: c.id !== "error", mini:false, maxi:false,
+      z: 10+i, active: c.id === "about",
+      rx:c.ix, ry:c.iy, rw:c.iw, rh:c.ih };
+  });
+  return r;
+}
+
+// ── STATE ────────────────────────────────────────────────────────────────
+const S = { wins: mkState(), menuOpen: false, selIco: null, selCmp: null };
+let errMsg = "An unexpected error has occurred.<br>The operation could not be completed.";
+let statusTimer = null;
+let containerW = window.innerWidth, containerH = window.innerHeight;
+const wEls = {};
+
+// ── HELPERS ──────────────────────────────────────────────────────────────
+const getCfg = id => WINS.find(w => w.id === id);
+const compact = () => containerW < 560;
+
+// ── Z / FOCUS ────────────────────────────────────────────────────────────
+function focus(id) {
+  if (id === "error" && !S.wins[id].active && CFG.enableSounds) SFX.error();
+  const entries = Object.entries(S.wins).sort((a,b) => a[1].z - b[1].z);
+  let z = 10;
+  entries.forEach(([k]) => { if (k !== id) S.wins[k].z = z++; });
+  S.wins[id].z = z;
+  Object.keys(S.wins).forEach(k => S.wins[k].active = k === id);
+  updateAllWins(); updateTaskbar();
+}
+
+// ── ACTIONS ──────────────────────────────────────────────────────────────
+function openWin(id) {
+  const s = S.wins[id];
+  if (CFG.enableSounds && id !== "error" && (!s.visible || s.mini)) SFX.open();
+  S.wins[id].visible = true; S.wins[id].mini = false;
+  focus(id);
+  if (CFG.showAnimations) {
+    const el = wEls[id];
+    if (el) { el.style.animation="none"; el.offsetHeight; el.style.animation="w95open .12s ease-out"; }
+  }
+  if (id === "contact") setTimeout(bindContactForm, 50);
+}
+
+function closeWin(id) {
+  if (CFG.enableSounds && id !== "error") SFX.close();
+  S.wins[id].visible = false; S.wins[id].mini = false; S.wins[id].active = false;
+  const next = Object.entries(S.wins).filter(([k,v]) => k!==id && v.visible && !v.mini).sort((a,b)=>b[1].z-a[1].z)[0];
+  if (next) S.wins[next[0]].active = true;
+  updateWin(id); updateTaskbar();
+}
+
+function miniWin(id) {
+  if (CFG.enableSounds) SFX.close();
+  S.wins[id].mini = true; S.wins[id].active = false;
+  const next = Object.entries(S.wins).filter(([k,v]) => k!==id && v.visible && !v.mini).sort((a,b)=>b[1].z-a[1].z)[0];
+  if (next) S.wins[next[0]].active = true;
+  updateWin(id); updateTaskbar();
+}
+
+function maxiWin(id) {
+  const s = S.wins[id];
+  if (s.maxi) {
+    Object.assign(S.wins[id], { maxi:false, x:s.rx, y:s.ry, w:s.rw, h:s.rh });
+  } else {
+    Object.assign(S.wins[id], { maxi:true, rx:s.x, ry:s.y, rw:s.w, rh:s.h, x:0, y:0, w:containerW, h:containerH-32 });
+  }
+  if (!S.wins[id].active) focus(id); else updateWin(id);
+}
+
+function showError(msg) {
+  errMsg = msg;
+  const el = document.getElementById("err-msg");
+  if (el) el.innerHTML = msg;
+  openWin("error");
+}
+
+function taskClick(id) {
+  const s = S.wins[id];
+  if (!s.visible || s.mini) openWin(id);
+  else if (s.active) miniWin(id);
+  else focus(id);
+}
+
+// ── UPDATE DOM ───────────────────────────────────────────────────────────
+function updateWin(id) {
+  const s = S.wins[id], cfg = getCfg(id), el = wEls[id];
+  if (!el) return;
+  const cp = compact(), forceMaxi = cp || s.maxi;
+
+  if (!s.visible || s.mini || (cp && !s.active)) { el.style.display="none"; return; }
+  el.style.display = "flex";
+
+  if (forceMaxi) { el.style.cssText += ";top:0;left:0;width:100%;height:100%"; }
+  else { el.style.top=s.y+"px"; el.style.left=s.x+"px"; el.style.width=s.w+"px"; el.style.height=s.h+"px"; }
+  el.style.zIndex = s.z;
+
+  const tb = el.querySelector(".win-tb");
+  if (tb) tb.style.background = s.active ? "#000080" : "#6e6e6e";
+
+  const minB = el.querySelector("[data-min]"), maxB = el.querySelector("[data-max]");
+  const hide = cp || cfg.system;
+  if (minB) minB.style.display = hide ? "none" : "flex";
+  if (maxB) { maxB.style.display = hide ? "none" : "flex"; maxB.textContent = s.maxi ? "❐" : "□"; }
+
+  const rh = el.querySelector(".resize-handle");
+  if (rh) rh.style.display = forceMaxi ? "none" : "";
+}
+
+function updateAllWins() { WINS.forEach(c => updateWin(c.id)); }
+
+function updateTaskbar() {
+  const tb = document.getElementById("task-btns");
+  if (!tb) return; tb.innerHTML = "";
+  WINS.filter(c => !c.system && (S.wins[c.id].visible || S.wins[c.id].mini)).forEach(cfg => {
+    const s = S.wins[cfg.id], active = s.active && s.visible && !s.mini;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.style.cssText = `height:24px;padding:0 6px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;text-align:left;background:${active?"#a0a0a0":"#c0c0c0"};font-family:inherit;cursor:default;color:#000;${active?"border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #dfdfdf;border-bottom:2px solid #dfdfdf":"border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080"}`;
+    btn.textContent = `${cfg.icon} ${cfg.title}`;
+    btn.addEventListener("click", () => taskClick(cfg.id));
+    tb.appendChild(btn);
+  });
+}
+
+function updateStartMenu() {
+  document.getElementById("start-menu").style.display = S.menuOpen ? "flex" : "none";
+}
+
+// ── WINDOW CONTENT ───────────────────────────────────────────────────────
+const SOCIAL = [
+  { label:"GitHub",    url:()=>CFG.githubUrl,    path:"M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z" },
+  { label:"LinkedIn",  url:()=>CFG.linkedinUrl,  path:"M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" },
+  { label:"Instagram", url:()=>CFG.instagramUrl, path:"M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" },
+  { label:"Website",   url:()=>CFG.websiteUrl,   path:"M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 17.93A8.01 8.01 0 014.07 11H7a13.45 13.45 0 001 4.47A8.05 8.05 0 0111 17.93zm0-13.86A8.05 8.05 0 017 6.53 13.45 13.45 0 006.07 11H4.07A8.01 8.01 0 0111 4.07zM13 4.07A8.01 8.01 0 0119.93 11H17a13.45 13.45 0 00-1-4.47 8.05 8.05 0 01-3-2.46zm0 13.86a8.05 8.05 0 01-3-2.46A13.45 13.45 0 009 11h6a13.45 13.45 0 00-1 4.47 8.05 8.05 0 01-3 2.46zm1 0a8.05 8.05 0 013-2.46A13.45 13.45 0 0018 11h2.93A8.01 8.01 0 0113 17.93z" },
+];
+
+function contentAbout() {
+  const F = CFG.fontFamily;
+  const socials = SOCIAL.map(({ label, url, path }) => {
+    const u = url();
+    return `<a href="${u||""}" ${u?'target="_blank" rel="noreferrer"':''} aria-label="${label}"
+      style="display:inline-flex;align-items:center;gap:4px;height:23px;padding:0 8px;font-size:11px;text-decoration:none;font-family:${F};background:#c0c0c0;color:#000;cursor:${u?"pointer":"default"};opacity:${u?1:0.45};border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080"
+      ${!u?'onclick="return false"':''}>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="${path}"/></svg>${label}</a>`;
+  }).join("");
+  return `<div style="padding:12px;overflow:auto;flex:1;font-family:${F}">
+    <div style="display:flex;gap:12px;margin-bottom:10px">
+      <div style="width:60px;height:60px;flex-shrink:0;background:#000080;display:flex;align-items:center;justify-content:center;font-size:28px;border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080">${CFG.avatarEmoji}</div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:2px">
+        <h3 style="font-size:13px;font-weight:bold;color:#000;margin:0;font-family:${F}">${CFG.userName}</h3>
+        <p style="font-size:11px;color:#4a4a4a;margin:0">${CFG.userTitle}</p>
+        ${CFG.tagline?`<p style="font-size:11px;color:#000080;font-style:italic;margin:0">${CFG.tagline}</p>`:""}
+        ${CFG.userCity?`<p style="font-size:11px;color:#4a4a4a;margin:0">📍 ${CFG.userCity}</p>`:""}
       </div>
     </div>
-  </footer>
+    <hr style="border:none;border-top:1px solid #808080;margin:8px 0">
+    ${CFG.skills?`<div style="margin-bottom:8px"><h4 style="font-size:10px;font-weight:bold;color:#4a4a4a;margin:0 0 3px;text-transform:uppercase;letter-spacing:1px;font-family:${F}">Skills</h4><p style="font-size:11px;color:#000;margin:0;line-height:1.6">${CFG.skills}</p></div>`:""}
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${socials}</div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
+      <button type="button" class="w95-btn" onclick="openWin('portfolio')">Portfolio</button>
+      <button type="button" class="w95-btn" onclick="openWin('contact')">Contact Me</button>
+    </div>
+  </div>`;
+}
 
-  <script src="js/app.js"></script>
+function contentComputer() {
+  const ERRS = {
+    "Documents":"Access is denied.<br>You do not have permission to access this folder.",
+    "Downloads":"Downloads folder is empty.<br>No files found.",
+    "Floppy (A:)":"A: is not accessible.<br>The device is not ready.",
+    "CD-ROM (D:)":"The disc in drive D: is not formatted.<br>Do you want to format it now?",
+    "Printers":"No printers installed.<br>Please contact your system administrator.",
+    "Network":"No network resources available.<br>The network path was not found.",
+  };
+  const items = [["📁","Documents"],["📁","Downloads"],["💾","Floppy (A:)"],["💿","CD-ROM (D:)"],["🖨️","Printers"],["🌐","Network"]];
+  return `<div style="padding:4px;overflow:auto;flex:1" onclick="selCmp(null)">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;padding:8px">
+    ${items.map(([ico,lbl])=>`<div role="button" tabindex="0" aria-label="${lbl}" data-cmp="${lbl}"
+      style="display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;padding:4px 2px;cursor:default"
+      onclick="event.stopPropagation();selCmp('${lbl}')"
+      ondblclick="event.stopPropagation();selCmp(null);showError('${ERRS[lbl].replace(/'/g,"\\'")}')">
+      <span style="font-size:32px">${ico}</span>
+      <span class="cmp-lbl" style="font-size:11px;text-align:center;font-family:${CFG.fontFamily};padding:0 2px">${lbl}</span>
+    </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function contentContact() {
+  const F = CFG.fontFamily;
+  return `<form id="c-form" style="padding:8px;display:flex;flex-direction:column;gap:8px;flex:1">
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <label for="c-name" style="font-size:11px;font-weight:bold;font-family:${F}">Name:</label>
+      <input id="c-name" type="text" placeholder="Your name" autocomplete="off" class="w95-input" style="width:100%">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <label for="c-email" style="font-size:11px;font-weight:bold;font-family:${F}">E-mail:</label>
+      <input id="c-email" type="email" placeholder="you@example.com" autocomplete="off" class="w95-input" style="width:100%">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <label for="c-msg" style="font-size:11px;font-weight:bold;font-family:${F}">Message:</label>
+      <textarea id="c-msg" placeholder="Type your message…" class="w95-input" style="width:100%;height:70px;resize:none"></textarea>
+    </div>
+    <p style="font-size:10px;color:#4a4a4a;font-family:${F};margin:0">Sends to: ${CFG.contactEmail}</p>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button type="submit" class="w95-btn">Send</button>
+      <button type="button" class="w95-btn" id="c-clear">Clear</button>
+    </div>
+  </form>`;
+}
+
+function contentPortfolio() {
+  return `<div style="padding:4px;overflow:auto;flex:1">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;padding:8px">
+    ${CFG.portfolio.map(p=>`<div class="pcard">
+      <div style="height:60px;background:#000080;display:flex;align-items:center;justify-content:center;font-size:28px">${p.icon}</div>
+      <div style="padding:6px 8px;display:flex;flex-direction:column;gap:3px;flex:1">
+        <h3 style="font-size:11px;font-weight:bold;font-family:${CFG.fontFamily};margin:0">${p.title}</h3>
+        <p style="font-size:11px;color:#4a4a4a;line-height:1.4;flex:1;font-family:${CFG.fontFamily};margin:0">${p.desc}</p>
+        <a href="${p.url&&p.url!="#"?p.url:""}" ${p.url&&p.url!="#"?'target="_blank" rel="noreferrer"':''}
+          class="w95-btn" style="margin-top:4px;text-decoration:none;opacity:${!p.url||p.url=="#"?.5:1};cursor:${!p.url||p.url=="#"?"default":"pointer"};align-self:flex-start"
+          ${!p.url||p.url=="#"?'onclick="return false"':''}>View →</a>
+      </div>
+    </div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function contentServices() {
+  return `<div style="overflow:auto;flex:1">
+    ${CFG.services.map((s,i)=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 8px;${i<CFG.services.length-1?"border-bottom:1px solid #808080":""}">
+      <span style="font-size:20px;flex-shrink:0;width:26px;text-align:center">${s.icon}</span>
+      <div>
+        <h3 style="font-size:11px;font-weight:bold;font-family:${CFG.fontFamily};margin:0 0 2px">${s.title}</h3>
+        <p style="font-size:11px;color:#4a4a4a;line-height:1.4;font-family:${CFG.fontFamily};margin:0">${s.desc}</p>
+      </div>
+    </div>`).join("")}
+  </div>`;
+}
+
+function contentNotepad() {
+  return `<textarea aria-label="Notepad" spellcheck="false" style="flex:1;width:100%;padding:4px;font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.6;background:#fff;color:#000;border:none;outline:none;resize:none;cursor:text;user-select:text;-webkit-user-select:text">${CFG.userBio}</textarea>`;
+}
+
+function contentError() {
+  return `<div style="display:flex;align-items:flex-start;gap:16px;padding:16px">
+    <span style="font-size:32px;flex-shrink:0">⚠️</span>
+    <div>
+      <p id="err-msg" style="font-size:11px;line-height:1.5;font-family:${CFG.fontFamily};margin:0">${errMsg}</p>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button type="button" class="w95-btn" onclick="closeWin('error')">OK</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+const CONTENTS = { about:contentAbout, computer:contentComputer, contact:contentContact, portfolio:contentPortfolio, services:contentServices, notepad:contentNotepad, error:contentError };
+
+// ── BUILD WINDOWS ────────────────────────────────────────────────────────
+function buildWin(cfg) {
+  const s = S.wins[cfg.id];
+  const el = document.createElement("div");
+  el.id = "win-" + cfg.id;
+  el.className = "win";
+  el.setAttribute("role", "dialog");
+
+  // Title bar
+  const tb = document.createElement("div");
+  tb.className = "win-tb";
+  tb.style.background = s.active ? "#000080" : "#6e6e6e";
+  tb.innerHTML = `
+    <span style="font-size:13px;width:16px;flex-shrink:0">${cfg.icon}</span>
+    <h2 style="flex:1;font-size:11px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;color:inherit;font-family:Arial,Helvetica,sans-serif">${cfg.id==="about"?"About Me":cfg.title}</h2>
+    <div style="display:flex;gap:2px">
+      ${!cfg.system?`<button type="button" class="win-ctrl" data-min aria-label="Minimize">_</button>`:""}
+      ${!cfg.system?`<button type="button" class="win-ctrl" data-max aria-label="Maximize">□</button>`:""}
+      <button type="button" class="win-ctrl win-ctrl-close" data-close aria-label="Close">✕</button>
+    </div>`;
+
+  tb.querySelector("[data-close]").addEventListener("click", () => closeWin(cfg.id));
+  tb.querySelector("[data-min]")?.addEventListener("click", () => miniWin(cfg.id));
+  tb.querySelector("[data-max]")?.addEventListener("click", () => maxiWin(cfg.id));
+
+  tb.addEventListener("pointerdown", e => {
+    if (e.target.closest("[data-min],[data-max],[data-close]")) return;
+    if (compact() || S.wins[cfg.id].maxi) return;
+    const area = document.getElementById("desktop-area").getBoundingClientRect();
+    const sw = S.wins[cfg.id];
+    dragSt = { id: cfg.id, ox: e.clientX - area.left - sw.x, oy: e.clientY - area.top - sw.y };
+    tb.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  tb.addEventListener("dblclick", e => {
+    if (e.target.closest("[data-min],[data-max],[data-close]")) return;
+    if (!compact() && !cfg.system) maxiWin(cfg.id);
+  });
+  el.appendChild(tb);
+
+  // Menu bar
+  if (cfg.menu) {
+    const mb = document.createElement("div");
+    mb.className = "win-menu";
+    mb.innerHTML = cfg.menu.map(m => `<button type="button">${m}</button>`).join("");
+    el.appendChild(mb);
+  }
+
+  // Content
+  const ct = document.createElement("div");
+  ct.className = "win-content";
+  ct.innerHTML = CONTENTS[cfg.id]?.() || "";
+  el.appendChild(ct);
+
+  // Status bar
+  if (cfg.status) {
+    const sb = document.createElement("div");
+    sb.className = "win-status";
+    sb.id = "sb-" + cfg.id;
+    let txt = cfg.id==="portfolio" ? `${CFG.portfolio.length} project(s)` : cfg.id==="services" ? `${CFG.services.length} service(s)` : "Ready";
+    sb.innerHTML = `<span class="status-cell">${txt}</span>`;
+    el.appendChild(sb);
+  }
+
+  // Resize handle
+  if (!cfg.system) {
+    const rh = document.createElement("div");
+    rh.className = "resize-handle";
+    rh.addEventListener("pointerdown", e => {
+      const sw = S.wins[cfg.id];
+      resizeSt = { id: cfg.id, sx: e.clientX, sy: e.clientY, sw: sw.w, sh: sw.h };
+      rh.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    el.appendChild(rh);
+  }
+
+  el.addEventListener("pointerdown", () => { if (!S.wins[cfg.id].active) focus(cfg.id); });
+  return el;
+}
+
+// ── DRAG & RESIZE ────────────────────────────────────────────────────────
+let dragSt = null, resizeSt = null;
+
+document.addEventListener("pointermove", e => {
+  const area = document.getElementById("desktop-area");
+  if (!area) return;
+  const r = area.getBoundingClientRect();
+  if (dragSt) {
+    const { id, ox, oy } = dragSt, s = S.wins[id];
+    S.wins[id].x = Math.max(0, Math.min(e.clientX - r.left - ox, r.width - s.w));
+    S.wins[id].y = Math.max(0, Math.min(e.clientY - r.top  - oy, r.height - s.h));
+    updateWin(id);
+  }
+  if (resizeSt) {
+    const { id, sx, sy, sw, sh } = resizeSt;
+    S.wins[id].w = Math.max(200, sw + e.clientX - sx);
+    S.wins[id].h = Math.max(150, sh + e.clientY - sy);
+    updateWin(id);
+  }
+});
+document.addEventListener("pointerup",     () => { dragSt = null; resizeSt = null; });
+document.addEventListener("pointercancel", () => { dragSt = null; resizeSt = null; });
+
+// ── DESKTOP ICONS ────────────────────────────────────────────────────────
+const D_ICONS = [
+  { ico:"🖥️", lbl:"My Computer",       fn:() => openWin("computer") },
+  { ico:"📁", lbl:"Portfolio",          fn:() => openWin("portfolio") },
+  { ico:"✉️", lbl:"Contact",           fn:() => openWin("contact") },
+  { ico:"📝", lbl:"Notepad",           fn:() => openWin("notepad") },
+  { ico:"🗑️", lbl:"Recycle Bin",       fn:() => showError("Cannot empty Recycle Bin.<br>Access is denied.") },
+  { ico:"🌐", lbl:"Internet Explorer", fn:() => showError("IEXPLORE.EXE has performed an illegal operation<br>and will be shut down.") },
+];
+
+function selIco(lbl) {
+  S.selIco = lbl;
+  document.querySelectorAll(".d-icon").forEach(el => {
+    const l = el.dataset.lbl, sel = l === lbl;
+    el.style.background = sel ? "rgba(0,0,128,.35)" : "transparent";
+    el.style.outline = sel ? "1px dotted rgba(255,255,255,.7)" : "none";
+    const span = el.querySelector(".d-icon-lbl");
+    if (span) { span.style.background = sel ? "#000080" : "transparent"; span.style.color = sel ? "#fff" : "#fff"; }
+  });
+}
+
+function selCmp(lbl) {
+  S.selCmp = lbl;
+  document.querySelectorAll("[data-cmp]").forEach(el => {
+    const l = el.dataset.cmp, sel = l === lbl;
+    el.style.background = sel ? "rgba(0,0,128,.35)" : "transparent";
+    el.style.outline = sel ? "1px dotted rgba(0,0,128,.6)" : "none";
+    const span = el.querySelector(".cmp-lbl");
+    if (span) { span.style.background = sel ? "#000080" : "transparent"; span.style.color = sel ? "#fff" : "#000"; }
+  });
+}
+
+function buildDesktopIcons() {
+  const wrap = document.getElementById("desktop-icons");
+  D_ICONS.forEach(({ ico, lbl, fn }) => {
+    const el = document.createElement("div");
+    el.className = "d-icon"; el.dataset.lbl = lbl;
+    el.setAttribute("role", "button"); el.setAttribute("tabindex", "0"); el.setAttribute("aria-label", lbl);
+    el.innerHTML = `<span style="font-size:28px">${ico}</span><span class="d-icon-lbl">${lbl}</span>`;
+    el.addEventListener("click", e => { e.stopPropagation(); S.menuOpen=false; updateStartMenu(); selIco(lbl); });
+    el.addEventListener("dblclick", () => { S.menuOpen=false; updateStartMenu(); fn(); selIco(null); });
+    el.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fn(); selIco(null); } });
+    wrap.appendChild(el);
+  });
+}
+
+// ── START MENU ───────────────────────────────────────────────────────────
+const SM_ITEMS = [
+  { ico:"📁", lbl:"Programs",   arrow:true },
+  { ico:"📄", lbl:"Documents",  arrow:true },
+  { ico:"⚙️", lbl:"Settings",  arrow:true },
+  { ico:"🔍", lbl:"Find",       arrow:true },
+  { ico:"❓", lbl:"Help" },
+  { ico:"📂", lbl:"Run…" },
+  { sep:true },
+  { ico:"🔌", lbl:"Shut Down…" },
+];
+const SM_ACTIONS = {
+  Programs:    () => openWin("portfolio"),
+  Documents:   () => openWin("notepad"),
+  Settings:    () => openWin("about"),
+  Find:        () => showError("Find: feature not available<br>in this version."),
+  Help:        () => openWin("about"),
+  "Run…":      () => showError("The name specified is not recognized<br>as a program or command."),
+  "Shut Down…":() => showError("Access is denied.<br>You cannot shut down this computer."),
+};
+
+function buildStartMenu() {
+  const wrap = document.getElementById("sm-items");
+  SM_ITEMS.forEach(item => {
+    if (item.sep) {
+      const d = document.createElement("div");
+      d.style.cssText = "margin:2px 4px;border-top:1px solid #808080;border-bottom:1px solid #dfdfdf";
+      wrap.appendChild(d); return;
+    }
+    const el = document.createElement("div");
+    el.setAttribute("role","menuitem"); el.setAttribute("tabindex","0");
+    el.style.cssText = "display:flex;align-items:center;height:26px;padding:0 4px;gap:4px;cursor:default";
+    el.innerHTML = `<span style="width:20px;font-size:14px;text-align:center;flex-shrink:0">${item.ico}</span><span style="flex:1;font-size:12px">${item.lbl}</span>${item.arrow?`<span style="font-size:8px">▶</span>`:""}`;
+    el.addEventListener("pointerenter", () => { el.style.background="#000080"; el.style.color="#fff"; });
+    el.addEventListener("pointerleave", () => { el.style.background=""; el.style.color=""; });
+    el.addEventListener("click", () => { SM_ACTIONS[item.lbl]?.(); S.menuOpen=false; updateStartMenu(); updateTaskbar(); });
+    el.addEventListener("keydown", e => { if(e.key==="Enter"){ SM_ACTIONS[item.lbl]?.(); S.menuOpen=false; updateStartMenu(); } });
+    wrap.appendChild(el);
+  });
+}
+
+// ── CONTACT FORM ─────────────────────────────────────────────────────────
+function bindContactForm() {
+  const form = document.getElementById("c-form");
+  const clearBtn = document.getElementById("c-clear");
+  if (!form || form._bound) return;
+  form._bound = true;
+  clearBtn?.addEventListener("click", () => {
+    document.getElementById("c-name").value = "";
+    document.getElementById("c-email").value = "";
+    document.getElementById("c-msg").value = "";
+  });
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const name  = document.getElementById("c-name")?.value.trim()  || "";
+    const email = document.getElementById("c-email")?.value.trim() || "";
+    const msg   = document.getElementById("c-msg")?.value.trim()   || "";
+    if (!name || !email || !msg) { showError("All fields are required.<br>Please fill in Name, E-mail and Message."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("The e-mail address entered is not valid.<br>Please check and try again."); return; }
+    const subj = encodeURIComponent(`Portfolio contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
+    location.href = `mailto:${CFG.contactEmail}?subject=${subj}&body=${body}`;
+    const sb = document.querySelector("#sb-contact .status-cell");
+    if (sb) sb.textContent = "Opening email client…";
+    document.getElementById("c-name").value = "";
+    document.getElementById("c-email").value = "";
+    document.getElementById("c-msg").value = "";
+    if (statusTimer) clearTimeout(statusTimer);
+    statusTimer = setTimeout(() => { const s=document.querySelector("#sb-contact .status-cell"); if(s) s.textContent="Ready"; }, 3000);
+  });
+}
+
+// ── CLOCK ────────────────────────────────────────────────────────────────
+function startClock() {
+  const tick = () => {
+    const el = document.getElementById("clock"); if (!el) return;
+    const d = new Date();
+    el.textContent = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  };
+  tick(); setInterval(tick, 1000);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────
+function init() {
+  document.getElementById("desktop").style.background = CFG.desktopColor;
+  if (!CFG.showCrt) document.getElementById("crt-overlay").style.display = "none";
+
+  buildDesktopIcons();
+  buildStartMenu();
+
+  const area = document.getElementById("desktop-area");
+  WINS.forEach(cfg => {
+    const el = buildWin(cfg);
+    area.appendChild(el);
+    wEls[cfg.id] = el;
+    updateWin(cfg.id);
+  });
+
+  const startBtn = document.getElementById("start-btn");
+  startBtn.addEventListener("click", e => {
+    e.stopPropagation(); selIco(null);
+    if (CFG.enableSounds && !S.menuOpen) SFX.menu();
+    S.menuOpen = !S.menuOpen;
+    updateStartMenu(); updateTaskbar();
+  });
+
+  document.getElementById("desktop").addEventListener("click", () => {
+    S.menuOpen = false; updateStartMenu(); selIco(null); updateTaskbar();
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { S.menuOpen=false; updateStartMenu(); selIco(null); updateTaskbar(); }
+  });
+
+  new ResizeObserver(([entry]) => {
+    containerW = entry.contentRect.width;
+    containerH = entry.contentRect.height;
+    updateAllWins();
+  }).observe(document.getElementById("desktop"));
+
+  startClock();
+  updateTaskbar();
+  setTimeout(bindContactForm, 100);
+}
+
+// expose for inline handlers
+window.openWin  = openWin;
+window.closeWin = closeWin;
+window.showError = showError;
+window.selCmp   = selCmp;
+
+init();
+</script>
 </body>
 </html>
