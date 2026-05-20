@@ -58,13 +58,112 @@ body{font-family:Arial,Helvetica,sans-serif;font-size:11px;overflow:hidden;user-
   </div>
 </div>
 <script>
+// ── LANGUAGE ─────────────────────────────────────────────────────────────
+const lang = localStorage.getItem("ml_lang") || "es";
+
+// ── TRANSLATIONS ─────────────────────────────────────────────────────────
+const T = {
+  es: {
+    winTitles: { notepad:"Bloc de notas", computer:"Mi PC", services:"Servicios", contact:"Contacto", portfolio:"Portafolio", about:"Sobre mí", error:"Error del sistema" },
+    winMenus:  { notepad:["Archivo","Editar","Formato","Ayuda"], computer:["Archivo","Editar","Ver"], services:["Archivo","Ver","Ayuda"], contact:["Archivo","Editar","Ayuda"], portfolio:["Archivo","Ver","Ayuda"], about:["Archivo","Editar","Ver","Ayuda"] },
+    dIcons:    ["Mi PC","Portafolio","Contacto","Bloc de notas","Papelera de reciclaje","Internet Explorer"],
+    sm:        [
+      { ico:"📁", lbl:"Programas",    key:"Programs",    arrow:true },
+      { ico:"📄", lbl:"Documentos",   key:"Documents",   arrow:true },
+      { ico:"⚙️", lbl:"Configuración",key:"Settings",    arrow:true },
+      { ico:"🔍", lbl:"Buscar",       key:"Find",        arrow:true },
+      { ico:"❓", lbl:"Ayuda",        key:"Help" },
+      { ico:"📂", lbl:"Ejecutar…",    key:"Run…" },
+      { sep:true },
+      { ico:"🔌", lbl:"Apagar…",      key:"Shut Down…" },
+    ],
+    skills:       "Habilidades",
+    portfolioBtn: "Portafolio",
+    contactBtn:   "Contáctame",
+    viewBtn:      "Ver →",
+    nameLbl:  "Nombre:", emailLbl: "Correo:", msgLbl: "Mensaje:",
+    namePh:   "Tu nombre", emailPh: "tu@ejemplo.com", msgPh: "Escribe tu mensaje…",
+    sendsTo:  "Enviará a:",
+    sendBtn:  "Enviar", clearBtn: "Limpiar",
+    ready:    "Listo",
+    opening:  "Abriendo cliente de correo…",
+    projects: n => `${n} proyecto(s)`,
+    services: n => `${n} servicio(s)`,
+    objects:  "6 objeto(s)",
+    cmpItems: [["📁","Documentos"],["📁","Descargas"],["💾","Disquete (A:)"],["💿","CD-ROM (D:)"],["🖨️","Impresoras"],["🌐","Red"]],
+    cmpErrs: {
+      "Documentos":    "Acceso denegado.<br>No tienes permiso para acceder a esta carpeta.",
+      "Descargas":     "La carpeta Descargas está vacía.<br>No se encontraron archivos.",
+      "Disquete (A:)": "No se puede acceder a A:.<br>El dispositivo no está listo.",
+      "CD-ROM (D:)":   "El disco en D: no está formateado.<br>¿Deseas formatearlo ahora?",
+      "Impresoras":    "No hay impresoras instaladas.<br>Contacta al administrador del sistema.",
+      "Red":           "No hay recursos de red disponibles.<br>No se encontró la ruta de red.",
+    },
+    errRecycle:  "No se puede vaciar la Papelera de reciclaje.<br>Acceso denegado.",
+    errIE:       "IEXPLORE.EXE ha realizado una operación ilegal<br>y se cerrará.",
+    errFind:     "Buscar: función no disponible<br>en esta versión.",
+    errRun:      "El nombre especificado no se reconoce<br>como un programa o comando.",
+    errShutdown: "Acceso denegado.<br>No puedes apagar este equipo.",
+    errRequired: "Todos los campos son obligatorios.<br>Por favor completa Nombre, Correo y Mensaje.",
+    errEmail:    "La dirección de correo no es válida.<br>Por favor verifica e intenta de nuevo.",
+    defaultBio:  "¡Hola! Soy desarrollador y diseñador.\n\nConstruyo experiencias web limpias, rápidas y accesibles.\n\n— Reemplaza este texto con tu propia historia.",
+  },
+  en: {
+    winTitles: { notepad:"Notepad", computer:"My Computer", services:"Services", contact:"Contact", portfolio:"Portfolio", about:"About Me", error:"System Error" },
+    winMenus:  { notepad:["File","Edit","Format","Help"], computer:["File","Edit","View"], services:["File","View","Help"], contact:["File","Edit","Help"], portfolio:["File","View","Help"], about:["File","Edit","View","Help"] },
+    dIcons:    ["My Computer","Portfolio","Contact","Notepad","Recycle Bin","Internet Explorer"],
+    sm:        [
+      { ico:"📁", lbl:"Programs",   key:"Programs",    arrow:true },
+      { ico:"📄", lbl:"Documents",  key:"Documents",   arrow:true },
+      { ico:"⚙️", lbl:"Settings",  key:"Settings",    arrow:true },
+      { ico:"🔍", lbl:"Find",       key:"Find",        arrow:true },
+      { ico:"❓", lbl:"Help",       key:"Help" },
+      { ico:"📂", lbl:"Run…",       key:"Run…" },
+      { sep:true },
+      { ico:"🔌", lbl:"Shut Down…", key:"Shut Down…" },
+    ],
+    skills:       "Skills",
+    portfolioBtn: "Portfolio",
+    contactBtn:   "Contact Me",
+    viewBtn:      "View →",
+    nameLbl:  "Name:", emailLbl: "E-mail:", msgLbl: "Message:",
+    namePh:   "Your name", emailPh: "you@example.com", msgPh: "Type your message…",
+    sendsTo:  "Sends to:",
+    sendBtn:  "Send", clearBtn: "Clear",
+    ready:    "Ready",
+    opening:  "Opening email client…",
+    projects: n => `${n} project(s)`,
+    services: n => `${n} service(s)`,
+    objects:  "6 object(s)",
+    cmpItems: [["📁","Documents"],["📁","Downloads"],["💾","Floppy (A:)"],["💿","CD-ROM (D:)"],["🖨️","Printers"],["🌐","Network"]],
+    cmpErrs: {
+      "Documents":   "Access is denied.<br>You do not have permission to access this folder.",
+      "Downloads":   "Downloads folder is empty.<br>No files found.",
+      "Floppy (A:)": "A: is not accessible.<br>The device is not ready.",
+      "CD-ROM (D:)": "The disc in drive D: is not formatted.<br>Do you want to format it now?",
+      "Printers":    "No printers installed.<br>Please contact your system administrator.",
+      "Network":     "No network resources available.<br>The network path was not found.",
+    },
+    errRecycle:  "Cannot empty Recycle Bin.<br>Access is denied.",
+    errIE:       "IEXPLORE.EXE has performed an illegal operation<br>and will be shut down.",
+    errFind:     "Find: feature not available<br>in this version.",
+    errRun:      "The name specified is not recognized<br>as a program or command.",
+    errShutdown: "Access is denied.<br>You cannot shut down this computer.",
+    errRequired: "All fields are required.<br>Please fill in Name, E-mail and Message.",
+    errEmail:    "The e-mail address entered is not valid.<br>Please check and try again.",
+    defaultBio:  "Hello! I'm a developer & designer.\n\nI build clean, fast, and accessible web experiences.\n\n— Replace this text with your own story.",
+  },
+};
+
+const t = T[lang] || T.es;
+
 // ── CONFIG ── edit to customize ──────────────────────────────────────────
 const CFG = {
   userName:     "Your Name",
   userTitle:    "Developer & Designer",
   tagline:      "Available for freelance",
   userCity:     "Your City",
-  userBio:      "Hello! I'm a developer & designer.\n\nI build clean, fast, and accessible web experiences.\n\n— Replace this text with your own story.",
+  userBio:      t.defaultBio,
   avatarEmoji:  "👤",
   skills:       "React · TypeScript · Figma",
   githubUrl:    "",
@@ -100,30 +199,30 @@ function getCtx() {
     return _ctx;
   } catch { return null; }
 }
-function tone(ac, freq, t, dur, type="square", vol=0.07) {
+function tone(ac, freq, t2, dur, type="square", vol=0.07) {
   const o = ac.createOscillator(), g = ac.createGain();
   o.connect(g); g.connect(ac.destination);
-  o.type = type; o.frequency.setValueAtTime(freq, t);
-  g.gain.setValueAtTime(vol, t);
-  g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-  o.start(t); o.stop(t + dur + 0.01);
+  o.type = type; o.frequency.setValueAtTime(freq, t2);
+  g.gain.setValueAtTime(vol, t2);
+  g.gain.exponentialRampToValueAtTime(0.001, t2 + dur);
+  o.start(t2); o.stop(t2 + dur + 0.01);
 }
 const SFX = {
-  open()  { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,523.25,t,.12); tone(ac,659.25,t+.08,.18); },
-  close() { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,440,t,.1,"square",.06); tone(ac,330,t+.06,.14,"square",.06); },
-  error() { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,493.88,t,.35,"sine",.09); tone(ac,369.99,t+.04,.35,"sine",.06); },
-  menu()  { const ac=getCtx(); if(!ac) return; const t=ac.currentTime; tone(ac,880,t,.05,"square",.04); tone(ac,1100,t+.04,.07,"square",.04); },
+  open()  { const ac=getCtx(); if(!ac) return; const t2=ac.currentTime; tone(ac,523.25,t2,.12); tone(ac,659.25,t2+.08,.18); },
+  close() { const ac=getCtx(); if(!ac) return; const t2=ac.currentTime; tone(ac,440,t2,.1,"square",.06); tone(ac,330,t2+.06,.14,"square",.06); },
+  error() { const ac=getCtx(); if(!ac) return; const t2=ac.currentTime; tone(ac,493.88,t2,.35,"sine",.09); tone(ac,369.99,t2+.04,.35,"sine",.06); },
+  menu()  { const ac=getCtx(); if(!ac) return; const t2=ac.currentTime; tone(ac,880,t2,.05,"square",.04); tone(ac,1100,t2+.04,.07,"square",.04); },
 };
 
 // ── WINDOW DEFINITIONS ───────────────────────────────────────────────────
 const WINS = [
-  { id:"notepad",   title:"Notepad",      icon:"📝", ix:220, iy:230, iw:400, ih:250, menu:["File","Edit","Format","Help"] },
-  { id:"computer",  title:"My Computer",  icon:"🖥️", ix:530, iy:170, iw:330, ih:250, menu:["File","Edit","View"],        status:true },
-  { id:"services",  title:"Services",     icon:"🛠️", ix:410, iy: 24, iw:360, ih:280, menu:["File","View","Help"],        status:true },
-  { id:"contact",   title:"Contact",      icon:"✉️", ix:490, iy: 55, iw:330, ih:320, menu:["File","Edit","Help"],        status:true },
-  { id:"portfolio", title:"Portfolio",    icon:"📁", ix: 24, iy:190, iw:540, ih:250, menu:["File","View","Help"],        status:true },
-  { id:"about",     title:"About Me",     icon:"👤", ix: 24, iy: 24, iw:370, ih:310, menu:["File","Edit","View","Help"], status:true },
-  { id:"error",     title:"System Error", icon:"⚠️", ix:280, iy:225, iw:320, ih:150, system:true },
+  { id:"notepad",   ix:220, iy:230, iw:400, ih:250 },
+  { id:"computer",  ix:530, iy:170, iw:330, ih:250, status:true },
+  { id:"services",  ix:410, iy: 24, iw:360, ih:280, status:true },
+  { id:"contact",   ix:490, iy: 55, iw:330, ih:320, status:true },
+  { id:"portfolio", ix: 24, iy:190, iw:540, ih:250, status:true },
+  { id:"about",     ix: 24, iy: 24, iw:370, ih:310, status:true },
+  { id:"error",     ix:280, iy:225, iw:320, ih:150, system:true },
 ];
 
 function mkState() {
@@ -144,11 +243,10 @@ let statusTimer = null;
 let containerW = window.innerWidth, containerH = window.innerHeight;
 const wEls = {};
 
-// ── HELPERS ──────────────────────────────────────────────────────────────
 const getCfg = id => WINS.find(w => w.id === id);
 const compact = () => containerW < 560;
 
-// ── Z / FOCUS ────────────────────────────────────────────────────────────
+// ── FOCUS / Z-ORDER ──────────────────────────────────────────────────────
 function focus(id) {
   if (id === "error" && !S.wins[id].active && CFG.enableSounds) SFX.error();
   const entries = Object.entries(S.wins).sort((a,b) => a[1].z - b[1].z);
@@ -221,7 +319,7 @@ function updateWin(id) {
   if (!s.visible || s.mini || (cp && !s.active)) { el.style.display="none"; return; }
   el.style.display = "flex";
 
-  if (forceMaxi) { el.style.cssText += ";top:0;left:0;width:100%;height:100%"; }
+  if (forceMaxi) { el.style.top="0"; el.style.left="0"; el.style.width="100%"; el.style.height="100%"; }
   else { el.style.top=s.y+"px"; el.style.left=s.x+"px"; el.style.width=s.w+"px"; el.style.height=s.h+"px"; }
   el.style.zIndex = s.z;
 
@@ -247,7 +345,8 @@ function updateTaskbar() {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.style.cssText = `height:24px;padding:0 6px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;text-align:left;background:${active?"#a0a0a0":"#c0c0c0"};font-family:inherit;cursor:default;color:#000;${active?"border-top:2px solid #808080;border-left:2px solid #808080;border-right:2px solid #dfdfdf;border-bottom:2px solid #dfdfdf":"border-top:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #404040;border-bottom:2px solid #404040;box-shadow:inset 1px 1px 0 #dfdfdf,inset -1px -1px 0 #808080"}`;
-    btn.textContent = `${cfg.icon} ${cfg.title}`;
+    const icon = { notepad:"📝", computer:"🖥️", services:"🛠️", contact:"✉️", portfolio:"📁", about:"👤" };
+    btn.textContent = `${icon[cfg.id]} ${t.winTitles[cfg.id]}`;
     btn.addEventListener("click", () => taskClick(cfg.id));
     tb.appendChild(btn);
   });
@@ -285,31 +384,22 @@ function contentAbout() {
       </div>
     </div>
     <hr style="border:none;border-top:1px solid #808080;margin:8px 0">
-    ${CFG.skills?`<div style="margin-bottom:8px"><h4 style="font-size:10px;font-weight:bold;color:#4a4a4a;margin:0 0 3px;text-transform:uppercase;letter-spacing:1px;font-family:${F}">Skills</h4><p style="font-size:11px;color:#000;margin:0;line-height:1.6">${CFG.skills}</p></div>`:""}
+    ${CFG.skills?`<div style="margin-bottom:8px"><h4 style="font-size:10px;font-weight:bold;color:#4a4a4a;margin:0 0 3px;text-transform:uppercase;letter-spacing:1px;font-family:${F}">${t.skills}</h4><p style="font-size:11px;color:#000;margin:0;line-height:1.6">${CFG.skills}</p></div>`:""}
     <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${socials}</div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:4px">
-      <button type="button" class="w95-btn" onclick="openWin('portfolio')">Portfolio</button>
-      <button type="button" class="w95-btn" onclick="openWin('contact')">Contact Me</button>
+      <button type="button" class="w95-btn" onclick="openWin('portfolio')">${t.portfolioBtn}</button>
+      <button type="button" class="w95-btn" onclick="openWin('contact')">${t.contactBtn}</button>
     </div>
   </div>`;
 }
 
 function contentComputer() {
-  const ERRS = {
-    "Documents":"Access is denied.<br>You do not have permission to access this folder.",
-    "Downloads":"Downloads folder is empty.<br>No files found.",
-    "Floppy (A:)":"A: is not accessible.<br>The device is not ready.",
-    "CD-ROM (D:)":"The disc in drive D: is not formatted.<br>Do you want to format it now?",
-    "Printers":"No printers installed.<br>Please contact your system administrator.",
-    "Network":"No network resources available.<br>The network path was not found.",
-  };
-  const items = [["📁","Documents"],["📁","Downloads"],["💾","Floppy (A:)"],["💿","CD-ROM (D:)"],["🖨️","Printers"],["🌐","Network"]];
   return `<div style="padding:4px;overflow:auto;flex:1" onclick="selCmp(null)">
     <div style="display:flex;flex-wrap:wrap;gap:16px;padding:8px">
-    ${items.map(([ico,lbl])=>`<div role="button" tabindex="0" aria-label="${lbl}" data-cmp="${lbl}"
+    ${t.cmpItems.map(([ico,lbl])=>`<div role="button" tabindex="0" aria-label="${lbl}" data-cmp="${lbl}"
       style="display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;padding:4px 2px;cursor:default"
       onclick="event.stopPropagation();selCmp('${lbl}')"
-      ondblclick="event.stopPropagation();selCmp(null);showError('${ERRS[lbl].replace(/'/g,"\\'")}')">
+      ondblclick="event.stopPropagation();selCmp(null);showError('${(t.cmpErrs[lbl]||"").replace(/'/g,"\\'")}')">
       <span style="font-size:32px">${ico}</span>
       <span class="cmp-lbl" style="font-size:11px;text-align:center;font-family:${CFG.fontFamily};padding:0 2px">${lbl}</span>
     </div>`).join("")}
@@ -321,21 +411,21 @@ function contentContact() {
   const F = CFG.fontFamily;
   return `<form id="c-form" style="padding:8px;display:flex;flex-direction:column;gap:8px;flex:1">
     <div style="display:flex;flex-direction:column;gap:2px">
-      <label for="c-name" style="font-size:11px;font-weight:bold;font-family:${F}">Name:</label>
-      <input id="c-name" type="text" placeholder="Your name" autocomplete="off" class="w95-input" style="width:100%">
+      <label for="c-name" style="font-size:11px;font-weight:bold;font-family:${F}">${t.nameLbl}</label>
+      <input id="c-name" type="text" placeholder="${t.namePh}" autocomplete="off" class="w95-input" style="width:100%">
     </div>
     <div style="display:flex;flex-direction:column;gap:2px">
-      <label for="c-email" style="font-size:11px;font-weight:bold;font-family:${F}">E-mail:</label>
-      <input id="c-email" type="email" placeholder="you@example.com" autocomplete="off" class="w95-input" style="width:100%">
+      <label for="c-email" style="font-size:11px;font-weight:bold;font-family:${F}">${t.emailLbl}</label>
+      <input id="c-email" type="email" placeholder="${t.emailPh}" autocomplete="off" class="w95-input" style="width:100%">
     </div>
     <div style="display:flex;flex-direction:column;gap:2px">
-      <label for="c-msg" style="font-size:11px;font-weight:bold;font-family:${F}">Message:</label>
-      <textarea id="c-msg" placeholder="Type your message…" class="w95-input" style="width:100%;height:70px;resize:none"></textarea>
+      <label for="c-msg" style="font-size:11px;font-weight:bold;font-family:${F}">${t.msgLbl}</label>
+      <textarea id="c-msg" placeholder="${t.msgPh}" class="w95-input" style="width:100%;height:70px;resize:none"></textarea>
     </div>
-    <p style="font-size:10px;color:#4a4a4a;font-family:${F};margin:0">Sends to: ${CFG.contactEmail}</p>
+    <p style="font-size:10px;color:#4a4a4a;font-family:${F};margin:0">${t.sendsTo} ${CFG.contactEmail}</p>
     <div style="display:flex;gap:8px;justify-content:flex-end">
-      <button type="submit" class="w95-btn">Send</button>
-      <button type="button" class="w95-btn" id="c-clear">Clear</button>
+      <button type="submit" class="w95-btn">${t.sendBtn}</button>
+      <button type="button" class="w95-btn" id="c-clear">${t.clearBtn}</button>
     </div>
   </form>`;
 }
@@ -350,7 +440,7 @@ function contentPortfolio() {
         <p style="font-size:11px;color:#4a4a4a;line-height:1.4;flex:1;font-family:${CFG.fontFamily};margin:0">${p.desc}</p>
         <a href="${p.url&&p.url!="#"?p.url:""}" ${p.url&&p.url!="#"?'target="_blank" rel="noreferrer"':''}
           class="w95-btn" style="margin-top:4px;text-decoration:none;opacity:${!p.url||p.url=="#"?.5:1};cursor:${!p.url||p.url=="#"?"default":"pointer"};align-self:flex-start"
-          ${!p.url||p.url=="#"?'onclick="return false"':''}>View →</a>
+          ${!p.url||p.url=="#"?'onclick="return false"':''}>${t.viewBtn}</a>
       </div>
     </div>`).join("")}
     </div>
@@ -370,7 +460,7 @@ function contentServices() {
 }
 
 function contentNotepad() {
-  return `<textarea aria-label="Notepad" spellcheck="false" style="flex:1;width:100%;padding:4px;font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.6;background:#fff;color:#000;border:none;outline:none;resize:none;cursor:text;user-select:text;-webkit-user-select:text">${CFG.userBio}</textarea>`;
+  return `<textarea aria-label="${t.winTitles.notepad}" spellcheck="false" style="flex:1;width:100%;padding:4px;font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.6;background:#fff;color:#000;border:none;outline:none;resize:none;cursor:text;user-select:text;-webkit-user-select:text">${CFG.userBio}</textarea>`;
 }
 
 function contentError() {
@@ -393,19 +483,20 @@ function buildWin(cfg) {
   const el = document.createElement("div");
   el.id = "win-" + cfg.id;
   el.className = "win";
-  el.setAttribute("role", "dialog");
+  el.setAttribute("role","dialog");
 
-  // Title bar
   const tb = document.createElement("div");
   tb.className = "win-tb";
   tb.style.background = s.active ? "#000080" : "#6e6e6e";
+  const icons = { notepad:"📝", computer:"🖥️", services:"🛠️", contact:"✉️", portfolio:"📁", about:"👤", error:"⚠️" };
+  const menu = t.winMenus[cfg.id];
   tb.innerHTML = `
-    <span style="font-size:13px;width:16px;flex-shrink:0">${cfg.icon}</span>
-    <h2 style="flex:1;font-size:11px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;color:inherit;font-family:Arial,Helvetica,sans-serif">${cfg.id==="about"?"About Me":cfg.title}</h2>
+    <span style="font-size:13px;width:16px;flex-shrink:0">${icons[cfg.id]}</span>
+    <h2 style="flex:1;font-size:11px;font-weight:bold;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0;color:inherit;font-family:Arial,Helvetica,sans-serif">${t.winTitles[cfg.id]}</h2>
     <div style="display:flex;gap:2px">
-      ${!cfg.system?`<button type="button" class="win-ctrl" data-min aria-label="Minimize">_</button>`:""}
-      ${!cfg.system?`<button type="button" class="win-ctrl" data-max aria-label="Maximize">□</button>`:""}
-      <button type="button" class="win-ctrl win-ctrl-close" data-close aria-label="Close">✕</button>
+      ${!cfg.system?`<button type="button" class="win-ctrl" data-min aria-label="–">_</button>`:""}
+      ${!cfg.system?`<button type="button" class="win-ctrl" data-max aria-label="□">□</button>`:""}
+      <button type="button" class="win-ctrl win-ctrl-close" data-close aria-label="✕">✕</button>
     </div>`;
 
   tb.querySelector("[data-close]").addEventListener("click", () => closeWin(cfg.id));
@@ -417,9 +508,8 @@ function buildWin(cfg) {
     if (compact() || S.wins[cfg.id].maxi) return;
     const area = document.getElementById("desktop-area").getBoundingClientRect();
     const sw = S.wins[cfg.id];
-    dragSt = { id: cfg.id, ox: e.clientX - area.left - sw.x, oy: e.clientY - area.top - sw.y };
-    tb.setPointerCapture(e.pointerId);
-    e.preventDefault();
+    dragSt = { id:cfg.id, ox:e.clientX-area.left-sw.x, oy:e.clientY-area.top-sw.y };
+    tb.setPointerCapture(e.pointerId); e.preventDefault();
   });
   tb.addEventListener("dblclick", e => {
     if (e.target.closest("[data-min],[data-max],[data-close]")) return;
@@ -427,39 +517,33 @@ function buildWin(cfg) {
   });
   el.appendChild(tb);
 
-  // Menu bar
-  if (cfg.menu) {
+  if (menu) {
     const mb = document.createElement("div");
     mb.className = "win-menu";
-    mb.innerHTML = cfg.menu.map(m => `<button type="button">${m}</button>`).join("");
+    mb.innerHTML = menu.map(m=>`<button type="button">${m}</button>`).join("");
     el.appendChild(mb);
   }
 
-  // Content
   const ct = document.createElement("div");
   ct.className = "win-content";
   ct.innerHTML = CONTENTS[cfg.id]?.() || "";
   el.appendChild(ct);
 
-  // Status bar
   if (cfg.status) {
     const sb = document.createElement("div");
-    sb.className = "win-status";
-    sb.id = "sb-" + cfg.id;
-    let txt = cfg.id==="portfolio" ? `${CFG.portfolio.length} project(s)` : cfg.id==="services" ? `${CFG.services.length} service(s)` : "Ready";
+    sb.className = "win-status"; sb.id = "sb-"+cfg.id;
+    const txt = cfg.id==="portfolio" ? t.projects(CFG.portfolio.length) : cfg.id==="services" ? t.services(CFG.services.length) : cfg.id==="computer" ? t.objects : t.ready;
     sb.innerHTML = `<span class="status-cell">${txt}</span>`;
     el.appendChild(sb);
   }
 
-  // Resize handle
   if (!cfg.system) {
     const rh = document.createElement("div");
     rh.className = "resize-handle";
     rh.addEventListener("pointerdown", e => {
       const sw = S.wins[cfg.id];
-      resizeSt = { id: cfg.id, sx: e.clientX, sy: e.clientY, sw: sw.w, sh: sw.h };
-      rh.setPointerCapture(e.pointerId);
-      e.preventDefault();
+      resizeSt = { id:cfg.id, sx:e.clientX, sy:e.clientY, sw:sw.w, sh:sw.h };
+      rh.setPointerCapture(e.pointerId); e.preventDefault();
     });
     el.appendChild(rh);
   }
@@ -477,103 +561,95 @@ document.addEventListener("pointermove", e => {
   const r = area.getBoundingClientRect();
   if (dragSt) {
     const { id, ox, oy } = dragSt, s = S.wins[id];
-    S.wins[id].x = Math.max(0, Math.min(e.clientX - r.left - ox, r.width - s.w));
-    S.wins[id].y = Math.max(0, Math.min(e.clientY - r.top  - oy, r.height - s.h));
+    S.wins[id].x = Math.max(0, Math.min(e.clientX-r.left-ox, r.width-s.w));
+    S.wins[id].y = Math.max(0, Math.min(e.clientY-r.top-oy,  r.height-s.h));
     updateWin(id);
   }
   if (resizeSt) {
     const { id, sx, sy, sw, sh } = resizeSt;
-    S.wins[id].w = Math.max(200, sw + e.clientX - sx);
-    S.wins[id].h = Math.max(150, sh + e.clientY - sy);
+    S.wins[id].w = Math.max(200, sw+e.clientX-sx);
+    S.wins[id].h = Math.max(150, sh+e.clientY-sy);
     updateWin(id);
   }
 });
-document.addEventListener("pointerup",     () => { dragSt = null; resizeSt = null; });
-document.addEventListener("pointercancel", () => { dragSt = null; resizeSt = null; });
+document.addEventListener("pointerup",     () => { dragSt=null; resizeSt=null; });
+document.addEventListener("pointercancel", () => { dragSt=null; resizeSt=null; });
 
 // ── DESKTOP ICONS ────────────────────────────────────────────────────────
 const D_ICONS = [
-  { ico:"🖥️", lbl:"My Computer",       fn:() => openWin("computer") },
-  { ico:"📁", lbl:"Portfolio",          fn:() => openWin("portfolio") },
-  { ico:"✉️", lbl:"Contact",           fn:() => openWin("contact") },
-  { ico:"📝", lbl:"Notepad",           fn:() => openWin("notepad") },
-  { ico:"🗑️", lbl:"Recycle Bin",       fn:() => showError("Cannot empty Recycle Bin.<br>Access is denied.") },
-  { ico:"🌐", lbl:"Internet Explorer", fn:() => showError("IEXPLORE.EXE has performed an illegal operation<br>and will be shut down.") },
+  { ico:"🖥️", fn:()=>openWin("computer") },
+  { ico:"📁", fn:()=>openWin("portfolio") },
+  { ico:"✉️", fn:()=>openWin("contact") },
+  { ico:"📝", fn:()=>openWin("notepad") },
+  { ico:"🗑️", fn:()=>showError(t.errRecycle) },
+  { ico:"🌐", fn:()=>showError(t.errIE) },
 ];
 
 function selIco(lbl) {
   S.selIco = lbl;
   document.querySelectorAll(".d-icon").forEach(el => {
-    const l = el.dataset.lbl, sel = l === lbl;
+    const l = el.dataset.lbl, sel = l===lbl;
     el.style.background = sel ? "rgba(0,0,128,.35)" : "transparent";
-    el.style.outline = sel ? "1px dotted rgba(255,255,255,.7)" : "none";
+    el.style.outline    = sel ? "1px dotted rgba(255,255,255,.7)" : "none";
     const span = el.querySelector(".d-icon-lbl");
-    if (span) { span.style.background = sel ? "#000080" : "transparent"; span.style.color = sel ? "#fff" : "#fff"; }
+    if (span) { span.style.background=sel?"#000080":"transparent"; span.style.color="#fff"; }
   });
 }
 
 function selCmp(lbl) {
   S.selCmp = lbl;
   document.querySelectorAll("[data-cmp]").forEach(el => {
-    const l = el.dataset.cmp, sel = l === lbl;
+    const l = el.dataset.cmp, sel = l===lbl;
     el.style.background = sel ? "rgba(0,0,128,.35)" : "transparent";
-    el.style.outline = sel ? "1px dotted rgba(0,0,128,.6)" : "none";
+    el.style.outline    = sel ? "1px dotted rgba(0,0,128,.6)" : "none";
     const span = el.querySelector(".cmp-lbl");
-    if (span) { span.style.background = sel ? "#000080" : "transparent"; span.style.color = sel ? "#fff" : "#000"; }
+    if (span) { span.style.background=sel?"#000080":"transparent"; span.style.color=sel?"#fff":"#000"; }
   });
 }
 
 function buildDesktopIcons() {
   const wrap = document.getElementById("desktop-icons");
-  D_ICONS.forEach(({ ico, lbl, fn }) => {
+  D_ICONS.forEach(({ ico, fn }, i) => {
+    const lbl = t.dIcons[i];
     const el = document.createElement("div");
-    el.className = "d-icon"; el.dataset.lbl = lbl;
-    el.setAttribute("role", "button"); el.setAttribute("tabindex", "0"); el.setAttribute("aria-label", lbl);
-    el.innerHTML = `<span style="font-size:28px">${ico}</span><span class="d-icon-lbl">${lbl}</span>`;
-    el.addEventListener("click", e => { e.stopPropagation(); S.menuOpen=false; updateStartMenu(); selIco(lbl); });
-    el.addEventListener("dblclick", () => { S.menuOpen=false; updateStartMenu(); fn(); selIco(null); });
-    el.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); fn(); selIco(null); } });
+    el.className="d-icon"; el.dataset.lbl=lbl;
+    el.setAttribute("role","button"); el.setAttribute("tabindex","0"); el.setAttribute("aria-label",lbl);
+    el.innerHTML=`<span style="font-size:28px">${ico}</span><span class="d-icon-lbl">${lbl}</span>`;
+    el.addEventListener("click",  e=>{e.stopPropagation();S.menuOpen=false;updateStartMenu();selIco(lbl);});
+    el.addEventListener("dblclick",()=>{S.menuOpen=false;updateStartMenu();fn();selIco(null);});
+    el.addEventListener("keydown", e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fn();selIco(null);}});
     wrap.appendChild(el);
   });
 }
 
 // ── START MENU ───────────────────────────────────────────────────────────
-const SM_ITEMS = [
-  { ico:"📁", lbl:"Programs",   arrow:true },
-  { ico:"📄", lbl:"Documents",  arrow:true },
-  { ico:"⚙️", lbl:"Settings",  arrow:true },
-  { ico:"🔍", lbl:"Find",       arrow:true },
-  { ico:"❓", lbl:"Help" },
-  { ico:"📂", lbl:"Run…" },
-  { sep:true },
-  { ico:"🔌", lbl:"Shut Down…" },
-];
 const SM_ACTIONS = {
-  Programs:    () => openWin("portfolio"),
-  Documents:   () => openWin("notepad"),
-  Settings:    () => openWin("about"),
-  Find:        () => showError("Find: feature not available<br>in this version."),
-  Help:        () => openWin("about"),
-  "Run…":      () => showError("The name specified is not recognized<br>as a program or command."),
-  "Shut Down…":() => showError("Access is denied.<br>You cannot shut down this computer."),
+  Programs:    ()=>openWin("portfolio"),
+  Documents:   ()=>openWin("notepad"),
+  Settings:    ()=>openWin("about"),
+  Find:        ()=>showError(t.errFind),
+  Help:        ()=>openWin("about"),
+  "Run…":      ()=>showError(t.errRun),
+  "Shut Down…":()=>showError(t.errShutdown),
 };
 
 function buildStartMenu() {
   const wrap = document.getElementById("sm-items");
-  SM_ITEMS.forEach(item => {
+  t.sm.forEach(item => {
     if (item.sep) {
       const d = document.createElement("div");
-      d.style.cssText = "margin:2px 4px;border-top:1px solid #808080;border-bottom:1px solid #dfdfdf";
+      d.style.cssText="margin:2px 4px;border-top:1px solid #808080;border-bottom:1px solid #dfdfdf";
       wrap.appendChild(d); return;
     }
     const el = document.createElement("div");
     el.setAttribute("role","menuitem"); el.setAttribute("tabindex","0");
-    el.style.cssText = "display:flex;align-items:center;height:26px;padding:0 4px;gap:4px;cursor:default";
-    el.innerHTML = `<span style="width:20px;font-size:14px;text-align:center;flex-shrink:0">${item.ico}</span><span style="flex:1;font-size:12px">${item.lbl}</span>${item.arrow?`<span style="font-size:8px">▶</span>`:""}`;
-    el.addEventListener("pointerenter", () => { el.style.background="#000080"; el.style.color="#fff"; });
-    el.addEventListener("pointerleave", () => { el.style.background=""; el.style.color=""; });
-    el.addEventListener("click", () => { SM_ACTIONS[item.lbl]?.(); S.menuOpen=false; updateStartMenu(); updateTaskbar(); });
-    el.addEventListener("keydown", e => { if(e.key==="Enter"){ SM_ACTIONS[item.lbl]?.(); S.menuOpen=false; updateStartMenu(); } });
+    el.style.cssText="display:flex;align-items:center;height:26px;padding:0 4px;gap:4px;cursor:default";
+    el.innerHTML=`<span style="width:20px;font-size:14px;text-align:center;flex-shrink:0">${item.ico}</span><span style="flex:1;font-size:12px">${item.lbl}</span>${item.arrow?`<span style="font-size:8px">▶</span>`:""}`;
+    el.addEventListener("pointerenter",()=>{el.style.background="#000080";el.style.color="#fff";});
+    el.addEventListener("pointerleave",()=>{el.style.background="";el.style.color="";});
+    const act = ()=>{SM_ACTIONS[item.key]?.();S.menuOpen=false;updateStartMenu();updateTaskbar();};
+    el.addEventListener("click", act);
+    el.addEventListener("keydown",e=>{if(e.key==="Enter")act();});
     wrap.appendChild(el);
   });
 }
@@ -584,89 +660,86 @@ function bindContactForm() {
   const clearBtn = document.getElementById("c-clear");
   if (!form || form._bound) return;
   form._bound = true;
-  clearBtn?.addEventListener("click", () => {
-    document.getElementById("c-name").value = "";
-    document.getElementById("c-email").value = "";
-    document.getElementById("c-msg").value = "";
+  clearBtn?.addEventListener("click",()=>{
+    document.getElementById("c-name").value="";
+    document.getElementById("c-email").value="";
+    document.getElementById("c-msg").value="";
   });
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", e=>{
     e.preventDefault();
     const name  = document.getElementById("c-name")?.value.trim()  || "";
     const email = document.getElementById("c-email")?.value.trim() || "";
     const msg   = document.getElementById("c-msg")?.value.trim()   || "";
-    if (!name || !email || !msg) { showError("All fields are required.<br>Please fill in Name, E-mail and Message."); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError("The e-mail address entered is not valid.<br>Please check and try again."); return; }
+    if (!name||!email||!msg){ showError(t.errRequired); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showError(t.errEmail); return; }
     const subj = encodeURIComponent(`Portfolio contact from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${msg}`);
-    location.href = `mailto:${CFG.contactEmail}?subject=${subj}&body=${body}`;
+    location.href=`mailto:${CFG.contactEmail}?subject=${subj}&body=${body}`;
     const sb = document.querySelector("#sb-contact .status-cell");
-    if (sb) sb.textContent = "Opening email client…";
-    document.getElementById("c-name").value = "";
-    document.getElementById("c-email").value = "";
-    document.getElementById("c-msg").value = "";
+    if (sb) sb.textContent = t.opening;
+    document.getElementById("c-name").value="";
+    document.getElementById("c-email").value="";
+    document.getElementById("c-msg").value="";
     if (statusTimer) clearTimeout(statusTimer);
-    statusTimer = setTimeout(() => { const s=document.querySelector("#sb-contact .status-cell"); if(s) s.textContent="Ready"; }, 3000);
+    statusTimer = setTimeout(()=>{const s=document.querySelector("#sb-contact .status-cell");if(s)s.textContent=t.ready;},3000);
   });
 }
 
 // ── CLOCK ────────────────────────────────────────────────────────────────
 function startClock() {
-  const tick = () => {
-    const el = document.getElementById("clock"); if (!el) return;
-    const d = new Date();
-    el.textContent = `${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+  const tick = ()=>{
+    const el=document.getElementById("clock"); if(!el) return;
+    const d=new Date();
+    el.textContent=`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
   };
-  tick(); setInterval(tick, 1000);
+  tick(); setInterval(tick,1000);
 }
 
 // ── INIT ─────────────────────────────────────────────────────────────────
 function init() {
   document.getElementById("desktop").style.background = CFG.desktopColor;
-  if (!CFG.showCrt) document.getElementById("crt-overlay").style.display = "none";
+  if (!CFG.showCrt) document.getElementById("crt-overlay").style.display="none";
 
   buildDesktopIcons();
   buildStartMenu();
 
   const area = document.getElementById("desktop-area");
-  WINS.forEach(cfg => {
+  WINS.forEach(cfg=>{
     const el = buildWin(cfg);
     area.appendChild(el);
     wEls[cfg.id] = el;
     updateWin(cfg.id);
   });
 
-  const startBtn = document.getElementById("start-btn");
-  startBtn.addEventListener("click", e => {
+  document.getElementById("start-btn").addEventListener("click", e=>{
     e.stopPropagation(); selIco(null);
     if (CFG.enableSounds && !S.menuOpen) SFX.menu();
     S.menuOpen = !S.menuOpen;
     updateStartMenu(); updateTaskbar();
   });
 
-  document.getElementById("desktop").addEventListener("click", () => {
-    S.menuOpen = false; updateStartMenu(); selIco(null); updateTaskbar();
+  document.getElementById("desktop").addEventListener("click",()=>{
+    S.menuOpen=false; updateStartMenu(); selIco(null); updateTaskbar();
   });
 
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") { S.menuOpen=false; updateStartMenu(); selIco(null); updateTaskbar(); }
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape"){S.menuOpen=false;updateStartMenu();selIco(null);updateTaskbar();}
   });
 
-  new ResizeObserver(([entry]) => {
-    containerW = entry.contentRect.width;
-    containerH = entry.contentRect.height;
+  new ResizeObserver(([entry])=>{
+    containerW=entry.contentRect.width; containerH=entry.contentRect.height;
     updateAllWins();
   }).observe(document.getElementById("desktop"));
 
   startClock();
   updateTaskbar();
-  setTimeout(bindContactForm, 100);
+  setTimeout(bindContactForm,100);
 }
 
-// expose for inline handlers
-window.openWin  = openWin;
-window.closeWin = closeWin;
+window.openWin   = openWin;
+window.closeWin  = closeWin;
 window.showError = showError;
-window.selCmp   = selCmp;
+window.selCmp    = selCmp;
 
 init();
 </script>
