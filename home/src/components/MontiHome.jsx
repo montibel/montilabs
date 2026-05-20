@@ -12,7 +12,7 @@ const PROJECTS = [
   {
     id: "fluid-type",
     title: "Fluid Type",
-    cat: { es: "Tipografía", en: "Typography" },
+    cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
       es: "Texto que responde al movimiento en tiempo real.",
       en: "Text that responds to movement in real time.",
@@ -24,7 +24,7 @@ const PROJECTS = [
   {
     id: "gravity",
     title: "Gravity",
-    cat: { es: "Tipografía", en: "Typography" },
+    cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
       es: "Partículas aplicada a la tipografía interactiva.",
       en: "Particles applied to interactive typography.",
@@ -73,23 +73,23 @@ const PROJECTS = [
 
 const COPY = {
   es: {
-    eyebrow: "Interfaces · Animaciones · Código",
+    eyebrow: "Interfaces · Animaciones · Código creativo",
     h1: ["Más allá", "de tu", "imaginación."],
     cta: "Ver proyectos",
     projectsLabel: "Proyectos",
     about:
-      "Interfaces dinámicas y animaciones interactivas. Rompemos la barrera entre el diseño y el desarrollo para dar vida a productos digitales únicos.",
+      "Interfaces dinámicas y animaciones interactivas. Diseño y desarrollo para dar vida a productos digitales únicos.",
     contact: "Hablemos",
     open: "Abrir →",
     footer: "© 2025 montilabs",
   },
   en: {
-    eyebrow: "Interfaces · Animations · Code",
+    eyebrow: "Interfaces · Animations · Creative Code",
     h1: ["Beyond", "your", "imagination."],
     cta: "View projects",
     projectsLabel: "Projects",
     about:
-      "Dynamic interfaces and interactive animations. We break the barrier between design and development to bring unique digital products to life.",
+      "Dynamic interfaces and interactive animations. Design and development to bring unique digital products to life.",
     contact: "Let's talk",
     open: "Open →",
     footer: "© 2025 montilabs",
