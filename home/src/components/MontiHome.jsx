@@ -36,7 +36,7 @@ const PROJECTS = [
   {
     id: "search",
     title: "Search Sequence",
-    cat: { es: "UI / UX", en: "UI / UX" },
+    cat: { es: "Animación", en: "Animation" },
     desc: {
       es: "Secuencia animada de búsqueda e interacción con resultados.",
       en: "Animated search sequence and results interaction.",
