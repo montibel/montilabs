@@ -33,21 +33,14 @@ jobs:
         working-directory: home
         run: npm ci && npm run build
 
-      - name: Assemble deployment
-        run: |
-          mkdir -p _deploy
-          cp -r home/dist/* _deploy/
-          cp -r tipografia _deploy/tipografia
-          cp -r tipografia2 _deploy/tipografia2
-          cp -r uxsim _deploy/uxsim
-          cp -r iphone _deploy/iphone
-          cp -r win95 _deploy/win95
+      - name: Remove home/node_modules before upload
+        run: rm -rf home/node_modules
 
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _deploy
+          path: .
 
       - name: Deploy
         id: deployment
