@@ -6,6 +6,7 @@ import {
   useAnimation,
   AnimatePresence,
 } from "framer-motion";
+import ContactModal from "./ContactModal";
 
 const ACCENT = "#c8ff3e";
 
@@ -438,6 +439,7 @@ export default function MontiHome() {
     () => localStorage.getItem("ml_lang") || "es",
   );
   const [hovering, setHovering] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
   const projectsRef = useRef(null);
   const wide = useWide(820);
   const t = COPY[lang];
@@ -776,8 +778,8 @@ export default function MontiHome() {
             {t.about}
           </motion.p>
 
-          <motion.a
-            href="mailto:montilabss@gmail.com"
+          <motion.button
+            onClick={() => setContactOpen(true)}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             style={{
@@ -791,8 +793,9 @@ export default function MontiHome() {
               color: ACCENT,
               fontSize: 14,
               fontWeight: 600,
-              textDecoration: "none",
+              background: "transparent",
               cursor: "none",
+              fontFamily: "inherit",
             }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -802,7 +805,7 @@ export default function MontiHome() {
             whileTap={{ scale: 0.97 }}
           >
             {t.contact} →
-          </motion.a>
+          </motion.button>
         </div>
       </section>
 
@@ -842,6 +845,13 @@ export default function MontiHome() {
           GitHub
         </a>
       </footer>
+
+      <ContactModal
+        lang={lang}
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        setHovering={setHovering}
+      />
     </div>
   );
 }
