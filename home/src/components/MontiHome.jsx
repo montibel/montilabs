@@ -1,12 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import {
-  motion,
+  m,
+  LazyMotion,
+  domAnimation,
   useMotionValue,
   useSpring,
   useAnimation,
   AnimatePresence,
 } from "framer-motion";
-import ContactModal from "./ContactModal";
+
+const ContactModal = lazy(() => import("./ContactModal"));
 
 const ACCENT = "#c8ff3e";
 
@@ -131,7 +134,7 @@ function Cursor({ hovering }) {
 
   return (
     <>
-      <motion.div
+      <m.div
         style={{
           x: mx,
           y: my,
@@ -151,7 +154,7 @@ function Cursor({ hovering }) {
         }}
         transition={{ duration: 0.15 }}
       />
-      <motion.div
+      <m.div
         style={{
           x: rx,
           y: ry,
@@ -237,7 +240,7 @@ function HeroLogo({ onHover }) {
     <div style={{ position: "relative", width: 280, height: 280 }}>
 
       {/* Outer glow */}
-      <motion.div
+      <m.div
         animate={glowCtrl}
         initial={{ opacity: 0, scale: 1 }}
         style={{
@@ -250,7 +253,7 @@ function HeroLogo({ onHover }) {
         }}
       />
       {/* Inner glow */}
-      <motion.div
+      <m.div
         animate={glowCtrl}
         initial={{ opacity: 0, scale: 1 }}
         style={{
@@ -264,7 +267,7 @@ function HeroLogo({ onHover }) {
       />
 
       {/* Flash */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.22, 0] }}
         transition={{ delay: 1.85, duration: 0.6, times: [0, 0.08, 1] }}
@@ -282,7 +285,7 @@ function HeroLogo({ onHover }) {
           translateX: "-50%", translateY: "-50%",
           width: 130, height: 125, overflow: "visible" }}
       >
-        <motion.path
+        <m.path
           d={PATH} fill="none" stroke="#c8ff3e"
           strokeWidth={0.5} strokeLinecap="round" strokeLinejoin="round"
           style={{ filter: "drop-shadow(0 0 2px #c8ff3e) drop-shadow(0 0 7px rgba(200,255,62,.6))" }}
@@ -293,7 +296,7 @@ function HeroLogo({ onHover }) {
             opacity:    { delay: 1.75, duration: 0.2 },
           }}
         />
-        <motion.path
+        <m.path
           d={PATH} fill="#c8ff3e"
           animate={fillCtrl}
           initial={{ opacity: 0 }}
@@ -302,7 +305,7 @@ function HeroLogo({ onHover }) {
       </svg>
 
       {/* Toggle switch */}
-      <motion.button
+      <m.button
         initial={{ opacity: 0 }}
         animate={{ opacity: revealed ? 1 : 0 }}
         transition={{ duration: 0.5 }}
@@ -321,7 +324,7 @@ function HeroLogo({ onHover }) {
           border: isOn ? "none" : "1px solid rgba(255,255,255,0.15)",
           position: "relative", transition: "background 0.3s, border 0.3s", flexShrink: 0,
         }}>
-          <motion.div
+          <m.div
             animate={{ x: isOn ? 15 : 2 }}
             transition={{ type: "spring", stiffness: 500, damping: 28 }}
             style={{
@@ -339,7 +342,7 @@ function HeroLogo({ onHover }) {
         }}>
           {isOn ? "on" : "off"}
         </span>
-      </motion.button>
+      </m.button>
     </div>
   );
 }
@@ -348,7 +351,7 @@ function HeroLogo({ onHover }) {
 function ProjectCard({ project, lang, index, onHover }) {
   const t = COPY[lang];
   return (
-    <motion.a
+    <m.a
       href={project.url}
       target="_blank"
       rel="noreferrer"
@@ -417,7 +420,7 @@ function ProjectCard({ project, lang, index, onHover }) {
         </p>
       </div>
 
-      <motion.span
+      <m.span
         style={{
           position: "absolute",
           bottom: 28,
@@ -430,8 +433,8 @@ function ProjectCard({ project, lang, index, onHover }) {
         whileHover={{ opacity: 1, x: 0 }}
       >
         {t.open}
-      </motion.span>
-    </motion.a>
+      </m.span>
+    </m.a>
   );
 }
 
@@ -450,6 +453,7 @@ export default function MontiHome() {
     projectsRef.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
+    <LazyMotion features={domAnimation}>
     <div style={{ minHeight: "100vh", background: "#0b0b0b" }}>
       <Cursor hovering={hovering} />
 
@@ -470,7 +474,7 @@ export default function MontiHome() {
           background: "rgba(11,11,11,0.85)",
         }}
       >
-        <motion.a
+        <m.a
           href="#"
           onClick={(e) => {
             e.preventDefault();
@@ -489,7 +493,7 @@ export default function MontiHome() {
           whileHover={{ color: "#f0f0f0" }}
         >
           ↑
-        </motion.a>
+        </m.a>
 
         <button
           aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
@@ -519,7 +523,7 @@ export default function MontiHome() {
           }}
         >
           <AnimatePresence mode="wait">
-            <motion.span
+            <m.span
               key={lang}
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
@@ -527,7 +531,7 @@ export default function MontiHome() {
               transition={{ duration: 0.18 }}
             >
               {lang === "es" ? "EN" : "ES"}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         </button>
       </header>
@@ -556,7 +560,7 @@ export default function MontiHome() {
           }}
         >
           {/* Brand — neon logotype */}
-          <motion.p
+          <m.p
             style={{
               marginBottom: 20,
               fontSize: "clamp(56px, 8.5vw, 116px)",
@@ -587,10 +591,10 @@ export default function MontiHome() {
             }}
           >
             montilabs
-          </motion.p>
+          </m.p>
 
           {/* Eyebrow */}
-          <motion.p
+          <m.p
             style={{
               fontSize: 11,
               fontWeight: 500,
@@ -604,7 +608,7 @@ export default function MontiHome() {
             transition={{ delay: 0.2, duration: 0.8 }}
           >
             {t.eyebrow}
-          </motion.p>
+          </m.p>
 
           {/* Tagline — light weight, contrasts with heavy brand */}
           <h1
@@ -619,7 +623,7 @@ export default function MontiHome() {
             }}
           >
             {t.h1.map((line, i) => (
-              <motion.span
+              <m.span
                 key={line}
                 style={{ display: "block" }}
                 initial={{ opacity: 0, y: 18 }}
@@ -638,12 +642,12 @@ export default function MontiHome() {
                 ) : (
                   line
                 )}
-              </motion.span>
+              </m.span>
             ))}
           </h1>
 
           {/* CTA */}
-          <motion.button
+          <m.button
             onClick={scrollToProjects}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
@@ -670,7 +674,7 @@ export default function MontiHome() {
             whileTap={{ scale: 0.97 }}
           >
             {t.cta}
-            <motion.span
+            <m.span
               animate={{ x: [0, 5, 0] }}
               transition={{
                 repeat: Infinity,
@@ -679,13 +683,13 @@ export default function MontiHome() {
               }}
             >
               ↓
-            </motion.span>
-          </motion.button>
+            </m.span>
+          </m.button>
         </div>
 
         {/* Right — tiles */}
         {wide && (
-          <motion.div
+          <m.div
             style={{
               display: "flex",
               alignItems: "center",
@@ -696,13 +700,13 @@ export default function MontiHome() {
             transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             <HeroLogo onHover={setHovering} />
-          </motion.div>
+          </m.div>
         )}
       </section>
 
       {/* ── Projects ── */}
       <section ref={projectsRef} style={{ padding: "0 64px 96px" }}>
-        <motion.div
+        <m.div
           style={{
             display: "flex",
             alignItems: "center",
@@ -728,7 +732,7 @@ export default function MontiHome() {
           <div
             style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }}
           />
-        </motion.div>
+        </m.div>
 
         <div
           style={{
@@ -763,7 +767,7 @@ export default function MontiHome() {
             border: "1px solid rgba(255,255,255,0.07)",
           }}
         >
-          <motion.p
+          <m.p
             style={{
               flex: 1,
               fontSize: 18,
@@ -778,9 +782,9 @@ export default function MontiHome() {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             {t.about}
-          </motion.p>
+          </m.p>
 
-          <motion.button
+          <m.button
             onClick={() => setContactOpen(true)}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
@@ -807,7 +811,7 @@ export default function MontiHome() {
             whileTap={{ scale: 0.97 }}
           >
             {t.contact} →
-          </motion.button>
+          </m.button>
         </div>
       </section>
 
@@ -856,12 +860,15 @@ export default function MontiHome() {
         </a>
       </footer>
 
-      <ContactModal
-        lang={lang}
-        open={contactOpen}
-        onClose={() => setContactOpen(false)}
-        setHovering={setHovering}
-      />
+      <Suspense fallback={null}>
+        <ContactModal
+          lang={lang}
+          open={contactOpen}
+          onClose={() => setContactOpen(false)}
+          setHovering={setHovering}
+        />
+      </Suspense>
     </div>
+    </LazyMotion>
   );
 }
