@@ -80,7 +80,7 @@ const COPY = {
     cta: "Ver proyectos",
     projectsLabel: "Proyectos",
     about:
-      "Interfaces dinámicas y animaciones interactivas. Diseño y desarrollo para dar vida a productos digitales únicos.",
+      "Estudio creativo en Santiago, Chile. Interfaces dinámicas y animaciones interactivas para dar vida a productos digitales únicos.",
     contact: "Hablemos",
     open: "Abrir →",
     footer: "© 2026 montilabs",
@@ -93,7 +93,7 @@ const COPY = {
     cta: "View projects",
     projectsLabel: "Projects",
     about:
-      "Dynamic interfaces and interactive animations. Design and development to bring unique digital products to life.",
+      "Creative studio based in Santiago, Chile. Dynamic interfaces and interactive animations to bring unique digital products to life.",
     contact: "Let's talk",
     open: "Open →",
     footer: "© 2026 montilabs",
