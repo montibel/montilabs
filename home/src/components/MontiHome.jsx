@@ -85,6 +85,7 @@ const COPY = {
     open: "Abrir →",
     footer: "© 2026 montilabs",
     privacy: "Política de privacidad",
+    terms: "Términos",
   },
   en: {
     eyebrow: "Interfaces · Animations · Creative Code",
@@ -97,6 +98,7 @@ const COPY = {
     open: "Open →",
     footer: "© 2026 montilabs",
     privacy: "Privacy policy",
+    terms: "Terms",
   },
 };
 
@@ -828,6 +830,14 @@ export default function MontiHome() {
             onMouseLeave={() => setHovering(false)}
           >
             {t.privacy}
+          </a>
+          <a
+            href="terms.html"
+            style={{ color: "rgba(240,240,240,0.2)" }}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
+          >
+            {t.terms}
           </a>
         </span>
         <a
