@@ -63,6 +63,18 @@ const PROJECTS = [
     bg: "radial-gradient(ellipse at 60% 30%, rgba(191,90,242,.18) 0%, transparent 70%), #111",
   },
   {
+    id: "pizarron",
+    title: "Video Tutorial",
+    cat: { es: "E-learning", en: "E-learning" },
+    desc: {
+      es: "Tutorial animado estilo pizarrón blanco.",
+      en: "Animated whiteboard-style tutorial.",
+    },
+    url: "pizarron/",
+    color: "#2563eb",
+    bg: "radial-gradient(ellipse at 50% 50%, rgba(37,99,235,.18) 0%, transparent 70%), #111",
+  },
+  {
     id: "win95",
     title: "Windows 95",
     cat: { es: "UI / UX", en: "UI / UX" },

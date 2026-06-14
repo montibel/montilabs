@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Cómo hacer un video tutorial? — Montilabs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink:       #1a1a2e;
+      --ink-mid:   rgba(26,26,46,0.45);
+      --ink-light: rgba(26,26,46,0.18);
+      --cta:       #2563eb;
+      --board-bg:  #f9f9f7;
+    }
+
+    html, body {
+      height: 100%;
+      background: #161616;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Back link ── */
+    .back {
+      position: fixed;
+      top: 18px; left: 20px;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      transition: color .2s;
+      z-index: 10;
+    }
+    .back:hover { color: rgba(255,255,255,.7); }
+
+    /* ── Board wrapper ── */
+    .scene {
+      width: min(980px, 96vw);
+    }
+
+    .board {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--board-bg);
+      border-radius: 3px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      /* aluminium frame */
+      box-shadow:
+        0 0 0 2px #e0e0e0,
+        0 0 0 14px #c8c8c8,
+        0 0 0 16px #b8b8b8,
+        0 24px 80px rgba(0,0,0,.55);
+    }
+
+    /* subtle whiteboard sheen */
+    .board::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.6) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Content ── */
+    .board-inner {
+      flex: 1;
+      padding: clamp(16px,3.5%,44px) clamp(20px,5.5%,68px) clamp(10px,2%,24px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px,1.4%,16px);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Title ── */
+    .title-row {
+      text-align: center;
+    }
+
+    .board-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(18px, 3.4vw, 38px);
+      font-weight: 700;
+      color: var(--ink);
+      clip-path: inset(0 100% 0 0);
+      display: inline-block;
+    }
+    .board-title.write { animation: reveal 1.5s cubic-bezier(.4,0,.2,1) forwards; }
+
+    .underline-svg {
+      display: block;
+      margin: clamp(2px,0.5%,6px) auto 0;
+      width: clamp(120px,28%,300px);
+      overflow: visible;
+    }
+    .underline-svg path {
+      stroke: var(--ink-mid);
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 320;
+      stroke-dashoffset: 320;
+    }
+    .underline-svg path.draw {
+      transition: stroke-dashoffset .9s ease;
+      stroke-dashoffset: 0;
+    }
+
+    /* ── Steps grid ── */
+    .steps {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: clamp(6px,1.5%,20px) clamp(10px,3%,44px);
+    }
+
+    /* ── Single step ── */
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px,1.5%,18px);
+      opacity: 0;
+      transform: translateY(10px);
+      position: relative;
+    }
+    .step.appear { animation: pop-in .5s cubic-bezier(.16,1,.3,1) forwards; }
+
+    /* divider at bottom of each step (except last row) */
+    .step:nth-child(1)::after,
+    .step:nth-child(2)::after {
+      content: '';
+      position: absolute;
+      bottom: -clamp(4px,.8%,11px);
+      left: 0; right: 0;
+      height: 1.5px;
+      background: var(--ink-light);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    .step:nth-child(1).appear::after,
+    .step:nth-child(2).appear::after {
+      animation: line-draw .5s ease .3s forwards;
+    }
+
+    /* ── Step icon ── */
+    .step-icon {
+      flex-shrink: 0;
+      width:  clamp(28px, 4.5vw, 52px);
+      height: clamp(28px, 4.5vw, 52px);
+      margin-top: clamp(2px,.4%,5px);
+    }
+    .step-icon svg { width: 100%; height: 100%; overflow: visible; }
+
+    .step-icon svg * {
+      stroke: var(--ink);
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+    }
+    .step-icon.draw svg *          { transition: stroke-dashoffset .75s ease; stroke-dashoffset: 0; }
+    .step-icon.draw svg *:nth-child(2) { transition-delay: .12s; }
+    .step-icon.draw svg *:nth-child(3) { transition-delay: .24s; }
+    .step-icon.draw svg *:nth-child(4) { transition-delay: .36s; }
+    .step-icon.draw svg *:nth-child(5) { transition-delay: .48s; }
+
+    /* CTA icon color */
+    .step-cta .step-icon svg * { stroke: var(--cta); }
+
+    /* ── Step text ── */
+    .step-body { flex: 1; min-width: 0; }
+
+    .step-label {
+      font-size: clamp(9px,1.1vw,13px);
+      font-weight: 500;
+      color: var(--ink-mid);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: clamp(1px,.2%,3px);
+    }
+
+    .step-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(15px, 2.4vw, 28px);
+      font-weight: 700;
+      color: var(--ink);
+      clip-path: inset(0 100% 0 0);
+      line-height: 1.15;
+    }
+    .step-title.write { animation: reveal .85s cubic-bezier(.4,0,.2,1) forwards; }
+
+    .step-desc {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(11px, 1.7vw, 20px);
+      color: var(--ink-mid);
+      clip-path: inset(0 100% 0 0);
+      margin-top: clamp(1px,.2%,3px);
+    }
+    .step-desc.write { animation: reveal .7s cubic-bezier(.4,0,.2,1) .18s forwards; }
+
+    .step-cta .step-title { color: var(--cta); }
+    .step-cta .step-desc  { color: rgba(37,99,235,.6); }
+
+    /* CTA link */
+    .cta-link {
+      display: inline-block;
+      margin-top: clamp(3px,.6%,8px);
+      font-size: clamp(10px,1.3vw,15px);
+      font-weight: 500;
+      color: var(--cta);
+      border: 1.5px solid var(--cta);
+      border-radius: 99px;
+      padding: clamp(3px,.5%,6px) clamp(8px,1.2%,14px);
+      text-decoration: none;
+      opacity: 0;
+      transition: background .2s;
+    }
+    .cta-link:hover { background: rgba(37,99,235,.07); }
+    .cta-link.appear { animation: pop-in .4s cubic-bezier(.16,1,.3,1) .3s forwards; }
+
+    /* ── Bottom tray ── */
+    .tray {
+      background: rgba(0,0,0,.035);
+      border-top: 1px solid rgba(0,0,0,.07);
+      padding: clamp(5px,1%,10px) clamp(16px,3%,32px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ctrl-btn {
+      background: none;
+      border: 1.5px solid rgba(26,26,46,.2);
+      border-radius: 50%;
+      width:  clamp(24px,2.8vw,34px);
+      height: clamp(24px,2.8vw,34px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      font-size: clamp(10px,1.3vw,15px);
+      flex-shrink: 0;
+      transition: background .15s, border-color .15s;
+    }
+    .ctrl-btn:hover { background: rgba(0,0,0,.06); border-color: rgba(26,26,46,.4); }
+
+    .progress-track {
+      flex: 1;
+      height: 3px;
+      background: var(--ink-light);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--ink);
+      border-radius: 2px;
+    }
+
+    .time-label {
+      font-size: clamp(9px,1.1vw,13px);
+      color: var(--ink-mid);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    /* watermark */
+    .watermark {
+      font-size: clamp(9px,1vw,12px);
+      color: var(--ink-light);
+      letter-spacing: .05em;
+      flex-shrink: 0;
+    }
+
+    /* ── Keyframes ── */
+    @keyframes reveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to   { clip-path: inset(0   0% 0 0); }
+    }
+    @keyframes pop-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+    @keyframes line-draw {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+  </style>
+</head>
+<body>
+
+<a href="../" class="back">← montilabs</a>
+
+<div class="scene">
+  <div class="board">
+
+    <div class="board-inner">
+
+      <!-- Title -->
+      <div class="title-row">
+        <h1 class="board-title" id="board-title">¿Cómo hacer un video tutorial?</h1>
+        <svg class="underline-svg" viewBox="0 0 300 8" height="8">
+          <path id="uline" d="M0 5 Q75 2 150 5 Q225 8 300 5"/>
+        </svg>
+      </div>
+
+      <!-- Steps -->
+      <div class="steps">
+
+        <!-- Step 1: Encuentra tu idea -->
+        <div class="step" id="s1">
+          <div class="step-icon" id="i1">
+            <svg viewBox="0 0 40 42">
+              <circle cx="20" cy="16" r="10"/>
+              <path d="M14 28 h12"/>
+              <path d="M15 32 h10"/>
+              <path d="M16.5 36 h7 a2 2 0 0 0 0-4 h-7 a2 2 0 0 0 0 4z"/>
+              <line x1="20" y1="3"  x2="20" y2="1"/>
+              <line x1="31" y1="7"  x2="33" y2="5"/>
+              <line x1="9"  y1="7"  x2="7"  y2="5"/>
+              <line x1="34" y1="18" x2="36" y2="18"/>
+              <line x1="6"  y1="18" x2="4"  y2="18"/>
+            </svg>
+          </div>
+          <div class="step-body">
+            <div class="step-label">Paso 1</div>
+            <div class="step-title" id="t1">Encuentra tu idea</div>
+            <div class="step-desc"  id="d1">¿Qué conocimiento quieres compartir?</div>
+          </div>
+        </div>
+
+        <!-- Step 2: Conoce tu audiencia -->
+        <div class="step" id="s2">
+          <div class="step-icon" id="i2">
+            <svg viewBox="0 0 40 40">
+              <circle cx="14" cy="13" r="6"/>
+              <path d="M2 36 C2 26 10 22 14 22 C18 22 26 26 26 36"/>
+              <circle cx="30" cy="11" r="5"/>
+              <path d="M22 34 C22 26 26 22 30 22 C34 22 38 26 38 34"/>
+            </svg>
+          </div>
+          <div class="step-body">
+            <div class="step-label">Paso 2</div>
+            <div class="step-title" id="t2">Conoce tu audiencia</div>
+            <div class="step-desc"  id="d2">¿Para quién es tu tutorial?</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Escribe el guión -->
+        <div class="step" id="s3">
+          <div class="step-icon" id="i3">
+            <svg viewBox="0 0 40 40">
+              <rect x="6" y="6" width="22" height="28" rx="2"/>
+              <line x1="11" y1="14" x2="23" y2="14"/>
+              <line x1="11" y1="20" x2="23" y2="20"/>
+              <line x1="11" y1="26" x2="17" y2="26"/>
+              <path d="M25 28 L33 20 L29 16 L21 24 Z"/>
+              <line x1="29" y1="16" x2="33" y2="20"/>
+            </svg>
+          </div>
+          <div class="step-body">
+            <div class="step-label">Paso 3</div>
+            <div class="step-title" id="t3">Escribe el guión</div>
+            <div class="step-desc"  id="d3">Planifica cada momento del video</div>
+          </div>
+        </div>
+
+        <!-- Step 4: Contáctanos -->
+        <div class="step step-cta" id="s4">
+          <div class="step-icon" id="i4">
+            <svg viewBox="0 0 40 40">
+              <path d="M20 4 L23 15 L35 15 L26 22 L29 33 L20 27 L11 33 L14 22 L5 15 L17 15 Z"/>
+            </svg>
+          </div>
+          <div class="step-body">
+            <div class="step-label">¡Último paso!</div>
+            <div class="step-title" id="t4">Contáctanos en Montilabs</div>
+            <div class="step-desc"  id="d4">Nosotros producimos el resto por ti</div>
+            <a class="cta-link" id="cta-link" href="../#contact">Escribir ahora →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Controls tray -->
+    <div class="tray">
+      <button class="ctrl-btn" id="play-btn" aria-label="Pausar">⏸</button>
+      <div class="progress-track">
+        <div class="progress-fill" id="prog"></div>
+      </div>
+      <span class="time-label" id="clock">0:00</span>
+      <button class="ctrl-btn" id="restart-btn" aria-label="Reiniciar">↺</button>
+      <span class="watermark">montilabs</span>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const TOTAL = 9500;
+
+  const seq = [
+    { t:  80,  fn: () => cls('board-title','write') },
+    { t: 1000, fn: () => cls('uline','draw') },
+    { t: 1700, fn: () => showStep(1) },
+    { t: 3500, fn: () => showStep(2) },
+    { t: 5300, fn: () => showStep(3) },
+    { t: 7100, fn: () => showStep(4) },
+    { t: 8200, fn: () => cls('cta-link','appear') },
+  ];
+
+  function cls(id, c) { document.getElementById(id).classList.add(c); }
+
+  function showStep(n) {
+    cls('s'+n, 'appear');
+    setTimeout(() => {
+      cls('i'+n, 'draw');
+      cls('t'+n, 'write');
+      cls('d'+n, 'write');
+    }, 160);
+  }
+
+  // ── Timeline engine ──
+  let elapsed = 0, startTs = null, paused = false, raf = null;
+  const done = new Set();
+
+  function tick(now) {
+    if (!startTs) startTs = now - elapsed;
+    elapsed = now - startTs;
+
+    // progress bar + clock
+    const pct = Math.min(elapsed / TOTAL * 100, 100);
+    document.getElementById('prog').style.width = pct + '%';
+    const s = Math.floor(elapsed / 1000);
+    document.getElementById('clock').textContent =
+      Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+
+    seq.forEach((ev, i) => {
+      if (!done.has(i) && elapsed >= ev.t) { ev.fn(); done.add(i); }
+    });
+
+    if (elapsed < TOTAL) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      const btn = document.getElementById('play-btn');
+      btn.textContent = '↺';
+      btn.setAttribute('aria-label', 'Reiniciar');
+    }
+  }
+
+  function reset() {
+    cancelAnimationFrame(raf);
+    elapsed = 0; startTs = null; paused = false; done.clear();
+
+    // Remove all animation classes
+    ['board-title'].forEach(id => document.getElementById(id).classList.remove('write'));
+    document.getElementById('uline').classList.remove('draw');
+    [1,2,3,4].forEach(n => {
+      document.getElementById('s'+n).classList.remove('appear');
+      document.getElementById('i'+n).classList.remove('draw');
+      document.getElementById('t'+n).classList.remove('write');
+      document.getElementById('d'+n).classList.remove('write');
+    });
+    document.getElementById('cta-link').classList.remove('appear');
+    document.getElementById('prog').style.width = '0%';
+    document.getElementById('clock').textContent = '0:00';
+
+    const btn = document.getElementById('play-btn');
+    btn.textContent = '⏸';
+    btn.setAttribute('aria-label', 'Pausar');
+
+    setTimeout(() => { raf = requestAnimationFrame(tick); }, 60);
+  }
+
+  document.getElementById('play-btn').addEventListener('click', () => {
+    if (elapsed >= TOTAL) { reset(); return; }
+    if (paused) {
+      paused = false;
+      startTs = null;
+      document.getElementById('play-btn').textContent = '⏸';
+      raf = requestAnimationFrame(tick);
+    } else {
+      paused = true;
+      cancelAnimationFrame(raf);
+      document.getElementById('play-btn').textContent = '▶';
+    }
+  });
+
+  document.getElementById('restart-btn').addEventListener('click', reset);
+
+  // Start
+  raf = requestAnimationFrame(tick);
+</script>
+
+</body>
+</html>
