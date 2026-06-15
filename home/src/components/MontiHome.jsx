@@ -404,79 +404,107 @@ function HeroLogo({ onHover }) {
 
 // ── Project Card ─────────────────────────────────────────────────────
 function VideoCard({ project, lang, index }) {
-  const t = COPY[lang];
-  const [playing, setPlaying] = useState(false);
+  const [open, setOpen] = useState(false);
   const videoRef = useRef(null);
 
-  const toggle = () => {
-    if (!videoRef.current) return;
-    if (playing) { videoRef.current.pause(); setPlaying(false); }
-    else { videoRef.current.play(); setPlaying(true); }
+  const openModal = () => setOpen(true);
+  const closeModal = () => {
+    if (videoRef.current) videoRef.current.pause();
+    setOpen(false);
   };
 
+  useEffect(() => {
+    if (open && videoRef.current) videoRef.current.play();
+    const onKey = (e) => { if (e.key === "Escape") closeModal(); };
+    if (open) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <m.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        borderRadius: 18,
-        background: "#111",
-        border: "1px solid rgba(255,255,255,0.07)",
-        overflow: "hidden",
-        cursor: "pointer",
-      }}
-      onClick={toggle}
-    >
-      {/* Video */}
-      <div style={{ position: "relative", background: "#000" }}>
-        <video
-          ref={videoRef}
-          src={project.video}
-          poster={project.img}
-          style={{ width: "100%", display: "block", maxHeight: 320, objectFit: "cover" }}
-          onEnded={() => setPlaying(false)}
-        />
-        {/* Play/pause overlay */}
-        {!playing && (
+    <>
+      {/* Card (thumbnail) */}
+      <m.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          borderRadius: 18, background: "#111",
+          border: "1px solid rgba(255,255,255,0.07)",
+          overflow: "hidden", cursor: "pointer",
+        }}
+        onClick={openModal}
+      >
+        <div style={{ position: "relative" }}>
+          <img
+            src={project.img}
+            alt={project.title}
+            style={{ width: "100%", display: "block", height: 220, objectFit: "cover" }}
+          />
           <div style={{
             position: "absolute", inset: 0,
             display: "flex", alignItems: "center", justifyContent: "center",
-            background: "rgba(0,0,0,0.35)",
+            background: "rgba(0,0,0,0.3)",
           }}>
             <div style={{
               width: 64, height: 64, borderRadius: "50%",
-              background: "rgba(255,255,255,0.15)",
-              backdropFilter: "blur(8px)",
+              background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)",
               display: "flex", alignItems: "center", justifyContent: "center",
               border: "1px solid rgba(255,255,255,0.25)",
             }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+        <div style={{ padding: "20px 24px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
+          <span style={{
+            fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+            padding: "4px 10px", borderRadius: 99, alignSelf: "flex-start",
+            background: project.color + "18", color: project.color,
+          }}>
+            {project.cat[lang]}
+          </span>
+          <span style={{ fontSize: 18, fontWeight: 700, color: "#f0f0f0", letterSpacing: "-0.02em" }}>
+            {project.title}
+          </span>
+          <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.45)", margin: 0 }}>
+            {project.desc[lang]}
+          </p>
+        </div>
+      </m.div>
 
-      {/* Info */}
-      <div style={{ padding: "20px 24px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
-        <span style={{
-          fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
-          padding: "4px 10px", borderRadius: 99, alignSelf: "flex-start",
-          background: project.color + "18", color: project.color,
-        }}>
-          {project.cat[lang]}
-        </span>
-        <span style={{ fontSize: 18, fontWeight: 700, color: "#f0f0f0", letterSpacing: "-0.02em" }}>
-          {project.title}
-        </span>
-        <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.45)", margin: 0 }}>
-          {project.desc[lang]}
-        </p>
-      </div>
-    </m.div>
+      {/* Modal */}
+      {open && (
+        <div
+          onClick={closeModal}
+          style={{
+            position: "fixed", inset: 0, zIndex: 1000,
+            background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: 24,
+          }}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%", maxWidth: 900 }}>
+            <video
+              ref={videoRef}
+              src={project.video}
+              controls
+              style={{ width: "100%", borderRadius: 12, display: "block", background: "#000" }}
+            />
+            <button
+              onClick={closeModal}
+              style={{
+                position: "absolute", top: -44, right: 0,
+                background: "none", border: "none", color: "rgba(255,255,255,0.6)",
+                fontSize: 28, cursor: "pointer", lineHeight: 1, padding: 8,
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
