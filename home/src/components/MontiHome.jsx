@@ -35,8 +35,8 @@ const PROJECTS_VIDEO = [
     title: "Search Sequence",
     cat: { es: "Motion design", en: "Motion design" },
     desc: {
-      es: "Barra de búsqueda animada con texto fluido.",
-      en: "Animated search bar with fluid text.",
+      es: "Barra de búsqueda animada.",
+      en: "Animated search bar.",
     },
     video: "assets/videos/search.mp4",
     img: "assets/screenshots/search.jpg",
