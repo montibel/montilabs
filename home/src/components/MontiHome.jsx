@@ -23,8 +23,8 @@ const PROJECTS_VIDEO = [
     title: "Tutorial Banca Digital",
     cat: { es: "Videotutorial", en: "Video Tutorial" },
     desc: {
-      es: "Recorrido animado por las funciones principales de una app bancaria.",
-      en: "Animated walkthrough of a banking app's main features.",
+      es: "Tutorial animado App bancaria.",
+      en: "Animated tutorial banking app.",
     },
     video: "assets/videos/fintech.mp4",
     img: "assets/screenshots/fintech.jpg",
