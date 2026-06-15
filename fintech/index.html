@@ -12,30 +12,16 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #0f0f0f;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      background: #000;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Player ── */
-    .player {
-      width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .player:hover .controls { opacity: 1; }
-
     /* ── Video content ── */
     .vcontent {
-      position: absolute; inset: 0;
+      position: fixed; inset: 0;
       display: flex;
     }
 
@@ -237,44 +223,11 @@
     .callout::after { content:''; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border:4px solid transparent; border-bottom:none; border-top-color:#06b6d4; }
     .callout.sh { opacity:1; transform:scale(1); }
 
-    /* Thumbnail */
-    .thumb { position:absolute; inset:0; z-index:50; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; cursor:pointer; transition:opacity .3s ease; }
-    .thumb.gone { opacity:0; pointer-events:none; }
-    .thumb-bg { position:absolute; inset:0; background:linear-gradient(135deg,#060913 0%,#0b1a35 50%,#060913 100%); }
-    .thumb-tag { position:relative; z-index:1; font-size:clamp(9px,1.1vw,13px); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#06b6d4; }
-    .thumb-title { position:relative; z-index:1; font-size:clamp(14px,2.4vw,28px); font-weight:800; letter-spacing:-.02em; text-align:center; color:#f8fafc; max-width:60%; line-height:1.2; }
-    .thumb-sub { position:relative; z-index:1; font-size:clamp(9px,1vw,13px); color:#64748b; }
-    .thumb-play { position:relative; z-index:1; width:clamp(44px,6vw,72px); height:clamp(44px,6vw,72px); background:rgba(255,255,255,.95); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:transform .2s ease; }
-    .thumb:hover .thumb-play { transform:scale(1.08); }
-    .thumb-play svg { width:38%; height:38%; margin-left:8%; fill:#000; }
-    .thumb-dur { position:absolute; bottom:10px; right:10px; z-index:1; background:rgba(0,0,0,.8); color:#fff; font-size:clamp(9px,1.1vw,13px); font-weight:700; padding:2px 7px; border-radius:3px; }
-
-    /* Controls */
-    .controls { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,.88)); padding:28px 12px 10px; opacity:0; transition:opacity .25s ease; z-index:40; }
-    .player.on .controls { opacity:1; }
-    .player.on:hover .controls { opacity:1; }
-    .prog { width:100%; height:3px; background:rgba(255,255,255,.25); border-radius:2px; margin-bottom:8px; cursor:pointer; position:relative; }
-    .prog:hover { height:5px; margin-bottom:6px; }
-    .prog-buf { position:absolute; left:0; top:0; height:100%; background:rgba(255,255,255,.28); border-radius:2px; width:28%; }
-    .prog-bar { position:absolute; left:0; top:0; height:100%; background:#ff0000; border-radius:2px; width:0%; transition:width .1s linear; }
-    .prog-dot { position:absolute; right:-5px; top:50%; transform:translateY(-50%); width:12px; height:12px; background:#ff0000; border-radius:50%; opacity:0; transition:opacity .2s ease; }
-    .prog:hover .prog-dot { opacity:1; }
-    .ctrl-row { display:flex; align-items:center; gap:4px; }
-    .yc { background:none; border:none; cursor:pointer; color:#fff; padding:5px; display:flex; align-items:center; justify-content:center; border-radius:4px; }
-    .yc:hover { background:rgba(255,255,255,.1); }
-    .yc svg { width:22px; height:22px; }
-    .yt-time { font-size:13px; color:#fff; margin:0 4px; font-variant-numeric:tabular-nums; white-space:nowrap; }
-    .spacer { flex:1; }
-    .vol-w { display:flex; align-items:center; gap:4px; }
-    .vol-bar { width:56px; height:3px; background:rgba(255,255,255,.3); border-radius:2px; }
-    .vol-fill { height:100%; width:75%; background:#fff; border-radius:2px; }
   </style>
 </head>
 <body>
 
-  <div class="player" id="player">
-
-    <div class="vcontent">
+  <div class="vcontent">
       <!-- Caption -->
       <div class="vleft">
         <div class="cap-step"  id="capStep"></div>
@@ -377,39 +330,7 @@
           </div>
         </div>
       </div>
-    </div><!-- .vcontent -->
-
-    <!-- Thumbnail -->
-    <div class="thumb" id="thumb" onclick="startVideo()">
-      <div class="thumb-bg"></div>
-      <div class="thumb-tag">Tutorial · Banca Digital</div>
-      <div class="thumb-title">Cómo usar tu app bancaria paso a paso</div>
-      <div class="thumb-sub">Montilabs · Demo de videotutorial</div>
-      <div class="thumb-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-      <div class="thumb-dur">0:18</div>
-    </div>
-
-    <!-- Controls -->
-    <div class="controls" id="ctrl">
-      <div class="prog" id="prog" onclick="seekClick(event)">
-        <div class="prog-buf"></div>
-        <div class="prog-bar" id="progBar"><div class="prog-dot"></div></div>
-      </div>
-      <div class="ctrl-row">
-        <button class="yc" onclick="togglePlay()"><svg viewBox="0 0 24 24" fill="currentColor" id="playIco"><polygon points="5,3 19,12 5,21"/></svg></button>
-        <button class="yc" onclick="restart()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
-        <div class="vol-w">
-          <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></button>
-          <div class="vol-bar"><div class="vol-fill"></div></div>
-        </div>
-        <div class="yt-time" id="ytTime">0:00 / 0:18</div>
-        <div class="spacer"></div>
-        <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button>
-        <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
-      </div>
-    </div>
-
-  </div><!-- .player -->
+  </div><!-- .vcontent -->
 
 <script>
   const TOTAL = 18500;
@@ -492,66 +413,24 @@
 
   let playing=false,startTime=null,elapsed=0,rafId=null,fired=new Set(),tl=[];
 
-  function resetAll(){
-    Object.values(scrMap).forEach(id=>{const e=document.getElementById(id);e.classList.remove('in','out');});
-    for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.remove('on');
-    const bio=document.getElementById('bio');bio.classList.remove('show','pulse');
-    for(let i=0;i<4;i++)unsh('qa'+i);
-    for(let i=0;i<3;i++)unsh('tx'+i);
-    document.getElementById('balNum').textContent='0';
-    ['dg0','dg1','mv0','mv1','mv2','mv3'].forEach(unsh);
-    document.getElementById('rfBox').classList.remove('foc');
-    document.getElementById('amBox').classList.remove('foc');
-    const rv=document.getElementById('rfVal');rv.textContent='Nombre o RUT…';rv.classList.add('fph');rv.style.color='';
-    const av=document.getElementById('amVal');av.textContent='0';av.classList.add('fph');av.style.color='';
-    ['cChip','fldAmt','fldMsg','fldBtn','sucLay'].forEach(unsh);
-    document.getElementById('trfBtn').classList.remove('press');
-    hideCallout();
-    ['capStep','capTitle','capBody'].forEach(id=>{const e=document.getElementById(id);e.classList.remove('v');e.textContent='';});
-    document.getElementById('stepDots').classList.remove('v');
-    document.querySelectorAll('.sdot').forEach(d=>d.classList.remove('on','done'));
-    document.getElementById('progBar').style.width='0%';
-    document.getElementById('ytTime').textContent='0:00 / 0:18';
-  }
-
-  function updateBtn(){
-    const ico=document.getElementById('playIco');
-    ico.innerHTML=playing?'<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>':'<polygon points="5,3 19,12 5,21"/>';
-  }
-
   function tick(now){
     if(!playing)return;
     elapsed=now-startTime;
     tl.forEach(([t,fn],i)=>{if(elapsed>=t&&!fired.has(i)){fired.add(i);fn();}});
-    const pct=Math.min(elapsed/TOTAL*100,100);
-    document.getElementById('progBar').style.width=pct+'%';
-    const s=Math.floor(elapsed/1000);
-    document.getElementById('ytTime').textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / 0:18`;
-    if(elapsed>=TOTAL){playing=false;updateBtn();return;}
+    if(elapsed>=TOTAL){playing=false;return;}
     rafId=requestAnimationFrame(tick);
   }
 
-  function play(){if(elapsed>=TOTAL)restart();playing=true;startTime=performance.now()-elapsed;updateBtn();rafId=requestAnimationFrame(tick);}
-  function pause(){playing=false;cancelAnimationFrame(rafId);updateBtn();}
-  function restart(){pause();resetAll();elapsed=0;fired=new Set();tl=buildTL();play();}
-  function togglePlay(){playing?pause():play();}
+  function play(){
+    playing=true;
+    startTime=performance.now()-elapsed;
+    rafId=requestAnimationFrame(tick);
+  }
 
-  function startVideo(){
-    document.getElementById('thumb').classList.add('gone');
-    document.getElementById('player').classList.add('on');
+  window.addEventListener('DOMContentLoaded',()=>{
     tl=buildTL();
-    setTimeout(play,300);
-  }
-
-  function seekClick(e){
-    const rect=document.getElementById('prog').getBoundingClientRect();
-    const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
-    elapsed=pct*TOTAL;
-    if(playing)startTime=performance.now()-elapsed;
-    document.getElementById('progBar').style.width=(pct*100)+'%';
-  }
-
-  tl=buildTL();
+    setTimeout(play,400);
+  });
 </script>
 </body>
 </html>
