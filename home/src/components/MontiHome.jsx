@@ -45,19 +45,6 @@ const PROJECTS_DISENO = [
     bg: "radial-gradient(ellipse at 70% 40%, rgba(255,140,66,.18) 0%, transparent 70%), #111",
   },
   {
-    id: "search",
-    title: "Search Sequence",
-    cat: { es: "Animación", en: "Animation" },
-    desc: {
-      es: "Secuencia animada de búsqueda e interacción con resultados.",
-      en: "Animated search sequence and results interaction.",
-    },
-    url: "uxsim/dist/",
-    img: "assets/screenshots/search.jpg",
-    color: "#4bf0c8",
-    bg: "radial-gradient(ellipse at 50% 70%, rgba(75,240,200,.15) 0%, transparent 70%), #111",
-  },
-  {
     id: "iphone",
     title: "iPhone Home",
     cat: { es: "UI / UX", en: "UI / UX" },
@@ -101,7 +88,7 @@ const COPY = {
     sectionDiseno: {
       title: "Diseño Web",
       desc: "Interfaces interactivas, tipografía y UI/UX.",
-      count: "5 proyectos",
+      count: "4 proyectos",
     },
     sectionVideo: {
       title: "Video",
@@ -126,7 +113,7 @@ const COPY = {
     sectionDiseno: {
       title: "Web Design",
       desc: "Interactive interfaces, typography and UI/UX.",
-      count: "5 projects",
+      count: "4 projects",
     },
     sectionVideo: {
       title: "Video",
