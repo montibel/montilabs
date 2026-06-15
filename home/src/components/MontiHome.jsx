@@ -30,6 +30,30 @@ const PROJECTS_VIDEO = [
     img: "assets/screenshots/fintech.jpg",
     color: "#ff8c42",
   },
+  {
+    id: "pizarron",
+    title: "¿Cómo hacer un videotutorial?",
+    cat: { es: "Animación pizarrón", en: "Whiteboard Animation" },
+    desc: {
+      es: "Animación estilo pizarrón que explica en pasos cómo crear un videotutorial desde cero.",
+      en: "Whiteboard-style animation explaining step by step how to create a video tutorial from scratch.",
+    },
+    video: "assets/videos/pizarron.mp4",
+    img: "assets/screenshots/pizarron.jpg",
+    color: "#ff8c42",
+  },
+  {
+    id: "search",
+    title: "Search Sequence",
+    cat: { es: "Motion design", en: "Motion design" },
+    desc: {
+      es: "Secuencia animada que muestra cómo una barra de búsqueda cobra vida con texto y transiciones fluidas.",
+      en: "Animated sequence showing how a search bar comes to life with fluid text and transitions.",
+    },
+    video: "assets/videos/search.mp4",
+    img: "assets/screenshots/search.jpg",
+    color: "#ff8c42",
+  },
 ];
 
 const PROJECTS_DISENO = [
@@ -113,7 +137,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Producción audiovisual y motion design.",
-      count: "1 proyecto",
+      count: "3 proyectos",
       comingSoon: "Próximamente",
       comingSoonDesc: "Los proyectos de video están en producción.",
       process: [
@@ -148,7 +172,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Audiovisual production and motion design.",
-      count: "1 project",
+      count: "3 projects",
       comingSoon: "Coming soon",
       comingSoonDesc: "Video projects are in production.",
       process: [
