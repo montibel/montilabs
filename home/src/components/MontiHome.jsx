@@ -23,8 +23,8 @@ const PROJECTS_DISENO = [
     title: "Fluid Type",
     cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
-      es: "Tipografía con efecto dot-matrix que reacciona al movimiento del cursor en tiempo real.",
-      en: "Dot-matrix typography that reacts to cursor movement in real time.",
+      es: "Tipografía formada por partículas que reacciona al movimiento del cursor en tiempo real.",
+      en: "Typography made of particles that reacts to cursor movement in real time.",
     },
     url: "tipografia/",
     img: "assets/screenshots/fluid-type.jpg",
