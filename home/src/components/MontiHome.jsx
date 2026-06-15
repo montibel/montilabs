@@ -74,7 +74,7 @@ const PROJECTS_DISENO = [
 
 const COPY = {
   es: {
-    eyebrow: "Interfaces · Animaciones · Código creativo",
+    eyebrow: "Diseño Web · Video · Santiago, Chile",
     h1: ["Más allá", "de tu", "imaginación."],
     explore: "Explorar",
     about:
@@ -89,6 +89,11 @@ const COPY = {
       title: "Diseño Web",
       desc: "Interfaces interactivas, tipografía y UI/UX.",
       count: "4 proyectos",
+      process: [
+        { n: "01", title: "Briefing", desc: "Entendemos el proyecto, objetivos y audiencia." },
+        { n: "02", title: "Diseño & Prototipo", desc: "Iteramos hasta que la visión sea clara." },
+        { n: "03", title: "Desarrollo & Entrega", desc: "Código limpio, animaciones y detalle final." },
+      ],
     },
     sectionVideo: {
       title: "Video",
@@ -96,10 +101,15 @@ const COPY = {
       count: "Próximamente",
       comingSoon: "Próximamente",
       comingSoonDesc: "Los proyectos de video están en producción.",
+      process: [
+        { n: "01", title: "Briefing", desc: "Definimos el mensaje, tono y audiencia." },
+        { n: "02", title: "Guión & Storyboard", desc: "Estructuramos la narrativa visual." },
+        { n: "03", title: "Producción & Entrega", desc: "Animación, edición y ajustes finales." },
+      ],
     },
   },
   en: {
-    eyebrow: "Interfaces · Animations · Creative Code",
+    eyebrow: "Web Design · Video · Santiago, Chile",
     h1: ["Beyond", "your", "imagination."],
     explore: "Explore",
     about:
@@ -114,6 +124,11 @@ const COPY = {
       title: "Web Design",
       desc: "Interactive interfaces, typography and UI/UX.",
       count: "4 projects",
+      process: [
+        { n: "01", title: "Briefing", desc: "We understand the project, goals and audience." },
+        { n: "02", title: "Design & Prototype", desc: "We iterate until the vision is clear." },
+        { n: "03", title: "Development & Delivery", desc: "Clean code, animations and final detail." },
+      ],
     },
     sectionVideo: {
       title: "Video",
@@ -121,6 +136,11 @@ const COPY = {
       count: "Coming soon",
       comingSoon: "Coming soon",
       comingSoonDesc: "Video projects are in production.",
+      process: [
+        { n: "01", title: "Briefing", desc: "We define the message, tone and audience." },
+        { n: "02", title: "Script & Storyboard", desc: "We structure the visual narrative." },
+        { n: "03", title: "Production & Delivery", desc: "Animation, editing and final adjustments." },
+      ],
     },
   },
 };
@@ -514,6 +534,71 @@ function CategoryCard({ title, desc, count, color, href, icon, onHover, index })
         }}
       />
     </m.a>
+  );
+}
+
+// ── Process Section ──────────────────────────────────────────────────
+function ProcessSection({ steps, color, wide }) {
+  return (
+    <section style={{ padding: wide ? "0 64px 80px" : "0 24px 64px" }}>
+      <m.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        style={{
+          display: "flex", alignItems: "center", gap: 16, marginBottom: 40,
+        }}
+      >
+        <span style={{
+          fontSize: 11, fontWeight: 500, letterSpacing: "0.2em",
+          textTransform: "uppercase", color: "rgba(240,240,240,0.3)",
+        }}>
+          Proceso
+        </span>
+        <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.06)" }} />
+      </m.div>
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: wide ? "1fr 1fr 1fr" : "1fr",
+        gap: wide ? 0 : 24,
+      }}>
+        {steps.map((step, i) => (
+          <m.div
+            key={step.n}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              padding: wide ? "0 40px 0 0" : 0,
+              borderRight: wide && i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
+              paddingRight: wide && i < 2 ? 40 : 0,
+              paddingLeft: wide && i > 0 ? 40 : 0,
+            }}
+          >
+            <span style={{
+              fontSize: 11, fontWeight: 700, letterSpacing: "0.15em",
+              color, opacity: 0.6, display: "block", marginBottom: 16,
+            }}>
+              {step.n}
+            </span>
+            <p style={{
+              fontSize: 17, fontWeight: 600, color: "#f0f0f0",
+              marginBottom: 10, letterSpacing: "-0.01em",
+            }}>
+              {step.title}
+            </p>
+            <p style={{
+              fontSize: 14, lineHeight: 1.65, color: "rgba(240,240,240,0.4)",
+            }}>
+              {step.desc}
+            </p>
+          </m.div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -960,6 +1045,7 @@ export default function MontiHome() {
                 </div>
               </section>
 
+              <ProcessSection steps={t.sectionDiseno.process} color={ACCENT} wide={wide} />
               <Footer t={t} setHovering={setHovering} />
             </m.div>
           )}
@@ -998,8 +1084,10 @@ export default function MontiHome() {
                 </m.div>
               </section>
 
+              <ProcessSection steps={t.sectionVideo.process} color={ACCENT_VIDEO} wide={wide} />
+
               <section style={{
-                padding: wide ? "48px 64px 120px" : "32px 24px 80px",
+                padding: wide ? "0 64px 120px" : "0 24px 80px",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 minHeight: 320,
               }}>
