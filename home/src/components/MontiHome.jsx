@@ -36,8 +36,8 @@ const PROJECTS_DISENO = [
     title: "Gravity",
     cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
-      es: "Las letras de 'montilabs' flotan en un espacio 3D retro y orbitan el cursor al moverlo.",
-      en: "The letters of 'montilabs' float in a retro 3D space and orbit the cursor as you move it.",
+      es: "Letras flotando en un espacio 3D retro que orbitan el cursor al moverlo.",
+      en: "Letters floating in a retro 3D space that orbit the cursor as you move it.",
     },
     url: "tipografia2/dist/",
     img: "assets/screenshots/gravity.jpg",
