@@ -21,15 +21,14 @@ const PROJECTS_VIDEO = [
   {
     id: "fintech",
     title: "Tutorial Banca Digital",
-    cat: { es: "Videotutorial interactivo", en: "Interactive Video Tutorial" },
+    cat: { es: "Videotutorial", en: "Video Tutorial" },
     desc: {
-      es: "Demo animado que muestra las funciones principales de una app bancaria: login, dashboard, movimientos y transferencias.",
-      en: "Animated demo showing the main features of a banking app: login, dashboard, transactions and transfers.",
+      es: "Recorrido animado por las funciones principales de una app bancaria: login, saldo, movimientos y transferencias.",
+      en: "Animated walkthrough of a banking app's main features: login, balance, transactions and transfers.",
     },
-    url: "fintech/",
+    video: "assets/videos/fintech.mp4",
     img: "assets/screenshots/fintech.jpg",
     color: "#ff8c42",
-    bg: "radial-gradient(ellipse at 60% 40%, rgba(255,140,66,.15) 0%, transparent 70%), #111",
   },
 ];
 
@@ -404,6 +403,83 @@ function HeroLogo({ onHover }) {
 }
 
 // ── Project Card ─────────────────────────────────────────────────────
+function VideoCard({ project, lang, index }) {
+  const t = COPY[lang];
+  const [playing, setPlaying] = React.useState(false);
+  const videoRef = React.useRef(null);
+
+  const toggle = () => {
+    if (!videoRef.current) return;
+    if (playing) { videoRef.current.pause(); setPlaying(false); }
+    else { videoRef.current.play(); setPlaying(true); }
+  };
+
+  return (
+    <m.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        borderRadius: 18,
+        background: "#111",
+        border: "1px solid rgba(255,255,255,0.07)",
+        overflow: "hidden",
+        cursor: "pointer",
+      }}
+      onClick={toggle}
+    >
+      {/* Video */}
+      <div style={{ position: "relative", background: "#000" }}>
+        <video
+          ref={videoRef}
+          src={project.video}
+          poster={project.img}
+          style={{ width: "100%", display: "block", maxHeight: 320, objectFit: "cover" }}
+          onEnded={() => setPlaying(false)}
+        />
+        {/* Play/pause overlay */}
+        {!playing && (
+          <div style={{
+            position: "absolute", inset: 0,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            background: "rgba(0,0,0,0.35)",
+          }}>
+            <div style={{
+              width: 64, height: 64, borderRadius: "50%",
+              background: "rgba(255,255,255,0.15)",
+              backdropFilter: "blur(8px)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              border: "1px solid rgba(255,255,255,0.25)",
+            }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Info */}
+      <div style={{ padding: "20px 24px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
+        <span style={{
+          fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+          padding: "4px 10px", borderRadius: 99, alignSelf: "flex-start",
+          background: project.color + "18", color: project.color,
+        }}>
+          {project.cat[lang]}
+        </span>
+        <span style={{ fontSize: 18, fontWeight: 700, color: "#f0f0f0", letterSpacing: "-0.02em" }}>
+          {project.title}
+        </span>
+        <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.45)", margin: 0 }}>
+          {project.desc[lang]}
+        </p>
+      </div>
+    </m.div>
+  );
+}
+
 function ProjectCard({ project, lang, index, onHover }) {
   const t = COPY[lang];
   return (
@@ -1109,12 +1185,11 @@ export default function MontiHome() {
                   gap: 20,
                 }}>
                   {PROJECTS_VIDEO.map((p, i) => (
-                    <ProjectCard
+                    <VideoCard
                       key={p.id}
                       project={p}
                       lang={lang}
                       index={i}
-                      onHover={setHovering}
                     />
                   ))}
                 </div>
