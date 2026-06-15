@@ -489,6 +489,7 @@ function VideoCard({ project, lang, index }) {
               ref={videoRef}
               src={project.video}
               controls
+              controlsList="nodownload"
               style={{ width: "100%", borderRadius: 12, display: "block", background: "#000" }}
             />
             <button
