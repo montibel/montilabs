@@ -405,8 +405,8 @@ function HeroLogo({ onHover }) {
 // ── Project Card ─────────────────────────────────────────────────────
 function VideoCard({ project, lang, index }) {
   const t = COPY[lang];
-  const [playing, setPlaying] = React.useState(false);
-  const videoRef = React.useRef(null);
+  const [playing, setPlaying] = useState(false);
+  const videoRef = useRef(null);
 
   const toggle = () => {
     if (!videoRef.current) return;
