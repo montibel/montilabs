@@ -83,7 +83,7 @@
 
     /* Phone */
     .ph-o {
-      width: clamp(80px, 15vw, 210px);
+      width: clamp(140px, 24vw, 320px);
       aspect-ratio: 280 / 580;
       background: linear-gradient(160deg, #2a2a2e, #18181b);
       border-radius: 13.5%;
@@ -218,6 +218,75 @@
     .ok-t { font-weight:800; }
     .ok-a { font-size:clamp(7px,1.3vw,16px) !important; font-weight:800 !important; color:#10b981 !important; }
 
+    /* ── Player controls overlay ── */
+    .yt-frame {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+    .yt-spacer { flex: 1; }
+
+    /* Bottom controls */
+    .yt-bottom {
+      background: linear-gradient(to top, rgba(0,0,0,.8) 0%, transparent 100%);
+      padding: 32px 20px 16px;
+      pointer-events: all;
+    }
+
+    /* Seek bar */
+    .yt-prog-wrap {
+      position: relative;
+      height: 4px;
+      background: rgba(255,255,255,.25);
+      border-radius: 2px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+    .yt-prog-wrap:hover { height: 6px; }
+    .yt-prog-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: #fff;
+      border-radius: 2px;
+    }
+    .yt-prog-dot {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 14px; height: 14px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform .15s ease;
+    }
+    .yt-prog-wrap:hover .yt-prog-dot { transform: translate(-50%, -50%) scale(1); }
+
+    /* Controls row */
+    .yt-ctrl-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .yt-btn {
+      background: none; border: none;
+      color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px;
+      border-radius: 4px;
+      opacity: .9;
+      transition: opacity .15s, background .15s;
+    }
+    .yt-btn:hover { opacity: 1; background: rgba(255,255,255,.1); }
+    .yt-btn svg { width: 22px; height: 22px; fill: #fff; }
+    .yt-time {
+      font-size: 13px;
+      color: rgba(255,255,255,.85);
+      font-weight: 500;
+      white-space: nowrap;
+      user-select: none;
+    }
+
     /* Callout */
     .callout { position:absolute; background:#06b6d4; color:#000; font-size:clamp(5px,.8vw,10px); font-weight:700; padding:2px 8px; border-radius:20px; white-space:nowrap; opacity:0; transform:scale(.85); transition:opacity .3s ease, transform .3s ease; pointer-events:none; z-index:30; }
     .callout::after { content:''; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border:4px solid transparent; border-bottom:none; border-top-color:#06b6d4; }
@@ -332,6 +401,33 @@
       </div>
   </div><!-- .vcontent -->
 
+  <!-- Player controls overlay -->
+  <div class="yt-frame" id="ytFrame">
+    <div class="yt-spacer"></div>
+    <div class="yt-bottom">
+      <div class="yt-prog-wrap" id="ytSeek">
+        <div class="yt-prog-fill" id="ytFill" style="width:0%"></div>
+        <div class="yt-prog-dot"  id="ytDot"  style="left:0%"></div>
+      </div>
+      <div class="yt-ctrl-row">
+        <!-- Retrasar 10s -->
+        <button class="yt-btn" id="btnBack" title="Retroceder 10s">
+          <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="14" text-anchor="middle" font-size="5" fill="#fff" font-family="Arial" font-weight="bold">10</text></svg>
+        </button>
+        <!-- Play / Pause -->
+        <button class="yt-btn" id="btnPlay" title="Play/Pausa">
+          <svg id="icoPlay"  viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="icoPause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <!-- Adelantar 10s -->
+        <button class="yt-btn" id="btnFwd" title="Adelantar 10s">
+          <svg viewBox="0 0 24 24"><path d="M18 13c0 3.31-2.69 6-6 6s-6-2.69-6-6 2.69-6 6-6v4l5-5-5-5v4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8h-2z"/><text x="12" y="14" text-anchor="middle" font-size="5" fill="#fff" font-family="Arial" font-weight="bold">10</text></svg>
+        </button>
+        <div class="yt-time" id="ytTime">0:00 / 0:18</div>
+      </div>
+    </div>
+  </div>
+
 <script>
   const TOTAL = 18500;
   const STEPS = [
@@ -417,6 +513,7 @@
     if(!playing)return;
     elapsed=now-startTime;
     tl.forEach(([t,fn],i)=>{if(elapsed>=t&&!fired.has(i)){fired.add(i);fn();}});
+    updateUI();
     if(elapsed>=TOTAL){playing=false;return;}
     rafId=requestAnimationFrame(tick);
   }
@@ -427,9 +524,49 @@
     rafId=requestAnimationFrame(tick);
   }
 
+  // ── Controls ──
+  function seek(ms) {
+    elapsed = Math.max(0, Math.min(ms, TOTAL));
+    fired.clear();
+    // Re-fire all events up to new position
+    tl.forEach(([t,fn],i)=>{ if(t<=elapsed){ fired.add(i); fn(); } });
+    if(playing) startTime = performance.now() - elapsed;
+  }
+
+  function updateUI() {
+    const pct = Math.min(elapsed/TOTAL*100,100).toFixed(1);
+    const fill = document.getElementById('ytFill');
+    const dot  = document.getElementById('ytDot');
+    const time = document.getElementById('ytTime');
+    if(fill) fill.style.width = pct+'%';
+    if(dot)  dot.style.left  = pct+'%';
+    if(time){
+      const s=Math.floor(elapsed/1000), total=Math.floor(TOTAL/1000);
+      time.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / ${Math.floor(total/60)}:${String(total%60).padStart(2,'0')}`;
+    }
+    document.getElementById('icoPlay').style.display  = playing ? 'none' : '';
+    document.getElementById('icoPause').style.display = playing ? ''     : 'none';
+  }
+
+  document.getElementById('btnPlay').addEventListener('click', ()=>{
+    if(playing){ cancelAnimationFrame(rafId); playing=false; }
+    else { if(elapsed>=TOTAL) { elapsed=0; fired.clear(); } play(); }
+    updateUI();
+  });
+
+  document.getElementById('btnBack').addEventListener('click', ()=>{ seek(elapsed-10000); updateUI(); });
+  document.getElementById('btnFwd').addEventListener('click',  ()=>{ seek(elapsed+10000); updateUI(); });
+
+  document.getElementById('ytSeek').addEventListener('click', e=>{
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct  = (e.clientX - rect.left) / rect.width;
+    seek(pct * TOTAL);
+    updateUI();
+  });
+
   window.addEventListener('DOMContentLoaded',()=>{
     tl=buildTL();
-    setTimeout(play,400);
+    setTimeout(()=>{ play(); updateUI(); }, 400);
   });
 </script>
 </body>

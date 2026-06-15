@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CompanyCare Intro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,113 +11,158 @@
     width: 1920px;
     height: 1080px;
     overflow: hidden;
-    background: #061a22;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
   }
 
-  .scene {
-    position: relative;
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  /* ── Ícono ── */
+  .icon { position: relative; width: 220px; height: 203px; flex-shrink: 0; }
+  .icon svg { position: absolute; inset: 0; }
+
+  /* Trazo que se dibuja */
+  .heart-stroke {
+    fill: none;
+    stroke: #2ec4b6;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1;         /* se setea con JS */
+    stroke-dashoffset: 1;
+    animation: drawHeart 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+  }
+
+  /* Relleno que aparece tras el trazo */
+  .heart-fill {
+    fill: #2ec4b6;
+    opacity: 0;
+    animation: fadeUp 0.35s ease 1.05s forwards;
+  }
+
+  /* Trazo se hace invisible cuando se rellena */
+  .heart-stroke-hide {
+    animation: hideStroke 0.1s ease 1.05s forwards;
+  }
+
+  @keyframes drawHeart    { to { stroke-dashoffset: 0; } }
+  @keyframes fadeUp       { to { opacity: 1; } }
+  @keyframes hideStroke   { to { opacity: 0; } }
+
+  /* Persona dentro del corazón */
+  .person-head {
+    opacity: 0;
+    animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) 1.25s forwards;
+  }
+  .person-body {
+    opacity: 0;
+    animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) 1.35s forwards;
+  }
+
+  @keyframes popIn { to { opacity: 1; } }
+
+  /* ── Wordmark ── */
+  .wordmark-wrap {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0;
   }
 
-  /* Accent line that draws from left to right */
-  .line {
-    width: 0;
-    height: 3px;
-    background: #2ec4b6;
-    margin-bottom: 28px;
-    animation: drawLine 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  .wordmark {
+    font-size: 118px;
+    line-height: 1.15;
+    letter-spacing: -5px;
+    white-space: nowrap;
+    color: white;
+    transform: translateY(100%);
+    opacity: 0;
   }
 
-  @keyframes drawLine {
-    to { width: 520px; }
+  .line-company {
+    animation: riseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.3s forwards;
+  }
+  .line-care {
+    animation: riseIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.45s forwards;
   }
 
-  /* Clip container for each word */
-  .clip {
-    overflow: hidden;
-    line-height: 1;
-  }
+  @keyframes riseIn { to { transform: translateY(0); opacity: 1; } }
 
-  .word-company {
-    font-size: 148px;
-    font-weight: 700;
-    letter-spacing: -4px;
-    color: #ffffff;
-    transform: translateY(110%);
-    animation: riseUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
-  }
+  .bold    { font-weight: 700; }
+  .regular { font-weight: 400; color: white; }
 
-  .word-care {
-    font-size: 148px;
-    font-weight: 300;
-    letter-spacing: -4px;
-    color: #2ec4b6;
-    transform: translateY(110%);
-    animation: riseUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
-  }
-
-  @keyframes riseUp {
-    to { transform: translateY(0); }
-  }
-
-  /* Tagline */
+  /* ── Tagline ── */
   .tagline {
-    margin-top: 32px;
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 6px;
+    letter-spacing: 7px;
     text-transform: uppercase;
-    color: #7baab4;
+    color: rgba(46,196,182,0.7);
+    white-space: nowrap;
     opacity: 0;
-    animation: fadeIn 0.6s ease 1.7s forwards;
+    animation: fadeUp 0.6s ease 2.1s forwards;
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; }
+  /* ── Fade out ── */
+  .logo {
+    animation: fadeOutLogo 0.65s ease 4.2s forwards;
   }
-
-  /* Dot accent */
-  .dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: #2ec4b6;
-    border-radius: 50%;
-    margin: 0 10px;
-    vertical-align: middle;
-    position: relative;
-    top: -2px;
-  }
-
-  /* Full-screen fade to black overlay */
-  .fade-out {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    opacity: 0;
-    pointer-events: none;
-    animation: blackout 0.6s ease 4.2s forwards;
-  }
-
-  @keyframes blackout {
-    to { opacity: 1; }
-  }
+  @keyframes fadeOutLogo { to { opacity: 0; } }
 </style>
 </head>
 <body>
-  <div class="scene">
-    <div class="line"></div>
-    <div class="clip"><div class="word-company">Company</div></div>
-    <div class="clip"><div class="word-care">Care</div></div>
-    <div class="tagline">Cuidado con propósito<span class="dot"></span>Santiago, Chile</div>
+
+  <div class="logo">
+
+    <!-- Ícono corazón -->
+    <div class="icon">
+      <!-- Capa 1: trazo animado -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 102" width="220" height="204">
+        <path class="heart-stroke heart-stroke-hide"
+          d="M55 92 C55 81,9 62,9 34 C9 20,16 10,28 10 C36 10,44 14,55 24 C66 14,74 10,82 10 C94 10,101 20,101 34 C101 62,55 81,55 92Z"/>
+      </svg>
+      <!-- Capa 2: relleno + persona -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 102" width="220" height="204">
+        <path class="heart-fill"
+          d="M55 92 C55 81,9 62,9 34 C9 20,16 10,28 10 C36 10,44 14,55 24 C66 14,74 10,82 10 C94 10,101 20,101 34 C101 62,55 81,55 92Z"/>
+        <circle class="person-head" cx="55" cy="39" r="11" fill="#061a22"/>
+        <path class="person-body" d="M39 55 Q55 65 71 55"
+          fill="none" stroke="#061a22" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- Wordmark -->
+    <div class="wordmark-wrap">
+      <div style="overflow:hidden;">
+        <div class="wordmark line-company"><span class="bold">Company</span></div>
+      </div>
+      <div style="overflow:hidden;">
+        <div class="wordmark line-care"><span class="regular">Care</span></div>
+      </div>
+    </div>
+
   </div>
-  <div class="fade-out"></div>
+
+
+  <script>
+    // Calcular longitud real del path para la animación de trazo
+    window.addEventListener('DOMContentLoaded', () => {
+      const path = document.querySelector('.heart-stroke');
+      const len = path.getTotalLength();
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+    });
+  </script>
+
 </body>
 </html>
