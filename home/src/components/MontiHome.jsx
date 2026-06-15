@@ -19,15 +19,15 @@ const GITHUB_PATH =
 
 const PROJECTS_VIDEO = [
   {
-    id: "pizarron",
-    title: "¿Cómo hacer un videotutorial?",
-    cat: { es: "Animación pizarrón", en: "Whiteboard Animation" },
+    id: "fintech",
+    title: "Tutorial Banca Digital",
+    cat: { es: "Videotutorial", en: "Video Tutorial" },
     desc: {
-      es: "Animación estilo pizarrón que explica en pasos cómo crear un videotutorial desde cero.",
-      en: "Whiteboard-style animation explaining step by step how to create a video tutorial from scratch.",
+      es: "Recorrido animado por las funciones principales de una app bancaria.",
+      en: "Animated walkthrough of a banking app's main features.",
     },
-    video: "assets/videos/pizarron.mp4",
-    img: "assets/screenshots/pizarron.jpg",
+    video: "assets/videos/fintech.mp4",
+    img: "assets/screenshots/fintech.jpg",
     color: "#ff8c42",
   },
   {
