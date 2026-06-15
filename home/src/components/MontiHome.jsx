@@ -27,6 +27,7 @@ const PROJECTS_DISENO = [
       en: "Text that responds to movement in real time.",
     },
     url: "tipografia/",
+    img: "assets/screenshots/fluid-type.jpg",
     color: "#c8ff3e",
     bg: "radial-gradient(ellipse at 30% 60%, rgba(200,255,62,.18) 0%, transparent 70%), #111",
   },
@@ -39,6 +40,7 @@ const PROJECTS_DISENO = [
       en: "Particles applied to interactive typography.",
     },
     url: "tipografia2/dist/",
+    img: "assets/screenshots/gravity.jpg",
     color: "#ff8c42",
     bg: "radial-gradient(ellipse at 70% 40%, rgba(255,140,66,.18) 0%, transparent 70%), #111",
   },
@@ -51,6 +53,7 @@ const PROJECTS_DISENO = [
       en: "Animated search sequence and results interaction.",
     },
     url: "uxsim/dist/",
+    img: "assets/screenshots/search.jpg",
     color: "#4bf0c8",
     bg: "radial-gradient(ellipse at 50% 70%, rgba(75,240,200,.15) 0%, transparent 70%), #111",
   },
@@ -63,6 +66,7 @@ const PROJECTS_DISENO = [
       en: "Interactive iOS simulator.",
     },
     url: "iphone/dist/",
+    img: "assets/screenshots/iphone.jpg",
     color: "#bf5af2",
     bg: "radial-gradient(ellipse at 60% 30%, rgba(191,90,242,.18) 0%, transparent 70%), #111",
   },
@@ -75,6 +79,7 @@ const PROJECTS_DISENO = [
       en: "Retro Windows 95 template.",
     },
     url: "win95/",
+    img: "assets/screenshots/win95.jpg",
     color: "#1084d0",
     bg: "radial-gradient(ellipse at 30% 70%, rgba(16,132,208,.18) 0%, transparent 70%), #111",
   },
@@ -393,11 +398,8 @@ function ProjectCard({ project, lang, index, onHover }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
-        padding: 28,
         borderRadius: 18,
-        minHeight: 220,
-        background: project.bg,
+        background: "#111",
         border: "1px solid rgba(255,255,255,0.07)",
         textDecoration: "none",
         cursor: "none",
@@ -405,34 +407,50 @@ function ProjectCard({ project, lang, index, onHover }) {
         overflow: "hidden",
       }}
     >
-      <span style={{
-        display: "inline-block",
-        fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
-        padding: "4px 10px", borderRadius: 99,
-        background: project.color + "18",
-        color: project.color,
-        alignSelf: "flex-start",
-      }}>
-        {project.cat[lang]}
-      </span>
-      <div>
-        <p style={{ fontSize: 20, fontWeight: 600, color: "#f0f0f0", marginBottom: 8 }}>
-          {project.title}
-        </p>
-        <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.45)" }}>
-          {project.desc[lang]}
-        </p>
+      {/* Screenshot */}
+      <div style={{ position: "relative", height: 210, overflow: "hidden", flexShrink: 0 }}>
+        <img
+          src={project.img}
+          alt={project.title}
+          loading="lazy"
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+        {/* Gradient fade into card bottom */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: 80,
+          background: "linear-gradient(to bottom, transparent, #111)",
+          pointerEvents: "none",
+        }} />
       </div>
-      <m.span
-        style={{
-          position: "absolute", bottom: 28, right: 28,
-          fontSize: 13, fontWeight: 500, color: project.color,
-        }}
-        initial={{ opacity: 0, x: -4 }}
-        whileHover={{ opacity: 1, x: 0 }}
-      >
-        {t.open}
-      </m.span>
+
+      {/* Content */}
+      <div style={{ padding: "20px 24px 24px", display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{
+            fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+            padding: "4px 10px", borderRadius: 99,
+            background: project.color + "18",
+            color: project.color,
+          }}>
+            {project.cat[lang]}
+          </span>
+          <m.span
+            style={{ fontSize: 13, fontWeight: 500, color: project.color }}
+            initial={{ opacity: 0, x: -4 }}
+            whileHover={{ opacity: 1, x: 0 }}
+          >
+            {t.open}
+          </m.span>
+        </div>
+        <div>
+          <p style={{ fontSize: 18, fontWeight: 600, color: "#f0f0f0", marginBottom: 6 }}>
+            {project.title}
+          </p>
+          <p style={{ fontSize: 13, lineHeight: 1.6, color: "rgba(240,240,240,0.4)" }}>
+            {project.desc[lang]}
+          </p>
+        </div>
+      </div>
     </m.a>
   );
 }
