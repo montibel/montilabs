@@ -17,6 +17,22 @@ const ACCENT_VIDEO = "#ff8c42";
 const GITHUB_PATH =
   "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z";
 
+const PROJECTS_VIDEO = [
+  {
+    id: "fintech",
+    title: "Tutorial Banca Digital",
+    cat: { es: "Videotutorial interactivo", en: "Interactive Video Tutorial" },
+    desc: {
+      es: "Demo animado que muestra las funciones principales de una app bancaria: login, dashboard, movimientos y transferencias.",
+      en: "Animated demo showing the main features of a banking app: login, dashboard, transactions and transfers.",
+    },
+    url: "fintech/",
+    img: "assets/screenshots/fintech.jpg",
+    color: "#ff8c42",
+    bg: "radial-gradient(ellipse at 60% 40%, rgba(255,140,66,.15) 0%, transparent 70%), #111",
+  },
+];
+
 const PROJECTS_DISENO = [
   {
     id: "fluid-type",
@@ -98,7 +114,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Producción audiovisual y motion design.",
-      count: "Próximamente",
+      count: "1 proyecto",
       comingSoon: "Próximamente",
       comingSoonDesc: "Los proyectos de video están en producción.",
       process: [
@@ -133,7 +149,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Audiovisual production and motion design.",
-      count: "Coming soon",
+      count: "1 project",
       comingSoon: "Coming soon",
       comingSoonDesc: "Video projects are in production.",
       process: [
@@ -1086,41 +1102,22 @@ export default function MontiHome() {
 
               <ProcessSection steps={t.sectionVideo.process} color={ACCENT_VIDEO} wide={wide} />
 
-              <section style={{
-                padding: wide ? "0 64px 120px" : "0 24px 80px",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                minHeight: 320,
-              }}>
-                <m.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  style={{
-                    textAlign: "center", maxWidth: 480,
-                    padding: 64, borderRadius: 24,
-                    background: "rgba(255,140,66,0.04)",
-                    border: "1px solid rgba(255,140,66,0.12)",
-                  }}
-                >
-                  <div style={{
-                    color: ACCENT_VIDEO, opacity: 0.5, marginBottom: 24,
-                    display: "flex", justifyContent: "center",
-                  }}>
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                      <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="1.5" />
-                      <path d="M21 16l10 8-10 8V16z" fill="currentColor" />
-                    </svg>
-                  </div>
-                  <p style={{
-                    fontSize: 24, fontWeight: 700, color: "#f0f0f0",
-                    marginBottom: 12, letterSpacing: "-0.02em",
-                  }}>
-                    {t.sectionVideo.comingSoon}
-                  </p>
-                  <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(240,240,240,0.35)" }}>
-                    {t.sectionVideo.comingSoonDesc}
-                  </p>
-                </m.div>
+              <section style={{ padding: wide ? "0 64px 96px" : "0 24px 64px" }}>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
+                  gap: 20,
+                }}>
+                  {PROJECTS_VIDEO.map((p, i) => (
+                    <ProjectCard
+                      key={p.id}
+                      project={p}
+                      lang={lang}
+                      index={i}
+                      onHover={setHovering}
+                    />
+                  ))}
+                </div>
               </section>
 
               <Footer t={t} setHovering={setHovering} />
