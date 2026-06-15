@@ -23,8 +23,8 @@ const PROJECTS_DISENO = [
     title: "Fluid Type",
     cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
-      es: "Texto que responde al movimiento en tiempo real.",
-      en: "Text that responds to movement in real time.",
+      es: "Tipografía con efecto dot-matrix que reacciona al movimiento del cursor en tiempo real.",
+      en: "Dot-matrix typography that reacts to cursor movement in real time.",
     },
     url: "tipografia/",
     img: "assets/screenshots/fluid-type.jpg",
@@ -36,8 +36,8 @@ const PROJECTS_DISENO = [
     title: "Gravity",
     cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
     desc: {
-      es: "Partículas aplicada a la tipografía interactiva.",
-      en: "Particles applied to interactive typography.",
+      es: "Las letras de 'montilabs' flotan en un espacio 3D retro y orbitan el cursor al moverlo.",
+      en: "The letters of 'montilabs' float in a retro 3D space and orbit the cursor as you move it.",
     },
     url: "tipografia2/dist/",
     img: "assets/screenshots/gravity.jpg",
@@ -49,8 +49,8 @@ const PROJECTS_DISENO = [
     title: "iPhone Home",
     cat: { es: "UI / UX", en: "UI / UX" },
     desc: {
-      es: "Simulador interactivo de iOS.",
-      en: "Interactive iOS simulator.",
+      es: "Réplica funcional de la pantalla de inicio de iOS con animaciones y gestos nativos.",
+      en: "Functional replica of the iOS home screen with native animations and gestures.",
     },
     url: "iphone/dist/",
     img: "assets/screenshots/iphone.jpg",
@@ -62,8 +62,8 @@ const PROJECTS_DISENO = [
     title: "Windows 95",
     cat: { es: "UI / UX", en: "UI / UX" },
     desc: {
-      es: "Plantilla retro de Windows 95.",
-      en: "Retro Windows 95 template.",
+      es: "Template de portfolio con estética Windows 95: ventanas arrastrables, taskbar y menú Start.",
+      en: "Portfolio template with Windows 95 aesthetics: draggable windows, taskbar and Start menu.",
     },
     url: "win95/",
     img: "assets/screenshots/win95.jpg",
@@ -926,12 +926,6 @@ export default function MontiHome() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <p style={{
-                    fontSize: 11, fontWeight: 500, letterSpacing: "0.22em",
-                    textTransform: "uppercase", color: "rgba(240,240,240,0.3)", marginBottom: 12,
-                  }}>
-                    {t.sectionDiseno.count}
-                  </p>
                   <h1 style={{
                     fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 900,
                     letterSpacing: "-0.04em", color: ACCENT, lineHeight: 1,
