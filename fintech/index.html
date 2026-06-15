@@ -6,181 +6,116 @@
   <title>Tutorial Banca Digital — Montilabs</title>
   <meta name="description" content="Tutorial animado de banca digital. Aprende a usar las funciones principales de tu app bancaria."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: #0f0f0f;
-      color: #f1f1f1;
       min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── YT top bar ── */
-    .yt-topbar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 20px;
-      background: #0f0f0f;
-      position: sticky; top: 0; z-index: 100;
-    }
-    .yt-logo {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 20px; font-weight: 700; color: #fff;
-      text-decoration: none; letter-spacing: -.5px;
-    }
-    .yt-logo-icon { color: #ff0000; font-size: 28px; line-height: 1; }
-    .yt-logo span { color: #aaa; font-size: 11px; font-weight: 400; margin-left: 6px; align-self: flex-end; margin-bottom: 2px; }
-    .yt-topbar-right { display: flex; align-items: center; gap: 16px; }
-    .yt-icon-btn { width: 40px; height: 40px; border-radius: 50%; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; }
-    .yt-icon-btn:hover { background: rgba(255,255,255,.1); }
-
-    /* ── Main layout ── */
-    .yt-layout {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px 40px;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-    .yt-main { flex: 1; min-width: 0; }
-    .yt-sidebar {
-      width: 402px;
-      flex-shrink: 0;
-    }
-
-    /* ── Video player ── */
-    .player-wrap {
-      position: relative;
+    /* ── Player ── */
+    .player {
       width: 100%;
+      max-width: 900px;
       aspect-ratio: 16 / 9;
       background: #000;
-      cursor: pointer;
+      position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
-    .player-wrap:hover .yt-controls { opacity: 1; }
+    .player:hover .controls { opacity: 1; }
 
-    /* Video content (the "frame" content) */
-    .video-content {
+    /* ── Video content ── */
+    .vcontent {
       position: absolute; inset: 0;
       display: flex;
     }
 
-    /* Left panel – text */
-    .vid-left {
+    /* Left: caption */
+    .vleft {
       flex: 1;
       display: flex; flex-direction: column; justify-content: center;
-      padding: clamp(16px, 3vw, 48px) clamp(12px, 2.5vw, 40px);
+      padding: clamp(16px, 3.5vw, 52px);
       background: linear-gradient(135deg, #06091a 0%, #0b1120 100%);
       position: relative; overflow: hidden;
     }
-    .vid-left::before {
-      content: '';
-      position: absolute; top: -60px; left: -60px;
+    .vleft::before {
+      content: ''; position: absolute; top: -60px; left: -60px;
       width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(6,182,212,.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(6,182,212,.14) 0%, transparent 70%);
       pointer-events: none;
     }
-    .vid-left::after {
-      content: '';
-      position: absolute; bottom: -40px; right: -20px;
-      width: 150px; height: 150px;
-      background: radial-gradient(circle, rgba(59,130,246,.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
     .cap-step {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(8px, 1.1vw, 12px);
-      font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: #06b6d4;
-      margin-bottom: clamp(4px, .8vw, 10px);
+      font-size: clamp(8px, 1.1vw, 12px); font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; color: #06b6d4;
+      margin-bottom: clamp(4px, .7vw, 10px);
       opacity: 0; transform: translateY(5px);
       transition: opacity .35s ease, transform .35s ease;
     }
     .cap-title {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(11px, 2vw, 24px);
-      font-weight: 800; letter-spacing: -.02em; line-height: 1.2;
-      color: #f8fafc;
-      margin-bottom: clamp(4px, .8vw, 10px);
+      font-size: clamp(12px, 2.2vw, 26px); font-weight: 800;
+      letter-spacing: -.025em; line-height: 1.15; color: #f8fafc;
+      margin-bottom: clamp(4px, .7vw, 10px);
       opacity: 0; transform: translateY(6px);
       transition: opacity .35s ease .07s, transform .35s ease .07s;
     }
     .cap-body {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(8px, 1.1vw, 13px);
-      color: #94a3b8; line-height: 1.55;
+      font-size: clamp(8px, 1.05vw, 13px); color: #94a3b8; line-height: 1.55;
       opacity: 0; transform: translateY(6px);
       transition: opacity .35s ease .14s, transform .35s ease .14s;
     }
     .cap-step.v, .cap-title.v, .cap-body.v { opacity: 1; transform: translateY(0); }
-
     .step-dots {
-      display: flex; gap: 6px; margin-top: clamp(10px, 1.5vw, 20px);
+      display: flex; gap: clamp(4px,.6vw,8px); margin-top: clamp(10px,1.5vw,22px);
       opacity: 0; transform: translateY(4px);
       transition: opacity .35s ease .2s, transform .35s ease .2s;
     }
     .step-dots.v { opacity: 1; transform: translateY(0); }
     .sdot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(255,255,255,.15);
-      transition: background .3s ease, transform .3s ease;
+      width: clamp(4px,.55vw,7px); height: clamp(4px,.55vw,7px); border-radius: 50%;
+      background: rgba(255,255,255,.15); transition: background .3s, transform .3s;
     }
     .sdot.on { background: #06b6d4; transform: scale(1.4); }
     .sdot.done { background: rgba(6,182,212,.35); }
 
-    /* Right panel – phone */
-    .vid-right {
-      width: 45%;
+    /* Right: phone */
+    .vright {
+      width: 44%;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       background: #08090f;
-      position: relative;
-      padding: clamp(8px, 1.5vw, 20px) 0;
+      padding: clamp(8px,1.5vw,24px) 0;
     }
 
-    /* ── Phone ── */
-    .phone-o {
-      width: clamp(100px, 17vw, 220px);
+    /* Phone */
+    .ph-o {
+      width: clamp(80px, 15vw, 210px);
       aspect-ratio: 280 / 580;
-      background: linear-gradient(160deg, #2a2a2e 0%, #18181b 100%);
+      background: linear-gradient(160deg, #2a2a2e, #18181b);
       border-radius: 13.5%;
       padding: 3.5%;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.09),
-        0 20px 50px rgba(0,0,0,.85),
-        inset 0 1px 0 rgba(255,255,255,.12);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.09), 0 20px 50px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.12);
       position: relative;
     }
-    .phone-o::before {
-      content:''; position:absolute; left:-1%; top:20%;
-      width:3%; height:11%; background:#2a2a2e; border-radius:2px 0 0 2px;
-      box-shadow:0 130% 0 #2a2a2e;
+    .ph-o::before { content:''; position:absolute; left:-1%; top:20%; width:3%; height:11%; background:#2a2a2e; border-radius:2px 0 0 2px; box-shadow:0 130% 0 #2a2a2e; }
+    .ph-o::after  { content:''; position:absolute; right:-1%; top:28%; width:3%; height:17%; background:#2a2a2e; border-radius:0 2px 2px 0; }
+    .ph-i {
+      width:100%; height:100%; background:#0f172a; border-radius:11%;
+      overflow:hidden; position:relative; display:flex; flex-direction:column;
     }
-    .phone-o::after {
-      content:''; position:absolute; right:-1%; top:28%;
-      width:3%; height:17%; background:#2a2a2e; border-radius:0 2px 2px 0;
-    }
-    .phone-i {
-      width:100%; height:100%;
-      background:#0f172a; border-radius:11%;
-      overflow:hidden; position:relative;
-      display:flex; flex-direction:column;
-    }
-
-    /* status bar */
     .sbar {
-      flex-shrink:0; display:flex;
-      justify-content:space-between; align-items:center;
-      padding: 8% 10% 2%;
-      font-size: clamp(5px, .9vw, 9px); font-weight:700;
+      flex-shrink:0; display:flex; justify-content:space-between; align-items:center;
+      padding:8% 10% 2%; font-size:clamp(5px,.85vw,9px); font-weight:700; color:#f1f5f9;
     }
-    .sbar-ico { display:flex; gap:3px; align-items:center; }
-
-    /* screens */
+    .sbar-ic { display:flex; gap:3px; align-items:center; }
     .screens { flex:1; position:relative; overflow:hidden; }
     .scr {
       position:absolute; inset:0;
@@ -190,52 +125,21 @@
     }
     .scr.in { opacity:1; transform:translateY(0); }
     .scr.out { opacity:0; transform:translateY(-10px); }
-
-    /* font scaling helper */
-    .phone-i * { font-size: clamp(4px, .85vw, 11px); }
-    .bal-amt-n { font-size: clamp(7px, 1.4vw, 18px) !important; font-weight:800 !important; }
-    .lg { font-size: clamp(5px, .95vw, 12px) !important; }
-    .xl { font-size: clamp(6px, 1.1vw, 14px) !important; }
-    .ok-t { font-size: clamp(6px, 1.05vw, 13px) !important; font-weight:800 !important; }
-    .ok-a { font-size: clamp(8px, 1.4vw, 18px) !important; font-weight:800 !important; color:#10b981 !important; }
+    .ph-i * { font-size:clamp(4px,.82vw,11px); }
+    .fnt-lg  { font-size:clamp(5px,.95vw,12px) !important; font-weight:700 !important; }
+    .fnt-xl  { font-size:clamp(7px,1.35vw,17px) !important; font-weight:800 !important; }
 
     /* LOGIN */
-    .scr-login {
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      padding:10% 8%; gap:0;
-      background:linear-gradient(180deg,#0f172a 0%,#0a1020 100%);
-    }
-    .app-logo {
-      width:16%; aspect-ratio:1;
-      background:linear-gradient(135deg,#06b6d4,#3b82f6);
-      border-radius:22%;
-      display:flex; align-items:center; justify-content:center;
-      margin-bottom:5%;
-      box-shadow:0 4px 14px rgba(6,182,212,.28);
-    }
+    .scr-login { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10% 8%; background:linear-gradient(180deg,#0f172a,#0a1020); }
+    .app-logo { width:16%; aspect-ratio:1; background:linear-gradient(135deg,#06b6d4,#3b82f6); border-radius:22%; display:flex; align-items:center; justify-content:center; margin-bottom:5%; box-shadow:0 4px 14px rgba(6,182,212,.28); }
     .app-logo svg { width:55%; height:55%; }
     .app-name { font-weight:700; margin-bottom:2%; }
-    .app-sub { color:#64748b; margin-bottom:10%; }
-    .login-ask { color:#94a3b8; margin-bottom:5%; }
+    .app-sub  { color:#64748b; margin-bottom:10%; }
+    .ask { color:#94a3b8; margin-bottom:5%; }
     .pin-row { display:flex; gap:8%; margin-bottom:8%; }
-    .pd {
-      width:10%; aspect-ratio:1; border-radius:50%;
-      border:1.5px solid rgba(255,255,255,.2);
-      transition:all .18s ease;
-    }
-    .pd.on {
-      background:#06b6d4; border-color:#06b6d4;
-      box-shadow:0 0 6px rgba(6,182,212,.55);
-      transform:scale(1.15);
-    }
-    .bio {
-      width:13%; aspect-ratio:1; border-radius:50%;
-      border:1.5px solid rgba(6,182,212,.3);
-      display:flex; align-items:center; justify-content:center;
-      color:#06b6d4; opacity:0;
-      transition:opacity .3s ease, box-shadow .3s ease;
-    }
+    .pd { width:10%; aspect-ratio:1; border-radius:50%; border:1.5px solid rgba(255,255,255,.2); transition:all .18s ease; }
+    .pd.on { background:#06b6d4; border-color:#06b6d4; box-shadow:0 0 6px rgba(6,182,212,.55); transform:scale(1.15); }
+    .bio { width:13%; aspect-ratio:1; border-radius:50%; border:1.5px solid rgba(6,182,212,.3); display:flex; align-items:center; justify-content:center; color:#06b6d4; opacity:0; transition:opacity .3s ease; }
     .bio svg { width:55%; height:55%; }
     .bio.show { opacity:1; }
     .bio.pulse { border-color:#06b6d4; animation:bw .9s ease-out forwards; }
@@ -245,88 +149,52 @@
     .scr-dash { background:#0f172a; display:flex; flex-direction:column; }
     .dtop { padding:4% 6% 3%; flex-shrink:0; }
     .dhi { color:#64748b; margin-bottom:1%; }
-    .dname { font-weight:700; }
-    .bcard {
-      margin:0 5% 3%; flex-shrink:0;
-      background:linear-gradient(135deg,#162040,#0d1a35);
-      border-radius:8%; padding:5%;
-      border:1px solid rgba(255,255,255,.06);
-    }
+    .bcard { margin:0 5% 3%; background:linear-gradient(135deg,#162040,#0d1a35); border-radius:8%; padding:5%; border:1px solid rgba(255,255,255,.06); flex-shrink:0; }
     .blbl { color:#64748b; text-transform:uppercase; letter-spacing:.06em; margin-bottom:2%; }
-    .bamt { font-weight:800; margin-bottom:4%; }
+    .bamt { margin-bottom:4%; }
     .brow { display:flex; gap:10%; }
-    .bsl { color:#64748b; margin-bottom:1%; }
-    .bsv { font-weight:600; }
+    .bsl  { color:#64748b; margin-bottom:1%; }
+    .bsv  { font-weight:600; }
     .qrow { display:flex; justify-content:space-around; padding:0 5% 3%; flex-shrink:0; }
-    .qa {
-      display:flex; flex-direction:column; align-items:center; gap:3%;
-      opacity:0; transform:translateY(4px);
-      transition:opacity .25s ease, transform .25s ease;
-    }
+    .qa { display:flex; flex-direction:column; align-items:center; gap:3%; opacity:0; transform:translateY(4px); transition:opacity .25s ease, transform .25s ease; }
     .qa.sh { opacity:1; transform:translateY(0); }
-    .qaico {
-      width:clamp(18px,3vw,38px); aspect-ratio:1;
-      background:#1e293b; border-radius:25%;
-      display:flex; align-items:center; justify-content:center;
-      color:#06b6d4; border:1px solid rgba(255,255,255,.06);
-      margin-bottom:2px;
-    }
+    .qaico { width:clamp(16px,2.8vw,36px); aspect-ratio:1; background:#1e293b; border-radius:25%; display:flex; align-items:center; justify-content:center; color:#06b6d4; border:1px solid rgba(255,255,255,.06); margin-bottom:2px; }
     .qaico svg { width:45%; height:45%; }
     .qalbl { color:#64748b; }
-    .srow { display:flex; justify-content:space-between; align-items:center; padding:0 6% 2%; flex-shrink:0; }
-    .stitle { font-weight:600; }
-    .slink { color:#3b82f6; font-weight:500; }
-    .tx {
-      display:flex; align-items:center; gap:4%; padding:2% 6%;
-      opacity:0; transform:translateX(-5px);
-      transition:opacity .3s ease, transform .3s ease; flex-shrink:0;
-    }
+    .srow { display:flex; justify-content:space-between; padding:0 6% 2%; flex-shrink:0; }
+    .stit { font-weight:600; }
+    .slnk { color:#3b82f6; font-weight:500; }
+    .tx { display:flex; align-items:center; gap:4%; padding:2% 6%; opacity:0; transform:translateX(-5px); transition:opacity .3s ease, transform .3s ease; flex-shrink:0; }
     .tx.sh { opacity:1; transform:translateX(0); }
-    .txic { width:clamp(14px,2.4vw,30px); aspect-ratio:1; border-radius:30%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .txic { width:clamp(12px,2.2vw,28px); aspect-ratio:1; border-radius:30%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:clamp(6px,1vw,13px) !important; }
     .txinf { flex:1; }
     .txnm { font-weight:500; margin-bottom:1%; }
     .txdt { color:#64748b; }
     .txam { font-weight:700; }
-    .neg { color:#ef4444; }
-    .pos { color:#10b981; }
-    .bnav {
-      flex-shrink:0; padding:2% 0 3%;
-      background:rgba(9,13,23,.9);
-      border-top:1px solid rgba(255,255,255,.06);
-      display:flex; justify-content:space-around; align-items:center;
-    }
+    .neg { color:#ef4444; } .pos { color:#10b981; }
+    .bnav { flex-shrink:0; padding:2% 0 3%; background:rgba(9,13,23,.9); border-top:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-around; align-items:center; }
     .bni { display:flex; flex-direction:column; align-items:center; gap:1px; color:#475569; }
-    .bni svg { width:clamp(10px,1.8vw,20px); height:clamp(10px,1.8vw,20px); }
-    .bni span { font-size: clamp(3px, .55vw, 7px) !important; }
+    .bni svg { width:clamp(9px,1.7vw,20px); height:clamp(9px,1.7vw,20px); }
+    .bni span { font-size:clamp(3px,.5vw,6px) !important; }
     .bni.act { color:#06b6d4; }
 
     /* MOVIMIENTOS */
     .scr-mov { background:#0f172a; display:flex; flex-direction:column; }
     .shdr { display:flex; align-items:center; gap:4%; padding:4% 6% 3%; flex-shrink:0; }
-    .bico { width:clamp(10px,1.8vw,22px); height:clamp(10px,1.8vw,22px); display:flex; align-items:center; justify-content:center; color:#94a3b8; }
+    .bico { width:clamp(9px,1.6vw,20px); height:clamp(9px,1.6vw,20px); display:flex; align-items:center; justify-content:center; color:#94a3b8; }
     .bico svg { width:100%; height:100%; }
-    .shtitle { font-weight:700; }
+    .shtit { font-weight:700; }
     .chips { display:flex; gap:3%; padding:0 6% 3%; flex-shrink:0; overflow:hidden; }
-    .chip { padding:2% 5%; border-radius:20px; border:1px solid rgba(255,255,255,.1); color:#64748b; white-space:nowrap; font-weight:500; }
+    .chip { padding:2% 5%; border-radius:20px; border:1px solid rgba(255,255,255,.1); color:#64748b; white-space:nowrap; }
     .chip.act { background:rgba(6,182,212,.1); border-color:rgba(6,182,212,.3); color:#06b6d4; }
-    .smbar {
-      margin:0 5% 3%; flex-shrink:0;
-      background:#1e293b; border-radius:8%; padding:4% 5%;
-      display:flex; justify-content:space-between;
-      border:1px solid rgba(255,255,255,.06);
-    }
+    .smbar { margin:0 5% 3%; background:#1e293b; border-radius:8%; padding:4% 5%; display:flex; justify-content:space-between; border:1px solid rgba(255,255,255,.06); flex-shrink:0; }
     .sml { color:#64748b; text-transform:uppercase; letter-spacing:.06em; margin-bottom:2%; }
     .smv { font-weight:700; }
     .dg { padding:2% 6% 1%; color:#64748b; text-transform:uppercase; letter-spacing:.06em; font-weight:700; opacity:0; transition:opacity .3s ease; flex-shrink:0; }
     .dg.sh { opacity:1; }
-    .mv {
-      display:flex; align-items:center; gap:4%; padding:3% 6%;
-      border-bottom:1px solid rgba(255,255,255,.04); flex-shrink:0;
-      opacity:0; transform:translateY(3px);
-      transition:opacity .3s ease, transform .3s ease;
-    }
+    .mv { display:flex; align-items:center; gap:4%; padding:3% 6%; border-bottom:1px solid rgba(255,255,255,.04); flex-shrink:0; opacity:0; transform:translateY(3px); transition:opacity .3s ease, transform .3s ease; }
     .mv.sh { opacity:1; transform:translateY(0); }
-    .mvic { width:clamp(14px,2.4vw,30px); aspect-ratio:1; border-radius:30%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .mvic { width:clamp(12px,2.2vw,28px); aspect-ratio:1; border-radius:30%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:clamp(6px,1vw,13px) !important; }
     .mvinf { flex:1; }
     .mvnm { font-weight:500; margin-bottom:1%; }
     .mvcat { color:#64748b; }
@@ -340,756 +208,350 @@
     .fld { opacity:0; transform:translateY(4px); transition:opacity .3s ease, transform .3s ease; }
     .fld.sh { opacity:1; transform:translateY(0); }
     .flbl { color:#64748b; text-transform:uppercase; letter-spacing:.07em; font-weight:700; margin-bottom:2%; }
-    .fbox {
-      background:#1e293b; border-radius:8%; padding:4% 5%;
-      border:1px solid rgba(255,255,255,.06);
-      display:flex; align-items:center; gap:4%;
-      transition:border-color .25s ease;
-    }
+    .fbox { background:#1e293b; border-radius:8%; padding:4% 5%; border:1px solid rgba(255,255,255,.06); display:flex; align-items:center; gap:4%; transition:border-color .25s ease; }
     .fbox.foc { border-color:rgba(6,182,212,.45); box-shadow:0 0 0 2px rgba(6,182,212,.08); }
     .fval { flex:1; font-weight:500; }
     .fph { color:#475569; }
     .cur { width:1.5px; height:70%; background:#06b6d4; border-radius:1px; display:none; animation:bl .75s ease-in-out infinite; }
     .fbox.foc .cur { display:block; }
     @keyframes bl { 0%,100%{opacity:1}50%{opacity:0} }
-    .cchip {
-      display:flex; align-items:center; gap:5%;
-      background:rgba(6,182,212,.08); border-radius:8%; padding:3% 5%;
-      border:1px solid rgba(6,182,212,.18); margin-top:3%;
-      opacity:0; transform:scale(.95);
-      transition:opacity .3s ease, transform .3s ease;
-    }
+    .cchip { display:flex; align-items:center; gap:5%; background:rgba(6,182,212,.08); border-radius:8%; padding:3% 5%; border:1px solid rgba(6,182,212,.18); margin-top:3%; opacity:0; transform:scale(.95); transition:opacity .3s ease, transform .3s ease; }
     .cchip.sh { opacity:1; transform:scale(1); }
-    .cav {
-      width:clamp(12px,2vw,26px); aspect-ratio:1; border-radius:50%;
-      background:linear-gradient(135deg,#06b6d4,#3b82f6);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:800; flex-shrink:0; color:#fff;
-    }
+    .cav { width:clamp(10px,1.9vw,24px); aspect-ratio:1; border-radius:50%; background:linear-gradient(135deg,#06b6d4,#3b82f6); display:flex; align-items:center; justify-content:center; font-weight:800; flex-shrink:0; color:#fff; }
     .cnm { font-weight:600; margin-bottom:1%; }
     .cbnk { color:#64748b; }
-    .tbtn {
-      background:linear-gradient(135deg,#06b6d4,#3b82f6);
-      border:none; border-radius:8%; padding:4% 5%;
-      color:#fff; font-weight:700; cursor:pointer;
-      opacity:0; transform:translateY(4px);
-      transition:opacity .3s ease, transform .3s ease, filter .2s ease;
-      text-align:center;
-    }
+    .tbtn { width:100%; background:linear-gradient(135deg,#06b6d4,#3b82f6); border:none; border-radius:8%; padding:4% 5%; color:#fff; font-weight:700; cursor:pointer; opacity:0; transform:translateY(4px); transition:opacity .3s ease, transform .3s ease, filter .2s ease; text-align:center; }
     .tbtn.sh { opacity:1; transform:translateY(0); }
     .tbtn.press { filter:brightness(.82); transform:scale(.97); }
-    .suclay {
-      position:absolute; inset:0;
-      background:rgba(9,13,23,.94);
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:4%;
-      opacity:0; pointer-events:none;
-      transition:opacity .4s ease; z-index:10;
-    }
+    .suclay { position:absolute; inset:0; background:rgba(9,13,23,.94); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4%; opacity:0; pointer-events:none; transition:opacity .4s ease; z-index:10; }
     .suclay.sh { opacity:1; }
-    .chkring {
-      width:clamp(22px,3.8vw,48px); aspect-ratio:1;
-      border:2px solid #10b981; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(16,185,129,.1);
-    }
+    .chkring { width:clamp(20px,3.5vw,44px); aspect-ratio:1; border:2px solid #10b981; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(16,185,129,.1); }
     .chkring svg { width:70%; height:70%; }
-    .chkp {
-      stroke-dasharray:34; stroke-dashoffset:34;
-      transition:stroke-dashoffset .55s ease .25s;
-    }
+    .chkp { stroke-dasharray:34; stroke-dashoffset:34; transition:stroke-dashoffset .55s ease .25s; }
     .suclay.sh .chkp { stroke-dashoffset:0; }
+    .ok-t { font-weight:800; }
+    .ok-a { font-size:clamp(7px,1.3vw,16px) !important; font-weight:800 !important; color:#10b981 !important; }
 
     /* Callout */
-    .callout {
-      position:absolute;
-      background:#06b6d4; color:#000;
-      font-size:clamp(6px,.9vw,11px); font-weight:700;
-      padding:3px 10px; border-radius:20px; white-space:nowrap;
-      opacity:0; transform:scale(.85);
-      transition:opacity .3s ease, transform .3s ease;
-      pointer-events:none; z-index:30;
-    }
-    .callout::after {
-      content:''; position:absolute;
-      left:50%; bottom:-5px; transform:translateX(-50%);
-      border:5px solid transparent; border-bottom:none;
-      border-top-color:#06b6d4;
-    }
+    .callout { position:absolute; background:#06b6d4; color:#000; font-size:clamp(5px,.8vw,10px); font-weight:700; padding:2px 8px; border-radius:20px; white-space:nowrap; opacity:0; transform:scale(.85); transition:opacity .3s ease, transform .3s ease; pointer-events:none; z-index:30; }
+    .callout::after { content:''; position:absolute; left:50%; bottom:-4px; transform:translateX(-50%); border:4px solid transparent; border-bottom:none; border-top-color:#06b6d4; }
     .callout.sh { opacity:1; transform:scale(1); }
 
-    /* ── Thumbnail overlay ── */
-    .thumb {
-      position:absolute; inset:0; z-index:50;
-      background:#000;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center; gap:16px;
-      cursor:pointer;
-      transition:opacity .3s ease;
-    }
+    /* Thumbnail */
+    .thumb { position:absolute; inset:0; z-index:50; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; cursor:pointer; transition:opacity .3s ease; }
     .thumb.gone { opacity:0; pointer-events:none; }
-    .thumb-bg {
-      position:absolute; inset:0;
-      background:linear-gradient(135deg, #060913 0%, #0b1a35 50%, #060913 100%);
-    }
-    .thumb-tag {
-      position:relative; z-index:1;
-      font-family:'Inter',sans-serif;
-      font-size:clamp(10px,1.2vw,14px); font-weight:700;
-      letter-spacing:.1em; text-transform:uppercase;
-      color:#06b6d4; margin-bottom:4px;
-    }
-    .thumb-title {
-      position:relative; z-index:1;
-      font-family:'Inter',sans-serif;
-      font-size:clamp(14px,2.5vw,30px); font-weight:800;
-      letter-spacing:-.02em; text-align:center;
-      color:#f8fafc; max-width:60%; line-height:1.2;
-    }
-    .thumb-sub {
-      position:relative; z-index:1;
-      font-size:clamp(9px,1.1vw,13px); color:#64748b;
-    }
-    .thumb-play {
-      position:relative; z-index:1;
-      width:clamp(44px,6vw,72px); height:clamp(44px,6vw,72px);
-      background:rgba(255,255,255,.95); border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      transition:transform .2s ease, background .2s ease;
-    }
-    .thumb:hover .thumb-play { transform:scale(1.08); background:#fff; }
+    .thumb-bg { position:absolute; inset:0; background:linear-gradient(135deg,#060913 0%,#0b1a35 50%,#060913 100%); }
+    .thumb-tag { position:relative; z-index:1; font-size:clamp(9px,1.1vw,13px); font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#06b6d4; }
+    .thumb-title { position:relative; z-index:1; font-size:clamp(14px,2.4vw,28px); font-weight:800; letter-spacing:-.02em; text-align:center; color:#f8fafc; max-width:60%; line-height:1.2; }
+    .thumb-sub { position:relative; z-index:1; font-size:clamp(9px,1vw,13px); color:#64748b; }
+    .thumb-play { position:relative; z-index:1; width:clamp(44px,6vw,72px); height:clamp(44px,6vw,72px); background:rgba(255,255,255,.95); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:transform .2s ease; }
+    .thumb:hover .thumb-play { transform:scale(1.08); }
     .thumb-play svg { width:38%; height:38%; margin-left:8%; fill:#000; }
-    .thumb-duration {
-      position:absolute; bottom:10px; right:10px; z-index:1;
-      background:rgba(0,0,0,.8); color:#fff;
-      font-size:clamp(8px,1vw,12px); font-weight:700;
-      padding:2px 6px; border-radius:3px;
-    }
+    .thumb-dur { position:absolute; bottom:10px; right:10px; z-index:1; background:rgba(0,0,0,.8); color:#fff; font-size:clamp(9px,1.1vw,13px); font-weight:700; padding:2px 7px; border-radius:3px; }
 
-    /* ── YT Controls ── */
-    .yt-controls {
-      position:absolute; bottom:0; left:0; right:0;
-      background:linear-gradient(transparent, rgba(0,0,0,.85));
-      padding:24px 12px 10px;
-      opacity:0;
-      transition:opacity .25s ease;
-      z-index:40;
-    }
-    .player-wrap.started .yt-controls { opacity:1; }
-    .player-wrap.started:hover .yt-controls { opacity:1; }
-
-    .yt-progress {
-      width:100%; height:3px; background:rgba(255,255,255,.25);
-      border-radius:2px; margin-bottom:8px; cursor:pointer; position:relative;
-    }
-    .yt-progress:hover { height:5px; margin-bottom:6px; }
-    .yt-buf {
-      position:absolute; left:0; top:0; height:100%;
-      background:rgba(255,255,255,.3); border-radius:2px;
-      width:30%; transition:width 2s ease;
-    }
-    .yt-bar {
-      position:absolute; left:0; top:0; height:100%;
-      background:#ff0000; border-radius:2px;
-      width:0%; transition:width .1s linear;
-    }
-    .yt-prog-dot {
-      position:absolute; right:-5px; top:50%; transform:translateY(-50%);
-      width:12px; height:12px; background:#ff0000; border-radius:50%;
-      opacity:0; transition:opacity .2s ease;
-    }
-    .yt-progress:hover .yt-prog-dot { opacity:1; }
-
-    .yt-ctrl-row {
-      display:flex; align-items:center; gap:4px;
-    }
-    .yc { background:none; border:none; cursor:pointer; color:#fff; padding:4px; display:flex; align-items:center; justify-content:center; border-radius:4px; }
+    /* Controls */
+    .controls { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,.88)); padding:28px 12px 10px; opacity:0; transition:opacity .25s ease; z-index:40; }
+    .player.on .controls { opacity:1; }
+    .player.on:hover .controls { opacity:1; }
+    .prog { width:100%; height:3px; background:rgba(255,255,255,.25); border-radius:2px; margin-bottom:8px; cursor:pointer; position:relative; }
+    .prog:hover { height:5px; margin-bottom:6px; }
+    .prog-buf { position:absolute; left:0; top:0; height:100%; background:rgba(255,255,255,.28); border-radius:2px; width:28%; }
+    .prog-bar { position:absolute; left:0; top:0; height:100%; background:#ff0000; border-radius:2px; width:0%; transition:width .1s linear; }
+    .prog-dot { position:absolute; right:-5px; top:50%; transform:translateY(-50%); width:12px; height:12px; background:#ff0000; border-radius:50%; opacity:0; transition:opacity .2s ease; }
+    .prog:hover .prog-dot { opacity:1; }
+    .ctrl-row { display:flex; align-items:center; gap:4px; }
+    .yc { background:none; border:none; cursor:pointer; color:#fff; padding:5px; display:flex; align-items:center; justify-content:center; border-radius:4px; }
     .yc:hover { background:rgba(255,255,255,.1); }
-    .yc svg { width:20px; height:20px; }
-    .yt-time { font-size:12px; color:#fff; margin:0 4px; white-space:nowrap; font-variant-numeric:tabular-nums; }
-    .yt-spacer { flex:1; }
-    .yt-vol-wrap { display:flex; align-items:center; gap:4px; }
-    .yt-vol-bar { width:52px; height:3px; background:rgba(255,255,255,.3); border-radius:2px; position:relative; }
-    .yt-vol-fill { height:100%; width:75%; background:#fff; border-radius:2px; }
-
-    /* ── Video info below player ── */
-    .vid-info { padding: 12px 0 0; }
-    .vid-title {
-      font-size:18px; font-weight:700; line-height:1.3;
-      color:#f1f1f1; margin-bottom:10px;
-    }
-    .vid-meta {
-      display:flex; align-items:center; justify-content:space-between;
-      flex-wrap:wrap; gap:8px;
-    }
-    .vid-views { font-size:14px; color:#aaa; }
-    .vid-actions { display:flex; align-items:center; gap:4px; }
-    .yt-action-btn {
-      display:flex; align-items:center; gap:6px;
-      background:#272727; border:none; border-radius:20px;
-      color:#f1f1f1; font-size:14px; font-weight:500;
-      padding:8px 14px; cursor:pointer;
-      transition:background .2s ease;
-    }
-    .yt-action-btn:hover { background:#3f3f3f; }
-    .yt-action-btn svg { width:18px; height:18px; }
-    .yt-like-group {
-      display:flex; background:#272727; border-radius:20px; overflow:hidden;
-    }
-    .yt-like-group .yt-action-btn { border-radius:0; }
-    .yt-like-group .yt-action-btn:first-child { border-right:1px solid #404040; }
-
-    /* Channel row */
-    .channel-row {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 0; border-top:1px solid #272727; border-bottom:1px solid #272727;
-      margin:10px 0;
-    }
-    .channel-left { display:flex; align-items:center; gap:12px; }
-    .ch-avatar {
-      width:40px; height:40px; border-radius:50%;
-      background:linear-gradient(135deg,#06b6d4,#3b82f6);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:800; font-size:16px; color:#fff; flex-shrink:0;
-    }
-    .ch-name { font-size:15px; font-weight:600; color:#f1f1f1; }
-    .ch-subs { font-size:13px; color:#aaa; }
-    .subscribe-btn {
-      background:#fff; color:#0f0f0f; border:none;
-      padding:9px 18px; border-radius:20px;
-      font-size:14px; font-weight:700; cursor:pointer;
-      transition:background .2s ease;
-    }
-    .subscribe-btn:hover { background:#e5e5e5; }
-
-    /* Description */
-    .vid-desc {
-      background:#272727; border-radius:12px; padding:12px 14px;
-      font-size:14px; line-height:1.55; color:#f1f1f1;
-    }
-    .vid-desc strong { display:block; margin-bottom:6px; }
-    .vid-desc span { color:#aaa; }
-
-    /* ── Sidebar ── */
-    .sidebar-title { font-size:15px; font-weight:700; margin-bottom:12px; }
-    .sug {
-      display:flex; gap:8px; margin-bottom:10px; cursor:pointer;
-      padding:4px; border-radius:8px; text-decoration:none; color:inherit;
-      transition:background .2s ease;
-    }
-    .sug:hover { background:#272727; }
-    .sug-thumb {
-      width:168px; flex-shrink:0; aspect-ratio:16/9;
-      border-radius:6px; overflow:hidden; position:relative;
-    }
-    .sug-thumb-bg {
-      width:100%; height:100%;
-      display:flex; align-items:center; justify-content:center;
-      font-size:24px;
-    }
-    .sug-dur {
-      position:absolute; bottom:3px; right:4px;
-      background:rgba(0,0,0,.8); color:#fff;
-      font-size:11px; font-weight:700; padding:1px 4px; border-radius:2px;
-    }
-    .sug-info { flex:1; min-width:0; }
-    .sug-title { font-size:14px; font-weight:600; line-height:1.3; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-    .sug-ch { font-size:12px; color:#aaa; }
-    .sug-views { font-size:12px; color:#aaa; }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .yt-layout { flex-direction:column; padding:0 12px 40px; }
-      .yt-sidebar { width:100%; }
-      .sug-thumb { width:120px; }
-    }
-    @media (max-width:600px) {
-      .vid-left { padding:12px; }
-      .vid-right { width:42%; }
-      .yt-vol-wrap { display:none; }
-    }
+    .yc svg { width:22px; height:22px; }
+    .yt-time { font-size:13px; color:#fff; margin:0 4px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .spacer { flex:1; }
+    .vol-w { display:flex; align-items:center; gap:4px; }
+    .vol-bar { width:56px; height:3px; background:rgba(255,255,255,.3); border-radius:2px; }
+    .vol-fill { height:100%; width:75%; background:#fff; border-radius:2px; }
   </style>
 </head>
 <body>
 
-  <!-- YouTube top bar -->
-  <div class="yt-topbar">
-    <a class="yt-logo" href="../index.html">
-      <span class="yt-logo-icon">▶</span>
-      <span style="font-weight:700;font-size:20px">Montilabs</span>
-      <span>STUDIO</span>
-    </a>
-    <div class="yt-topbar-right">
-      <button class="yt-icon-btn" title="Buscar">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
-      <button class="yt-icon-btn" title="Notificaciones">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-      </button>
-      <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#06b6d4,#3b82f6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;cursor:pointer">M</div>
-    </div>
-  </div>
+  <div class="player" id="player">
 
-  <div class="yt-layout">
-    <div class="yt-main">
+    <div class="vcontent">
+      <!-- Caption -->
+      <div class="vleft">
+        <div class="cap-step"  id="capStep"></div>
+        <div class="cap-title" id="capTitle"></div>
+        <div class="cap-body"  id="capBody"></div>
+        <div class="step-dots" id="stepDots">
+          <div class="sdot" id="sd0"></div><div class="sdot" id="sd1"></div>
+          <div class="sdot" id="sd2"></div><div class="sdot" id="sd3"></div>
+          <div class="sdot" id="sd4"></div>
+        </div>
+      </div>
 
-      <!-- Player -->
-      <div class="player-wrap" id="playerWrap">
-
-        <!-- Video content -->
-        <div class="video-content">
-          <!-- Left: caption -->
-          <div class="vid-left">
-            <div class="cap-step" id="capStep"></div>
-            <div class="cap-title" id="capTitle"></div>
-            <div class="cap-body" id="capBody"></div>
-            <div class="step-dots" id="stepDots">
-              <div class="sdot" id="sd0"></div>
-              <div class="sdot" id="sd1"></div>
-              <div class="sdot" id="sd2"></div>
-              <div class="sdot" id="sd3"></div>
-              <div class="sdot" id="sd4"></div>
-            </div>
-          </div>
-
-          <!-- Right: phone -->
-          <div class="vid-right">
-            <div class="phone-o">
-              <div class="phone-i">
-                <div class="sbar">
-                  <span>9:41</span>
-                  <div class="sbar-ico">
-                    <svg width="10" height="8" viewBox="0 0 15 11" fill="none"><rect x="0" y="7" width="2.5" height="4" fill="white" rx=".4"/><rect x="4" y="4.5" width="2.5" height="6.5" fill="white" rx=".4"/><rect x="8" y="2" width="2.5" height="9" fill="white" rx=".4"/><rect x="12" y="0" width="2.5" height="11" fill="white" rx=".4" opacity=".4"/></svg>
-                    <svg width="12" height="8" viewBox="0 0 21 11" fill="none"><rect x=".5" y=".5" width="17" height="10" rx="2" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="1.5" width="12" height="8" rx="1" fill="white"/><path d="M19 3.5v4a2 2 0 0 0 0-4z" fill="white" opacity=".35"/></svg>
-                  </div>
-                </div>
-                <div class="screens">
-
-                  <!-- LOGIN -->
-                  <div class="scr scr-login" id="scrLogin">
-                    <div class="app-logo">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-                    </div>
-                    <div class="app-name lg">FinDemo</div>
-                    <div class="app-sub">Banca Digital</div>
-                    <div class="login-ask">Ingresa tu PIN</div>
-                    <div class="pin-row"><div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div><div class="pd" id="pd3"></div></div>
-                    <div class="bio" id="bio">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                    </div>
-                  </div>
-
-                  <!-- DASHBOARD -->
-                  <div class="scr scr-dash" id="scrDash">
-                    <div class="dtop"><div class="dhi">Bienvenida 👋</div><div class="dname lg">María González</div></div>
-                    <div class="bcard">
-                      <div class="blbl">Saldo disponible</div>
-                      <div class="bamt bal-amt-n"><span style="font-size:60%;font-weight:500;opacity:.7">$</span><span id="balNum">0</span></div>
-                      <div class="brow"><div><div class="bsl">Crédito</div><div class="bsv">$500.000</div></div><div><div class="bsl">Ahorro</div><div class="bsv">$320.000</div></div></div>
-                    </div>
-                    <div class="qrow">
-                      <div class="qa" id="qa0"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="qalbl">Transferir</div></div>
-                      <div class="qa" id="qa1"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="qalbl">Pagar</div></div>
-                      <div class="qa" id="qa2"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div><div class="qalbl">Recargar</div></div>
-                      <div class="qa" id="qa3"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="qalbl">Más</div></div>
-                    </div>
-                    <div class="srow"><span class="stitle">Últimos movimientos</span><span class="slink">Ver todos</span></div>
-                    <div class="tx" id="tx0"><div class="txic" style="background:rgba(6,182,212,.12)"><span>🛒</span></div><div class="txinf"><div class="txnm">Supermercado</div><div class="txdt">Hoy, 10:23</div></div><div class="txam neg">-$32.500</div></div>
-                    <div class="tx" id="tx1"><div class="txic" style="background:rgba(16,185,129,.12)"><span>💰</span></div><div class="txinf"><div class="txnm">Transferencia</div><div class="txdt">Ayer, 14:05</div></div><div class="txam pos">+$150.000</div></div>
-                    <div class="tx" id="tx2"><div class="txic" style="background:rgba(239,68,68,.12)"><span>🎬</span></div><div class="txinf"><div class="txnm">Netflix</div><div class="txdt">13 Jun</div></div><div class="txam neg">-$8.990</div></div>
-                    <div class="bnav">
-                      <div class="bni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div>
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Mov.</span></div>
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Tarjetas</span></div>
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Perfil</span></div>
-                    </div>
-                  </div>
-
-                  <!-- MOVIMIENTOS -->
-                  <div class="scr scr-mov" id="scrMov">
-                    <div class="shdr"><div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="shtitle">Movimientos</div></div>
-                    <div class="chips"><div class="chip act">Jun 2026</div><div class="chip">May</div><div class="chip">Abr</div></div>
-                    <div class="smbar"><div><div class="sml">Ingresos</div><div class="smv pos">+$850.000</div></div><div style="width:1px;background:rgba(255,255,255,.08)"></div><div><div class="sml">Gastos</div><div class="smv neg">-$245.000</div></div></div>
-                    <div class="dg" id="dg0">14 Jun</div>
-                    <div class="mv" id="mv0"><div class="mvic" style="background:rgba(6,182,212,.1)">🛒</div><div class="mvinf"><div class="mvnm">Supermercado</div><div class="mvcat">Alimentación</div></div><div class="mvrt"><div class="mvam neg">-$32.500</div><div class="mvst">Procesado</div></div></div>
-                    <div class="mv" id="mv1"><div class="mvic" style="background:rgba(239,68,68,.1)">🚗</div><div class="mvinf"><div class="mvnm">Uber</div><div class="mvcat">Transporte</div></div><div class="mvrt"><div class="mvam neg">-$5.800</div><div class="mvst">Procesado</div></div></div>
-                    <div class="dg" id="dg1">13 Jun</div>
-                    <div class="mv" id="mv2"><div class="mvic" style="background:rgba(16,185,129,.1)">💰</div><div class="mvinf"><div class="mvnm">Sueldo Junio</div><div class="mvcat">Transferencia</div></div><div class="mvrt"><div class="mvam pos">+$850.000</div><div class="mvst">Acreditado</div></div></div>
-                    <div class="mv" id="mv3"><div class="mvic" style="background:rgba(239,68,68,.1)">🎬</div><div class="mvinf"><div class="mvnm">Netflix</div><div class="mvcat">Streaming</div></div><div class="mvrt"><div class="mvam neg">-$8.990</div><div class="mvst">Procesado</div></div></div>
-                    <div class="bnav">
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div>
-                      <div class="bni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Mov.</span></div>
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Tarjetas</span></div>
-                      <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Perfil</span></div>
-                    </div>
-                  </div>
-
-                  <!-- TRANSFERENCIA -->
-                  <div class="scr scr-trf" id="scrTrf">
-                    <div class="shdr"><div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="shtitle">Nueva transferencia</div></div>
-                    <div class="tform">
-                      <div class="fld sh">
-                        <div class="flbl">Destinatario</div>
-                        <div class="fbox" id="rfBox">
-                          <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                          <div class="fval fph" id="rfVal">Nombre o RUT…</div>
-                          <div class="cur"></div>
-                        </div>
-                        <div class="cchip" id="cChip">
-                          <div class="cav">JR</div>
-                          <div><div class="cnm">Juan Rodríguez</div><div class="cbnk">FinDemo · Vista</div></div>
-                        </div>
-                      </div>
-                      <div class="fld" id="fldAmt">
-                        <div class="flbl">Monto</div>
-                        <div class="fbox" id="amBox">
-                          <span style="color:#475569;font-weight:600">$</span>
-                          <div class="fval fph" id="amVal">0</div>
-                          <div class="cur"></div>
-                        </div>
-                      </div>
-                      <div class="fld" id="fldMsg">
-                        <div class="flbl">Mensaje</div>
-                        <div class="fbox"><div class="fval fph">Ej: Cena de ayer</div></div>
-                      </div>
-                      <div class="fld" id="fldBtn"><button class="tbtn" id="trfBtn">Transferir ahora</button></div>
-                    </div>
-                    <div class="suclay" id="sucLay">
-                      <div class="chkring"><svg viewBox="0 0 46 46" fill="none"><polyline class="chkp" points="9,24 20,35 38,14" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                      <div class="ok-t">¡Transferencia exitosa!</div>
-                      <div class="ok-a">$50.000</div>
-                      <div style="color:#64748b">Enviado a Juan Rodríguez</div>
-                    </div>
-                  </div>
-
-                </div><!-- .screens -->
-
-                <!-- callout -->
-                <div class="callout" id="callout"></div>
+      <!-- Phone -->
+      <div class="vright">
+        <div class="ph-o">
+          <div class="ph-i">
+            <div class="sbar">
+              <span>9:41</span>
+              <div class="sbar-ic">
+                <svg width="10" height="8" viewBox="0 0 15 11" fill="none"><rect x="0" y="7" width="2.5" height="4" fill="white" rx=".4"/><rect x="4" y="4.5" width="2.5" height="6.5" fill="white" rx=".4"/><rect x="8" y="2" width="2.5" height="9" fill="white" rx=".4"/><rect x="12" y="0" width="2.5" height="11" fill="white" rx=".4" opacity=".4"/></svg>
+                <svg width="13" height="8" viewBox="0 0 21 11" fill="none"><rect x=".5" y=".5" width="17" height="10" rx="2" stroke="white" stroke-width="1" fill="none"/><rect x="1.5" y="1.5" width="12" height="8" rx="1" fill="white"/><path d="M19 3.5v4a2 2 0 0 0 0-4z" fill="white" opacity=".35"/></svg>
               </div>
             </div>
-          </div>
-        </div><!-- .video-content -->
+            <div class="screens">
 
-        <!-- Thumbnail overlay -->
-        <div class="thumb" id="thumb" onclick="startVideo()">
-          <div class="thumb-bg"></div>
-          <div class="thumb-tag">Tutorial · Banca Digital</div>
-          <div class="thumb-title">Cómo usar tu app bancaria paso a paso</div>
-          <div class="thumb-sub">Montilabs · Demo de videotutorial</div>
-          <div class="thumb-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-          <div class="thumb-duration">0:18</div>
-        </div>
+              <!-- LOGIN -->
+              <div class="scr scr-login" id="scrLogin">
+                <div class="app-logo"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+                <div class="app-name fnt-lg">FinDemo</div>
+                <div class="app-sub">Banca Digital</div>
+                <div class="ask">Ingresa tu PIN</div>
+                <div class="pin-row"><div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div><div class="pd" id="pd3"></div></div>
+                <div class="bio" id="bio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+              </div>
 
-        <!-- YT Controls -->
-        <div class="yt-controls" id="ytControls">
-          <div class="yt-progress" id="ytProg" onclick="seekClick(event)">
-            <div class="yt-buf"></div>
-            <div class="yt-bar" id="ytBar"><div class="yt-prog-dot"></div></div>
-          </div>
-          <div class="yt-ctrl-row">
-            <button class="yc" id="playBtn" onclick="togglePlay()" title="Reproducir/Pausar">
-              <svg viewBox="0 0 24 24" fill="currentColor" id="playIco"><polygon points="5,3 19,12 5,21"/></svg>
-            </button>
-            <button class="yc" title="Siguiente" onclick="restart()">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-            </button>
-            <div class="yt-vol-wrap">
-              <button class="yc" title="Volumen">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-              </button>
-              <div class="yt-vol-bar"><div class="yt-vol-fill"></div></div>
-            </div>
-            <div class="yt-time" id="ytTime">0:00 / 0:18</div>
-            <div class="yt-spacer"></div>
-            <button class="yc" title="Subtítulos">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1z"/></svg>
-            </button>
-            <button class="yc" title="Configuración">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            </button>
-            <button class="yc" title="Pantalla completa">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-            </button>
-          </div>
-        </div>
+              <!-- DASHBOARD -->
+              <div class="scr scr-dash" id="scrDash">
+                <div class="dtop"><div class="dhi">Bienvenida 👋</div><div class="fnt-lg">María González</div></div>
+                <div class="bcard">
+                  <div class="blbl">Saldo disponible</div>
+                  <div class="bamt fnt-xl"><span style="font-size:60%;font-weight:500;opacity:.7">$</span><span id="balNum">0</span></div>
+                  <div class="brow"><div><div class="bsl">Crédito</div><div class="bsv">$500.000</div></div><div><div class="bsl">Ahorro</div><div class="bsv">$320.000</div></div></div>
+                </div>
+                <div class="qrow">
+                  <div class="qa" id="qa0"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="qalbl">Transferir</div></div>
+                  <div class="qa" id="qa1"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="qalbl">Pagar</div></div>
+                  <div class="qa" id="qa2"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div><div class="qalbl">Recargar</div></div>
+                  <div class="qa" id="qa3"><div class="qaico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="qalbl">Más</div></div>
+                </div>
+                <div class="srow"><span class="stit">Últimos movimientos</span><span class="slnk">Ver todos</span></div>
+                <div class="tx" id="tx0"><div class="txic" style="background:rgba(6,182,212,.12)">🛒</div><div class="txinf"><div class="txnm">Supermercado</div><div class="txdt">Hoy, 10:23</div></div><div class="txam neg">-$32.500</div></div>
+                <div class="tx" id="tx1"><div class="txic" style="background:rgba(16,185,129,.12)">💰</div><div class="txinf"><div class="txnm">Transferencia</div><div class="txdt">Ayer</div></div><div class="txam pos">+$150.000</div></div>
+                <div class="tx" id="tx2"><div class="txic" style="background:rgba(239,68,68,.12)">🎬</div><div class="txinf"><div class="txnm">Netflix</div><div class="txdt">13 Jun</div></div><div class="txam neg">-$8.990</div></div>
+                <div class="bnav">
+                  <div class="bni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div>
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Mov.</span></div>
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Tarjetas</span></div>
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Perfil</span></div>
+                </div>
+              </div>
 
-      </div><!-- .player-wrap -->
+              <!-- MOVIMIENTOS -->
+              <div class="scr scr-mov" id="scrMov">
+                <div class="shdr"><div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="shtit">Movimientos</div></div>
+                <div class="chips"><div class="chip act">Jun 2026</div><div class="chip">May</div><div class="chip">Abr</div></div>
+                <div class="smbar"><div><div class="sml">Ingresos</div><div class="smv pos">+$850.000</div></div><div style="width:1px;background:rgba(255,255,255,.08)"></div><div><div class="sml">Gastos</div><div class="smv neg">-$245.000</div></div></div>
+                <div class="dg" id="dg0">14 Jun</div>
+                <div class="mv" id="mv0"><div class="mvic" style="background:rgba(6,182,212,.1)">🛒</div><div class="mvinf"><div class="mvnm">Supermercado</div><div class="mvcat">Alimentación</div></div><div class="mvrt"><div class="mvam neg">-$32.500</div><div class="mvst">Procesado</div></div></div>
+                <div class="mv" id="mv1"><div class="mvic" style="background:rgba(239,68,68,.1)">🚗</div><div class="mvinf"><div class="mvnm">Uber</div><div class="mvcat">Transporte</div></div><div class="mvrt"><div class="mvam neg">-$5.800</div><div class="mvst">Procesado</div></div></div>
+                <div class="dg" id="dg1">13 Jun</div>
+                <div class="mv" id="mv2"><div class="mvic" style="background:rgba(16,185,129,.1)">💰</div><div class="mvinf"><div class="mvnm">Sueldo Junio</div><div class="mvcat">Transferencia</div></div><div class="mvrt"><div class="mvam pos">+$850.000</div><div class="mvst">Acreditado</div></div></div>
+                <div class="mv" id="mv3"><div class="mvic" style="background:rgba(239,68,68,.1)">🎬</div><div class="mvinf"><div class="mvnm">Netflix</div><div class="mvcat">Streaming</div></div><div class="mvrt"><div class="mvam neg">-$8.990</div><div class="mvst">Procesado</div></div></div>
+                <div class="bnav">
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div>
+                  <div class="bni act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Mov.</span></div>
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Tarjetas</span></div>
+                  <div class="bni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span>Perfil</span></div>
+                </div>
+              </div>
 
-      <!-- Video info -->
-      <div class="vid-info">
-        <div class="vid-title">Cómo usar tu app de banca digital — Login, Saldo, Movimientos y Transferencias</div>
-        <div class="vid-meta">
-          <div class="vid-views">243.891 visualizaciones · hace 2 semanas</div>
-          <div class="vid-actions">
-            <div class="yt-like-group">
-              <button class="yt-action-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
-                15 mil
-              </button>
-              <button class="yt-action-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg>
-              </button>
-            </div>
-            <button class="yt-action-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-              Compartir
-            </button>
-            <button class="yt-action-btn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
-              Guardar
-            </button>
+              <!-- TRANSFERENCIA -->
+              <div class="scr scr-trf" id="scrTrf">
+                <div class="shdr"><div class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div><div class="shtit">Nueva transferencia</div></div>
+                <div class="tform">
+                  <div class="fld sh"><div class="flbl">Destinatario</div><div class="fbox" id="rfBox"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><div class="fval fph" id="rfVal">Nombre o RUT…</div><div class="cur"></div></div><div class="cchip" id="cChip"><div class="cav">JR</div><div><div class="cnm">Juan Rodríguez</div><div class="cbnk">FinDemo · Vista</div></div></div></div>
+                  <div class="fld" id="fldAmt"><div class="flbl">Monto</div><div class="fbox" id="amBox"><span style="color:#475569;font-weight:600">$</span><div class="fval fph" id="amVal">0</div><div class="cur"></div></div></div>
+                  <div class="fld" id="fldMsg"><div class="flbl">Mensaje</div><div class="fbox"><div class="fval fph">Ej: Cena de ayer</div></div></div>
+                  <div class="fld" id="fldBtn"><button class="tbtn" id="trfBtn">Transferir ahora</button></div>
+                </div>
+                <div class="suclay" id="sucLay">
+                  <div class="chkring"><svg viewBox="0 0 46 46" fill="none"><polyline class="chkp" points="9,24 20,35 38,14" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                  <div class="ok-t">¡Transferencia exitosa!</div>
+                  <div class="ok-a">$50.000</div>
+                  <div style="color:#64748b">Enviado a Juan Rodríguez</div>
+                </div>
+              </div>
+
+            </div><!-- .screens -->
+            <div class="callout" id="callout"></div>
           </div>
         </div>
       </div>
+    </div><!-- .vcontent -->
 
-      <!-- Channel -->
-      <div class="channel-row">
-        <div class="channel-left">
-          <div class="ch-avatar">M</div>
-          <div>
-            <div class="ch-name">Montilabs</div>
-            <div class="ch-subs">1,2 mil suscriptores</div>
-          </div>
-        </div>
-        <button class="subscribe-btn">Suscribirse</button>
-      </div>
-
-      <!-- Description -->
-      <div class="vid-desc">
-        <strong>Tutorial: Banca Digital paso a paso</strong>
-        En este tutorial aprenderás a usar las funciones principales de tu app bancaria: inicio de sesión seguro con PIN o biometría, revisión de saldo y movimientos, y cómo realizar transferencias en segundos.<br><br>
-        <span>Este es un demo animado creado por Montilabs para mostrar las capacidades de diseño de interfaces y videotutoriales para el sector financiero. ¿Quieres algo así para tu producto? <a href="../index.html" style="color:#3b82f6">Contáctanos.</a></span>
-      </div>
-
-    </div><!-- .yt-main -->
-
-    <!-- Sidebar -->
-    <div class="yt-sidebar">
-      <div class="sidebar-title">Videos relacionados</div>
-
-      <a class="sug" href="../pizarron/">
-        <div class="sug-thumb"><div class="sug-thumb-bg" style="background:#f9f9f7">🖊️</div><div class="sug-dur">0:09</div></div>
-        <div class="sug-info">
-          <div class="sug-title">Cómo crear un videotutorial — Tutorial animado pizarrón</div>
-          <div class="sug-ch">Montilabs</div>
-          <div class="sug-views">8.432 visualizaciones</div>
-        </div>
-      </a>
-
-      <a class="sug" href="../iphone/dist/">
-        <div class="sug-thumb"><div class="sug-thumb-bg" style="background:#1a1a2e">📱</div><div class="sug-dur">Demo</div></div>
-        <div class="sug-info">
-          <div class="sug-title">Simulador iOS interactivo — iPhone Home Screen</div>
-          <div class="sug-ch">Montilabs</div>
-          <div class="sug-views">12.841 visualizaciones</div>
-        </div>
-      </a>
-
-      <a class="sug" href="../uxsim/dist/">
-        <div class="sug-thumb"><div class="sug-thumb-bg" style="background:#0a0a0a">🔍</div><div class="sug-dur">Demo</div></div>
-        <div class="sug-info">
-          <div class="sug-title">Search Sequence — Animación de búsqueda UX</div>
-          <div class="sug-ch">Montilabs</div>
-          <div class="sug-views">5.217 visualizaciones</div>
-        </div>
-      </a>
-
-      <a class="sug" href="../tipografia/">
-        <div class="sug-thumb"><div class="sug-thumb-bg" style="background:#111">Aa</div><div class="sug-dur">Demo</div></div>
-        <div class="sug-info">
-          <div class="sug-title">Fluid Type — Tipografía interactiva en tiempo real</div>
-          <div class="sug-ch">Montilabs</div>
-          <div class="sug-views">3.904 visualizaciones</div>
-        </div>
-      </a>
-
-      <a class="sug" href="../index.html" style="margin-top:8px;background:#272727;border-radius:10px;padding:12px;">
-        <div style="width:100%;text-align:center;font-size:14px;font-weight:600;color:#f1f1f1">Ver todos los proyectos →</div>
-      </a>
+    <!-- Thumbnail -->
+    <div class="thumb" id="thumb" onclick="startVideo()">
+      <div class="thumb-bg"></div>
+      <div class="thumb-tag">Tutorial · Banca Digital</div>
+      <div class="thumb-title">Cómo usar tu app bancaria paso a paso</div>
+      <div class="thumb-sub">Montilabs · Demo de videotutorial</div>
+      <div class="thumb-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+      <div class="thumb-dur">0:18</div>
     </div>
 
-  </div><!-- .yt-layout -->
+    <!-- Controls -->
+    <div class="controls" id="ctrl">
+      <div class="prog" id="prog" onclick="seekClick(event)">
+        <div class="prog-buf"></div>
+        <div class="prog-bar" id="progBar"><div class="prog-dot"></div></div>
+      </div>
+      <div class="ctrl-row">
+        <button class="yc" onclick="togglePlay()"><svg viewBox="0 0 24 24" fill="currentColor" id="playIco"><polygon points="5,3 19,12 5,21"/></svg></button>
+        <button class="yc" onclick="restart()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+        <div class="vol-w">
+          <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg></button>
+          <div class="vol-bar"><div class="vol-fill"></div></div>
+        </div>
+        <div class="yt-time" id="ytTime">0:00 / 0:18</div>
+        <div class="spacer"></div>
+        <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></button>
+        <button class="yc"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg></button>
+      </div>
+    </div>
+
+  </div><!-- .player -->
 
 <script>
   const TOTAL = 18500;
-
   const STEPS = [
-    { l:'Paso 1 de 4', t:'Inicia sesión de forma segura', b:'Ingresa tu PIN de 4 dígitos o usa tu huella dactilar para acceder a tu cuenta.' },
-    { l:'Paso 2 de 4', t:'Revisa tu saldo y movimientos', b:'Desde el inicio visualiza tu saldo disponible y las últimas transacciones.' },
-    { l:'Paso 3 de 4', t:'Consulta el historial completo', b:'Accede al detalle de ingresos y gastos organizados por fecha y categoría.' },
-    { l:'Paso 4 de 4', t:'Realiza una transferencia', b:'Selecciona el destinatario, ingresa el monto y confirma en segundos.' },
-    { l:'¡Listo!', t:'Transferencia exitosa', b:'La operación quedó registrada y tu contacto recibió una notificación.' },
+    {l:'Paso 1 de 4',t:'Inicia sesión de forma segura',b:'Ingresa tu PIN de 4 dígitos o usa tu huella dactilar para acceder a tu cuenta.'},
+    {l:'Paso 2 de 4',t:'Revisa tu saldo y movimientos',b:'Desde el inicio visualiza tu saldo disponible y las últimas transacciones.'},
+    {l:'Paso 3 de 4',t:'Consulta el historial completo',b:'Accede al detalle de ingresos y gastos organizados por fecha y categoría.'},
+    {l:'Paso 4 de 4',t:'Realiza una transferencia',b:'Selecciona el destinatario, ingresa el monto y confirma en segundos.'},
+    {l:'¡Listo!',t:'Transferencia exitosa',b:'La operación quedó registrada y tu contacto recibió una notificación.'},
   ];
+  const scrMap = {login:'scrLogin',dash:'scrDash',mov:'scrMov',trf:'scrTrf'};
 
-  const scrEls = { login:'scrLogin', dash:'scrDash', mov:'scrMov', trf:'scrTrf' };
-
-  function showScr(key) {
-    Object.values(scrEls).forEach(id => {
-      const el = document.getElementById(id);
-      if (id === scrEls[key]) {
-        el.classList.add('in'); el.classList.remove('out');
-      } else if (el.classList.contains('in')) {
-        el.classList.add('out');
-        setTimeout(() => el.classList.remove('in','out'), 450);
-      }
+  function showScr(k) {
+    Object.values(scrMap).forEach(id => {
+      const el=document.getElementById(id);
+      if(id===scrMap[k]){el.classList.add('in');el.classList.remove('out');}
+      else if(el.classList.contains('in')){el.classList.add('out');setTimeout(()=>el.classList.remove('in','out'),450);}
     });
   }
-
   function setCaption(i) {
-    const s = STEPS[i];
-    ['capStep','capTitle','capBody'].forEach(id => document.getElementById(id).classList.remove('v'));
-    setTimeout(() => {
-      document.getElementById('capStep').textContent = s.l;
-      document.getElementById('capTitle').textContent = s.t;
-      document.getElementById('capBody').textContent = s.b;
+    const s=STEPS[i];
+    ['capStep','capTitle','capBody'].forEach(id=>document.getElementById(id).classList.remove('v'));
+    setTimeout(()=>{
+      document.getElementById('capStep').textContent=s.l;
+      document.getElementById('capTitle').textContent=s.t;
+      document.getElementById('capBody').textContent=s.b;
       document.getElementById('stepDots').classList.add('v');
-      ['capStep','capTitle','capBody'].forEach(id => document.getElementById(id).classList.add('v'));
-    }, 80);
-    document.querySelectorAll('.sdot').forEach((d,j) => {
-      d.classList.toggle('on', j===i);
-      d.classList.toggle('done', j<i);
-    });
+      ['capStep','capTitle','capBody'].forEach(id=>document.getElementById(id).classList.add('v'));
+    },80);
+    document.querySelectorAll('.sdot').forEach((d,j)=>{d.classList.toggle('on',j===i);d.classList.toggle('done',j<i);});
   }
-
-  const sh  = id => { const e=document.getElementById(id); if(e) e.classList.add('sh'); };
-  const unsh = id => { const e=document.getElementById(id); if(e) e.classList.remove('sh'); };
-
-  function pinOn(i) { document.getElementById('pd'+i).classList.add('on'); }
-
-  function countUp(to, dur) {
-    const el = document.getElementById('balNum'), t0 = performance.now();
-    const f = now => {
-      const p = Math.min((now-t0)/dur,1), e=1-Math.pow(1-p,3);
-      el.textContent = Math.round(to*e).toLocaleString('es-CL');
-      if(p<1) requestAnimationFrame(f);
-    };
+  const sh=id=>{const e=document.getElementById(id);if(e)e.classList.add('sh');};
+  const unsh=id=>{const e=document.getElementById(id);if(e)e.classList.remove('sh');};
+  function pinOn(i){document.getElementById('pd'+i).classList.add('on');}
+  function countUp(to,dur){
+    const el=document.getElementById('balNum'),t0=performance.now();
+    const f=now=>{const p=Math.min((now-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e).toLocaleString('es-CL');if(p<1)requestAnimationFrame(f);};
     requestAnimationFrame(f);
   }
-
-  function typeInto(id, text, clr) {
-    const el = document.getElementById(id); if(!el) return;
-    el.classList.remove('fph'); el.style.color = clr||'#f8fafc';
-    let i=0;
-    const f = () => { el.textContent=text.slice(0,i); i++; if(i<=text.length) setTimeout(f,70); };
-    f();
+  function typeInto(id,text){
+    const el=document.getElementById(id);if(!el)return;
+    el.classList.remove('fph');el.style.color='#f8fafc';
+    let i=0;const f=()=>{el.textContent=text.slice(0,i);i++;if(i<=text.length)setTimeout(f,70);};f();
   }
-
-  function showCallout(text, topPct, leftPct) {
-    const c=document.getElementById('callout');
-    c.textContent=text; c.style.top=topPct+'%'; c.style.left=leftPct+'%';
-    c.style.transform='translate(-50%,-115%)'; c.classList.add('sh');
+  function showCallout(text,top,left){
+    const c=document.getElementById('callout');c.textContent=text;c.style.top=top+'%';c.style.left=left+'%';c.style.transform='translate(-50%,-115%)';c.classList.add('sh');
   }
-  const hideCallout = () => document.getElementById('callout').classList.remove('sh');
+  const hideCallout=()=>document.getElementById('callout').classList.remove('sh');
 
-  function buildTL() {
-    return [
-      [0,    ()=>{ setCaption(0); showScr('login'); }],
-      [400,  ()=>pinOn(0)],
-      [700,  ()=>pinOn(1)],
-      [1000, ()=>pinOn(2)],
-      [1300, ()=>pinOn(3)],
-      [1800, ()=>document.getElementById('bio').classList.add('show')],
-      [2400, ()=>{ document.getElementById('bio').classList.add('pulse'); showCallout('Huella reconocida ✓',72,50); }],
-      [3400, ()=>hideCallout()],
-      [3600, ()=>{ setCaption(1); showScr('dash'); }],
-      [4100, ()=>countUp(1234567,1400)],
-      [4200, ()=>sh('qa0')],[4420, ()=>sh('qa1')],[4640, ()=>sh('qa2')],[4860, ()=>sh('qa3')],
-      [5200, ()=>{ sh('tx0'); showCallout('Últimas transacciones',68,50); }],
-      [5550, ()=>sh('tx1')],[5850, ()=>sh('tx2')],
-      [6900, ()=>hideCallout()],
-      [7300, ()=>{ setCaption(2); showScr('mov'); showCallout('Toca "Movimientos"',55,50); }],
-      [8100, ()=>{ hideCallout(); sh('dg0'); }],
-      [8350, ()=>sh('mv0')],[8700, ()=>sh('mv1')],
-      [9000, ()=>sh('dg1')],[9250, ()=>sh('mv2')],[9600, ()=>sh('mv3')],
-      [10500,()=>{ showCallout('Filtra por mes',27,50); }],
-      [11300,()=>hideCallout()],
-      [11600,()=>{ setCaption(3); showScr('trf'); }],
-      [12000,()=>{ document.getElementById('rfBox').classList.add('foc'); showCallout('Busca por nombre o RUT',36,50); }],
-      [12400,()=>typeInto('rfVal','Juan Ro')],
-      [13000,()=>{ hideCallout(); sh('cChip'); document.getElementById('rfBox').classList.remove('foc'); }],
-      [13300,()=>{ sh('fldAmt'); document.getElementById('amBox').classList.add('foc'); }],
-      [13500,()=>typeInto('amVal','50.000')],
-      [14200,()=>{ document.getElementById('amBox').classList.remove('foc'); sh('fldMsg'); }],
-      [14500,()=>{ sh('fldBtn'); showCallout('Confirma la operación',82,50); }],
-      [15300,()=>{ hideCallout(); document.getElementById('trfBtn').classList.add('press'); }],
-      [15700,()=>document.getElementById('trfBtn').classList.remove('press')],
-      [16000,()=>{ setCaption(4); sh('sucLay'); }],
-    ];
-  }
+  function buildTL(){return[
+    [0,    ()=>{setCaption(0);showScr('login');}],
+    [400,  ()=>pinOn(0)],[700,()=>pinOn(1)],[1000,()=>pinOn(2)],[1300,()=>pinOn(3)],
+    [1800, ()=>document.getElementById('bio').classList.add('show')],
+    [2400, ()=>{document.getElementById('bio').classList.add('pulse');showCallout('Huella reconocida ✓',72,50);}],
+    [3400, ()=>hideCallout()],
+    [3600, ()=>{setCaption(1);showScr('dash');}],
+    [4100, ()=>countUp(1234567,1400)],
+    [4200,()=>sh('qa0')],[4420,()=>sh('qa1')],[4640,()=>sh('qa2')],[4860,()=>sh('qa3')],
+    [5200, ()=>{sh('tx0');showCallout('Últimas transacciones',68,50);}],
+    [5550,()=>sh('tx1')],[5850,()=>sh('tx2')],
+    [6900, ()=>hideCallout()],
+    [7300, ()=>{setCaption(2);showScr('mov');showCallout('Toca "Movimientos"',55,50);}],
+    [8100, ()=>{hideCallout();sh('dg0');}],
+    [8350,()=>sh('mv0')],[8700,()=>sh('mv1')],
+    [9000,()=>sh('dg1')],[9250,()=>sh('mv2')],[9600,()=>sh('mv3')],
+    [10500,()=>showCallout('Filtra por mes',27,50)],
+    [11300,()=>hideCallout()],
+    [11600,()=>{setCaption(3);showScr('trf');}],
+    [12000,()=>{document.getElementById('rfBox').classList.add('foc');showCallout('Busca por nombre o RUT',36,50);}],
+    [12400,()=>typeInto('rfVal','Juan Ro')],
+    [13000,()=>{hideCallout();sh('cChip');document.getElementById('rfBox').classList.remove('foc');}],
+    [13300,()=>{sh('fldAmt');document.getElementById('amBox').classList.add('foc');}],
+    [13500,()=>typeInto('amVal','50.000')],
+    [14200,()=>{document.getElementById('amBox').classList.remove('foc');sh('fldMsg');}],
+    [14500,()=>{sh('fldBtn');showCallout('Confirma la operación',82,50);}],
+    [15300,()=>{hideCallout();document.getElementById('trfBtn').classList.add('press');}],
+    [15700,()=>document.getElementById('trfBtn').classList.remove('press')],
+    [16000,()=>{setCaption(4);sh('sucLay');}],
+  ];}
 
-  let playing=false, startTime=null, elapsed=0, rafId=null, fired=new Set(), tl=[];
+  let playing=false,startTime=null,elapsed=0,rafId=null,fired=new Set(),tl=[];
 
-  function resetAll() {
-    Object.values(scrEls).forEach(id=>{const e=document.getElementById(id);e.classList.remove('in','out');});
-    for(let i=0;i<4;i++){document.getElementById('pd'+i).classList.remove('on');}
-    const bio=document.getElementById('bio'); bio.classList.remove('show','pulse');
-    for(let i=0;i<4;i++) unsh('qa'+i);
-    for(let i=0;i<3;i++) unsh('tx'+i);
+  function resetAll(){
+    Object.values(scrMap).forEach(id=>{const e=document.getElementById(id);e.classList.remove('in','out');});
+    for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.remove('on');
+    const bio=document.getElementById('bio');bio.classList.remove('show','pulse');
+    for(let i=0;i<4;i++)unsh('qa'+i);
+    for(let i=0;i<3;i++)unsh('tx'+i);
     document.getElementById('balNum').textContent='0';
     ['dg0','dg1','mv0','mv1','mv2','mv3'].forEach(unsh);
     document.getElementById('rfBox').classList.remove('foc');
     document.getElementById('amBox').classList.remove('foc');
-    const rv=document.getElementById('rfVal'); rv.textContent='Nombre o RUT…'; rv.classList.add('fph'); rv.style.color='';
-    const av=document.getElementById('amVal'); av.textContent='0'; av.classList.add('fph'); av.style.color='';
+    const rv=document.getElementById('rfVal');rv.textContent='Nombre o RUT…';rv.classList.add('fph');rv.style.color='';
+    const av=document.getElementById('amVal');av.textContent='0';av.classList.add('fph');av.style.color='';
     ['cChip','fldAmt','fldMsg','fldBtn','sucLay'].forEach(unsh);
     document.getElementById('trfBtn').classList.remove('press');
     hideCallout();
     ['capStep','capTitle','capBody'].forEach(id=>{const e=document.getElementById(id);e.classList.remove('v');e.textContent='';});
     document.getElementById('stepDots').classList.remove('v');
     document.querySelectorAll('.sdot').forEach(d=>d.classList.remove('on','done'));
-    document.getElementById('ytBar').style.width='0%';
+    document.getElementById('progBar').style.width='0%';
     document.getElementById('ytTime').textContent='0:00 / 0:18';
   }
 
-  function updateBtn() {
+  function updateBtn(){
     const ico=document.getElementById('playIco');
-    ico.innerHTML = playing
-      ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
-      : '<polygon points="5,3 19,12 5,21"/>';
+    ico.innerHTML=playing?'<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>':'<polygon points="5,3 19,12 5,21"/>';
   }
 
-  function tick(now) {
-    if(!playing) return;
-    elapsed = now - startTime;
-    tl.forEach(([t,fn],i)=>{ if(elapsed>=t && !fired.has(i)){ fired.add(i); fn(); } });
-    const pct = Math.min(elapsed/TOTAL*100,100);
-    document.getElementById('ytBar').style.width = pct+'%';
-    const s = Math.floor(elapsed/1000);
-    document.getElementById('ytTime').textContent = `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / 0:18`;
-    if(elapsed>=TOTAL){ playing=false; updateBtn(); return; }
-    rafId = requestAnimationFrame(tick);
+  function tick(now){
+    if(!playing)return;
+    elapsed=now-startTime;
+    tl.forEach(([t,fn],i)=>{if(elapsed>=t&&!fired.has(i)){fired.add(i);fn();}});
+    const pct=Math.min(elapsed/TOTAL*100,100);
+    document.getElementById('progBar').style.width=pct+'%';
+    const s=Math.floor(elapsed/1000);
+    document.getElementById('ytTime').textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')} / 0:18`;
+    if(elapsed>=TOTAL){playing=false;updateBtn();return;}
+    rafId=requestAnimationFrame(tick);
   }
 
-  function play() {
-    if(elapsed>=TOTAL) restart();
-    playing=true; startTime=performance.now()-elapsed;
-    updateBtn(); rafId=requestAnimationFrame(tick);
-  }
-  function pause() { playing=false; cancelAnimationFrame(rafId); updateBtn(); }
+  function play(){if(elapsed>=TOTAL)restart();playing=true;startTime=performance.now()-elapsed;updateBtn();rafId=requestAnimationFrame(tick);}
+  function pause(){playing=false;cancelAnimationFrame(rafId);updateBtn();}
+  function restart(){pause();resetAll();elapsed=0;fired=new Set();tl=buildTL();play();}
+  function togglePlay(){playing?pause():play();}
 
-  function restart() {
-    pause(); resetAll(); elapsed=0; fired=new Set(); tl=buildTL(); play();
-  }
-
-  function togglePlay() { playing ? pause() : play(); }
-
-  function startVideo() {
+  function startVideo(){
     document.getElementById('thumb').classList.add('gone');
-    document.getElementById('playerWrap').classList.add('started');
-    tl = buildTL();
-    setTimeout(play, 300);
+    document.getElementById('player').classList.add('on');
+    tl=buildTL();
+    setTimeout(play,300);
   }
 
-  function seekClick(e) {
-    const rect = document.getElementById('ytProg').getBoundingClientRect();
-    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    elapsed = pct * TOTAL;
-    if(playing) { startTime = performance.now() - elapsed; }
-    document.getElementById('ytBar').style.width = (pct*100)+'%';
+  function seekClick(e){
+    const rect=document.getElementById('prog').getBoundingClientRect();
+    const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+    elapsed=pct*TOTAL;
+    if(playing)startTime=performance.now()-elapsed;
+    document.getElementById('progBar').style.width=(pct*100)+'%';
   }
 
-  tl = buildTL();
+  tl=buildTL();
 </script>
 </body>
 </html>
