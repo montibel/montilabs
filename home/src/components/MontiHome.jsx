@@ -12,8 +12,12 @@ import {
 const ContactModal = lazy(() => import("./ContactModal"));
 
 const ACCENT = "#c8ff3e";
+const ACCENT_VIDEO = "#ff8c42";
 
-const PROJECTS = [
+const GITHUB_PATH =
+  "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z";
+
+const PROJECTS_DISENO = [
   {
     id: "fluid-type",
     title: "Fluid Type",
@@ -63,23 +67,11 @@ const PROJECTS = [
     bg: "radial-gradient(ellipse at 60% 30%, rgba(191,90,242,.18) 0%, transparent 70%), #111",
   },
   {
-    id: "pizarron",
-    title: "Video Tutorial",
-    cat: { es: "E-learning", en: "E-learning" },
-    desc: {
-      es: "Tutorial animado estilo pizarrón blanco.",
-      en: "Animated whiteboard-style tutorial.",
-    },
-    url: "pizarron/",
-    color: "#2563eb",
-    bg: "radial-gradient(ellipse at 50% 50%, rgba(37,99,235,.18) 0%, transparent 70%), #111",
-  },
-  {
     id: "win95",
     title: "Windows 95",
     cat: { es: "UI / UX", en: "UI / UX" },
     desc: {
-      es: "Plantilla retro de Windows 95",
+      es: "Plantilla retro de Windows 95.",
       en: "Retro Windows 95 template.",
     },
     url: "win95/",
@@ -92,8 +84,7 @@ const COPY = {
   es: {
     eyebrow: "Interfaces · Animaciones · Código creativo",
     h1: ["Más allá", "de tu", "imaginación."],
-    cta: "Ver proyectos",
-    projectsLabel: "Proyectos",
+    explore: "Explorar",
     about:
       "Estudio creativo en Santiago, Chile. Interfaces dinámicas y animaciones interactivas para dar vida a productos digitales únicos.",
     contact: "Hablemos",
@@ -101,12 +92,24 @@ const COPY = {
     footer: "© 2026 montilabs",
     privacy: "Política de privacidad",
     terms: "Términos",
+    back: "← Volver",
+    sectionDiseno: {
+      title: "Diseño Web",
+      desc: "Interfaces interactivas, tipografía y UI/UX.",
+      count: "5 proyectos",
+    },
+    sectionVideo: {
+      title: "Video",
+      desc: "Producción audiovisual y motion design.",
+      count: "Próximamente",
+      comingSoon: "Próximamente",
+      comingSoonDesc: "Los proyectos de video están en producción.",
+    },
   },
   en: {
     eyebrow: "Interfaces · Animations · Creative Code",
     h1: ["Beyond", "your", "imagination."],
-    cta: "View projects",
-    projectsLabel: "Projects",
+    explore: "Explore",
     about:
       "Creative studio based in Santiago, Chile. Dynamic interfaces and interactive animations to bring unique digital products to life.",
     contact: "Let's talk",
@@ -114,8 +117,28 @@ const COPY = {
     footer: "© 2026 montilabs",
     privacy: "Privacy policy",
     terms: "Terms",
+    back: "← Back",
+    sectionDiseno: {
+      title: "Web Design",
+      desc: "Interactive interfaces, typography and UI/UX.",
+      count: "5 projects",
+    },
+    sectionVideo: {
+      title: "Video",
+      desc: "Audiovisual production and motion design.",
+      count: "Coming soon",
+      comingSoon: "Coming soon",
+      comingSoonDesc: "Video projects are in production.",
+    },
   },
 };
+
+function getPageFromHash() {
+  const hash = window.location.hash;
+  if (hash === "#diseno-web") return "diseno";
+  if (hash === "#video") return "video";
+  return "home";
+}
 
 // ── Viewport width hook ───────────────────────────────────────────────
 function useWide(breakpoint = 768) {
@@ -191,7 +214,7 @@ function Cursor({ hovering }) {
   );
 }
 
-// ── Hero logo reveal (right side) ───────────────────────────────────
+// ── Hero logo reveal ─────────────────────────────────────────────────
 function HeroLogo({ onHover }) {
   const PATH =
     "M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z";
@@ -250,8 +273,6 @@ function HeroLogo({ onHover }) {
 
   return (
     <div style={{ position: "relative", width: 280, height: 280 }}>
-
-      {/* Outer glow */}
       <m.div
         animate={glowCtrl}
         initial={{ opacity: 0, scale: 1 }}
@@ -264,7 +285,6 @@ function HeroLogo({ onHover }) {
           pointerEvents: "none",
         }}
       />
-      {/* Inner glow */}
       <m.div
         animate={glowCtrl}
         initial={{ opacity: 0, scale: 1 }}
@@ -277,8 +297,6 @@ function HeroLogo({ onHover }) {
           pointerEvents: "none",
         }}
       />
-
-      {/* Flash */}
       <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.22, 0] }}
@@ -289,13 +307,13 @@ function HeroLogo({ onHover }) {
           filter: "blur(18px)",
         }}
       />
-
-      {/* Lightning bolt SVG */}
       <svg
         viewBox="0 0 48 46"
-        style={{ position: "absolute", top: "50%", left: "50%",
+        style={{
+          position: "absolute", top: "50%", left: "50%",
           translateX: "-50%", translateY: "-50%",
-          width: 130, height: 125, overflow: "visible" }}
+          width: 130, height: 125, overflow: "visible",
+        }}
       >
         <m.path
           d={PATH} fill="none" stroke="#c8ff3e"
@@ -305,7 +323,7 @@ function HeroLogo({ onHover }) {
           animate={{ pathLength: 1, opacity: 0 }}
           transition={{
             pathLength: { delay: 0.4, duration: 1.4, ease: [0.42, 0, 0.58, 1] },
-            opacity:    { delay: 1.75, duration: 0.2 },
+            opacity: { delay: 1.75, duration: 0.2 },
           }}
         />
         <m.path
@@ -315,8 +333,6 @@ function HeroLogo({ onHover }) {
           style={{ filter: "drop-shadow(0 0 3px #c8ff3e) drop-shadow(0 0 10px rgba(200,255,62,.8)) drop-shadow(0 0 22px rgba(200,255,62,.5))" }}
         />
       </svg>
-
-      {/* Toggle switch */}
       <m.button
         initial={{ opacity: 0 }}
         animate={{ opacity: revealed ? 1 : 0 }}
@@ -370,11 +386,7 @@ function ProjectCard({ project, lang, index, onHover }) {
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{
-        delay: index * 0.08,
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ scale: 1.015 }}
       onHoverStart={() => onHover(true)}
       onHoverEnd={() => onHover(false)}
@@ -393,53 +405,28 @@ function ProjectCard({ project, lang, index, onHover }) {
         overflow: "hidden",
       }}
     >
-      <span
-        style={{
-          display: "inline-block",
-          fontSize: 11,
-          fontWeight: 500,
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-          padding: "4px 10px",
-          borderRadius: 99,
-          background: project.color + "18",
-          color: project.color,
-          alignSelf: "flex-start",
-        }}
-      >
+      <span style={{
+        display: "inline-block",
+        fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+        padding: "4px 10px", borderRadius: 99,
+        background: project.color + "18",
+        color: project.color,
+        alignSelf: "flex-start",
+      }}>
         {project.cat[lang]}
       </span>
-
       <div>
-        <p
-          style={{
-            fontSize: 20,
-            fontWeight: 600,
-            color: "#f0f0f0",
-            marginBottom: 8,
-          }}
-        >
+        <p style={{ fontSize: 20, fontWeight: 600, color: "#f0f0f0", marginBottom: 8 }}>
           {project.title}
         </p>
-        <p
-          style={{
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: "rgba(240,240,240,0.45)",
-          }}
-        >
+        <p style={{ fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.45)" }}>
           {project.desc[lang]}
         </p>
       </div>
-
       <m.span
         style={{
-          position: "absolute",
-          bottom: 28,
-          right: 28,
-          fontSize: 13,
-          fontWeight: 500,
-          color: project.color,
+          position: "absolute", bottom: 28, right: 28,
+          fontSize: 13, fontWeight: 500, color: project.color,
         }}
         initial={{ opacity: 0, x: -4 }}
         whileHover={{ opacity: 1, x: 0 }}
@@ -450,6 +437,137 @@ function ProjectCard({ project, lang, index, onHover }) {
   );
 }
 
+// ── Category Card ────────────────────────────────────────────────────
+function CategoryCard({ title, desc, count, color, href, icon, onHover, index }) {
+  return (
+    <m.a
+      href={href}
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ scale: 1.02 }}
+      onHoverStart={() => onHover(true)}
+      onHoverEnd={() => onHover(false)}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: "48px",
+        borderRadius: 24,
+        minHeight: 320,
+        background: `radial-gradient(ellipse at 20% 80%, ${color}14 0%, transparent 65%), #111`,
+        border: "1px solid rgba(255,255,255,0.07)",
+        textDecoration: "none",
+        cursor: "none",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ color, opacity: 0.85 }}>{icon}</div>
+
+      <div>
+        <p style={{
+          fontSize: "clamp(28px, 3.5vw, 42px)",
+          fontWeight: 700,
+          color: "#f0f0f0",
+          marginBottom: 10,
+          letterSpacing: "-0.02em",
+        }}>
+          {title}
+        </p>
+        <p style={{
+          fontSize: 14,
+          lineHeight: 1.6,
+          color: "rgba(240,240,240,0.4)",
+          marginBottom: 28,
+        }}>
+          {desc}
+        </p>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{
+            fontSize: 11, fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase",
+            padding: "4px 10px", borderRadius: 99,
+            background: color + "18",
+            color,
+          }}>
+            {count}
+          </span>
+          <span style={{ color, fontSize: 20, fontWeight: 300, opacity: 0.7 }}>→</span>
+        </div>
+      </div>
+
+      <m.div
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.25 }}
+        style={{
+          position: "absolute", inset: 0,
+          background: `radial-gradient(ellipse at 50% 100%, ${color}08 0%, transparent 60%)`,
+          pointerEvents: "none",
+          borderRadius: 24,
+        }}
+      />
+    </m.a>
+  );
+}
+
+// ── GitHub icon ──────────────────────────────────────────────────────
+function GithubIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d={GITHUB_PATH} />
+    </svg>
+  );
+}
+
+// ── Shared footer ────────────────────────────────────────────────────
+function Footer({ t, full, setHovering }) {
+  return (
+    <footer style={{
+      padding: "24px 64px",
+      borderTop: "1px solid rgba(255,255,255,0.05)",
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+    }}>
+      <span style={{ fontSize: 12, color: "rgba(240,240,240,0.2)", display: "flex", gap: 16, alignItems: "center" }}>
+        <span>{t.footer}</span>
+        {full && (
+          <>
+            <a
+              href="privacy.html"
+              style={{ color: "rgba(240,240,240,0.2)" }}
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
+            >
+              {t.privacy}
+            </a>
+            <a
+              href="terms.html"
+              style={{ color: "rgba(240,240,240,0.2)" }}
+              onMouseEnter={() => setHovering(true)}
+              onMouseLeave={() => setHovering(false)}
+            >
+              {t.terms}
+            </a>
+          </>
+        )}
+      </span>
+      <a
+        href="https://github.com/montibel"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub de Montilabs"
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        style={{ fontSize: 12, color: "rgba(240,240,240,0.2)", display: "flex", alignItems: "center", gap: 6 }}
+      >
+        <GithubIcon />
+        GitHub
+      </a>
+    </footer>
+  );
+}
+
 // ── Main ─────────────────────────────────────────────────────────────
 export default function MontiHome() {
   const [lang, setLang] = useState(
@@ -457,430 +575,482 @@ export default function MontiHome() {
   );
   const [hovering, setHovering] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
-  const projectsRef = useRef(null);
+  const [page, setPage] = useState(getPageFromHash);
+  const cardsRef = useRef(null);
   const wide = useWide(820);
   const t = COPY[lang];
 
-  const scrollToProjects = () =>
-    projectsRef.current?.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    const onHashChange = () => {
+      setPage(getPageFromHash());
+      window.scrollTo({ top: 0, behavior: "instant" });
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const toggleLang = () =>
+    setLang((l) => {
+      const n = l === "es" ? "en" : "es";
+      localStorage.setItem("ml_lang", n);
+      return n;
+    });
 
   return (
     <LazyMotion features={domAnimation}>
-    <div style={{ minHeight: "100vh", background: "#0b0b0b" }}>
-      <Cursor hovering={hovering} />
+      <div style={{ minHeight: "100vh", background: "#0b0b0b" }}>
+        <Cursor hovering={hovering} />
 
-      {/* ── Header ── */}
-      <header
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+        {/* ── Header ── */}
+        <header style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
           padding: "20px 48px",
           borderBottom: "1px solid rgba(255,255,255,0.05)",
           backdropFilter: "blur(20px)",
           background: "rgba(11,11,11,0.85)",
-        }}
-      >
-        <m.a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-          style={{
-            fontSize: 18,
-            fontWeight: 400,
-            color: "rgba(240,240,240,0.4)",
-            textDecoration: "none",
-            cursor: "none",
-            lineHeight: 1,
-          }}
-          onHoverStart={() => setHovering(true)}
-          onHoverEnd={() => setHovering(false)}
-          whileHover={{ color: "#f0f0f0" }}
-        >
-          ↑
-        </m.a>
-
-        <button
-          aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
-          onClick={() =>
-            setLang((l) => {
-              const n = l === "es" ? "en" : "es";
-              localStorage.setItem("ml_lang", n);
-              return n;
-            })
-          }
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "6px 14px",
-            borderRadius: 99,
-            border: "1px solid rgba(255,255,255,0.12)",
-            background: "transparent",
-            color: "rgba(240,240,240,0.5)",
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            cursor: "none",
-            fontFamily: "inherit",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <m.span
-              key={lang}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.18 }}
+        }}>
+          {page === "home" ? (
+            <m.a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              style={{
+                fontSize: 18, fontWeight: 400, color: "rgba(240,240,240,0.4)",
+                textDecoration: "none", cursor: "none", lineHeight: 1,
+              }}
+              onHoverStart={() => setHovering(true)}
+              onHoverEnd={() => setHovering(false)}
+              whileHover={{ color: "#f0f0f0" }}
             >
-              {lang === "es" ? "EN" : "ES"}
-            </m.span>
-          </AnimatePresence>
-        </button>
-      </header>
+              ↑
+            </m.a>
+          ) : (
+            <m.a
+              href="#"
+              style={{
+                fontSize: 13, fontWeight: 500, letterSpacing: "0.05em",
+                color: "rgba(240,240,240,0.4)", textDecoration: "none", cursor: "none",
+              }}
+              onHoverStart={() => setHovering(true)}
+              onHoverEnd={() => setHovering(false)}
+              whileHover={{ color: "#f0f0f0" }}
+            >
+              {t.back}
+            </m.a>
+          )}
 
-      {/* ── Hero ── */}
-      <section
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: wide ? "row" : "column",
-          alignItems: "center",
-          paddingTop: 96,
-          paddingBottom: 64,
-          paddingLeft: wide ? 72 : 32,
-          paddingRight: wide ? 72 : 32,
-          gap: wide ? 56 : 52,
-        }}
-      >
-        {/* Left — text */}
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          {/* Brand — neon logotype */}
-          <m.p
-            style={{
-              marginBottom: 20,
-              fontSize: "clamp(56px, 8.5vw, 116px)",
-              fontWeight: 900,
-              letterSpacing: "-0.04em",
-              color: ACCENT,
-              lineHeight: 0.88,
-            }}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              textShadow: [
-                `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
-                `0 0 6px ${ACCENT}88, 0 0 16px ${ACCENT}44, 0 0 32px ${ACCENT}22, 0 0 60px ${ACCENT}11`,
-                `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
-              ],
-            }}
-            transition={{
-              opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-              y: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-              textShadow: {
-                repeat: Infinity,
-                duration: 3.2,
-                ease: "easeInOut",
-                delay: 0.7,
-              },
-            }}
-          >
-            montilabs
-          </m.p>
-
-          {/* Eyebrow */}
-          <m.p
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(240,240,240,0.35)",
-              marginBottom: 18,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-          >
-            {t.eyebrow}
-          </m.p>
-
-          {/* Tagline — light weight, contrasts with heavy brand */}
-          <h1
-            style={{
-              fontWeight: 300,
-              lineHeight: 1.2,
-              letterSpacing: "-0.02em",
-              color: "rgba(240,240,240,0.75)",
-              fontSize: "clamp(26px, 3vw, 42px)",
-              marginBottom: "2.5rem",
-              maxWidth: 480,
-            }}
-          >
-            {t.h1.map((line, i) => (
-              <m.span
-                key={line}
-                style={{ display: "block" }}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.25 + i * 0.08,
-                  duration: 0.7,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-                {i === 2 ? (
-                  <>
-                    {line.replace(".", "")}
-                    <span style={{ color: ACCENT }}>.</span>
-                  </>
-                ) : (
-                  line
-                )}
-              </m.span>
-            ))}
-          </h1>
-
-          {/* CTA */}
-          <m.button
-            onClick={scrollToProjects}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-              padding: "15px 32px",
-              borderRadius: 99,
-              border: "none",
-              background: ACCENT,
-              color: "#0b0b0b",
-              fontSize: 14,
-              fontWeight: 700,
-              alignSelf: "flex-start",
-              cursor: "none",
-              fontFamily: "inherit",
-              letterSpacing: "-0.01em",
-            }}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.48, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            {t.cta}
+          {page !== "home" && (
             <m.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{
-                repeat: Infinity,
-                duration: 1.8,
-                ease: "easeInOut",
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                fontSize: 15, fontWeight: 700, color: ACCENT,
+                letterSpacing: "-0.02em",
+                position: "absolute", left: "50%", transform: "translateX(-50%)",
               }}
             >
-              ↓
+              montilabs
             </m.span>
-          </m.button>
-        </div>
+          )}
 
-        {/* Right — tiles */}
-        {wide && (
-          <m.div
+          <button
+            aria-label={lang === "es" ? "Switch to English" : "Cambiar a español"}
+            onClick={toggleLang}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <HeroLogo onHover={setHovering} />
-          </m.div>
-        )}
-      </section>
-
-      {/* ── Projects ── */}
-      <section ref={projectsRef} style={{ padding: "0 64px 96px" }}>
-        <m.div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            marginBottom: 48,
-          }}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "rgba(240,240,240,0.35)",
+              display: "flex", alignItems: "center",
+              padding: "6px 14px", borderRadius: 99,
+              border: "1px solid rgba(255,255,255,0.12)",
+              background: "transparent", color: "rgba(240,240,240,0.5)",
+              fontSize: 11, fontWeight: 500, letterSpacing: "0.15em",
+              textTransform: "uppercase", cursor: "none", fontFamily: "inherit",
             }}
           >
-            {t.projectsLabel}
-          </span>
-          <div
-            style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }}
+            <AnimatePresence mode="wait">
+              <m.span
+                key={lang}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.18 }}
+              >
+                {lang === "es" ? "EN" : "ES"}
+              </m.span>
+            </AnimatePresence>
+          </button>
+        </header>
+
+        {/* ── Pages ── */}
+        <AnimatePresence mode="wait">
+
+          {/* HOME */}
+          {page === "home" && (
+            <m.div
+              key="home"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Hero */}
+              <section style={{
+                minHeight: "100vh",
+                display: "flex",
+                flexDirection: wide ? "row" : "column",
+                alignItems: "center",
+                paddingTop: 96, paddingBottom: 64,
+                paddingLeft: wide ? 72 : 32,
+                paddingRight: wide ? 72 : 32,
+                gap: wide ? 56 : 52,
+              }}>
+                <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <m.p
+                    style={{
+                      marginBottom: 20,
+                      fontSize: "clamp(56px, 8.5vw, 116px)",
+                      fontWeight: 900, letterSpacing: "-0.04em",
+                      color: ACCENT, lineHeight: 0.88,
+                    }}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{
+                      opacity: 1, y: 0,
+                      textShadow: [
+                        `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
+                        `0 0 6px ${ACCENT}88, 0 0 16px ${ACCENT}44, 0 0 32px ${ACCENT}22, 0 0 60px ${ACCENT}11`,
+                        `0 0 12px ${ACCENT}cc, 0 0 32px ${ACCENT}88, 0 0 64px ${ACCENT}44, 0 0 120px ${ACCENT}22`,
+                      ],
+                    }}
+                    transition={{
+                      opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+                      y: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+                      textShadow: { repeat: Infinity, duration: 3.2, ease: "easeInOut", delay: 0.7 },
+                    }}
+                  >
+                    montilabs
+                  </m.p>
+
+                  <m.p
+                    style={{
+                      fontSize: 11, fontWeight: 500, letterSpacing: "0.22em",
+                      textTransform: "uppercase", color: "rgba(240,240,240,0.35)", marginBottom: 18,
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.8 }}
+                  >
+                    {t.eyebrow}
+                  </m.p>
+
+                  <h1 style={{
+                    fontWeight: 300, lineHeight: 1.2, letterSpacing: "-0.02em",
+                    color: "rgba(240,240,240,0.75)",
+                    fontSize: "clamp(26px, 3vw, 42px)",
+                    marginBottom: "2.5rem", maxWidth: 480,
+                  }}>
+                    {t.h1.map((line, i) => (
+                      <m.span
+                        key={line}
+                        style={{ display: "block" }}
+                        initial={{ opacity: 0, y: 18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.25 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {i === 2 ? (
+                          <>
+                            {line.replace(".", "")}
+                            <span style={{ color: ACCENT }}>.</span>
+                          </>
+                        ) : (
+                          line
+                        )}
+                      </m.span>
+                    ))}
+                  </h1>
+
+                  <m.button
+                    onClick={() => cardsRef.current?.scrollIntoView({ behavior: "smooth" })}
+                    onMouseEnter={() => setHovering(true)}
+                    onMouseLeave={() => setHovering(false)}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: 12,
+                      padding: "15px 32px", borderRadius: 99, border: "none",
+                      background: ACCENT, color: "#0b0b0b",
+                      fontSize: 14, fontWeight: 700, alignSelf: "flex-start",
+                      cursor: "none", fontFamily: "inherit", letterSpacing: "-0.01em",
+                    }}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.48, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    {t.explore}
+                    <m.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                    >
+                      ↓
+                    </m.span>
+                  </m.button>
+                </div>
+
+                {wide && (
+                  <m.div
+                    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <HeroLogo onHover={setHovering} />
+                  </m.div>
+                )}
+              </section>
+
+              {/* Category Cards */}
+              <section ref={cardsRef} style={{ padding: wide ? "0 64px 96px" : "0 24px 64px" }}>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
+                  gap: 20,
+                }}>
+                  <CategoryCard
+                    index={0}
+                    title={t.sectionDiseno.title}
+                    desc={t.sectionDiseno.desc}
+                    count={t.sectionDiseno.count}
+                    color={ACCENT}
+                    href="#diseno-web"
+                    onHover={setHovering}
+                    icon={
+                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect x="3" y="6" width="34" height="22" rx="3" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M14 34h12M20 28v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                        <path d="M9 14l5 5-5 5M18 23h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    }
+                  />
+                  <CategoryCard
+                    index={1}
+                    title={t.sectionVideo.title}
+                    desc={t.sectionVideo.desc}
+                    count={t.sectionVideo.count}
+                    color={ACCENT_VIDEO}
+                    href="#video"
+                    onHover={setHovering}
+                    icon={
+                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <rect x="3" y="9" width="26" height="22" rx="3" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M29 15l8-5v20l-8-5V15z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                        <path d="M14 17l8 5.5-8 5.5V17z" fill="currentColor" />
+                      </svg>
+                    }
+                  />
+                </div>
+              </section>
+
+              {/* About + Contact */}
+              <section style={{ padding: wide ? "0 64px 80px" : "0 24px 64px" }}>
+                <div style={{
+                  borderRadius: 20,
+                  padding: wide ? "56px 64px" : 32,
+                  display: "flex", flexDirection: wide ? "row" : "column",
+                  gap: 48, alignItems: "flex-start",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.07)",
+                }}>
+                  <m.p
+                    style={{
+                      flex: 1, fontSize: 18, lineHeight: 1.7, fontWeight: 300,
+                      color: "rgba(240,240,240,0.6)", maxWidth: 540,
+                    }}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {t.about}
+                  </m.p>
+                  <m.button
+                    onClick={() => setContactOpen(true)}
+                    onMouseEnter={() => setHovering(true)}
+                    onMouseLeave={() => setHovering(false)}
+                    style={{
+                      flexShrink: 0,
+                      display: "inline-flex", alignItems: "center", gap: 8,
+                      padding: "16px 28px", borderRadius: 99,
+                      border: `1px solid ${ACCENT}`, color: ACCENT,
+                      fontSize: 14, fontWeight: 600, background: "transparent",
+                      cursor: "none", fontFamily: "inherit",
+                    }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15, duration: 0.5 }}
+                    whileHover={{ background: ACCENT + "12", scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    {t.contact} →
+                  </m.button>
+                </div>
+              </section>
+
+              <Footer t={t} full setHovering={setHovering} />
+            </m.div>
+          )}
+
+          {/* DISEÑO WEB */}
+          {page === "diseno" && (
+            <m.div
+              key="diseno"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <section style={{
+                paddingTop: 140, paddingBottom: 48,
+                paddingLeft: wide ? 72 : 32, paddingRight: wide ? 72 : 32,
+              }}>
+                <m.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <p style={{
+                    fontSize: 11, fontWeight: 500, letterSpacing: "0.22em",
+                    textTransform: "uppercase", color: "rgba(240,240,240,0.3)", marginBottom: 12,
+                  }}>
+                    {t.sectionDiseno.count}
+                  </p>
+                  <h1 style={{
+                    fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 900,
+                    letterSpacing: "-0.04em", color: ACCENT, lineHeight: 1,
+                    textShadow: `0 0 32px ${ACCENT}44`,
+                  }}>
+                    {t.sectionDiseno.title}
+                  </h1>
+                  <p style={{
+                    marginTop: 12, fontSize: 16, fontWeight: 300,
+                    color: "rgba(240,240,240,0.4)",
+                  }}>
+                    {t.sectionDiseno.desc}
+                  </p>
+                </m.div>
+              </section>
+
+              <section style={{ padding: wide ? "0 64px 96px" : "0 24px 64px" }}>
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
+                  gap: 20,
+                }}>
+                  {PROJECTS_DISENO.map((p, i) => (
+                    <ProjectCard
+                      key={p.id}
+                      project={p}
+                      lang={lang}
+                      index={i}
+                      onHover={setHovering}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              <Footer t={t} setHovering={setHovering} />
+            </m.div>
+          )}
+
+          {/* VIDEO */}
+          {page === "video" && (
+            <m.div
+              key="video"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <section style={{
+                paddingTop: 140, paddingBottom: 48,
+                paddingLeft: wide ? 72 : 32, paddingRight: wide ? 72 : 32,
+              }}>
+                <m.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <h1 style={{
+                    fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 900,
+                    letterSpacing: "-0.04em", color: ACCENT_VIDEO, lineHeight: 1,
+                    textShadow: `0 0 32px ${ACCENT_VIDEO}44`,
+                  }}>
+                    {t.sectionVideo.title}
+                  </h1>
+                  <p style={{
+                    marginTop: 12, fontSize: 16, fontWeight: 300,
+                    color: "rgba(240,240,240,0.4)",
+                  }}>
+                    {t.sectionVideo.desc}
+                  </p>
+                </m.div>
+              </section>
+
+              <section style={{
+                padding: wide ? "48px 64px 120px" : "32px 24px 80px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                minHeight: 320,
+              }}>
+                <m.div
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    textAlign: "center", maxWidth: 480,
+                    padding: 64, borderRadius: 24,
+                    background: "rgba(255,140,66,0.04)",
+                    border: "1px solid rgba(255,140,66,0.12)",
+                  }}
+                >
+                  <div style={{
+                    color: ACCENT_VIDEO, opacity: 0.5, marginBottom: 24,
+                    display: "flex", justifyContent: "center",
+                  }}>
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                      <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M21 16l10 8-10 8V16z" fill="currentColor" />
+                    </svg>
+                  </div>
+                  <p style={{
+                    fontSize: 24, fontWeight: 700, color: "#f0f0f0",
+                    marginBottom: 12, letterSpacing: "-0.02em",
+                  }}>
+                    {t.sectionVideo.comingSoon}
+                  </p>
+                  <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(240,240,240,0.35)" }}>
+                    {t.sectionVideo.comingSoonDesc}
+                  </p>
+                </m.div>
+              </section>
+
+              <Footer t={t} setHovering={setHovering} />
+            </m.div>
+          )}
+
+        </AnimatePresence>
+
+        <Suspense fallback={null}>
+          <ContactModal
+            lang={lang}
+            open={contactOpen}
+            onClose={() => setContactOpen(false)}
+            setHovering={setHovering}
           />
-        </m.div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
-            gap: 20,
-          }}
-        >
-          {PROJECTS.map((p, i) => (
-            <ProjectCard
-              key={p.id}
-              project={p}
-              lang={lang}
-              index={i}
-              onHover={setHovering}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ── About + Contact ── */}
-      <section style={{ padding: "0 64px 80px" }}>
-        <div
-          style={{
-            borderRadius: 20,
-            padding: wide ? "56px 64px" : 32,
-            display: "flex",
-            flexDirection: wide ? "row" : "column",
-            gap: 48,
-            alignItems: "flex-start",
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.07)",
-          }}
-        >
-          <m.p
-            style={{
-              flex: 1,
-              fontSize: 18,
-              lineHeight: 1.7,
-              fontWeight: 300,
-              color: "rgba(240,240,240,0.6)",
-              maxWidth: 540,
-            }}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {t.about}
-          </m.p>
-
-          <m.button
-            onClick={() => setContactOpen(true)}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-            style={{
-              flexShrink: 0,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "16px 28px",
-              borderRadius: 99,
-              border: `1px solid ${ACCENT}`,
-              color: ACCENT,
-              fontSize: 14,
-              fontWeight: 600,
-              background: "transparent",
-              cursor: "none",
-              fontFamily: "inherit",
-            }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15, duration: 0.5 }}
-            whileHover={{ background: ACCENT + "12", scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            {t.contact} →
-          </m.button>
-        </div>
-      </section>
-
-      {/* ── Footer ── */}
-      <footer
-        style={{
-          padding: "24px 64px",
-          borderTop: "1px solid rgba(255,255,255,0.05)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <span style={{ fontSize: 12, color: "rgba(240,240,240,0.2)", display: "flex", gap: 16, alignItems: "center" }}>
-          <span>{t.footer}</span>
-          <a
-            href="privacy.html"
-            style={{ color: "rgba(240,240,240,0.2)" }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-          >
-            {t.privacy}
-          </a>
-          <a
-            href="terms.html"
-            style={{ color: "rgba(240,240,240,0.2)" }}
-            onMouseEnter={() => setHovering(true)}
-            onMouseLeave={() => setHovering(false)}
-          >
-            {t.terms}
-          </a>
-        </span>
-        <a
-          href="https://github.com/montibel"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub de Montilabs"
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          style={{ fontSize: 12, color: "rgba(240,240,240,0.2)", display: "flex", alignItems: "center", gap: 6 }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-          </svg>
-          GitHub
-        </a>
-      </footer>
-
-      <Suspense fallback={null}>
-        <ContactModal
-          lang={lang}
-          open={contactOpen}
-          onClose={() => setContactOpen(false)}
-          setHovering={setHovering}
-        />
-      </Suspense>
-    </div>
+        </Suspense>
+      </div>
     </LazyMotion>
   );
 }
