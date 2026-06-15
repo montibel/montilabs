@@ -19,18 +19,6 @@ const GITHUB_PATH =
 
 const PROJECTS_VIDEO = [
   {
-    id: "fintech",
-    title: "Tutorial Banca Digital",
-    cat: { es: "Videotutorial", en: "Video Tutorial" },
-    desc: {
-      es: "Recorrido animado por las funciones principales de una app bancaria: login, saldo, movimientos y transferencias.",
-      en: "Animated walkthrough of a banking app's main features: login, balance, transactions and transfers.",
-    },
-    video: "assets/videos/fintech.mp4",
-    img: "assets/screenshots/fintech.jpg",
-    color: "#ff8c42",
-  },
-  {
     id: "pizarron",
     title: "¿Cómo hacer un videotutorial?",
     cat: { es: "Animación pizarrón", en: "Whiteboard Animation" },
@@ -47,8 +35,8 @@ const PROJECTS_VIDEO = [
     title: "Search Sequence",
     cat: { es: "Motion design", en: "Motion design" },
     desc: {
-      es: "Secuencia animada que muestra cómo una barra de búsqueda cobra vida con texto y transiciones fluidas.",
-      en: "Animated sequence showing how a search bar comes to life with fluid text and transitions.",
+      es: "Barra de búsqueda animada con texto fluido.",
+      en: "Animated search bar with fluid text.",
     },
     video: "assets/videos/search.mp4",
     img: "assets/screenshots/search.jpg",
@@ -137,7 +125,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Producción audiovisual y motion design.",
-      count: "3 proyectos",
+      count: "2 proyectos",
       comingSoon: "Próximamente",
       comingSoonDesc: "Los proyectos de video están en producción.",
       process: [
@@ -172,7 +160,7 @@ const COPY = {
     sectionVideo: {
       title: "Video",
       desc: "Audiovisual production and motion design.",
-      count: "3 projects",
+      count: "2 projects",
       comingSoon: "Coming soon",
       comingSoonDesc: "Video projects are in production.",
       process: [
