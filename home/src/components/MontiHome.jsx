@@ -26,7 +26,7 @@ const PROJECTS_VIDEO = [
       es: "Tutorial animado App bancaria.",
       en: "Animated tutorial banking app.",
     },
-    video: "assets/videos/fintech.mp4",
+    video: "assets/videos/fintech-hd.mp4",
     img: "assets/screenshots/fintech.jpg",
     color: "#ff8c42",
   },
