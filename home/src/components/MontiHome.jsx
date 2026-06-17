@@ -38,7 +38,7 @@ const PROJECTS_VIDEO = [
       es: "Barra de búsqueda animada.",
       en: "Animated search bar.",
     },
-    video: "assets/videos/search.mp4",
+    iframe: "uxsim/dist/",
     img: "assets/screenshots/search.jpg",
     color: "#ff8c42",
   },
