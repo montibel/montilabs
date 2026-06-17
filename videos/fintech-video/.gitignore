@@ -1,0 +1,7 @@
+renders/
+snapshots/
+models/
+capture/
+sfx/
+hyper-shader-local.js
+node_modules/

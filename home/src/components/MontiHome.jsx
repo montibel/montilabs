@@ -26,9 +26,9 @@ const PROJECTS_VIDEO = [
       es: "Tutorial animado App bancaria.",
       en: "Animated tutorial banking app.",
     },
-    video: "assets/videos/fintech-hd.mp4",
-    img: "assets/screenshots/fintech.jpg",
-    color: "#ff8c42",
+    iframe: "videos/fintech-video/",
+    img: "assets/screenshots/fintech-hf.jpg",
+    color: "#06b6d4",
   },
   {
     id: "search",
@@ -418,6 +418,7 @@ function HeroLogo({ onHover }) {
 function VideoCard({ project, lang, index }) {
   const [open, setOpen] = useState(false);
   const videoRef = useRef(null);
+  const isIframe = !!project.iframe;
 
   const openModal = () => setOpen(true);
   const closeModal = () => {
@@ -426,7 +427,7 @@ function VideoCard({ project, lang, index }) {
   };
 
   useEffect(() => {
-    if (open && videoRef.current) videoRef.current.play();
+    if (open && videoRef.current && !isIframe) videoRef.current.play();
     const onKey = (e) => { if (e.key === "Escape") closeModal(); };
     if (open) window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -497,13 +498,31 @@ function VideoCard({ project, lang, index }) {
           }}
         >
           <div onClick={(e) => e.stopPropagation()} style={{ position: "relative", width: "100%", maxWidth: 900 }}>
-            <video
-              ref={videoRef}
-              src={project.video}
-              controls
-              controlsList="nodownload"
-              style={{ width: "100%", borderRadius: 12, display: "block", background: "#000" }}
-            />
+            {isIframe ? (
+              <div style={{ position: "relative", width: "100%", paddingBottom: "56.25%", borderRadius: 12, overflow: "hidden", background: "#08090f" }}>
+                <iframe
+                  src={project.iframe}
+                  title={project.title}
+                  scrolling="no"
+                  style={{
+                    position: "absolute", top: 0, left: 0,
+                    width: 1920, height: 1080,
+                    transformOrigin: "top left",
+                    transform: `scale(${900 / 1920})`,
+                    border: "none",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            ) : (
+              <video
+                ref={videoRef}
+                src={project.video}
+                controls
+                controlsList="nodownload"
+                style={{ width: "100%", borderRadius: 12, display: "block", background: "#000" }}
+              />
+            )}
             <button
               onClick={closeModal}
               style={{
