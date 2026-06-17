@@ -11,6 +11,8 @@ import {
 
 const ContactModal = lazy(() => import("./ContactModal"));
 
+const PRERENDER = typeof window !== "undefined" && !!window.__PRERENDER__;
+
 const ACCENT = "#c8ff3e";
 const ACCENT_VIDEO = "#ff8c42";
 
@@ -315,7 +317,7 @@ function HeroLogo({ onHover }) {
     <div style={{ position: "relative", width: 280, height: 280 }}>
       <m.div
         animate={glowCtrl}
-        initial={{ opacity: 0, scale: 1 }}
+        initial={PRERENDER ? false : { opacity: 0, scale: 1 }}
         style={{
           position: "absolute", top: "50%", left: "50%",
           translateX: "-50%", translateY: "-50%",
@@ -327,7 +329,7 @@ function HeroLogo({ onHover }) {
       />
       <m.div
         animate={glowCtrl}
-        initial={{ opacity: 0, scale: 1 }}
+        initial={PRERENDER ? false : { opacity: 0, scale: 1 }}
         style={{
           position: "absolute", top: "50%", left: "50%",
           translateX: "-50%", translateY: "-50%",
@@ -369,7 +371,7 @@ function HeroLogo({ onHover }) {
         <m.path
           d={PATH} fill="#c8ff3e"
           animate={fillCtrl}
-          initial={{ opacity: 0 }}
+          initial={PRERENDER ? false : { opacity: 0 }}
           style={{ filter: "drop-shadow(0 0 3px #c8ff3e) drop-shadow(0 0 10px rgba(200,255,62,.8)) drop-shadow(0 0 22px rgba(200,255,62,.5))" }}
         />
       </svg>
@@ -620,7 +622,7 @@ function CategoryCard({ title, desc, count, color, href, icon, onHover, index })
   return (
     <m.a
       href={href}
-      initial={{ opacity: 0, y: 32 }}
+      initial={PRERENDER ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
@@ -920,7 +922,7 @@ export default function MontiHome() {
             <AnimatePresence mode="wait">
               <m.span
                 key={lang}
-                initial={{ opacity: 0, y: 6 }}
+                initial={PRERENDER ? false : { opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.18 }}
@@ -938,7 +940,7 @@ export default function MontiHome() {
           {page === "home" && (
             <m.div
               key="home"
-              initial={{ opacity: 0 }}
+              initial={PRERENDER ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
@@ -962,7 +964,7 @@ export default function MontiHome() {
                       fontWeight: 900, letterSpacing: "-0.04em",
                       color: ACCENT, lineHeight: 0.88,
                     }}
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={PRERENDER ? false : { opacity: 0, y: 24 }}
                     animate={{
                       opacity: 1, y: 0,
                       textShadow: [
@@ -985,7 +987,7 @@ export default function MontiHome() {
                       fontSize: 11, fontWeight: 500, letterSpacing: "0.22em",
                       textTransform: "uppercase", color: "rgba(240,240,240,0.35)", marginBottom: 18,
                     }}
-                    initial={{ opacity: 0 }}
+                    initial={PRERENDER ? false : { opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
                   >
@@ -1002,7 +1004,7 @@ export default function MontiHome() {
                       <m.span
                         key={line}
                         style={{ display: "block" }}
-                        initial={{ opacity: 0, y: 18 }}
+                        initial={PRERENDER ? false : { opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25 + i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                       >
@@ -1029,7 +1031,7 @@ export default function MontiHome() {
                       fontSize: 14, fontWeight: 700, alignSelf: "flex-start",
                       cursor: "none", fontFamily: "inherit", letterSpacing: "-0.01em",
                     }}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={PRERENDER ? false : { opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.48, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     whileHover={{ scale: 1.04 }}
@@ -1048,7 +1050,7 @@ export default function MontiHome() {
                 {wide && (
                   <m.div
                     style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={PRERENDER ? false : { opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                   >
@@ -1114,7 +1116,7 @@ export default function MontiHome() {
                       flex: 1, fontSize: 18, lineHeight: 1.7, fontWeight: 300,
                       color: "rgba(240,240,240,0.6)", maxWidth: 540,
                     }}
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={PRERENDER ? false : { opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -1133,7 +1135,7 @@ export default function MontiHome() {
                       fontSize: 14, fontWeight: 600, background: "transparent",
                       cursor: "none", fontFamily: "inherit",
                     }}
-                    initial={{ opacity: 0 }}
+                    initial={PRERENDER ? false : { opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.15, duration: 0.5 }}

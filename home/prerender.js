@@ -40,9 +40,11 @@ const { port } = server.address();
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
+await page.addInitScript(() => { window.__PRERENDER__ = true; });
 await page.setViewportSize({ width: 1280, height: 800 });
 await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'domcontentloaded' });
 await page.waitForSelector('#root h1', { timeout: 15000 });
+await new Promise(r => setTimeout(r, 500));
 const rootHTML = await page.evaluate(() => document.getElementById('root').innerHTML);
 await browser.close();
 server.close();
