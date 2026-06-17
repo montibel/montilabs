@@ -181,9 +181,10 @@ function getPageFromHash() {
 
 // ── Viewport width hook ───────────────────────────────────────────────
 function useWide(breakpoint = 768) {
-  const [wide, setWide] = useState(() => window.innerWidth >= breakpoint);
+  const [wide, setWide] = useState(false);
   useEffect(() => {
     const check = () => setWide(window.innerWidth >= breakpoint);
+    check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, [breakpoint]);
@@ -812,15 +813,18 @@ function Footer({ t, full, setHovering }) {
 
 // ── Main ─────────────────────────────────────────────────────────────
 export default function MontiHome() {
-  const [lang, setLang] = useState(
-    () => localStorage.getItem("ml_lang") || "es",
-  );
+  const [lang, setLang] = useState("es");
   const [hovering, setHovering] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [page, setPage] = useState(getPageFromHash);
   const cardsRef = useRef(null);
   const wide = useWide(820);
   const t = COPY[lang];
+
+  useEffect(() => {
+    const saved = localStorage.getItem("ml_lang");
+    if (saved) setLang(saved);
+  }, []);
 
   useEffect(() => {
     const onHashChange = () => {

@@ -29,9 +29,13 @@ jobs:
           cache: npm
           cache-dependency-path: home/package-lock.json
 
-      - name: Build home app
+      - name: Install Playwright browsers
         working-directory: home
-        run: npm ci && npm run build
+        run: npm ci && npx playwright install chromium --with-deps
+
+      - name: Build home app (Vite + prerender)
+        working-directory: home
+        run: npm run build
 
       - name: Remove home/node_modules before upload
         run: rm -rf home/node_modules
