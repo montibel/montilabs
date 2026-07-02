@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://montibel.github.io/montilabs/sitemap.xml
+Sitemap: https://montilabs.cl/sitemap.xml
