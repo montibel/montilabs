@@ -116,7 +116,7 @@ const COPY = {
     back: "← Volver",
     sectionDiseno: {
       title: "Interfaces UI/UX",
-      desc: "Motion, animación y experiencias UI/UX.",
+      desc: "Motion, animación e interfaces UI/UX.",
       count: "4 proyectos",
       process: [
         { n: "01", title: "Briefing", desc: "Entendemos el objetivo, la interacción y la audiencia." },
@@ -151,7 +151,7 @@ const COPY = {
     back: "← Back",
     sectionDiseno: {
       title: "UI/UX Interfaces",
-      desc: "Motion, animation and UI/UX experiences.",
+      desc: "Motion, animation and UI/UX interfaces.",
       count: "4 projects",
       process: [
         { n: "01", title: "Briefing", desc: "We understand the goal, interaction and audience." },
