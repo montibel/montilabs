@@ -46,7 +46,7 @@ const PROJECTS_VIDEO = [
   },
 ];
 
-const PROJECTS_LABS = [
+const PROJECTS_INTERFACES = [
   {
     id: "fluid-type",
     title: "Fluid Type",
@@ -118,8 +118,6 @@ const COPY = {
       title: "Interfaces UI/UX",
       desc: "Motion, animación y experiencias UI/UX.",
       count: "4 proyectos",
-      labsEyebrow: "Labs",
-      labsDesc: "Experimentos de interfaz y animación.",
       process: [
         { n: "01", title: "Briefing", desc: "Entendemos el objetivo, la interacción y la audiencia." },
         { n: "02", title: "Motion & Prototipo", desc: "Iteramos la animación hasta que la sensación sea clara." },
@@ -155,8 +153,6 @@ const COPY = {
       title: "UI/UX Interfaces",
       desc: "Motion, animation and UI/UX experiences.",
       count: "4 projects",
-      labsEyebrow: "Labs",
-      labsDesc: "Interface and animation experiments.",
       process: [
         { n: "01", title: "Briefing", desc: "We understand the goal, interaction and audience." },
         { n: "02", title: "Motion & Prototype", desc: "We iterate the animation until the feel is right." },
@@ -1189,37 +1185,13 @@ export default function MontiHome() {
                 </m.div>
               </section>
 
-              <section style={{ padding: wide ? "0 64px 40px" : "0 24px 32px" }}>
-                <m.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  style={{
-                    display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8,
-                  }}
-                >
-                  <span style={{
-                    fontSize: 11, fontWeight: 700, letterSpacing: "0.2em",
-                    textTransform: "uppercase", color: ACCENT,
-                  }}>
-                    {t.sectionDiseno.labsEyebrow}
-                  </span>
-                </m.div>
-                <p style={{
-                  fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.4)", maxWidth: 480,
-                }}>
-                  {t.sectionDiseno.labsDesc}
-                </p>
-              </section>
-
               <section style={{ padding: wide ? "0 64px 96px" : "0 24px 64px" }}>
                 <div style={{
                   display: "grid",
                   gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
                   gap: 20,
                 }}>
-                  {PROJECTS_LABS.map((p, i) => (
+                  {PROJECTS_INTERFACES.map((p, i) => (
                     <ProjectCard
                       key={p.id}
                       project={p}
