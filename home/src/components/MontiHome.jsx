@@ -46,7 +46,7 @@ const PROJECTS_VIDEO = [
   },
 ];
 
-const PROJECTS_DISENO = [
+const PROJECTS_LABS = [
   {
     id: "fluid-type",
     title: "Fluid Type",
@@ -103,11 +103,11 @@ const PROJECTS_DISENO = [
 
 const COPY = {
   es: {
-    eyebrow: "Diseño Web · Video · Santiago, Chile",
+    eyebrow: "Video · Motion · UI/UX · Santiago, Chile",
     h1: ["Más allá", "de tu", "imaginación."],
     explore: "Explorar",
     about:
-      "Estudio creativo en Santiago, Chile. Interfaces dinámicas y animaciones interactivas para dar vida a productos digitales únicos.",
+      "Estudio creativo en Santiago, Chile. Video, motion design e interfaces UI/UX que dan vida a productos digitales únicos.",
     contact: "Hablemos",
     open: "Abrir →",
     footer: "© 2026 montilabs",
@@ -115,12 +115,14 @@ const COPY = {
     terms: "Términos",
     back: "← Volver",
     sectionDiseno: {
-      title: "Diseño Web",
-      desc: "Interfaces interactivas, tipografía y UI/UX.",
+      title: "Interfaces UI/UX",
+      desc: "Motion, animación y experiencias UI/UX.",
       count: "4 proyectos",
+      labsEyebrow: "Labs",
+      labsDesc: "Experimentos de interfaz y animación. R&D interno, no encargos de cliente.",
       process: [
-        { n: "01", title: "Briefing", desc: "Entendemos el proyecto, objetivos y audiencia." },
-        { n: "02", title: "Diseño & Prototipo", desc: "Iteramos hasta que la visión sea clara." },
+        { n: "01", title: "Briefing", desc: "Entendemos el objetivo, la interacción y la audiencia." },
+        { n: "02", title: "Motion & Prototipo", desc: "Iteramos la animación hasta que la sensación sea clara." },
         { n: "03", title: "Desarrollo & Entrega", desc: "Código limpio, animaciones y detalle final." },
       ],
     },
@@ -138,11 +140,11 @@ const COPY = {
     },
   },
   en: {
-    eyebrow: "Web Design · Video · Santiago, Chile",
+    eyebrow: "Video · Motion · UI/UX · Santiago, Chile",
     h1: ["Beyond", "your", "imagination."],
     explore: "Explore",
     about:
-      "Creative studio based in Santiago, Chile. Dynamic interfaces and interactive animations to bring unique digital products to life.",
+      "Creative studio based in Santiago, Chile. Video, motion design and UI/UX interfaces that bring unique digital products to life.",
     contact: "Let's talk",
     open: "Open →",
     footer: "© 2026 montilabs",
@@ -150,12 +152,14 @@ const COPY = {
     terms: "Terms",
     back: "← Back",
     sectionDiseno: {
-      title: "Web Design",
-      desc: "Interactive interfaces, typography and UI/UX.",
+      title: "UI/UX Interfaces",
+      desc: "Motion, animation and UI/UX experiences.",
       count: "4 projects",
+      labsEyebrow: "Labs",
+      labsDesc: "Interface and animation experiments. Internal R&D, not client work.",
       process: [
-        { n: "01", title: "Briefing", desc: "We understand the project, goals and audience." },
-        { n: "02", title: "Design & Prototype", desc: "We iterate until the vision is clear." },
+        { n: "01", title: "Briefing", desc: "We understand the goal, interaction and audience." },
+        { n: "02", title: "Motion & Prototype", desc: "We iterate the animation until the feel is right." },
         { n: "03", title: "Development & Delivery", desc: "Clean code, animations and final detail." },
       ],
     },
@@ -176,7 +180,7 @@ const COPY = {
 
 function getPageFromHash() {
   const hash = window.location.hash;
-  if (hash === "#diseno-web") return "diseno";
+  if (hash === "#interfaces") return "diseno";
   if (hash === "#video") return "video";
   return "home";
 }
@@ -1072,7 +1076,7 @@ export default function MontiHome() {
                     desc={t.sectionDiseno.desc}
                     count={t.sectionDiseno.count}
                     color={ACCENT}
-                    href="#diseno-web"
+                    href="#interfaces"
                     onHover={setHovering}
                     icon={
                       <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -1185,13 +1189,37 @@ export default function MontiHome() {
                 </m.div>
               </section>
 
+              <section style={{ padding: wide ? "0 64px 40px" : "0 24px 32px" }}>
+                <m.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  style={{
+                    display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8,
+                  }}
+                >
+                  <span style={{
+                    fontSize: 11, fontWeight: 700, letterSpacing: "0.2em",
+                    textTransform: "uppercase", color: ACCENT,
+                  }}>
+                    {t.sectionDiseno.labsEyebrow}
+                  </span>
+                </m.div>
+                <p style={{
+                  fontSize: 14, lineHeight: 1.6, color: "rgba(240,240,240,0.4)", maxWidth: 480,
+                }}>
+                  {t.sectionDiseno.labsDesc}
+                </p>
+              </section>
+
               <section style={{ padding: wide ? "0 64px 96px" : "0 24px 64px" }}>
                 <div style={{
                   display: "grid",
                   gridTemplateColumns: wide ? "1fr 1fr" : "1fr",
                   gap: 20,
                 }}>
-                  {PROJECTS_DISENO.map((p, i) => (
+                  {PROJECTS_LABS.map((p, i) => (
                     <ProjectCard
                       key={p.id}
                       project={p}
