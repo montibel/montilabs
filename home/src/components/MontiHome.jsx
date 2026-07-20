@@ -102,6 +102,7 @@ const COPY = {
   es: {
     eyebrow: "Video · Motion · UI/UX · Santiago, Chile",
     h1: ["Más allá", "de tu", "imaginación."],
+    h1Sr: "Montilabs — Video, Motion y UI/UX",
     explore: "Explorar",
     about:
       "Estudio creativo en Santiago, Chile. Video, motion design e interfaces UI/UX que dan vida a productos digitales únicos.",
@@ -137,6 +138,7 @@ const COPY = {
   en: {
     eyebrow: "Video · Motion · UI/UX · Santiago, Chile",
     h1: ["Beyond", "your", "imagination."],
+    h1Sr: "Montilabs — Video, Motion and UI/UX",
     explore: "Explore",
     about:
       "Creative studio based in Santiago, Chile. Video, motion design and UI/UX interfaces that bring unique digital products to life.",
@@ -976,6 +978,13 @@ export default function MontiHome() {
                     fontSize: "clamp(26px, 3vw, 42px)",
                     marginBottom: "2.5rem", maxWidth: 480,
                   }}>
+                    <span style={{
+                      position: "absolute", width: 1, height: 1, padding: 0,
+                      margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)",
+                      whiteSpace: "nowrap", border: 0,
+                    }}>
+                      {t.h1Sr}
+                    </span>
                     {t.h1.map((line, i) => (
                       <m.span
                         key={line}
