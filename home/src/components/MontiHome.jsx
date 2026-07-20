@@ -119,7 +119,7 @@ const COPY = {
       desc: "Motion, animación y experiencias UI/UX.",
       count: "4 proyectos",
       labsEyebrow: "Labs",
-      labsDesc: "Experimentos de interfaz y animación. R&D interno, no encargos de cliente.",
+      labsDesc: "Experimentos de interfaz y animación.",
       process: [
         { n: "01", title: "Briefing", desc: "Entendemos el objetivo, la interacción y la audiencia." },
         { n: "02", title: "Motion & Prototipo", desc: "Iteramos la animación hasta que la sensación sea clara." },
@@ -156,7 +156,7 @@ const COPY = {
       desc: "Motion, animation and UI/UX experiences.",
       count: "4 projects",
       labsEyebrow: "Labs",
-      labsDesc: "Interface and animation experiments. Internal R&D, not client work.",
+      labsDesc: "Interface and animation experiments.",
       process: [
         { n: "01", title: "Briefing", desc: "We understand the goal, interaction and audience." },
         { n: "02", title: "Motion & Prototype", desc: "We iterate the animation until the feel is right." },
