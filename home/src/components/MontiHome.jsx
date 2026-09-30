@@ -45,6 +45,19 @@ const PROJECTS_VIDEO = [
 
 const PROJECTS_INTERFACES = [
   {
+    id: "catculator",
+    title: "Catculator",
+    cat: { es: "App móvil", en: "Mobile App" },
+    desc: {
+      es: "Una calculadora con alma de gato: básica, científica, con historial y modo oscuro. iOS y Android.",
+      en: "A calculator with a cat's soul: basic, scientific, with history and dark mode. iOS and Android.",
+    },
+    url: "catculator/",
+    img: "assets/screenshots/catculator.jpg",
+    color: "#fb8c3c",
+    soon: true,
+  },
+  {
     id: "fluid-type",
     title: "Fluid Type",
     cat: { es: "Tipografía interactiva", en: "Interactive Typography" },
@@ -108,6 +121,7 @@ const COPY = {
       "Estudio creativo en Santiago, Chile. Video, motion design e interfaces UI/UX que dan vida a productos digitales únicos.",
     contact: "Hablemos",
     open: "Abrir →",
+    soon: "Próximamente",
     footer: "© 2026 montilabs",
     privacy: "Política de privacidad",
     terms: "Términos",
@@ -115,7 +129,7 @@ const COPY = {
     sectionDiseno: {
       title: "Interfaces UI/UX",
       desc: "Motion, animación e interfaces UI/UX.",
-      count: "4 proyectos",
+      count: "5 proyectos",
       process: [
         { n: "01", title: "Briefing", desc: "Entendemos el objetivo, la interacción y la audiencia." },
         { n: "02", title: "Motion & Prototipo", desc: "Iteramos la animación hasta que la sensación sea clara." },
@@ -144,6 +158,7 @@ const COPY = {
       "Creative studio based in Santiago, Chile. Video, motion design and UI/UX interfaces that bring unique digital products to life.",
     contact: "Let's talk",
     open: "Open →",
+    soon: "Coming soon",
     footer: "© 2026 montilabs",
     privacy: "Privacy policy",
     terms: "Terms",
@@ -151,7 +166,7 @@ const COPY = {
     sectionDiseno: {
       title: "UI/UX Interfaces",
       desc: "Motion, animation and UI/UX interfaces.",
-      count: "4 projects",
+      count: "5 projects",
       process: [
         { n: "01", title: "Briefing", desc: "We understand the goal, interaction and audience." },
         { n: "02", title: "Motion & Prototype", desc: "We iterate the animation until the feel is right." },
@@ -582,6 +597,18 @@ function ProjectCard({ project, lang, index, onHover }) {
           background: "linear-gradient(to bottom, transparent, #111)",
           pointerEvents: "none",
         }} />
+        {project.soon && (
+          <span style={{
+            position: "absolute", top: 14, left: 14,
+            fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase",
+            padding: "6px 12px", borderRadius: 99,
+            background: "rgba(11,11,11,0.75)", backdropFilter: "blur(8px)",
+            border: `1px solid ${project.color}55`,
+            color: project.color,
+          }}>
+            {t.soon}
+          </span>
+        )}
       </div>
 
       {/* Content */}
