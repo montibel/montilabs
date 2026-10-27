@@ -23,12 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # El home (index.html) es HTML estático; ya no se construye desde home/
+      # Sitio estático: se publican solo los archivos públicos (sin README, workflow ni fuentes de videos/)
+      - name: Preparar archivos del sitio
+        run: |
+          mkdir _site
+          cp -R index.html 404.html privacy.html terms.html google63b5410a80ae356e.html \
+            CNAME robots.txt sitemap.xml favicon.svg favicon.ico apple-touch-icon.png og-image.png \
+            assets fintech logo _site/
+          find _site -name .DS_Store -delete
+
       - uses: actions/configure-pages@v4
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy
         id: deployment

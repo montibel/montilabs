@@ -1,2 +1,15 @@
 node_modules/
 .DS_Store
+_site/
+
+# Herramientas locales
+.agents/
+.claude/
+skills-lock.json
+
+# Export de Claude Design (fuente del home, no se publica)
+Landing Montilabs.html
+
+# Proyectos de video de clientes: solo locales
+videos/*
+!videos/fintech-video/

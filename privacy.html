@@ -10,57 +10,61 @@
     <meta name="description" content="Política de privacidad y cookies de Montilabs." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://montilabs.cl/privacy.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <style>
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        background: #0b0b0b;
-        color: #f0f0f0;
-        font-family: 'Space Grotesk', system-ui, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
-        line-height: 1.7;
-      }
-      a { color: #c8ff3e; text-decoration: none; }
-      a:hover { text-decoration: underline; }
-      a:focus-visible { outline: 2px solid #c8ff3e; outline-offset: 3px; border-radius: 3px; }
-      .wrap { max-width: 720px; margin: 0 auto; padding: 80px 32px 120px; }
-      .back {
-        display: inline-flex; align-items: center; gap: 8px;
-        color: rgba(240,240,240,0.4); font-size: 13px; margin-bottom: 48px;
-        transition: color 0.2s;
-      }
-      .back:hover { color: #c8ff3e; text-decoration: none; }
-      h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 700; margin-bottom: 8px; }
-      .date { font-size: 13px; color: rgba(240,240,240,0.35); margin-bottom: 56px; }
-      h2 { font-size: 18px; font-weight: 600; color: #c8ff3e; margin: 48px 0 16px; }
-      p { font-size: 15px; color: rgba(240,240,240,0.7); margin-bottom: 16px; }
-      ul { font-size: 15px; color: rgba(240,240,240,0.7); padding-left: 20px; margin-bottom: 16px; }
-      ul li { margin-bottom: 8px; }
-      .footer-link { margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.07); font-size: 13px; color: rgba(240,240,240,0.3); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin-ext.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/ibm-plex-mono-400-latin.woff2") format('woff2'); }
+      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-dark: #163BA6; --bg: #F5F7FA; --line: #E3E8EF; }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+      a { color: var(--blue); text-decoration: none; }
+      a:hover { color: var(--blue-dark); }
+      :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+      .site-header { background: #fff; border-bottom: 1px solid var(--line); }
+      .site-header div { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+      .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
+      .brand:hover { color: var(--ink); }
+      .back { font-size: 14.5px; font-weight: 500; color: var(--ink-2); }
+      .wrap { max-width: 760px; margin: 0 auto; padding: 64px 24px 96px; }
+      .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--blue); margin-bottom: 12px; }
+      h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin-bottom: 10px; }
+      .date { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+      .doc { background: #fff; border: 1px solid #D5DCE6; border-radius: 12px; padding: clamp(24px, 5vw, 48px); }
+      h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 36px 0 12px; }
+      .doc h2:first-child { margin-top: 0; }
+      p, ul { font-size: 15.5px; color: var(--ink-2); margin-bottom: 14px; }
+      ul { padding-left: 20px; }
+      li { margin-bottom: 6px; }
+      strong { color: var(--ink); }
+      .foot { margin-top: 32px; font-size: 13.5px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; }
+      .foot a { color: var(--ink-2); }
     </style>
   </head>
   <body>
+    <header class="site-header">
+      <div>
+        <a href="/" class="brand"><svg viewBox="0 0 48 46" width="24" height="23" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>montilabs</a>
+        <a href="/" class="back">← Volver al inicio</a>
+      </div>
+    </header>
     <main class="wrap">
-      <a class="back" href="./">← Volver a Montilabs</a>
+      <div class="eyebrow">Legal</div>
 
       <h1>Política de Privacidad</h1>
-      <p class="date">Última actualización: 13 de junio de 2026</p>
+      <p class="date">Última actualización: 27 de octubre de 2026</p>
+      <div class="doc">
 
       <h2>1. Responsable del tratamiento</h2>
       <p>
         <strong>Montilabs</strong><br />
-        Correo electrónico de contacto: <a href="mailto:montilabss@gmail.com">montilabss@gmail.com</a>
+        Correo electrónico de contacto: <a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a>
       </p>
 
       <h2>2. Datos que recopilamos</h2>
       <p>Montilabs recopila únicamente los datos que tú nos facilitas de forma voluntaria:</p>
       <ul>
         <li><strong>Correo electrónico:</strong> cuando te pones en contacto con nosotros a través del enlace de correo de la web.</li>
-        <li><strong>Preferencia de idioma:</strong> almacenada localmente en tu navegador (localStorage) para recordar si prefieres español o inglés. No se envía a ningún servidor.</li>
       </ul>
       <p>No recopilamos datos de navegación, no usamos formularios con base de datos propia ni realizamos perfilado de usuarios.</p>
 
@@ -74,7 +78,7 @@
       <p>El tratamiento se basa en el <strong>consentimiento del interesado</strong> al ponerse en contacto con nosotros voluntariamente, de acuerdo con la <strong>Ley 19.628 sobre Protección de la Vida Privada</strong> de Chile.</p>
 
       <h2>5. Cookies y almacenamiento local</h2>
-      <p>Este sitio web <strong>no utiliza cookies</strong> propias ni de terceros para rastreo o publicidad. Únicamente usa <code>localStorage</code> para guardar tu preferencia de idioma. Este dato permanece en tu dispositivo y no se transmite a ningún servidor.</p>
+      <p>Este sitio web <strong>no utiliza cookies</strong> propias ni de terceros para rastreo o publicidad, ni guarda datos en tu navegador.</p>
       <p>En el futuro, si se integran servicios de análisis o publicidad (como Google Analytics o Google Ads), esta política se actualizará y se solicitará consentimiento explícito.</p>
 
       <h2>6. Transferencias internacionales</h2>
@@ -89,17 +93,15 @@
         <li><strong>Oposición y limitación:</strong> oponerte al tratamiento o limitarlo.</li>
         <li><strong>Portabilidad:</strong> recibir tus datos en formato estructurado.</li>
       </ul>
-      <p>Para ejercer estos derechos, escríbenos a <a href="mailto:montilabss@gmail.com">montilabss@gmail.com</a>. También puedes ejercer tus derechos ante el <a href="https://www.consejotransparencia.cl" target="_blank" rel="noopener noreferrer">Consejo para la Transparencia de Chile</a>.</p>
+      <p>Para ejercer estos derechos, escríbenos a <a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a>. También puedes ejercer tus derechos ante el <a href="https://www.consejotransparencia.cl" target="_blank" rel="noopener noreferrer">Consejo para la Transparencia de Chile</a>.</p>
 
       <h2>8. Conservación de datos</h2>
       <p>Los correos electrónicos recibidos se conservan únicamente el tiempo necesario para responder a la consulta, salvo que se establezca una relación comercial que requiera mayor plazo.</p>
 
       <h2>9. Cambios en esta política</h2>
       <p>Podemos actualizar esta política ocasionalmente. La fecha de "última actualización" en la parte superior refleja siempre la versión vigente.</p>
-
-      <div class="footer-link">
-        <p>© 2026 Montilabs · <a href="./">montilabs</a></p>
       </div>
+      <div class="foot"><span>© 2026 montilabs · Santiago, Chile</span><a href="/privacy.html">Privacidad</a><a href="/terms.html">Términos</a><a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a></div>
     </main>
   </body>
 </html>

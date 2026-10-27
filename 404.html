@@ -1,63 +1,33 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 — Montilabs</title>
+    <title>Página no encontrada — Montilabs</title>
     <meta name="robots" content="noindex" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-      body {
-        background: #0b0b0b;
-        color: #f0f0f0;
-        font-family: 'Space Grotesk', system-ui, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 32px;
-      }
-      a { color: inherit; text-decoration: none; }
-      a:focus-visible { outline: 2px solid #c8ff3e; outline-offset: 3px; border-radius: 3px; }
-      .num {
-        font-size: clamp(96px, 20vw, 180px);
-        font-weight: 700;
-        line-height: 1;
-        color: transparent;
-        -webkit-text-stroke: 1px rgba(200,255,62,0.3);
-        letter-spacing: -4px;
-        margin-bottom: 24px;
-      }
-      h1 { font-size: 20px; font-weight: 400; color: rgba(240,240,240,0.5); margin-bottom: 40px; }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 14px 28px;
-        border-radius: 99px;
-        border: 1px solid #c8ff3e;
-        color: #c8ff3e;
-        font-size: 14px;
-        font-weight: 600;
-        font-family: inherit;
-        transition: background 0.2s;
-      }
-      .btn:hover { background: rgba(200,255,62,0.08); }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); }
+      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/ibm-plex-mono-400-latin.woff2") format('woff2'); }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 32px 24px; background: #F5F7FA; color: #0B1B33; font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-align: center; }
+      a { text-decoration: none; }
+      :focus-visible { outline: 2px solid #1E4FD8; outline-offset: 2px; }
+      .brand { display: flex; align-items: center; gap: 10px; color: #0B1B33; font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 56px; }
+      .code { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #1E4FD8; background: #EEF3FF; padding: 6px 10px; border-radius: 4px; margin-bottom: 20px; }
+      h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin-bottom: 12px; }
+      p { font-size: 17px; line-height: 1.6; color: #3B4A61; max-width: 440px; margin-bottom: 32px; }
+      .btn { background: #1E4FD8; color: #fff; padding: 14px 22px; border-radius: 6px; font-size: 15.5px; font-weight: 600; transition: background .15s; }
+      .btn:hover { background: #163BA6; }
     </style>
   </head>
   <body>
-    <div>
-      <div class="num">404</div>
-      <h1>Esta página no existe</h1>
-      <a class="btn" href="./index.html">← Volver al inicio</a>
-    </div>
+    <a href="/" class="brand"><svg viewBox="0 0 48 46" width="24" height="23" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>montilabs</a>
+    <div class="code">Error 404</div>
+    <h1>Esta página no existe</h1>
+    <p>Puede que el enlace esté desactualizado o que la página se haya movido.</p>
+    <a class="btn" href="/">Volver al inicio</a>
   </body>
 </html>
