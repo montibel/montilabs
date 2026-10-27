@@ -240,16 +240,11 @@
       .metric span { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
 
       /* Proyectos */
-      .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-      .filter { border: 1px solid var(--line-3); background: #fff; color: var(--ink-2); padding: 8px 14px; border-radius: 6px; font: 600 13.5px 'IBM Plex Sans', sans-serif; cursor: pointer; }
-      .filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
-      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); gap: 20px; }
       .project { display: flex; flex-direction: column; border: 1px solid var(--line-2); border-radius: 10px; overflow: hidden; background: #fff; color: var(--ink); transition: border-color .15s, transform .15s, box-shadow .15s; }
       .project:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 14px 30px -18px rgba(11,27,51,0.35); }
-      .project[hidden] { display: none; }
       .project-img { position: relative; aspect-ratio: 16/10; background: var(--ink); overflow: hidden; }
       .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .project-img .soon { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 11px; background: #fff; color: var(--ink); padding: 4px 8px; border-radius: 4px; }
       .project-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
       .project-body .mono { font-size: 11px; color: var(--blue); }
       .project-body h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
@@ -458,43 +453,14 @@
 
       <section id="proyectos" class="wrap section">
         <div class="section-head">
-          <div class="eyebrow">Proyectos y experimentos</div>
+          <div class="eyebrow">Proyectos</div>
           <h2 class="h2">Lo que hacemos, funcionando en el navegador</h2>
-          <p class="lead">Interfaces, motion y videotutoriales que puedes abrir y probar ahora mismo.</p>
-        </div>
-        <div class="filters" role="group" aria-label="Filtrar proyectos">
-          <button class="filter" data-filter="all" aria-pressed="true">Todos</button>
-          <button class="filter" data-filter="ui" aria-pressed="false">Interfaces UI/UX</button>
-          <button class="filter" data-filter="video" aria-pressed="false">Video</button>
+          <p class="lead">Videotutoriales de producto que puedes abrir y ver ahora mismo.</p>
         </div>
         <div class="projects">
-          <a class="project" data-cat="video" href="fintech/">
+          <a class="project" href="fintech/">
             <div class="project-img"><img src="assets/screenshots/fintech-hf.jpg" alt="" loading="lazy" /></div>
             <div class="project-body"><span class="mono">Videotutorial</span><h3>Tutorial Banca Digital</h3><p>Tutorial animado para una app bancaria.</p><span class="open">Abrir →</span></div>
-          </a>
-          <a class="project" data-cat="video" href="uxsim/dist/">
-            <div class="project-img"><img src="assets/screenshots/search.jpg" alt="" loading="lazy" /></div>
-            <div class="project-body"><span class="mono">Motion design</span><h3>Search Sequence</h3><p>Barra de búsqueda animada.</p><span class="open">Abrir →</span></div>
-          </a>
-          <a class="project" data-cat="ui" href="catculator/">
-            <div class="project-img"><img src="assets/screenshots/catculator.jpg" alt="" loading="lazy" /><span class="soon">Próximamente</span></div>
-            <div class="project-body"><span class="mono">App móvil</span><h3>Catculator</h3><p>Una calculadora con alma de gato: básica, científica, con historial y modo oscuro. iOS y Android.</p><span class="open">Ver →</span></div>
-          </a>
-          <a class="project" data-cat="ui" href="tipografia/">
-            <div class="project-img"><img src="assets/screenshots/fluid-type.jpg" alt="" loading="lazy" /></div>
-            <div class="project-body"><span class="mono">Tipografía interactiva</span><h3>Fluid Type</h3><p>Tipografía formada por partículas que reacciona al movimiento del cursor en tiempo real.</p><span class="open">Abrir →</span></div>
-          </a>
-          <a class="project" data-cat="ui" href="tipografia2/dist/">
-            <div class="project-img"><img src="assets/screenshots/gravity.jpg" alt="" loading="lazy" /></div>
-            <div class="project-body"><span class="mono">Tipografía interactiva</span><h3>Gravity</h3><p>Letras flotando en un espacio 3D retro que orbitan el cursor al moverlo.</p><span class="open">Abrir →</span></div>
-          </a>
-          <a class="project" data-cat="ui" href="iphone/dist/">
-            <div class="project-img"><img src="assets/screenshots/iphone.jpg" alt="" loading="lazy" /></div>
-            <div class="project-body"><span class="mono">UI / UX</span><h3>iPhone Home</h3><p>Réplica funcional de la pantalla de inicio de iOS con animaciones y gestos nativos.</p><span class="open">Abrir →</span></div>
-          </a>
-          <a class="project" data-cat="ui" href="win95/">
-            <div class="project-img"><img src="assets/screenshots/win95.jpg" alt="" loading="lazy" /></div>
-            <div class="project-body"><span class="mono">UI / UX</span><h3>Windows 95</h3><p>Template de portfolio con estética Windows 95: ventanas arrastrables, taskbar y menú Start.</p><span class="open">Abrir →</span></div>
           </a>
         </div>
       </section>
@@ -604,17 +570,6 @@
           state.step = (state.step + 1) % 4;
           render();
         }, 4000);
-
-        // Filtro de proyectos
-        var filters = document.querySelectorAll('.filter');
-        var projects = document.querySelectorAll('.project');
-        filters.forEach(function (f) {
-          f.addEventListener('click', function () {
-            var cat = f.getAttribute('data-filter');
-            filters.forEach(function (x) { x.setAttribute('aria-pressed', x === f ? 'true' : 'false'); });
-            projects.forEach(function (p) { p.hidden = cat !== 'all' && p.getAttribute('data-cat') !== cat; });
-          });
-        });
       })();
     </script>
   </body>
