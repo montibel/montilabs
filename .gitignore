@@ -13,3 +13,7 @@ Landing Montilabs.html
 # Proyectos de video de clientes: solo locales
 videos/*
 !videos/fintech-video/
+
+# Originales de video (se publican versiones comprimidas en assets/videos/)
+/*.mp4
+/*.mov

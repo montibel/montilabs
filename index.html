@@ -241,7 +241,7 @@
       .metric span { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
 
       /* Proyectos */
-      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); gap: 20px; }
+      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; }
       .project { display: flex; flex-direction: column; border: 1px solid var(--line-2); border-radius: 10px; overflow: hidden; background: #fff; color: var(--ink); transition: border-color .15s, transform .15s, box-shadow .15s; }
       .project:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); box-shadow: 0 14px 30px -18px rgba(11,27,51,0.35); }
       .project-img { position: relative; aspect-ratio: 16/10; background: var(--ink); overflow: hidden; }
@@ -251,7 +251,19 @@
       .project-body h3 { margin: 0; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
       .project-body p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
       .project-body .open { margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 600; color: var(--blue); }
-      @media (prefers-reduced-motion: reduce) { .project, .project:hover { transition: none; transform: none; } }
+      .play-badge { position: absolute; left: 12px; bottom: 12px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.94); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px -8px rgba(11,27,51,0.5); transition: transform .15s; }
+      .project:hover .play-badge { transform: scale(1.08); }
+      .duration { position: absolute; right: 10px; bottom: 10px; font-family: var(--mono); font-size: 11px; color: #fff; background: rgba(11,27,51,0.75); padding: 3px 6px; border-radius: 3px; }
+      @media (prefers-reduced-motion: reduce) { .project, .project:hover, .play-badge, .project:hover .play-badge { transition: none; transform: none; } }
+
+      /* Reproductor */
+      .player { border: 0; padding: 0; background: transparent; width: min(1100px, calc(100vw - 32px)); max-width: none; max-height: none; overflow: visible; }
+      .player::backdrop { background: rgba(11,27,51,0.82); }
+      .player-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #fff; margin-bottom: 12px; }
+      .player-head h3 { margin: 0; font-size: 16px; font-weight: 600; }
+      .player-close { border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #fff; border-radius: 6px; padding: 8px 12px; font: 600 13.5px 'IBM Plex Sans', sans-serif; cursor: pointer; }
+      .player-close:hover { background: rgba(255,255,255,0.1); }
+      .player video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; }
 
       /* CTA + footer */
       .cta-wrap { padding-top: 88px; padding-bottom: 88px; }
@@ -455,10 +467,18 @@
       <section id="proyectos" class="wrap section">
         <div class="section-head">
           <div class="eyebrow">Proyectos</div>
-          <h2 class="h2">Lo que hacemos, funcionando en el navegador</h2>
-          <p class="lead">Videotutoriales de producto que puedes abrir y ver ahora mismo.</p>
+          <h2 class="h2">Tutoriales que ya trabajan para nuestros clientes</h2>
+          <p class="lead">Videos que enseñan a usar portales y plataformas internas, paso a paso y sin manuales.</p>
         </div>
         <div class="projects">
+          <a class="project" href="assets/videos/metlife-portal-intermediarios.mp4" data-video data-title="MetLife · Portal de Intermediarios">
+            <div class="project-img"><img src="assets/screenshots/metlife-portal-intermediarios.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#0B1B33"/></svg></span><span class="duration">2:24</span></div>
+            <div class="project-body"><span class="mono">MetLife · Videotutorial</span><h3>Portal de Intermediarios</h3><p>Cómo ingresar al portal, validar la identidad y actualizar los datos de contacto.</p><span class="open">Ver video →</span></div>
+          </a>
+          <a class="project" href="assets/videos/companycare-agendar-asesoria.mp4" data-video data-title="CompanyCare · Agendar una asesoría">
+            <div class="project-img"><img src="assets/screenshots/companycare-agendar-asesoria.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#0B1B33"/></svg></span><span class="duration">1:08</span></div>
+            <div class="project-body"><span class="mono">CompanyCare · Videotutorial</span><h3>Agendar una asesoría</h3><p>Paso a paso para reservar una sesión con un Care Expert desde la plataforma.</p><span class="open">Ver video →</span></div>
+          </a>
           <a class="project" href="fintech/">
             <div class="project-img"><img src="assets/screenshots/fintech-hf.jpg" alt="" loading="lazy" /></div>
             <div class="project-body"><span class="mono">Videotutorial</span><h3>Tutorial Banca Digital</h3><p>Tutorial animado para una app bancaria.</p><span class="open">Abrir →</span></div>
@@ -479,6 +499,14 @@
         </div>
       </section>
     </main>
+
+    <dialog class="player" id="player" aria-labelledby="player-title">
+      <div class="player-head">
+        <h3 id="player-title"></h3>
+        <button class="player-close" type="button" data-close>Cerrar ✕</button>
+      </div>
+      <video controls playsinline preload="none"></video>
+    </dialog>
 
     <footer class="site-footer">
       <div class="wrap">
@@ -571,6 +599,33 @@
           state.step = (state.step + 1) % 4;
           render();
         }, 4000);
+      })();
+
+      (function () {
+        // Reproductor de videotutoriales; sin <dialog> el enlace abre el mp4 directo
+        var player = document.getElementById('player');
+        if (!player || typeof player.showModal !== 'function') return;
+        var video = player.querySelector('video');
+        var title = document.getElementById('player-title');
+
+        document.querySelectorAll('[data-video]').forEach(function (card) {
+          card.addEventListener('click', function (e) {
+            e.preventDefault();
+            title.textContent = card.getAttribute('data-title');
+            video.src = card.getAttribute('href');
+            video.poster = card.querySelector('img').getAttribute('src');
+            player.showModal();
+            video.play().catch(function () {});
+          });
+        });
+
+        player.querySelector('[data-close]').addEventListener('click', function () { player.close(); });
+        player.addEventListener('click', function (e) { if (e.target === player) player.close(); });
+        player.addEventListener('close', function () {
+          video.pause();
+          video.removeAttribute('src');
+          video.load();
+        });
       })();
     </script>
   </body>
