@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://montilabs.cl/</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://montilabs.cl/fintech/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://montilabs.cl/privacy.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://montilabs.cl/terms.html</loc>
-    <lastmod>2026-06-13</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://montilabs.cl/fintech/</loc>
-    <lastmod>2026-06-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>
