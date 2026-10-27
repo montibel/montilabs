@@ -221,24 +221,7 @@
       .light .more { color: var(--ink); border-bottom: 1px solid var(--blue); }
       .light .more:hover { color: var(--blue); }
 
-      /* Casos */
       .band { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-      .band-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 44px; }
-      .band-head > div { max-width: 620px; }
-      .band-head > a { font-size: 15px; font-weight: 600; }
-      .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px; }
-      .case { border: 1px solid var(--line-2); border-radius: 10px; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
-      .case-top { padding: 22px 24px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-      .case-top h3 { margin: 0; font-size: 17px; font-weight: 700; }
-      .case-top .sector { font-size: 13px; color: var(--muted); margin-top: 2px; }
-      .pill { font-family: var(--mono); font-size: 11px; color: var(--blue); background: var(--blue-soft); padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
-      .case-body { padding: 22px 24px; display: grid; gap: 18px; flex: 1; }
-      .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-      .case-body p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
-      .case-body .problem { color: var(--ink); }
-      .metric { background: var(--bg); padding: 20px 24px; border-top: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; }
-      .metric b { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: var(--blue); }
-      .metric span { font-size: 14px; line-height: 1.4; color: var(--ink-2); }
 
       /* Proyectos */
       .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; }
@@ -295,7 +278,6 @@
         <nav class="nav" aria-label="Principal">
           <div class="nav-links">
             <a href="#soluciones">Soluciones</a>
-            <a href="#casos">Casos</a>
             <a href="#proyectos">Proyectos</a>
             <a href="mailto:hola@montilabs.cl">Contacto</a>
           </div>
@@ -313,7 +295,7 @@
             <p>Convertimos procesos de inducción y capacitación en experiencias que la gente sí termina. Producción de video, motion design y desarrollo web interactivo, en un solo equipo y con métricas de avance desde el primer día.</p>
             <div class="hero-ctas">
               <a href="mailto:hola@montilabs.cl?subject=Agendar%20demo" class="btn btn-primary">Agendar demo de 30 min</a>
-              <a href="#casos" class="btn btn-outline">Ver casos</a>
+              <a href="#proyectos" class="btn btn-outline">Ver proyectos</a>
             </div>
             <div class="audiences">
               <div><span></span>Startups y fintechs</div>
@@ -417,7 +399,7 @@
             <h3>Experiencias UX/UI e interfaces interactivas</h3>
             <p>Diseño y desarrollo de aplicaciones web a medida con stacks modernos. Interfaces rápidas, accesibles y con micro-interacciones que guían al usuario en vez de distraerlo.</p>
             <ul>
-              <li>Apps web personalizadas en React y Vite</li>
+              <li>Apps web personalizadas</li>
               <li>Plataformas de capacitación y portales internos</li>
               <li>Micro-interacciones y prototipos validados con usuarios</li>
             </ul>
@@ -426,45 +408,9 @@
         </div>
       </section>
 
-      <section id="casos" class="band">
-        <div class="wrap section">
-          <div class="band-head">
-            <div>
-              <div class="eyebrow">Casos de éxito</div>
-              <h2 class="h2">El problema de negocio, cómo lo resolvimos y qué cambió</h2>
-            </div>
-            <a href="mailto:hola@montilabs.cl?subject=Caso%20completo">Pide el caso completo →</a>
-          </div>
-          <div class="cases">
-            <article class="case">
-              <div class="case-top"><div><h3>Fintech de pagos</h3><div class="sector">Serie A · 120 personas</div></div><span class="pill">Onboarding</span></div>
-              <div class="case-body">
-                <div><div class="label">Problema</div><p class="problem">Cada ingreso al equipo de operaciones tardaba seis semanas en ser autónomo y dependía de un senior que explicaba todo en persona.</p></div>
-                <div><div class="label">Solución</div><p>Ocho explainers en motion sobre los flujos críticos y un portal web con quiz por módulo y avance visible para cada líder.</p></div>
-              </div>
-              <div class="metric"><b>−40%</b><span>tiempo hasta autonomía</span></div>
-            </article>
-            <article class="case">
-              <div class="case-top"><div><h3>SaaS de logística</h3><div class="sector">Empresa de tecnología</div></div><span class="pill">UX/UI</span></div>
-              <div class="case-body">
-                <div><div class="label">Problema</div><p class="problem">Los clientes nuevos abandonaban la configuración inicial del producto y saturaban soporte con las mismas preguntas.</p></div>
-                <div><div class="label">Solución</div><p>Rediseño del flujo de configuración en React con guías contextuales y micro-interacciones que confirman cada paso.</p></div>
-              </div>
-              <div class="metric"><b>2×</b><span>cuentas que completan la configuración</span></div>
-            </article>
-            <article class="case">
-              <div class="case-top"><div><h3>Agencia de publicidad</h3><div class="sector">Cliente retail</div></div><span class="pill">Video</span></div>
-              <div class="case-body">
-                <div><div class="label">Problema</div><p class="problem">La agencia necesitaba capacitar a 900 vendedores en un lanzamiento con dos semanas de plazo y sin presencialidad.</p></div>
-                <div><div class="label">Solución</div><p>Serie de cinco videos cortos y un micrositio de práctica, producidos en paralelo por el mismo equipo.</p></div>
-              </div>
-              <div class="metric"><b>87%</b><span>completaron la capacitación antes del lanzamiento</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
 
-      <section id="proyectos" class="wrap section">
+      <section id="proyectos" class="band">
+        <div class="wrap section">
         <div class="section-head">
           <div class="eyebrow">Proyectos</div>
           <h2 class="h2">Tutoriales que ya trabajan para nuestros clientes</h2>
@@ -483,6 +429,7 @@
             <div class="project-img"><img src="assets/screenshots/fintech-hf.jpg" alt="" loading="lazy" /></div>
             <div class="project-body"><span class="mono">Videotutorial</span><h3>Tutorial Banca Digital</h3><p>Tutorial animado para una app bancaria.</p><span class="open">Abrir →</span></div>
           </a>
+        </div>
         </div>
       </section>
 
