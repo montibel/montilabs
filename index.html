@@ -193,12 +193,12 @@
       .section-head { max-width: 640px; margin-bottom: 44px; }
       .section-head .h2 { margin-bottom: 14px; }
       .solutions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px; }
-      .solution { border-radius: 12px; padding: 36px; display: flex; flex-direction: column; gap: 22px; }
+      .solution { border-radius: 12px; padding: clamp(24px, 4vw, 36px); display: flex; flex-direction: column; gap: 22px; }
       .solution.dark { background: var(--ink); color: #fff; }
       .solution.light { background: #fff; color: var(--ink); border: 1px solid var(--line-2); }
-      .solution-top { display: flex; justify-content: space-between; align-items: center; }
+      .solution-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
       .solution-top .mono { font-size: 12px; }
-      .solution-top .chip { font-size: 12px; border-radius: 4px; padding: 4px 8px; }
+      .solution-top .chip { font-size: 12px; border-radius: 4px; padding: 4px 8px; white-space: nowrap; }
       .dark .solution-top .mono { color: var(--blue-light); }
       .dark .chip { color: #B9C6DC; border: 1px solid var(--navy-line); }
       .light .solution-top .mono { color: var(--blue); }
@@ -384,24 +384,24 @@
         </div>
         <div class="solutions">
           <article class="solution dark">
-            <div class="solution-top"><span class="mono">01 · Onboarding</span><span class="chip">Video · Motion</span></div>
-            <h3>Soluciones de onboarding y capacitación</h3>
-            <p>Producción audiovisual completa para inducción y entrenamiento: explainers animados, videos dinámicos y módulos cortos que explican procesos complejos sin manuales de 40 páginas.</p>
+            <div class="solution-top"><span class="mono">01 · Onboarding y Capacitación</span><span class="chip">Video · Motion</span></div>
+            <h3>Onboarding corporativo y capacitación <span style="white-space:nowrap">e-learning</span></h3>
+            <p>Producción audiovisual completa para la inducción de colaboradores. Transformamos procesos complejos, normativas y manuales aburridos de 40 páginas en módulos cortos, medibles y efectivos que tu equipo sí querrá terminar.</p>
             <ul>
-              <li>Explainers en motion design para producto y procesos</li>
-              <li>Videos de bienvenida, cultura y cumplimiento</li>
-              <li>Módulos e-learning con quiz y seguimiento (SCORM / web)</li>
+              <li>Explainers en motion design para flujos operativos críticos (ideal para el ecosistema regulado y Fintechs).</li>
+              <li>Videos de bienvenida, cultura corporativa y cumplimiento normativo.</li>
+              <li>Módulos e-learning con quiz y seguimiento en tiempo real (Formatos web o SCORM, listos para plataformas compatibles con SENCE).</li>
             </ul>
             <a href="#demo" class="more">Ver cómo funciona →</a>
           </article>
           <article class="solution light">
-            <div class="solution-top"><span class="mono">02 · Experiencias UX/UI</span><span class="chip">React · Vite</span></div>
-            <h3>Experiencias UX/UI e interfaces interactivas</h3>
-            <p>Diseño y desarrollo de aplicaciones web a medida con stacks modernos. Interfaces rápidas, accesibles y con micro-interacciones que guían al usuario en vez de distraerlo.</p>
+            <div class="solution-top"><span class="mono">02 · Experiencias UX/UI</span><span class="chip">Plataformas · Web</span></div>
+            <h3>Plataformas internas y Experiencias UX/UI</h3>
+            <p>Diseño y desarrollo de aplicaciones web a medida. Creamos interfaces rápidas, intuitivas y accesibles que guían a los colaboradores paso a paso, reduciendo drásticamente la curva de aprendizaje y aliviando a tus perfiles senior de la carga de soporte interno.</p>
             <ul>
-              <li>Apps web personalizadas</li>
-              <li>Plataformas de capacitación y portales internos</li>
-              <li>Micro-interacciones y prototipos validados con usuarios</li>
+              <li>Desarrollo de plataformas web ágiles y completamente personalizadas.</li>
+              <li>Plataformas de capacitación, portales corporativos e intranets interactivas.</li>
+              <li>Micro-interacciones y diseño centrado en la productividad del usuario final.</li>
             </ul>
             <a href="#proyectos" class="more">Ver proyectos →</a>
           </article>
