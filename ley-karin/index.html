@@ -27,6 +27,8 @@
       --ink-2: #4A5568;
       --navy: #1F3A5F;
       --clay: #9A5636;
+      --ok: #3F8266;
+      --bad: #C8352B;
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
@@ -59,8 +61,29 @@
 
     .quiz { margin-top: 32px; padding: 28px; border-radius: 12px; background: var(--sand); }
     .quiz[hidden] { display: none; }
-    .quiz h2 { margin: 0 0 6px; font-size: 26px; letter-spacing: -0.01em; }
-    .quiz p { margin: 0; color: var(--ink-2); }
+    .quiz h2 { margin: 0 0 20px; font-size: 26px; letter-spacing: -0.01em; }
+    .case { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 28px; align-items: start; animation: rise .5s ease-out; }
+    .case[hidden], .done[hidden], .next[hidden] { display: none; }
+    .scene { display: block; width: 100%; height: auto; border-radius: 12px; }
+    .case-count { margin: 0 0 6px; font-size: 15px; font-weight: 600; color: var(--clay); }
+    .case h3, .done h3 { margin: 0 0 12px; font-size: 22px; line-height: 1.25; }
+    .situation { margin: 0 0 16px; }
+    .question { margin: 0 0 12px; font-size: 18px; font-weight: 700; }
+    .options { display: grid; gap: 10px; }
+    .option { display: flex; gap: 10px; width: 100%; padding: 14px 16px; border: 2px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .25s ease, background .25s ease, opacity .25s ease; }
+    .option:hover:not(:disabled) { border-color: var(--navy); }
+    .option:disabled { cursor: default; }
+    .opt-letter { flex: none; font-weight: 700; }
+    .option.is-wrong { border-color: var(--bad); background: #FAEDEB; }
+    .option.is-right { border-color: var(--ok); background: #E9F2ED; font-weight: 600; }
+    .options.is-solved .option:not(.is-right) { opacity: .55; }
+    .feedback { margin: 14px 0 0; font-weight: 600; }
+    .feedback:empty { display: none; }
+    .feedback.is-right { color: #2C6650; }
+    .feedback.is-wrong { color: #A32A22; }
+    .next { margin-top: 16px; }
+    .done h3 { margin-bottom: 16px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     @media (max-width: 860px) {
       .layout { grid-template-columns: minmax(0, 1fr); }
@@ -68,8 +91,10 @@
       .step { padding: 12px 14px; font-size: 15px; }
       .actions { justify-content: flex-start; }
       .btn { width: 100%; }
+      .case { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+      .quiz { padding: 20px; }
     }
-    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .btn, .option { transition: none; } .case { animation: none; } }
   </style>
 </head>
 <body>
@@ -103,7 +128,58 @@
 
     <section id="quiz" class="quiz" aria-labelledby="quiz-title" hidden>
       <h2 id="quiz-title" tabindex="-1">Casos prácticos</h2>
-      <p>Esta parte del módulo estará disponible próximamente.</p>
+      <article class="case" id="case-1" data-correct="1" aria-labelledby="case-1-title">
+        <svg class="scene" viewBox="0 0 480 300" aria-hidden="true" focusable="false"><rect width="480" height="300" fill="#F7F3EC"/><rect y="250" width="480" height="50" fill="#E3DACB"/><g transform="translate(110,250) scale(0.72)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#B96F4A"/><circle cy="-188" r="60" fill="#8D5A3B"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#2B2622"/></g><path d="M190 96 L232 78 M198 136 H252 M190 176 L232 194" stroke="#16263F" stroke-width="10" stroke-linecap="round"/><g transform="translate(310,216) scale(0.5)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#1F3A5F"/><circle cy="-188" r="60" fill="#F2C9A5"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#7A4A2B"/></g><g transform="translate(415,216) scale(0.5)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#D9CDB8"/><circle cy="-188" r="60" fill="#C98E62"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#2B2622"/></g><rect x="262" y="214" width="210" height="16" rx="8" fill="#8A6548"/><rect x="284" y="230" width="12" height="20" fill="#8A6548"/><rect x="438" y="230" width="12" height="20" fill="#8A6548"/></svg>
+        <div class="case-body">
+          <p class="case-count">Caso 1 de 3</p>
+          <h3 id="case-1-title" tabindex="-1">El umbral de la conducta (Acoso Laboral)</h3>
+          <p class="situation">Un jefe interrumpe una reunión de equipo y descalifica en tono humillante a un colaborador frente a sus compañeros debido a un error en su reporte. Es la primera vez que ocurre un episodio de este tipo con este superior.</p>
+          <p class="question" id="case-1-q">¿Constituye esta conducta acoso laboral según la Ley Karin?</p>
+          <div class="options" role="group" aria-labelledby="case-1-q">
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">A)</span> <span>No, porque es un incidente aislado y la ley exige que sea una conducta reiterada en el tiempo.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">B)</span> <span>Sí, ya que la normativa actual elimina el requisito de reiteración; un solo acto de menoscabo es suficiente para denunciar.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">C)</span> <span>Depende exclusivamente de si el colaborador decide renunciar.</span></button>
+          </div>
+          <p class="feedback" role="status" data-ok="¡Correcto! El cambio más profundo de la Ley Karin es que un único acto de agresión, humillación o menoscabo activa las obligaciones de denuncia y protección."></p>
+          <button class="btn next" type="button" hidden>Siguiente caso →</button>
+        </div>
+      </article>
+      <article class="case" id="case-2" data-correct="2" hidden aria-labelledby="case-2-title">
+        <svg class="scene" viewBox="0 0 480 300" aria-hidden="true" focusable="false"><rect width="480" height="300" fill="#F7F3EC"/><rect y="250" width="480" height="50" fill="#E3DACB"/><g transform="translate(110,205) scale(0.68)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#1F3A5F"/><circle cy="-188" r="60" fill="#C98E62"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#2B2622"/></g><g transform="translate(355,205) scale(0.68)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#D9CDB8"/><circle cy="-188" r="60" fill="#F2C9A5"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#7A4A2B"/></g><path d="M190 70 L232 52 M198 108 H252 M190 146 L232 164" stroke="#16263F" stroke-width="10" stroke-linecap="round"/><rect x="20" y="200" width="440" height="20" rx="10" fill="#8A6548"/><rect x="40" y="220" width="400" height="30" fill="#B96F4A"/></svg>
+        <div class="case-body">
+          <p class="case-count">Caso 2 de 3</p>
+          <h3 id="case-2-title" tabindex="-1">El rol frente a agentes externos (Violencia en el Trabajo)</h3>
+          <p class="situation">Un cliente externo grita e insulta de forma agresiva a un ejecutivo de atención en su puesto de trabajo por un retraso en un trámite.</p>
+          <p class="question" id="case-2-q">¿Cómo tipifica la ley esta situación y qué responsabilidad tiene la organización?</p>
+          <div class="options" role="group" aria-labelledby="case-2-q">
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">A)</span> <span>Es un conflicto entre particulares que escapa del ámbito de control de la empresa.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">B)</span> <span>Se considera acoso laboral interno entre jefaturas y personal operativo.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">C)</span> <span>Es violencia en el trabajo ejercida por terceros, y la empresa está obligada a activar medidas de resguardo inmediato.</span></button>
+          </div>
+          <p class="feedback" role="status" data-ok="¡Exacto! La Ley Karin incorpora formalmente la violencia ejercida por clientes, proveedores o usuarios, obligando al empleador a proteger al trabajador desde el primer momento."></p>
+          <button class="btn next" type="button" hidden>Siguiente caso →</button>
+        </div>
+      </article>
+      <article class="case" id="case-3" data-correct="0" hidden aria-labelledby="case-3-title">
+        <svg class="scene" viewBox="0 0 480 300" aria-hidden="true" focusable="false"><rect width="480" height="300" fill="#F7F3EC"/><rect y="250" width="480" height="50" fill="#E3DACB"/><g transform="translate(100,214) scale(0.62)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#B96F4A"/><circle cy="-188" r="60" fill="#8D5A3B"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#2B2622"/></g><g transform="translate(380,214) scale(0.62)"><path d="M-105 0 V-60 a105 80 0 0 1 210 0 V0Z" fill="#1F3A5F"/><circle cy="-188" r="60" fill="#F2C9A5"/><path d="M-62 -192 a62 62 0 0 1 124 0 q-30 -30 -62 -24 q-32 -6 -62 24Z" fill="#7A4A2B"/></g><rect x="40" y="208" width="400" height="18" rx="9" fill="#8A6548"/><rect x="72" y="226" width="14" height="24" fill="#8A6548"/><rect x="394" y="226" width="14" height="24" fill="#8A6548"/><rect x="196" y="118" width="88" height="90" rx="8" fill="#fff" stroke="#8A6548" stroke-width="5"/><rect x="210" y="136" width="60" height="7" rx="3.5" fill="#D9CDB8"/><rect x="210" y="154" width="48" height="7" rx="3.5" fill="#D9CDB8"/><path d="M214 182 l9 10 l17 -22" fill="none" stroke="#3F8266" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="case-body">
+          <p class="case-count">Caso 3 de 3</p>
+          <h3 id="case-3-title" tabindex="-1">El ejercicio legítimo de las facultades de mando (Lo que NO es acoso)</h3>
+          <p class="situation">Una jefatura se reúne de forma privada con un colaborador para revisar su incumplimiento reiterado de indicadores y le entrega formalmente un plan de mejora de rendimiento.</p>
+          <p class="question" id="case-3-q">¿Esta acción infringe la normativa vigente?</p>
+          <div class="options" role="group" aria-labelledby="case-3-q">
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">A)</span> <span>No, ya que evaluar el desempeño y exigir el cumplimiento de responsabilidades de forma respetuosa no constituye acoso.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">B)</span> <span>Sí, porque cualquier llamada de atención genera presión psicológica denunciable.</span></button>
+            <button class="option" type="button"><span class="opt-letter" aria-hidden="true">C)</span> <span>Sí, porque toda retroalimentación de desempeño debe hacerse por escrito y nunca de forma presencial.</span></button>
+          </div>
+          <p class="feedback" role="status" data-ok="¡Correcto! La ley protege explícitamente el ejercicio de las facultades de dirección, diferenciando el liderazgo exigente y respetuoso del hostigamiento indebido."></p>
+          <button class="btn next" type="button" hidden>Finalizar →</button>
+        </div>
+      </article>
+      <div class="done" id="quiz-done" hidden>
+        <h3 id="done-title" tabindex="-1">Completaste los casos prácticos</h3>
+        <button class="btn" id="restart" type="button">Volver a empezar</button>
+      </div>
     </section>
   </main>
 
@@ -131,10 +207,67 @@
         quiz.hidden = false;
         step1.removeAttribute('aria-current');
         step2.setAttribute('aria-current', 'step');
-        title.focus({ preventScroll: true });
+        (quiz.querySelector('.case:not([hidden]) h3, .done:not([hidden]) h3') || title).focus({ preventScroll: true });
         var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
       }
+
+      var cases = Array.prototype.slice.call(document.querySelectorAll('.case'));
+      var done = document.getElementById('quiz-done');
+      var WRONG = 'Esa no es la respuesta correcta. Inténtalo de nuevo.';
+
+      function resetCase(c) {
+        c.querySelectorAll('.option').forEach(function (o) {
+          o.disabled = false;
+          o.classList.remove('is-right', 'is-wrong');
+        });
+        c.querySelector('.options').classList.remove('is-solved');
+        var fb = c.querySelector('.feedback');
+        fb.textContent = '';
+        fb.className = 'feedback';
+        c.querySelector('.next').hidden = true;
+      }
+
+      cases.forEach(function (c, i) {
+        var correct = Number(c.dataset.correct);
+        var options = c.querySelectorAll('.option');
+        var fb = c.querySelector('.feedback');
+        var next = c.querySelector('.next');
+        options.forEach(function (o, j) {
+          o.addEventListener('click', function () {
+            if (j !== correct) {
+              o.classList.add('is-wrong');
+              o.disabled = true;
+              fb.textContent = WRONG;
+              fb.className = 'feedback is-wrong';
+              return;
+            }
+            options.forEach(function (x) { x.disabled = true; x.classList.remove('is-wrong'); });
+            o.classList.add('is-right');
+            c.querySelector('.options').classList.add('is-solved');
+            fb.textContent = fb.dataset.ok;
+            fb.className = 'feedback is-right';
+            next.hidden = false;
+            next.focus({ preventScroll: true });
+          });
+        });
+        next.addEventListener('click', function () {
+          c.hidden = true;
+          var after = cases[i + 1];
+          var target = after ? after : done;
+          target.hidden = false;
+          var heading = target.querySelector('h3');
+          heading.focus({ preventScroll: true });
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+
+      document.getElementById('restart').addEventListener('click', function () {
+        done.hidden = true;
+        cases.forEach(function (c, i) { resetCase(c); c.hidden = i !== 0; });
+        cases[0].querySelector('h3').focus({ preventScroll: true });
+      });
 
       video.addEventListener('timeupdate', function () {
         var ready = video.currentTime >= BUTTON_AT;
