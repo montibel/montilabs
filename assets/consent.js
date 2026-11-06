@@ -4,6 +4,18 @@
   var TAG_ID = 'GTM-52ZBDLNP';
   var loaded = false;
   var banner = null;
+  var EN = /^en\b/i.test(document.documentElement.lang || '');
+  var TEXT = EN ? {
+    label: 'Cookie preferences',
+    body: 'We use Google cookies to measure visits and our ads. They are only activated if you accept them. <a href="/en/privacy.html#cookies">Privacy policy</a>',
+    deny: 'Reject',
+    accept: 'Accept'
+  } : {
+    label: 'Preferencias de cookies',
+    body: 'Usamos cookies de Google para medir las visitas y nuestros anuncios. Solo se activan si las aceptas. <a href="/privacy.html#cookies">Política de privacidad</a>',
+    deny: 'Rechazar',
+    accept: 'Aceptar'
+  };
 
   function read() {
     try { return window.localStorage.getItem(KEY); } catch (e) { return null; }
@@ -78,10 +90,10 @@
     banner = document.createElement('section');
     banner.id = 'cookie-banner';
     banner.setAttribute('role', 'region');
-    banner.setAttribute('aria-label', 'Preferencias de cookies');
+    banner.setAttribute('aria-label', TEXT.label);
     banner.innerHTML =
-      '<p>Usamos cookies de Google para medir las visitas y nuestros anuncios. Solo se activan si las aceptas. <a href="/privacy.html#cookies">Política de privacidad</a></p>' +
-      '<div class="cookie-actions"><button type="button" data-choice="denied">Rechazar</button><button type="button" data-choice="granted">Aceptar</button></div>';
+      '<p>' + TEXT.body + '</p>' +
+      '<div class="cookie-actions"><button type="button" data-choice="denied">' + TEXT.deny + '</button><button type="button" data-choice="granted">' + TEXT.accept + '</button></div>';
     banner.addEventListener('click', function (e) {
       var value = e.target.getAttribute && e.target.getAttribute('data-choice');
       if (value) choose(value);

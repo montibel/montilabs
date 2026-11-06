@@ -7,6 +7,7 @@ HTML estático publicado en GitHub Pages (detrás de Cloudflare) con cada push a
 ## Estructura
 
 - `index.html`: home
+- `en/`: versión en inglés del home, privacidad y términos. Si cambias un texto en español, actualiza también su par en `en/` (las demos `fintech/` y `ley-karin/` solo existen en español)
 - `fintech/`: Tutorial Banca Digital
 - `privacy.html`, `terms.html`, `404.html`
 - `assets/fonts/`: IBM Plex Sans y Mono
