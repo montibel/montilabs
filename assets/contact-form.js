@@ -5,12 +5,12 @@
   var TEXT = EN ? {
     sending: 'Sending…',
     doneTitle: 'Message sent',
-    doneBody: 'Thanks for writing. We will reply to your email within one business day.',
+    doneBody: 'Thanks for writing.',
     error: 'We couldn\'t send your message. Please try again or email us at hola@montilabs.cl.'
   } : {
     sending: 'Enviando…',
     doneTitle: 'Mensaje enviado',
-    doneBody: 'Gracias por escribirnos. Te responderemos a tu correo en un día hábil.',
+    doneBody: 'Gracias por escribirnos.',
     error: 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a hola@montilabs.cl.'
   };
 
