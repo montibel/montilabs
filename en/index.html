@@ -257,12 +257,30 @@
 
       /* CTA + footer */
       .cta-wrap { padding-top: 88px; padding-bottom: 88px; }
-      .cta { background: var(--ink); border-radius: 14px; padding: clamp(32px, 5vw, 56px); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
-      .cta > div:first-child { max-width: 560px; }
+      .cta { background: var(--ink); border-radius: 14px; padding: clamp(28px, 5vw, 56px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+      @media (max-width: 860px) { .cta { grid-template-columns: minmax(0, 1fr); } }
       .cta h2 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 34px); line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; color: #fff; text-wrap: balance; }
       .cta p { margin: 0; font-size: 16.5px; line-height: 1.6; color: #C7D2E4; }
-      .cta-actions { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-      .cta-actions span { font-size: 13.5px; color: #8A9AB5; }
+      .cta a { color: var(--blue-light); }
+      .cta a:hover { color: #fff; }
+      .cta p.cta-mail { margin-top: 20px; font-size: 14.5px; color: #8A9AB5; }
+      .contact-form { display: grid; gap: 14px; }
+      .field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+      @media (max-width: 520px) { .field-row { grid-template-columns: minmax(0, 1fr); } }
+      .contact-form label { display: grid; gap: 6px; font-size: 13.5px; font-weight: 600; color: #C7D2E4; }
+      .contact-form label small { font-weight: 400; color: #8A9AB5; }
+      .contact-form input, .contact-form textarea { width: 100%; font: 400 15.5px 'IBM Plex Sans', system-ui, sans-serif; color: var(--ink); background: #fff; border: 1px solid transparent; border-radius: 6px; padding: 11px 12px; }
+      .contact-form textarea { resize: vertical; min-height: 120px; }
+      .contact-form input:focus-visible, .contact-form textarea:focus-visible { outline: 2px solid var(--blue-light); outline-offset: 1px; }
+      .contact-form button { border: 0; cursor: pointer; font-family: inherit; justify-self: start; }
+      .contact-form button:disabled { opacity: .7; cursor: progress; }
+      .contact-form .cta-note { font-size: 12.5px; line-height: 1.5; color: #8A9AB5; }
+      .contact-form .form-status:empty { display: none; }
+      .contact-form .form-status { font-size: 14px; }
+      .contact-form .form-status.is-error { color: #FFB4A8; }
+      .form-done { background: var(--navy-line); border-radius: 10px; padding: 28px; outline: none; }
+      .form-done h3 { margin: 0 0 6px; font-size: 20px; color: #fff; }
+      .form-done p { margin: 0; font-size: 15.5px; line-height: 1.6; color: #C7D2E4; }
       .site-footer { border-top: 1px solid var(--line); background: #fff; }
       .site-footer .wrap { padding-top: 28px; padding-bottom: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13.5px; color: var(--muted); }
       .site-footer .who { display: flex; align-items: center; gap: 8px; color: var(--ink); }
@@ -275,6 +293,7 @@
       :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
     </style>
   <script src="/assets/consent.js" defer></script>
+  <script src="/assets/contact-form.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -290,7 +309,7 @@
           </div>
           <div class="nav-end">
             <a href="/" class="lang" hreflang="es" lang="es"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg><span class="lang-full">Español</span><span class="lang-short">ES</span></a>
-            <a href="mailto:hola@montilabs.cl?subject=Contact" class="btn btn-dark">Contact us</a>
+            <a href="#contact" class="btn btn-dark">Contact us</a>
           </div>
         </nav>
       </div>
@@ -304,7 +323,7 @@
             <h1>Corporate onboarding and interactive training modules</h1>
             <p>We design onboarding programs that combine video, motion design and custom web development. We deliver clear, easy-to-use material with progress tracking so your team learns faster.</p>
             <div class="hero-ctas">
-              <a href="mailto:hola@montilabs.cl?subject=Contact" class="btn btn-primary">Contact us</a>
+              <a href="#contact" class="btn btn-primary">Contact us</a>
               <a href="#projects" class="btn btn-outline">See projects</a>
             </div>
           </div>
@@ -442,16 +461,26 @@
         </div>
       </section>
 
-      <section class="wrap cta-wrap">
+      <section id="contact" class="wrap cta-wrap">
         <div class="cta">
           <div>
             <h2>Let's talk about your next project</h2>
             <p>Employees who learn faster, less load on your senior teams and measurable progress from day one.</p>
+            <p class="cta-mail">You can also email us at <a href="mailto:hola@montilabs.cl?subject=Contact">hola@montilabs.cl</a></p>
           </div>
-          <div class="cta-actions">
-            <a href="mailto:hola@montilabs.cl?subject=Contact" class="btn btn-white">Contact us</a>
-            <span>or email us at hola@montilabs.cl</span>
-          </div>
+          <form class="contact-form" action="https://formspree.io/f/xvzndpna" method="POST" data-contact-form>
+            <div class="field-row">
+              <label>Name<input type="text" name="nombre" autocomplete="name" maxlength="100" required /></label>
+              <label><span>Company <small>(optional)</small></span><input type="text" name="empresa" autocomplete="organization" maxlength="100" /></label>
+            </div>
+            <label>Work email<input type="email" name="email" autocomplete="email" maxlength="150" required /></label>
+            <label>How can we help?<textarea name="mensaje" rows="4" maxlength="3000" required></textarea></label>
+            <input type="hidden" name="_subject" value="New contact from montilabs.cl (EN)" />
+            <div hidden><label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+            <button type="submit" class="btn btn-white">Send message</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+            <p class="cta-note">We will only use your details to reply to you. Learn more in our <a href="/en/privacy.html">privacy policy</a>.</p>
+          </form>
         </div>
       </section>
     </main>
