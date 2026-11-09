@@ -112,7 +112,7 @@
     // Clic en un enlace de contacto. Cloudflare reescribe los mailto como email-protection.
     var href = el.getAttribute('href') || '';
     if (loaded && (href.indexOf('mailto:') === 0 || href.indexOf('email-protection') !== -1)) {
-      window.dataLayer.push({ event: 'contacto_click', contacto_pagina: window.location.pathname });
+      window.dataLayer.push({ event: 'contacto_click', contacto_pagina: window.location.pathname, contacto_tipo: 'correo' });
     }
   });
 
