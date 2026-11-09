@@ -2,6 +2,7 @@
 <html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
+    <script>try{var t=localStorage.getItem('montilabs-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -12,8 +13,9 @@
       @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); }
       @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/ibm-plex-mono-400-latin.woff2") format('woff2'); }
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-soft: #EEF3FF; --bg: #F5F7FA; --accent: #1E4FD8; --accent-hover: #163BA6; color-scheme: light; }
-      @media (prefers-color-scheme: dark) { :root { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-soft: #15264A; --bg: #08111F; --accent: #2F5FE6; --accent-hover: #4A76F0; color-scheme: dark; } }
+      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-soft: #EEF3FF; --bg: #F5F7FA; --accent: #1E4FD8; --accent-hover: #163BA6; --i-moon: block; --i-sun: none; color-scheme: light; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-soft: #15264A; --bg: #08111F; --accent: #2F5FE6; --accent-hover: #4A76F0; color-scheme: dark; --i-moon: none; --i-sun: block; } }
+      :root[data-theme="dark"] { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-soft: #15264A; --bg: #08111F; --accent: #2F5FE6; --accent-hover: #4A76F0; color-scheme: dark; --i-moon: none; --i-sun: block; }
       body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 32px 24px; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-align: center; }
       a { text-decoration: none; }
       :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -26,7 +28,7 @@
       .en { margin-top: 28px; margin-bottom: 0; font-size: 14.5px; color: var(--muted); }
       .en a { color: var(--blue); }
     </style>
-  <script src="/assets/consent.js?v=3" defer></script>
+  <script src="/assets/consent.js?v=4" defer></script>
   </head>
   <body>
     <a href="/" class="brand"><svg viewBox="0 0 48 46" width="24" height="23" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>montilabs</a>
