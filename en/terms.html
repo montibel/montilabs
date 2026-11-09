@@ -18,20 +18,21 @@
       @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin-ext.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C4, U+2C60-2C7F, U+A720-A7FF; }
       @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
       @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/ibm-plex-mono-400-latin.woff2") format('woff2'); }
-      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-dark: #163BA6; --bg: #F5F7FA; --line: #E3E8EF; }
+      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-dark: #163BA6; --blue-soft: #EEF3FF; --bg: #F5F7FA; --line: #E3E8EF; --line-2: #D5DCE6; --lang-border: #C9D8FF; --surface: #fff; color-scheme: light; }
+      @media (prefers-color-scheme: dark) { :root { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-dark: #A9C1FF; --blue-soft: #15264A; --bg: #08111F; --line: #1D2B42; --line-2: #273852; --lang-border: #2C4470; --surface: #0F1A2C; color-scheme: dark; } }
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body { background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.65; }
       a { color: var(--blue); text-decoration: none; }
       a:hover { color: var(--blue-dark); }
       :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-      .site-header { background: #fff; border-bottom: 1px solid var(--line); }
+      .site-header { background: var(--surface); border-bottom: 1px solid var(--line); }
       .site-header div { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
       .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
       .brand:hover { color: var(--ink); }
       .back { font-size: 14.5px; font-weight: 500; color: var(--ink-2); }
       .end { display: flex; align-items: center; gap: 14px; }
-      .lang { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; line-height: 1; color: #1E4FD8; background: #EEF3FF; border: 1px solid #C9D8FF; border-radius: 6px; padding: 9px 12px; white-space: nowrap; }
-      .lang:hover { color: #163BA6; border-color: #1E4FD8; }
+      .lang { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; line-height: 1; color: var(--blue); background: var(--blue-soft); border: 1px solid var(--lang-border); border-radius: 6px; padding: 9px 12px; white-space: nowrap; }
+      .lang:hover { color: var(--blue-dark); border-color: var(--blue); }
       .lang-short { display: none; }
       @media (max-width: 420px) { .lang-full { display: none; } .lang-short { display: inline; } }
       .back { white-space: nowrap; }
@@ -40,7 +41,7 @@
       .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--blue); margin-bottom: 12px; }
       h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin-bottom: 10px; }
       .date { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
-      .doc { background: #fff; border: 1px solid #D5DCE6; border-radius: 12px; padding: clamp(24px, 5vw, 48px); }
+      .doc { background: var(--surface); border: 1px solid var(--line-2); border-radius: 12px; padding: clamp(24px, 5vw, 48px); }
       h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 36px 0 12px; }
       .doc h2:first-child { margin-top: 0; }
       p, ul { font-size: 15.5px; color: var(--ink-2); margin-bottom: 14px; }
@@ -51,7 +52,7 @@
       .foot a { color: var(--ink-2); }
       .note { font-size: 14px; color: var(--muted); margin: -24px 0 32px; }
     </style>
-  <script src="/assets/consent.js?v=2" defer></script>
+  <script src="/assets/consent.js?v=3" defer></script>
   </head>
   <body>
     <header class="site-header">
