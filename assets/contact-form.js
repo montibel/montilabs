@@ -33,13 +33,10 @@
       }).then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
       }).then(function () {
-        // Solo existe dataLayer si la persona aceptó las cookies (ver consent.js).
-        // contacto_click es el evento que ya usa la conversión de Google Ads en GTM;
-        // contacto_enviado queda disponible para medir solo los formularios enviados.
-        if (window.dataLayer) {
-          var pagina = window.location.pathname;
-          window.dataLayer.push({ event: 'contacto_click', contacto_pagina: pagina, contacto_tipo: 'formulario' });
-          window.dataLayer.push({ event: 'contacto_enviado', contacto_pagina: pagina });
+        // Conversión de Google Ads "Enviar formulario de clientes potenciales".
+        // gtag solo existe si la persona aceptó las cookies (ver consent.js).
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'conversion', { send_to: 'AW-18557193943/9nWICIvNobUdENed4ZBF' });
         }
         var done = document.createElement('div');
         done.className = 'form-done';
