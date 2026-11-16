@@ -31,6 +31,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://montilabs.cl/tecnicas-de-comunicacion/</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://montilabs.cl/privacy.html</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://montilabs.cl/privacy.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://montilabs.cl/en/privacy.html" />

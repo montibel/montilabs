@@ -17,3 +17,6 @@ videos/*
 # Originales de video (se publican versiones comprimidas en assets/videos/)
 /*.mp4
 /*.mov
+
+# Fuentes del curso Técnicas de comunicación (documentos, audios y proyectos de video): solo locales
+/Técnicas de comunicación/
