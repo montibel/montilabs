@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Demo Técnicas de comunicación</title>
+  <title>Demo Técnicas de comunicación | Montilabs</title>
   <meta name="description" content="Demo de curso interactivo: una historia en el Teatro Municipal para aprender técnicas de comunicación al presentar proyectos y conducir reuniones."/>
   <meta name="robots" content="index, follow"/>
   <meta name="theme-color" content="#FFFFFF"/>
@@ -106,9 +106,9 @@
     .scene-bg { position: absolute; inset: 0; z-index: 0; }
     .scene-bg > svg { display: block; width: 100%; height: 100%; }
     .inner { position: relative; z-index: 1; flex: 1; width: 100%; max-width: 1060px; margin: 0 auto; padding: 36px 40px 28px; }
-    .screen h2 { margin: 0 0 18px; font-size: 28px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
-    .screen h2:focus { outline: none; }
-    .on-dark h2 { color: #fff; }
+    .screen h1, .screen h2 { margin: 0 0 18px; font-size: 28px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+    .screen h1:focus, .screen h2:focus { outline: none; }
+    .on-dark h1, .on-dark h2 { color: #fff; }
     h3 { margin: 0 0 8px; font-size: 16px; font-weight: 600; line-height: 1.35; }
 
     /* Sala de producción: papel mural marfil con cisnes y lunas de «El lago de los cisnes», riel dorado y zócalo de terciopelo carmesí */
@@ -168,7 +168,7 @@
     /* 0 · Portada */
     .title-screen .inner { display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 12vh; text-align: center; color: #fff; }
     .title-screen .scene-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 45% at 50% 58%, rgba(8, 10, 16, .55), transparent 75%), linear-gradient(transparent 70%, rgba(8, 10, 16, .5)); }
-    .title-screen h2 { margin-bottom: 10px; color: #fff; font-size: clamp(32px, 4.2vw, 48px); line-height: 1.12; text-shadow: 0 2px 16px rgba(0,0,0,.5); }
+    .title-screen h1 { margin-bottom: 10px; color: #fff; font-size: clamp(32px, 4.2vw, 48px); line-height: 1.12; text-shadow: 0 2px 16px rgba(0,0,0,.5); }
     .title-sub { margin: 0 0 28px; font-size: 19px; color: #E4E8EF; }
     .title-meta { margin: 0 0 28px; font-size: 14px; color: #AEB6C3; }
 
@@ -462,7 +462,7 @@
       .foot-in { padding: 12px 16px; }
       .foot .hint { display: none; }
       .foot .hint.lock-note { display: block; font-size: 12px; line-height: 1.3; }
-      .screen h2 { font-size: 24px; }
+      .screen h1, .screen h2 { font-size: 24px; }
       .board { padding: 28px 14px 18px; border-width: 10px; }
       .clip { padding: 40px 10px 10px; }
       .clip .paper { padding: 20px 16px; }
@@ -665,7 +665,7 @@
             <g transform="translate(210 26)"><circle r="15" fill="#C9A13B"/><circle r="11.5" fill="#7A1626"/><path d="M20.2 3.8c-5.6-.4-10.6 2.7-12.3 8.1-.5 1.6-.6 3.2-.4 4.6L4.3 19.7a.9.9 0 1 0 1.3 1.3l3.2-3.2c1.4.2 3 .1 4.6-.4 5.4-1.7 8.5-6.7 8.1-12.3a1.4 1.4 0 0 0-1.3-1.3Zm-9.9 11.4-1.2-1.2 6.5-6.5 1.2 1.2-6.5 6.5Z" transform="translate(-8 -8) scale(.68)" fill="#F1DFA0"/></g>
           </svg></div>
           <div class="inner">
-            <h2 id="h-title" tabindex="-1">Técnicas de comunicación efectiva</h2>
+            <h1 id="h-title" tabindex="-1">Técnicas de comunicación efectiva</h1>
             <p class="title-sub">Para presentar proyectos y conducir reuniones</p>
             <button class="btn" type="button" data-next>Comenzar el curso<svg class="ico" aria-hidden="true"><use href="#i-arrow-r"/></svg></button>
           </div>
@@ -1310,7 +1310,7 @@
         render();
         if (focus) {
           window.scrollTo(0, 0);
-          var h = screens[current].querySelector('h2');
+          var h = screens[current].querySelector('h1, h2');
           if (h) h.focus({ preventScroll: true });
         }
       }

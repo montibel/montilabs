@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>try{var t=localStorage.getItem('montilabs-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('montilabs-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -184,6 +184,7 @@
       .hero .wrap { padding-top: clamp(56px, 9vw, 128px); padding-bottom: clamp(48px, 6vw, 80px); }
       .hero h1 { margin: 0 0 clamp(40px, 5vw, 64px); font-family: var(--display); font-size: clamp(50px, 9vw, 132px); line-height: 0.92; letter-spacing: -0.052em; font-weight: 800; max-width: 11ch; text-wrap: balance; }
       .hero h1 em { font-style: normal; color: var(--blue-ink); }
+      .h1-kicker { display: block; margin-bottom: 20px; font-family: var(--text); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.4; font-weight: 600; letter-spacing: 0; color: var(--ink-2); }
       .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
       @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
       .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
@@ -256,6 +257,11 @@
       .wtab:hover { color: var(--ink); }
       .wtab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--blue); }
       .wpanel[hidden] { display: none; }
+      .wpanel-title { margin: 0 0 24px; font-family: var(--display); font-size: clamp(32px, 5vw, 64px); line-height: 1; letter-spacing: -0.045em; font-weight: 800; }
+      .js .wpanel-title { display: none; }
+      html:not(.js) .wtabs { display: none; }
+      html:not(.js) .wpanel + .wpanel { margin-top: clamp(72px, 10vw, 128px); }
+      .js:not(.tabs-ready) .wpanel ~ .wpanel { display: none; }
       .wpanel { animation: rise .45s cubic-bezier(.2,.7,.2,1); }
       @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
       @media (prefers-reduced-motion: reduce) { .wpanel { animation: none; } .wtab { transition: none; } }
@@ -361,7 +367,7 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <h1>Design that <em>speaks for you</em></h1>
+          <h1><span class="h1-kicker">Creative agency for video, e-learning and UX/UI</span>Design that <em>speaks for you</em></h1>
           <div class="hero-foot">
             <p>We make interactive experiences, video, motion design and e-learning for companies that want to communicate clearly and with style. We are a creative agency based in Santiago, Chile.</p>
             <div class="hero-ctas">
@@ -382,6 +388,7 @@
           </div>
 
           <div class="wpanel" role="tabpanel" id="video" aria-labelledby="wtab-video" tabindex="0">
+            <h3 class="wpanel-title">Video</h3>
             <div class="wintro">
               <div>
                 <p>Short, clear videos that explain what your company does.</p>
@@ -404,7 +411,8 @@
             </div>
           </div>
 
-          <div class="wpanel" role="tabpanel" id="e-learning" aria-labelledby="wtab-e-learning" tabindex="0" hidden>
+          <div class="wpanel" role="tabpanel" id="e-learning" aria-labelledby="wtab-e-learning" tabindex="0">
+            <h3 class="wpanel-title">E-learning</h3>
             <div class="wintro">
               <div>
                 <p>Interactive courses with video and quizzes, with everyone's progress in view.</p>
@@ -495,7 +503,8 @@
             </div>
           </div>
 
-          <div class="wpanel" role="tabpanel" id="ux-ui" aria-labelledby="wtab-ux-ui" tabindex="0" hidden>
+          <div class="wpanel" role="tabpanel" id="ux-ui" aria-labelledby="wtab-ux-ui" tabindex="0">
+            <h3 class="wpanel-title">UX/UI</h3>
             <div class="wintro">
               <div>
                 <p>We design clear, easy-to-use web applications that guide people step by step.</p>
@@ -679,6 +688,8 @@
             }
           }
         }
+        select(0);
+        document.documentElement.classList.add('tabs-ready');
         window.addEventListener('hashchange', fromHash);
         // Si el enlace apunta al mismo hash que ya está en la URL, el navegador no avisa del cambio: se abre la pestaña aquí.
         tabs.forEach(function (t, i) {
