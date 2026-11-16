@@ -75,10 +75,11 @@
 
   // Colores del aviso en modo oscuro (por sistema o elegido con el botón de theme.js).
   function darkBanner(scope) {
-    return scope + '#cookie-banner{background:#0F1A2C;color:#E6ECF5;border-color:#273852;box-shadow:0 12px 32px -12px rgba(0,0,0,.7)}' +
-      scope + '#cookie-banner a{color:#7EA2FF}' +
-      scope + '#cookie-banner button{background:#0F1A2C;color:#E6ECF5;border-color:#B4C1D4}' +
-      scope + '#cookie-banner button:focus-visible{outline-color:#7EA2FF}';
+    return scope + '#cookie-banner{background:#15223A;color:#ECEEF2;border-color:#ECEEF2;box-shadow:0 16px 40px -16px rgba(0,0,0,.7)}' +
+      scope + '#cookie-banner a{color:#8FB0FF}' +
+      scope + '#cookie-banner button{background:#15223A;color:#ECEEF2;border-color:#ECEEF2}' +
+      scope + '#cookie-banner button:hover{background:#ECEEF2;color:#15171C}' +
+      scope + '#cookie-banner button:focus-visible{outline-color:#8FB0FF}';
   }
 
   function showBanner() {
@@ -87,11 +88,12 @@
       var style = document.createElement('style');
       style.id = 'cookie-style';
       style.textContent =
-        '#cookie-banner{position:fixed;right:16px;bottom:16px;z-index:2147483000;box-sizing:border-box;width:min(460px,calc(100vw - 32px));padding:20px;border:1px solid #D5DCE6;border-radius:12px;background:#fff;color:#0B1B33;font:400 15px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 32px -12px rgba(11,27,51,.4)}' +
+        '#cookie-banner{position:fixed;right:16px;bottom:16px;z-index:2147483000;box-sizing:border-box;width:min(460px,calc(100vw - 32px));padding:20px;border:1.5px solid #15171C;border-radius:4px;background:#fff;color:#15171C;font:400 15px/1.5 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 16px 40px -16px rgba(21,23,28,.35)}' +
         '#cookie-banner p{margin:0 0 14px}' +
-        '#cookie-banner a{color:#1E4FD8;text-decoration:underline}' +
+        '#cookie-banner a{color:#1E4FD8;text-decoration:underline;text-underline-offset:3px}' +
         '#cookie-banner .cookie-actions{display:flex;gap:10px}' +
-        '#cookie-banner button{flex:1;min-height:44px;padding:10px 14px;border:1px solid #0B1B33;border-radius:8px;background:#fff;color:#0B1B33;font:inherit;font-weight:600;cursor:pointer}' +
+        '#cookie-banner button{flex:1;min-height:44px;padding:10px 14px;border:1.5px solid #15171C;border-radius:3px;background:#fff;color:#15171C;font:inherit;font-weight:600;cursor:pointer;transition:background .15s,color .15s}' +
+        '#cookie-banner button:hover{background:#15171C;color:#fff}' +
         '#cookie-banner button:focus-visible{outline:3px solid #1E4FD8;outline-offset:2px}' +
         '@media (prefers-color-scheme:dark){' + darkBanner('html:not([data-theme="light"]) ') + '}' +
         darkBanner('html[data-theme="dark"] ');

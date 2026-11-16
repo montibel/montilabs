@@ -7,32 +7,33 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página no encontrada — Montilabs</title>
+    <title>Página no encontrada | Montilabs</title>
     <meta name="robots" content="noindex" />
     <style>
+      @font-face { font-family: 'Schibsted Grotesk'; font-style: normal; font-weight: 400 900; font-display: swap; src: url("/assets/fonts/schibsted-grotesk-latin.woff2") format('woff2'); }
       @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); }
-      @font-face { font-family: 'IBM Plex Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/ibm-plex-mono-400-latin.woff2") format('woff2'); }
       * { box-sizing: border-box; margin: 0; padding: 0; }
-      :root { --ink: #0B1B33; --ink-2: #3B4A61; --muted: #6A7A93; --blue: #1E4FD8; --blue-soft: #EEF3FF; --bg: #F5F7FA; --accent: #1E4FD8; --accent-hover: #163BA6; --i-moon: block; --i-sun: none; color-scheme: light; }
-      @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-soft: #15264A; --bg: #08111F; --accent: #2F5FE6; --accent-hover: #4A76F0; color-scheme: dark; --i-moon: none; --i-sun: block; } }
-      :root[data-theme="dark"] { --ink: #E6ECF5; --ink-2: #B4C1D4; --muted: #8796AE; --blue: #7EA2FF; --blue-soft: #15264A; --bg: #08111F; --accent: #2F5FE6; --accent-hover: #4A76F0; color-scheme: dark; --i-moon: none; --i-sun: block; }
-      body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 32px 24px; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-align: center; }
+      :root { --display: 'Schibsted Grotesk', 'IBM Plex Sans', system-ui, sans-serif; --ink: #15171C; --ink-2: #474B55; --muted: #7A7F8A; --bg: #FFFFFF; --line-strong: #15171C; --blue: #1E4FD8; --blue-ink: #1E4FD8; color-scheme: light; }
+      @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink: #ECEEF2; --ink-2: #B5BAC4; --muted: #858B97; --bg: #0F1A2C; --line-strong: #ECEEF2; --blue-ink: #8FB0FF; color-scheme: dark; } }
+      :root[data-theme="dark"] { --ink: #ECEEF2; --ink-2: #B5BAC4; --muted: #858B97; --bg: #0F1A2C; --line-strong: #ECEEF2; --blue-ink: #8FB0FF; color-scheme: dark; }
+      body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; max-width: 1240px; margin: 0 auto; padding: 32px 24px; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      html { background: var(--bg); }
       a { text-decoration: none; }
-      :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-      .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 56px; }
-      .code { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--blue); background: var(--blue-soft); padding: 6px 10px; border-radius: 4px; margin-bottom: 20px; }
-      h1 { font-size: clamp(30px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.025em; font-weight: 700; margin-bottom: 12px; }
-      p { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 440px; margin-bottom: 32px; }
-      .btn { background: var(--accent); color: #fff; padding: 14px 22px; border-radius: 6px; font-size: 15.5px; font-weight: 600; transition: background .15s; }
-      .btn:hover { background: var(--accent-hover); }
-      .en { margin-top: 28px; margin-bottom: 0; font-size: 14.5px; color: var(--muted); }
-      .en a { color: var(--blue); }
+      :focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; }
+      .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: clamp(48px, 8vw, 96px); align-self: flex-start; }
+      .code { font-family: var(--display); font-size: clamp(96px, 18vw, 220px); line-height: 0.85; font-weight: 800; letter-spacing: -0.06em; color: var(--blue-ink); margin-bottom: 24px; }
+      h1 { font-family: var(--display); font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 800; margin-bottom: 16px; padding-top: 24px; border-top: 1.5px solid var(--line-strong); }
+      p { font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 480px; margin-bottom: 32px; }
+      .btn { align-self: flex-start; background: var(--blue); color: #fff; padding: 15px 24px; border-radius: 3px; font-size: 16px; font-weight: 600; transition: background .15s; }
+      .btn:hover { background: #163BA6; }
+      .en { margin-top: 32px; margin-bottom: 0; font-size: 15px; color: var(--muted); }
+      .en a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 4px; }
     </style>
-  <script src="/assets/consent.js?v=4" defer></script>
+  <script src="/assets/consent.js?v=5" defer></script>
   </head>
   <body>
     <a href="/" class="brand"><svg viewBox="0 0 48 46" width="24" height="23" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>montilabs</a>
-    <div class="code">Error 404</div>
+    <div class="code" aria-hidden="true">404</div>
     <h1>Esta página no existe</h1>
     <p>Puede que el enlace esté desactualizado o que la página se haya movido.</p>
     <a class="btn" href="/">Volver al inicio</a>

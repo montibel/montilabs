@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir _site
           cp -R index.html 404.html privacy.html terms.html google63b5410a80ae356e.html \
-            CNAME robots.txt sitemap.xml favicon.svg favicon.ico apple-touch-icon.png og-image.png \
+            CNAME robots.txt sitemap.xml favicon.svg favicon.ico apple-touch-icon.png og-image.png og-image-en.png \
             assets en fintech ley-karin tecnicas-de-comunicacion logo _site/
           find _site -name .DS_Store -delete
 
