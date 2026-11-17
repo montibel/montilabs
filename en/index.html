@@ -51,6 +51,7 @@
       "url": "https://montilabs.cl/",
       "logo": "https://montilabs.cl/logo/favicon-512.png",
       "email": "hola@montilabs.cl",
+      "sameAs": ["https://www.instagram.com/montilabs/"],
       "description": "Creative agency: interactive experiences, video, motion design, e-learning and UX/UI design for companies.",
       "areaServed": [
         { "@type": "City", "name": "Santiago" },
@@ -190,6 +191,16 @@
       .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
       .hero-ctas { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
       @media (max-width: 860px) { .hero-ctas { justify-content: flex-start; } }
+
+      /* Reel de portada */
+      .hero-reel { position: relative; margin: clamp(40px, 5vw, 64px) 0 0; aspect-ratio: 2 / 1; border-radius: 4px; overflow: hidden; background: #0F1A2C; }
+      .hero-reel video { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .reel-toggle { position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.92); color: #15171C; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+      .reel-toggle:hover { background: #fff; }
+      .reel-toggle .i-play { display: none; }
+      .reel-toggle[aria-pressed="true"] .i-play { display: block; }
+      .reel-toggle[aria-pressed="true"] .i-pause { display: none; }
+      @media (max-width: 600px) { .hero-reel { aspect-ratio: 16 / 9; } }
 
       /* Demo */
       .demo { border: 1.5px solid var(--line-strong); border-radius: 6px; background: var(--card); overflow: hidden; }
@@ -367,14 +378,20 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <h1><span class="h1-kicker">Creative agency for video, e-learning and UX/UI</span>Design that <em>speaks for you</em></h1>
+          <h1><span class="h1-kicker">Creative agency for video, e-learning and UX/UI</span>We make the complicated <em>simple</em></h1>
           <div class="hero-foot">
-            <p>We make interactive experiences, video, motion design and e-learning for companies that want to communicate clearly and with style. We are a creative agency based in Santiago, Chile.</p>
+            <p>Video, e-learning and UX/UI design to train teams: onboarding, platform tutorials and compliance training. We are a creative agency based in Santiago, Chile.</p>
             <div class="hero-ctas">
               <a href="#work" class="link">See our work</a>
               <a href="#contact" class="btn btn-blue btn-big">Contact us</a>
             </div>
           </div>
+          <figure class="hero-reel">
+            <video autoplay muted loop playsinline preload="metadata" poster="/assets/screenshots/reel-portada.jpg" aria-hidden="true" tabindex="-1">
+              <source src="/assets/videos/reel-portada.mp4" type="video/mp4" />
+            </video>
+            <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pause video" data-label-pause="Pause video" data-label-play="Play video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+          </figure>
         </div>
       </section>
 
@@ -394,12 +411,17 @@
                 <p>Short, clear videos that explain what your company does.</p>
               </div>
               <ul class="points">
+                <li>Product animation and brand pieces in motion design.</li>
                 <li>Motion design explainers for operational workflows and financial products.</li>
                 <li>Platform video tutorials, step by step and without manuals.</li>
                 <li>Welcome, company culture and compliance videos (Chile's Ley Karin, internal protocols).</li>
               </ul>
             </div>
             <div class="projects">
+              <a class="project" href="/assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Coca-Cola: Product animation">
+            <div class="project-img"><img src="/assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
+            <div class="project-body"><span class="who">Coca-Cola</span><h3>Cans in motion</h3><p>Product animation.</p><span class="open">Watch video</span></div>
+          </a>
               <a class="project" href="/assets/videos/metlife-portal-intermediarios.mp4" data-video data-title="MetLife: Intermediary Portal">
             <div class="project-img"><img src="/assets/screenshots/metlife-portal-intermediarios.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">2:24</span></div>
             <div class="project-body"><span class="who">MetLife, video tutorial</span><h3>Intermediary Portal</h3><p>How to log in to the portal, verify your identity and update your contact details.</p><span class="open">Watch video</span></div>
@@ -530,7 +552,7 @@
           <div>
             <h2>Let's talk</h2>
             <p>Tell us what your team needs and we'll get back to you with a proposal.</p>
-            <p class="contact-mail">Or email us directly at <a href="mailto:hola@montilabs.cl?subject=Contact">hola@montilabs.cl</a></p>
+            <p class="contact-mail">Or email us directly at <a href="mailto:hola@montilabs.cl?subject=Contact">hola@montilabs.cl</a> or follow us on Instagram: <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">@montilabs</a></p>
           </div>
           <form class="contact-form" action="https://formspree.io/f/xvzndpna" method="POST" data-contact-form>
             <div class="field-row">
@@ -566,8 +588,9 @@
         </div>
         <nav aria-label="Legal">
           <a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a>
+          <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">Instagram</a>
           <a href="/en/privacy.html">Privacy</a>
-          <a href="#" data-cookie-settings>Cookies</a>
+          <a href="/en/privacy.html#cookies" data-cookie-settings>Cookies</a>
           <a href="/en/terms.html">Terms</a>
         </nav>
       </div>
@@ -732,6 +755,28 @@
           video.load();
         });
       })();
+      (function () {
+        // Reel de portada: se detiene con el botón o si la persona prefiere menos movimiento
+        var btn = document.querySelector('[data-reel-toggle]');
+        if (!btn) return;
+        var video = btn.parentNode.querySelector('video');
+        function sync() {
+          var paused = video.paused;
+          btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+          btn.setAttribute('aria-label', btn.getAttribute(paused ? 'data-label-play' : 'data-label-pause'));
+        }
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          video.removeAttribute('autoplay');
+          video.pause();
+        }
+        btn.addEventListener('click', function () {
+          if (video.paused) video.play().catch(function () {}); else video.pause();
+        });
+        video.addEventListener('play', sync);
+        video.addEventListener('pause', sync);
+        sync();
+      })();
+
     </script>
   </body>
 </html>

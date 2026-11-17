@@ -50,6 +50,7 @@
       "url": "https://montilabs.cl/",
       "logo": "https://montilabs.cl/logo/favicon-512.png",
       "email": "hola@montilabs.cl",
+      "sameAs": ["https://www.instagram.com/montilabs/"],
       "description": "Agencia creativa: experiencias interactivas, video, motion design, e-learning y diseño UX/UI para empresas.",
       "areaServed": [
         { "@type": "City", "name": "Santiago" },
@@ -189,6 +190,16 @@
       .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
       .hero-ctas { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
       @media (max-width: 860px) { .hero-ctas { justify-content: flex-start; } }
+
+      /* Reel de portada */
+      .hero-reel { position: relative; margin: clamp(40px, 5vw, 64px) 0 0; aspect-ratio: 2 / 1; border-radius: 4px; overflow: hidden; background: #0F1A2C; }
+      .hero-reel video { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .reel-toggle { position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(255,255,255,0.92); color: #15171C; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+      .reel-toggle:hover { background: #fff; }
+      .reel-toggle .i-play { display: none; }
+      .reel-toggle[aria-pressed="true"] .i-play { display: block; }
+      .reel-toggle[aria-pressed="true"] .i-pause { display: none; }
+      @media (max-width: 600px) { .hero-reel { aspect-ratio: 16 / 9; } }
 
       /* Demo */
       .demo { border: 1.5px solid var(--line-strong); border-radius: 6px; background: var(--card); overflow: hidden; }
@@ -366,14 +377,20 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <h1><span class="h1-kicker">Agencia creativa de video, e-learning y UX/UI</span>Diseñamos lo que tu marca <em>quiere decir</em></h1>
+          <h1><span class="h1-kicker">Agencia creativa de video, e-learning y UX/UI</span>Hacemos <em>simple</em> lo complicado</h1>
           <div class="hero-foot">
-            <p>Hacemos experiencias interactivas, video, motion design y e-learning para empresas que quieren comunicar con claridad y con estilo. Somos una agencia creativa de Santiago de Chile.</p>
+            <p>Video, e-learning y diseño UX/UI para capacitar equipos: onboarding, tutoriales de plataformas y cumplimiento normativo, como la Ley Karin. Somos una agencia creativa de Santiago de Chile.</p>
             <div class="hero-ctas">
               <a href="#trabajo" class="link">Ver trabajo</a>
               <a href="#contacto" class="btn btn-blue btn-big">Contáctanos</a>
             </div>
           </div>
+          <figure class="hero-reel">
+            <video autoplay muted loop playsinline preload="metadata" poster="/assets/screenshots/reel-portada.jpg" aria-hidden="true" tabindex="-1">
+              <source src="/assets/videos/reel-portada.mp4" type="video/mp4" />
+            </video>
+            <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pausar video" data-label-pause="Pausar video" data-label-play="Reproducir video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+          </figure>
         </div>
       </section>
 
@@ -393,12 +410,17 @@
                 <p>Videos cortos y claros para explicar lo que hace tu empresa.</p>
               </div>
               <ul class="points">
+                <li>Animación de producto y piezas de marca en motion design.</li>
                 <li>Explainers en motion design para flujos operativos y productos financieros.</li>
                 <li>Videotutoriales de plataformas, paso a paso y sin manuales.</li>
                 <li>Videos de bienvenida, cultura corporativa y cumplimiento normativo (Ley Karin, protocolos internos).</li>
               </ul>
             </div>
             <div class="projects">
+              <a class="project" href="assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Coca-Cola: Animación de producto">
+            <div class="project-img"><img src="assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
+            <div class="project-body"><span class="who">Coca-Cola</span><h3>Lata en movimiento</h3><p>Animación de producto.</p><span class="open">Ver video</span></div>
+          </a>
               <a class="project" href="assets/videos/metlife-portal-intermediarios.mp4" data-video data-title="MetLife: Portal de Intermediarios">
             <div class="project-img"><img src="assets/screenshots/metlife-portal-intermediarios.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">2:24</span></div>
             <div class="project-body"><span class="who">MetLife, videotutorial</span><h3>Portal de Intermediarios</h3><p>Cómo ingresar al portal, validar la identidad y actualizar los datos de contacto.</p><span class="open">Ver video</span></div>
@@ -529,7 +551,7 @@
           <div>
             <h2>¿Hablamos?</h2>
             <p>Cuéntanos qué necesita tu equipo y te respondemos con una propuesta.</p>
-            <p class="contact-mail">O escríbenos directo a <a href="mailto:hola@montilabs.cl?subject=Contacto">hola@montilabs.cl</a></p>
+            <p class="contact-mail">O escríbenos directo a <a href="mailto:hola@montilabs.cl?subject=Contacto">hola@montilabs.cl</a> o síguenos en Instagram: <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">@montilabs</a></p>
           </div>
           <form class="contact-form" action="https://formspree.io/f/xvzndpna" method="POST" data-contact-form>
             <div class="field-row">
@@ -565,8 +587,9 @@
         </div>
         <nav aria-label="Legal">
           <a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a>
+          <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">Instagram</a>
           <a href="privacy.html">Privacidad</a>
-          <a href="#" data-cookie-settings>Cookies</a>
+          <a href="/privacy.html#cookies" data-cookie-settings>Cookies</a>
           <a href="terms.html">Términos</a>
         </nav>
       </div>
@@ -731,6 +754,28 @@
           video.load();
         });
       })();
+      (function () {
+        // Reel de portada: se detiene con el botón o si la persona prefiere menos movimiento
+        var btn = document.querySelector('[data-reel-toggle]');
+        if (!btn) return;
+        var video = btn.parentNode.querySelector('video');
+        function sync() {
+          var paused = video.paused;
+          btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+          btn.setAttribute('aria-label', btn.getAttribute(paused ? 'data-label-play' : 'data-label-pause'));
+        }
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          video.removeAttribute('autoplay');
+          video.pause();
+        }
+        btn.addEventListener('click', function () {
+          if (video.paused) video.play().catch(function () {}); else video.pause();
+        });
+        video.addEventListener('play', sync);
+        video.addEventListener('pause', sync);
+        sync();
+      })();
+
     </script>
   </body>
 </html>
