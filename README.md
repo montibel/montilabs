@@ -7,8 +7,9 @@ HTML estático publicado en GitHub Pages (detrás de Cloudflare) con cada push a
 ## Estructura
 
 - `index.html`: home
-- `en/`: versión en inglés del home, privacidad y términos. Si cambias un texto en español, actualiza también su par en `en/` (las demos `fintech/` y `ley-karin/` solo existen en español)
+- `en/`: versión en inglés del home, privacidad y términos. Si cambias un texto en español, actualiza también su par en `en/` (las demos `fintech/`, `ley-karin/` y `joyeria/` solo existen en español)
 - `fintech/`: Tutorial Banca Digital
+- `joyeria/`: portafolio de diseño 3D de joyería (renders y modelos en `assets/joyeria/`, videos en `assets/videos/joyeria-*.mp4`)
 - `privacy.html`, `terms.html`, `404.html`
 - `assets/fonts/`: Schibsted Grotesk (títulos), IBM Plex Sans (texto) e IBM Plex Mono (solo la demo `fintech/`)
 - `assets/screenshots/`: capturas de proyectos

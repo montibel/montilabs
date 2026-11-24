@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diseño 3D de joyería | Montilabs</title>
+    <meta name="description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0F1A2C" />
+    <link rel="canonical" href="https://montilabs.cl/joyeria/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://montilabs.cl/joyeria/" />
+    <meta property="og:title" content="Diseño 3D de joyería — Montilabs" />
+    <meta property="og:description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta property="og:image" content="https://montilabs.cl/assets/screenshots/joyeria-solitario.jpg" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="Montilabs" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Diseño 3D de joyería — Montilabs" />
+    <meta name="twitter:description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta name="twitter:image" content="https://montilabs.cl/assets/screenshots/joyeria-solitario.jpg" />
+
+    <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face { font-family: 'Schibsted Grotesk'; font-style: normal; font-weight: 400 900; font-display: swap; src: url("/assets/fonts/schibsted-grotesk-latin-ext.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: 'Schibsted Grotesk'; font-style: normal; font-weight: 400 900; font-display: swap; src: url("/assets/fonts/schibsted-grotesk-latin.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-stretch: 100%; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin-ext.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+      @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400 700; font-stretch: 100%; font-display: swap; src: url("/assets/fonts/ibm-plex-sans-latin.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+      :root {
+        --display: 'Schibsted Grotesk', 'IBM Plex Sans', system-ui, sans-serif;
+        --text: 'IBM Plex Sans', system-ui, sans-serif;
+        --ink: #ECEEF2;
+        --ink-2: #B5BAC4;
+        --muted: #858B97;
+        --bg: #0F1A2C;
+        --bg-2: #15223A;
+        --line: #233250;
+        --line-strong: #ECEEF2;
+        --blue: #1E4FD8;
+        --blue-ink: #8FB0FF;
+        --yellow: #F4C430;
+        --header-bg: rgba(15,26,44,0.92);
+        --studio: #E4E4E4;
+        color-scheme: dark;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+      body { margin: 0; background: var(--bg); font-family: var(--text); color: var(--ink); -webkit-font-smoothing: antialiased; }
+      a { color: var(--blue-ink); }
+      [id] { scroll-margin-top: 72px; }
+      img, video { max-width: 100%; }
+      .wrap { max-width: 1240px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+      .link { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 5px; transition: color .15s; }
+      .link:hover { color: var(--blue-ink); }
+      :focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 2px; }
+
+      /* Header (igual al home) */
+      .site-header { position: sticky; top: 0; z-index: 10; background: var(--header-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+      .site-header .wrap { padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+      .brand span { font-family: var(--display); font-size: 21px; font-weight: 800; letter-spacing: -0.03em; }
+      .nav { display: flex; align-items: center; gap: 24px; }
+      .nav-links { display: flex; gap: 26px; font-size: 15px; }
+      .nav-links a { color: var(--ink-2); text-decoration: none; }
+      .nav-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
+      @media (max-width: 720px) { .nav-links { display: none; } }
+      .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 3px; font: 600 14.5px var(--text); text-decoration: none; cursor: pointer; transition: background .15s, color .15s; }
+      .btn-blue { background: var(--blue); color: #fff; padding: 11px 18px; }
+      .btn-blue:hover { background: #163BA6; color: #fff; }
+      .btn-yellow { background: var(--yellow); color: #15171C; padding: 13px 20px; font-weight: 700; }
+      .btn-yellow:hover { background: #fff; }
+
+      /* Hero */
+      .hero .wrap { padding-top: clamp(48px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 72px); }
+      .eyebrow { margin: 0 0 16px; font-size: 14px; font-weight: 600; color: var(--yellow); letter-spacing: .02em; }
+      h1 { margin: 0 0 clamp(24px, 3vw, 36px); font-family: var(--display); font-size: clamp(36px, 5.6vw, 72px); line-height: 1; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance; max-width: 14ch; }
+      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: start; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
+      @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
+      .hero-foot p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 540px; text-wrap: pretty; }
+      .points { list-style: none; margin: 0; padding: 0; }
+      .points li { padding: 13px 0 13px 22px; position: relative; font-size: 15px; line-height: 1.55; border-top: 1px solid var(--line); }
+      .points li:first-child { border-top: 0; padding-top: 0; }
+      .points li::before { content: ""; position: absolute; left: 0; top: 22px; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
+      .points li:first-child::before { top: 9px; }
+      .pieces-nav { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
+
+      /* Pieza */
+      .piece { border-top: 1px solid var(--line); }
+      .piece .wrap { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); }
+      .piece-head { display: flex; justify-content: space-between; align-items: end; gap: 16px 32px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 44px); }
+      .piece-head .num { display: block; font-size: 13.5px; color: var(--muted); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+      .piece-head h2 { margin: 0; font-family: var(--display); font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+      .piece-head p { margin: 10px 0 0; font-size: 17px; color: var(--ink-2); max-width: 560px; }
+
+      .piece-main { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+      @media (max-width: 900px) { .piece-main { grid-template-columns: minmax(0, 1fr); } }
+      .stage { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--studio); }
+      .stage video, .stage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .reel-toggle { position: absolute; right: 14px; bottom: 14px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: rgba(21,23,28,0.82); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+      .reel-toggle:hover { background: #15171C; }
+      .reel-toggle .i-play { display: none; }
+      .reel-toggle[aria-pressed="true"] .i-play { display: block; }
+      .reel-toggle[aria-pressed="true"] .i-pause { display: none; }
+
+      .spec h3 { margin: 0 0 4px; font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.015em; }
+      .spec .sub { margin: 0 0 18px; font-size: 14px; color: var(--muted); }
+      .spec dl { margin: 0 0 28px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr); }
+      .spec dt, .spec dd { margin: 0; padding: 11px 0; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.45; }
+      .spec dt { color: var(--muted); padding-right: 16px; }
+      .spec dd { color: var(--ink); }
+      .spec dd small { display: block; color: var(--muted); font-size: 13px; }
+      .ok { color: #4FD08F; font-weight: 600; }
+      .actions { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
+
+      .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+      @media (max-width: 900px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      .shot { margin: 0; }
+      .shot button { display: block; width: 100%; padding: 0; border: 0; background: var(--studio); border-radius: 4px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1; }
+      .shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+      .shot button:hover img { transform: scale(1.04); }
+      .shot figcaption { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+      @media (prefers-reduced-motion: reduce) { .shot img, .shot button:hover img { transition: none; transform: none; } }
+
+      /* Proceso */
+      .process { background: var(--bg-2); border-top: 1px solid var(--line); }
+      .process .wrap { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); }
+      .process h2 { margin: 0 0 clamp(28px, 4vw, 44px); font-family: var(--display); font-size: clamp(28px, 3.2vw, 42px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; }
+      .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: s; }
+      @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 520px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+      .steps li { counter-increment: s; border-top: 1.5px solid var(--line-strong); padding-top: 18px; }
+      .steps li::before { content: "0" counter(s); display: block; font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--yellow); margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+      .steps b { display: block; font-family: var(--display); font-size: 19px; letter-spacing: -0.015em; margin-bottom: 8px; }
+      .steps p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+
+      /* Cierre */
+      .cta .wrap { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+      .cta h2 { margin: 0; font-family: var(--display); font-size: clamp(26px, 3vw, 38px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 22ch; }
+
+      /* Diálogos (visor 3D y ampliación) */
+      dialog.modal { border: 0; padding: 0; background: transparent; width: min(1000px, calc(100vw - 32px)); max-width: none; max-height: none; overflow: visible; color: #fff; }
+      dialog.modal::backdrop { background: rgba(10,14,22,0.9); }
+      .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; }
+      .modal-head h3 { margin: 0; font-family: var(--display); font-size: 18px; font-weight: 700; }
+      .modal-close { border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #fff; border-radius: 3px; padding: 8px 12px; font: 600 13.5px var(--text); cursor: pointer; }
+      .modal-close:hover { background: rgba(255,255,255,0.1); }
+      .viewer-box { position: relative; aspect-ratio: 4 / 3; max-height: calc(100vh - 140px); width: 100%; border-radius: 4px; overflow: hidden; background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, #DADCE0 100%); }
+      model-viewer { width: 100%; height: 100%; --poster-color: transparent; }
+      .viewer-hint { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+      .zoom-img { display: block; width: 100%; max-height: calc(100vh - 120px); object-fit: contain; border-radius: 4px; background: var(--studio); }
+
+      /* Footer (igual al home) */
+      .site-footer { border-top: 1px solid var(--line); }
+      .site-footer .wrap { padding-top: 32px; padding-bottom: 32px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+      .site-footer .who { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+      .site-footer .who b { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; }
+      .site-footer .who span { color: var(--muted); }
+      .site-footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+      .site-footer nav a { color: var(--ink-2); text-decoration: none; }
+      .site-footer nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+    </style>
+    <script src="/assets/consent.js?v=5" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a href="/" class="brand" aria-label="montilabs, inicio">
+          <svg viewBox="0 0 48 46" width="24" height="23" fill="none" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>
+          <span>montilabs</span>
+        </a>
+        <nav class="nav" aria-label="Principal">
+          <div class="nav-links">
+            <a href="#solitario">Solitario</a>
+            <a href="#halo">Halo</a>
+            <a href="#proceso">Proceso</a>
+            <a href="/#diseno-3d">Todo el trabajo</a>
+          </div>
+          <a href="/#contacto" class="btn btn-blue">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">Diseño 3D de joyería</p>
+          <h1>Anillos de compromiso, del boceto al archivo de producción</h1>
+          <div class="hero-foot">
+            <p>Modelo cada pieza a medida real, en milímetros, con la talla y la piedra del cliente. Entrego renders para presentar la propuesta y un archivo revisado, listo para imprimir en resina castable y fundir.</p>
+            <ul class="points">
+              <li>Modelado a medida: talla, ancho y grosor del aro, piedra central y engaste.</li>
+              <li>Archivo de producción: malla cerrada, asientos de piedra y grosores mínimos para fundición.</li>
+              <li>Renders de estudio y video giratorio para clientes y redes.</li>
+              <li>Visor 3D para revisar la pieza desde cualquier ángulo.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pieza 01: Solitario -->
+      <section id="solitario" class="piece" aria-labelledby="solitario-title">
+        <div class="wrap">
+          <div class="piece-head">
+            <div>
+              <span class="num">01 / 02</span>
+              <h2 id="solitario-title">Solitario clásico</h2>
+              <p>Cuatro garras y galería, en oro amarillo. La pieza base de cualquier catálogo de compromiso.</p>
+            </div>
+          </div>
+          <div class="piece-main">
+            <div class="stage">
+              <video autoplay muted loop playsinline preload="metadata" poster="/assets/joyeria/solitario-tres-cuartos-800.webp" aria-label="Solitario girando 360 grados">
+                <source src="/assets/videos/joyeria-solitario-giro.mp4" type="video/mp4" />
+              </video>
+              <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="spec">
+              <h3>Ficha técnica</h3>
+              <p class="sub">Medidas del archivo de producción</p>
+              <dl>
+                <dt>Metal</dt><dd>Oro amarillo 18k</dd>
+                <dt>Talla</dt><dd>6 US<small>Ø interior 16,5 mm</small></dd>
+                <dt>Aro</dt><dd>2,0 × 1,6 mm<small>Interior comfort fit</small></dd>
+                <dt>Piedra central</dt><dd>Brillante redondo 6,5 mm<small>≈ 1 ct</small></dd>
+                <dt>Engaste</dt><dd>4 garras de Ø 0,9 mm con galería y asientos cortados</dd>
+                <dt>Metal estimado</dt><dd>189,5 mm³<small>≈ 2,9 g en oro 18k</small></dd>
+                <dt>Archivo</dt><dd><span class="ok">Malla cerrada, sin errores</span><small>STL en milímetros, listo para resina castable</small></dd>
+              </dl>
+              <div class="actions">
+                <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/solitario.glb" data-title="Solitario clásico"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
+              </div>
+            </div>
+          </div>
+          <div class="gallery">
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/solitario-frente-800.webp" alt="Solitario de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/solitario-perfil-800.webp" alt="Solitario de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/solitario-arriba-800.webp" alt="Solitario visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-detalle.webp" aria-label="Ampliar detalle del engaste"><img src="/assets/joyeria/solitario-detalle-800.webp" alt="Detalle de las garras y la galería del solitario" loading="lazy" width="800" height="800" /></button><figcaption>Detalle del engaste</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pieza 02: Halo -->
+      <section id="halo" class="piece" aria-labelledby="halo-title">
+        <div class="wrap">
+          <div class="piece-head">
+            <div>
+              <span class="num">02 / 02</span>
+              <h2 id="halo-title">Halo de diamantes</h2>
+              <p>Piedra central rodeada por 22 brillantes, en oro blanco. Más presencia sin subir el tamaño de la piedra principal.</p>
+            </div>
+          </div>
+          <div class="piece-main">
+            <div class="stage">
+              <video autoplay muted loop playsinline preload="metadata" poster="/assets/joyeria/halo-tres-cuartos-800.webp" aria-label="Anillo halo girando 360 grados">
+                <source src="/assets/videos/joyeria-halo-giro.mp4" type="video/mp4" />
+              </video>
+              <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="spec">
+              <h3>Ficha técnica</h3>
+              <p class="sub">Medidas del archivo de producción</p>
+              <dl>
+                <dt>Metal</dt><dd>Oro blanco 18k</dd>
+                <dt>Talla</dt><dd>6 US<small>Ø interior 16,5 mm</small></dd>
+                <dt>Aro</dt><dd>1,8 × 1,5 mm<small>Interior comfort fit</small></dd>
+                <dt>Piedra central</dt><dd>Brillante redondo 6,5 mm<small>≈ 1 ct, 4 garras con galería</small></dd>
+                <dt>Halo</dt><dd>22 brillantes de 1,2 mm<small>Granos de sujeción y perforación inferior para la luz</small></dd>
+                <dt>Estructura</dt><dd>4 soportes entre el halo y el aro</dd>
+                <dt>Metal estimado</dt><dd>227,4 mm³<small>≈ 3,4 g en oro blanco 18k</small></dd>
+                <dt>Archivo</dt><dd><span class="ok">Malla cerrada, sin errores</span><small>STL en milímetros, listo para resina castable</small></dd>
+              </dl>
+              <div class="actions">
+                <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/halo.glb" data-title="Halo de diamantes"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
+              </div>
+            </div>
+          </div>
+          <div class="gallery">
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/halo-frente-800.webp" alt="Anillo halo de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/halo-perfil-800.webp" alt="Anillo halo de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/halo-arriba-800.webp" alt="Anillo halo visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
+            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-detalle.webp" aria-label="Ampliar detalle del halo"><img src="/assets/joyeria/halo-detalle-800.webp" alt="Detalle del halo y los granos de sujeción" loading="lazy" width="800" height="800" /></button><figcaption>Detalle del halo</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso" class="process" aria-labelledby="proceso-title">
+        <div class="wrap">
+          <h2 id="proceso-title">Cómo trabajo cada pieza</h2>
+          <ol class="steps">
+            <li><b>Requerimientos</b><p>Talla, metal, medidas reales de la piedra y estilo que busca el cliente.</p></li>
+            <li><b>Modelado a medida</b><p>Aro, cabeza y engaste en milímetros, con asientos ajustados a la piedra.</p></li>
+            <li><b>Revisión técnica</b><p>Malla cerrada, grosores mínimos para fundir, volumen y peso estimado del metal.</p></li>
+            <li><b>Render y entrega</b><p>Renders y video para aprobar la propuesta, y el STL para impresión en resina castable.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="wrap">
+          <h2>¿Tienes una pieza en mente? Conversemos.</h2>
+          <a href="/#contacto" class="btn btn-blue">Contacto</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="who">
+          <svg viewBox="0 0 48 46" width="16" height="15" fill="none" aria-hidden="true"><path fill="#1E4FD8" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/></svg>
+          <b>montilabs</b>
+          <span>Santiago, Chile</span>
+        </div>
+        <nav aria-label="Legal">
+          <a href="mailto:hola@montilabs.cl">hola@montilabs.cl</a>
+          <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">Instagram</a>
+          <a href="/privacy.html">Privacidad</a>
+          <a href="/privacy.html#cookies" data-cookie-settings>Cookies</a>
+          <a href="/terms.html">Términos</a>
+        </nav>
+      </div>
+    </footer>
+
+    <dialog class="modal" id="viewer" aria-labelledby="viewer-title">
+      <div class="modal-head">
+        <h3 id="viewer-title">Vista 3D</h3>
+        <button type="button" class="modal-close" data-close>Cerrar</button>
+      </div>
+      <div class="viewer-box" id="viewer-box"></div>
+      <p class="viewer-hint">Arrastra para girar y usa la rueda o pellizca para acercar. El diamante en tiempo real es una aproximación; los renders muestran el acabado final.</p>
+    </dialog>
+
+    <dialog class="modal" id="zoom" aria-label="Imagen ampliada">
+      <div class="modal-head">
+        <h3 id="zoom-title"></h3>
+        <button type="button" class="modal-close" data-close>Cerrar</button>
+      </div>
+      <img class="zoom-img" id="zoom-img" alt="" />
+    </dialog>
+
+    <script>
+      (function () {
+        // Videos giratorios: pausa/reproducir, y sin autoplay si la persona prefiere menos movimiento
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.querySelectorAll('[data-reel-toggle]').forEach(function (btn) {
+          var video = btn.parentNode.querySelector('video');
+          function sync() {
+            var paused = video.paused;
+            btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+            btn.setAttribute('aria-label', paused ? 'Reproducir video' : 'Pausar video');
+          }
+          if (reduce) { video.removeAttribute('autoplay'); video.pause(); }
+          btn.addEventListener('click', function () { if (video.paused) video.play(); else video.pause(); });
+          video.addEventListener('play', sync);
+          video.addEventListener('pause', sync);
+          sync();
+        });
+
+        function wireClose(dlg, onClose) {
+          dlg.querySelector('[data-close]').addEventListener('click', function () { dlg.close(); });
+          dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+          if (onClose) dlg.addEventListener('close', onClose);
+        }
+
+        // Visor 3D: <model-viewer> se carga solo la primera vez que alguien lo abre
+        var viewer = document.getElementById('viewer');
+        var box = document.getElementById('viewer-box');
+        var vTitle = document.getElementById('viewer-title');
+        var mvLoaded = false;
+        function loadModelViewer() {
+          if (mvLoaded) return;
+          mvLoaded = true;
+          var s = document.createElement('script');
+          s.type = 'module';
+          s.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js';
+          document.head.appendChild(s);
+        }
+        if (viewer && typeof viewer.showModal === 'function') {
+          wireClose(viewer, function () { box.innerHTML = ''; });
+          document.querySelectorAll('[data-viewer]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              loadModelViewer();
+              vTitle.textContent = btn.getAttribute('data-title');
+              var mv = document.createElement('model-viewer');
+              mv.setAttribute('src', btn.getAttribute('data-viewer'));
+              mv.setAttribute('alt', 'Modelo 3D: ' + btn.getAttribute('data-title'));
+              mv.setAttribute('camera-controls', '');
+              mv.setAttribute('touch-action', 'pan-y');
+              mv.setAttribute('auto-rotate', '');
+              mv.setAttribute('auto-rotate-delay', '1500');
+              mv.setAttribute('rotation-per-second', '20deg');
+              mv.setAttribute('camera-orbit', '-30deg 70deg auto');
+              mv.setAttribute('shadow-intensity', '0.6');
+              mv.setAttribute('environment-image', 'neutral');
+              mv.setAttribute('exposure', '1.1');
+              mv.setAttribute('interaction-prompt', 'none');
+              box.appendChild(mv);
+              viewer.showModal();
+            });
+          });
+        } else {
+          document.querySelectorAll('[data-viewer]').forEach(function (b) { b.hidden = true; });
+        }
+
+        // Ampliar renders
+        var zoom = document.getElementById('zoom');
+        var zImg = document.getElementById('zoom-img');
+        var zTitle = document.getElementById('zoom-title');
+        if (zoom && typeof zoom.showModal === 'function') {
+          wireClose(zoom, function () { zImg.removeAttribute('src'); });
+          document.querySelectorAll('[data-zoom]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var img = btn.querySelector('img');
+              zImg.src = btn.getAttribute('data-zoom');
+              zImg.alt = img.alt;
+              zTitle.textContent = btn.closest('figure').querySelector('figcaption').textContent;
+              zoom.showModal();
+            });
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

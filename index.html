@@ -324,6 +324,7 @@
             <a href="#video">Video</a>
             <a href="#e-learning">E-learning</a>
             <a href="#ux-ui">UX/UI</a>
+            <a href="#diseno-3d">Diseño 3D</a>
           </div>
           <div class="nav-end">
             <a href="/en/" class="lang" hreflang="en" lang="en"><span class="lang-full">English</span><span class="lang-short">EN</span></a>
@@ -360,6 +361,7 @@
             <button class="wtab" role="tab" id="wtab-video" aria-controls="video" aria-selected="false" tabindex="-1">Video</button>
             <button class="wtab" role="tab" id="wtab-e-learning" aria-controls="e-learning" aria-selected="false" tabindex="-1">E-learning</button>
             <button class="wtab" role="tab" id="wtab-ux-ui" aria-controls="ux-ui" aria-selected="false" tabindex="-1">UX/UI</button>
+            <button class="wtab" role="tab" id="wtab-diseno-3d" aria-controls="diseno-3d" aria-selected="false" tabindex="-1">Diseño 3D</button>
           </div>
 
           <div class="wpanel" role="tabpanel" id="motion" aria-labelledby="wtab-motion" tabindex="0">
@@ -525,6 +527,30 @@
           </a>
             </div>
           </div>
+
+          <div class="wpanel" role="tabpanel" id="diseno-3d" aria-labelledby="wtab-diseno-3d" tabindex="0">
+            <h3 class="wpanel-title">Diseño 3D</h3>
+            <div class="wintro">
+              <div>
+                <p>Diseño y modelado 3D de joyería, con archivos listos para producción y renders para presentar a clientes.</p>
+              </div>
+              <ul class="points">
+                <li>Anillos de compromiso y argollas modelados a medida real.</li>
+                <li>Archivos revisados para impresión 3D en resina castable.</li>
+                <li>Renders de estudio, video giratorio y visor 3D.</li>
+              </ul>
+            </div>
+            <div class="projects">
+              <a class="project" href="joyeria/#solitario">
+            <div class="project-img"><img src="assets/screenshots/joyeria-solitario.jpg" alt="" loading="lazy" /><span class="duration">3D</span></div>
+            <div class="project-body"><span class="who">Alta joyería, modelado y render</span><h3>Solitario clásico</h3><p>Cuatro garras y galería en oro amarillo, listo para resina castable.</p><span class="open">Ver pieza</span></div>
+          </a>
+              <a class="project" href="joyeria/#halo">
+            <div class="project-img"><img src="assets/screenshots/joyeria-halo.jpg" alt="" loading="lazy" /><span class="duration">3D</span></div>
+            <div class="project-body"><span class="who">Alta joyería, modelado y render</span><h3>Halo de diamantes</h3><p>Piedra central rodeada por 22 brillantes, en oro blanco.</p><span class="open">Ver pieza</span></div>
+          </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -656,7 +682,7 @@
       })();
 
       (function () {
-        // Pestañas de trabajo (Motion, Video, E-learning, UX/UI). El enlace #motion, #video, #e-learning o #ux-ui abre su pestaña.
+        // Pestañas de trabajo (Motion, Video, E-learning, UX/UI, Diseño 3D). El enlace #motion, #video, #e-learning, #ux-ui o #diseno-3d abre su pestaña.
         var tabs = Array.prototype.slice.call(document.querySelectorAll('.wtab'));
         var section = document.getElementById('trabajo');
         function select(i, focus) {
