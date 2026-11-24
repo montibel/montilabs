@@ -6,12 +6,12 @@
     sending: 'Sending…',
     doneTitle: 'Message sent',
     doneBody: 'Thanks for writing.',
-    error: 'We couldn\'t send your message. Please try again or email us at hola@montilabs.cl.'
+    error: 'I couldn\'t send your message. Please try again or email me at hola@montilabs.cl.'
   } : {
     sending: 'Enviando…',
     doneTitle: 'Mensaje enviado',
-    doneBody: 'Gracias por escribirnos.',
-    error: 'No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos a hola@montilabs.cl.'
+    doneBody: 'Gracias por escribirme.',
+    error: 'No pude enviar tu mensaje. Inténtalo de nuevo o escríbeme a hola@montilabs.cl.'
   };
 
   function init(form) {

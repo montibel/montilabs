@@ -184,7 +184,6 @@
       .hero .wrap { padding-top: clamp(56px, 9vw, 128px); padding-bottom: clamp(48px, 6vw, 80px); }
       .hero h1 { margin: 0 0 clamp(40px, 5vw, 64px); font-family: var(--display); font-size: clamp(50px, 9vw, 132px); line-height: 0.92; letter-spacing: -0.052em; font-weight: 800; max-width: 11ch; text-wrap: balance; }
       .hero h1 em { font-style: normal; color: var(--blue-ink); }
-      .h1-kicker { display: block; margin-bottom: 20px; font-family: var(--text); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.4; font-weight: 600; letter-spacing: 0; color: var(--ink-2); }
       .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
       @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
       .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
@@ -353,7 +352,7 @@
     </style>
   <script src="/assets/consent.js?v=5" defer></script>
   <script src="/assets/theme.js" defer></script>
-  <script src="/assets/contact-form.js?v=4" defer></script>
+  <script src="/assets/contact-form.js?v=5" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -380,7 +379,7 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <h1><span class="h1-kicker">Agencia creativa de video, e-learning y UX/UI</span>Trabajo <em>seleccionado</em></h1>
+          <h1>Trabajo <em>seleccionado</em></h1>
           <div class="hero-foot">
             <p>Video, motion design, e-learning y diseño UX/UI. Santiago de Chile.</p>
             <div class="hero-ctas">
@@ -422,7 +421,7 @@
             <div class="projects">
               <a class="project project--featured" href="assets/videos/tv-90.mp4" data-video data-title="TV 90">
             <div class="project-img"><img src="assets/screenshots/tv-90.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:16</span></div>
-            <div class="project-body"><span class="who">Destacado, motion design</span><h3>TV 90</h3><p>Un televisor de los noventa y los títulos que marcaron la época.</p><span class="open">Ver video</span></div>
+            <div class="project-body"><span class="who">Destacado, motion design</span><h3>TV 90</h3><p>Composición 3D de un televisor CRT con efecto de líneas de barrido y tipografía animada.</p><span class="open">Ver video</span></div>
           </a>
               <a class="project" href="assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Concepto: animación de producto">
             <div class="project-img"><img src="assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
@@ -556,8 +555,8 @@
         <div class="wrap">
           <div>
             <h2>¿Hablamos?</h2>
-            <p>Cuéntanos qué necesita tu equipo y te respondemos con una propuesta.</p>
-            <p class="contact-mail">O escríbenos directo a <a href="mailto:hola@montilabs.cl?subject=Contacto">hola@montilabs.cl</a> o síguenos en Instagram: <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">@montilabs</a></p>
+            <p>Cuéntame qué necesita tu equipo y te respondo con una propuesta.</p>
+            <p class="contact-mail">O escríbeme directo a <a href="mailto:hola@montilabs.cl?subject=Contacto">hola@montilabs.cl</a> o sígueme en Instagram: <a href="https://www.instagram.com/montilabs/" rel="me noopener" target="_blank">@montilabs</a></p>
           </div>
           <form class="contact-form" action="https://formspree.io/f/xvzndpna" method="POST" data-contact-form>
             <div class="field-row">
@@ -565,12 +564,12 @@
               <label><span>Empresa <small>(opcional)</small></span><input type="text" name="empresa" autocomplete="organization" maxlength="100" /></label>
             </div>
             <label>Correo<input type="email" name="email" autocomplete="email" maxlength="150" required /></label>
-            <label>¿En qué te podemos ayudar?<textarea name="mensaje" rows="4" maxlength="3000" required></textarea></label>
+            <label>¿En qué te puedo ayudar?<textarea name="mensaje" rows="4" maxlength="3000" required></textarea></label>
             <input type="hidden" name="_subject" value="Nuevo contacto desde montilabs.cl" />
             <div hidden><label>No completar este campo<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
             <button type="submit" class="btn btn-white">Enviar mensaje</button>
             <p class="form-status" role="status" aria-live="polite"></p>
-            <p class="cta-note">Usaremos tus datos solo para responderte. Más información en nuestra <a href="privacy.html">política de privacidad</a>.</p>
+            <p class="cta-note">Usaré tus datos solo para responderte. Más información en la <a href="privacy.html">política de privacidad</a>.</p>
           </form>
         </div>
       </section>
