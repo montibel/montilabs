@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Diseño 3D de joyería | Montilabs</title>
-    <meta name="description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta name="description" content="Anillos de compromiso en 3D: renders, video y visor 3D." />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0F1A2C" />
     <link rel="canonical" href="https://montilabs.cl/joyeria/" />
@@ -16,14 +16,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://montilabs.cl/joyeria/" />
     <meta property="og:title" content="Diseño 3D de joyería — Montilabs" />
-    <meta property="og:description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta property="og:description" content="Anillos de compromiso en 3D: renders, video y visor 3D." />
     <meta property="og:image" content="https://montilabs.cl/assets/screenshots/joyeria-solitario.jpg" />
     <meta property="og:locale" content="es_CL" />
     <meta property="og:site_name" content="Montilabs" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Diseño 3D de joyería — Montilabs" />
-    <meta name="twitter:description" content="Anillos de compromiso modelados en 3D a medida real, con archivos listos para impresión en resina castable y renders para presentar a clientes." />
+    <meta name="twitter:description" content="Anillos de compromiso en 3D: renders, video y visor 3D." />
     <meta name="twitter:image" content="https://montilabs.cl/assets/screenshots/joyeria-solitario.jpg" />
 
     <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -83,14 +83,7 @@
       .hero .wrap { padding-top: clamp(48px, 8vw, 112px); padding-bottom: clamp(40px, 5vw, 72px); }
       .eyebrow { margin: 0 0 16px; font-size: 14px; font-weight: 600; color: var(--yellow); letter-spacing: .02em; }
       h1 { margin: 0 0 clamp(24px, 3vw, 36px); font-family: var(--display); font-size: clamp(36px, 5.6vw, 72px); line-height: 1; letter-spacing: -0.04em; font-weight: 800; text-wrap: balance; max-width: 14ch; }
-      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: start; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
-      @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
-      .hero-foot p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 540px; text-wrap: pretty; }
-      .points { list-style: none; margin: 0; padding: 0; }
-      .points li { padding: 13px 0 13px 22px; position: relative; font-size: 15px; line-height: 1.55; border-top: 1px solid var(--line); }
-      .points li:first-child { border-top: 0; padding-top: 0; }
-      .points li::before { content: ""; position: absolute; left: 0; top: 22px; width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); }
-      .points li:first-child::before { top: 9px; }
+      .lead { margin: 0; font-size: 18px; line-height: 1.5; color: var(--ink-2); border-top: 1.5px solid var(--line-strong); padding-top: 24px; }
       .pieces-nav { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
 
       /* Pieza */
@@ -101,7 +94,7 @@
       .piece-head h2 { margin: 0; font-family: var(--display); font-size: clamp(32px, 4.4vw, 56px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
       .piece-head p { margin: 10px 0 0; font-size: 17px; color: var(--ink-2); max-width: 560px; }
 
-      .piece-main { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+      .piece-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
       @media (max-width: 900px) { .piece-main { grid-template-columns: minmax(0, 1fr); } }
       .stage { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--studio); }
       .stage video, .stage img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -111,36 +104,14 @@
       .reel-toggle[aria-pressed="true"] .i-play { display: block; }
       .reel-toggle[aria-pressed="true"] .i-pause { display: none; }
 
-      .spec h3 { margin: 0 0 4px; font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.015em; }
-      .spec .sub { margin: 0 0 18px; font-size: 14px; color: var(--muted); }
-      .spec dl { margin: 0 0 28px; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr); }
-      .spec dt, .spec dd { margin: 0; padding: 11px 0; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.45; }
-      .spec dt { color: var(--muted); padding-right: 16px; }
-      .spec dd { color: var(--ink); }
-      .spec dd small { display: block; color: var(--muted); font-size: 13px; }
-      .ok { color: #4FD08F; font-weight: 600; }
-      .actions { display: flex; gap: 22px; flex-wrap: wrap; align-items: center; }
 
-      .gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
-      @media (max-width: 900px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
       .shot { margin: 0; }
       .shot button { display: block; width: 100%; padding: 0; border: 0; background: var(--studio); border-radius: 4px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1; }
       .shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
       .shot button:hover img { transform: scale(1.04); }
       .shot figcaption { margin-top: 10px; font-size: 13.5px; color: var(--muted); }
       @media (prefers-reduced-motion: reduce) { .shot img, .shot button:hover img { transition: none; transform: none; } }
-
-      /* Proceso */
-      .process { background: var(--bg-2); border-top: 1px solid var(--line); }
-      .process .wrap { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); }
-      .process h2 { margin: 0 0 clamp(28px, 4vw, 44px); font-family: var(--display); font-size: clamp(28px, 3.2vw, 42px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; }
-      .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; counter-reset: s; }
-      @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (max-width: 520px) { .steps { grid-template-columns: minmax(0, 1fr); } }
-      .steps li { counter-increment: s; border-top: 1.5px solid var(--line-strong); padding-top: 18px; }
-      .steps li::before { content: "0" counter(s); display: block; font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--yellow); margin-bottom: 12px; font-variant-numeric: tabular-nums; }
-      .steps b { display: block; font-family: var(--display); font-size: 19px; letter-spacing: -0.015em; margin-bottom: 8px; }
-      .steps p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
 
       /* Cierre */
       .cta .wrap { padding-top: clamp(56px, 8vw, 104px); padding-bottom: clamp(56px, 8vw, 104px); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -181,7 +152,6 @@
           <div class="nav-links">
             <a href="#solitario">Solitario</a>
             <a href="#halo">Halo</a>
-            <a href="#proceso">Proceso</a>
             <a href="/#diseno-3d">Todo el trabajo</a>
           </div>
           <a href="/#contacto" class="btn btn-blue">Contacto</a>
@@ -192,17 +162,9 @@
     <main>
       <section class="hero">
         <div class="wrap">
-          <p class="eyebrow">Diseño 3D de joyería</p>
-          <h1>Anillos de compromiso, del boceto al archivo de producción</h1>
-          <div class="hero-foot">
-            <p>Modelo cada pieza a medida real, en milímetros, con la talla y la piedra del cliente. Entrego renders para presentar la propuesta y un archivo revisado, listo para imprimir en resina castable y fundir.</p>
-            <ul class="points">
-              <li>Modelado a medida: talla, ancho y grosor del aro, piedra central y engaste.</li>
-              <li>Archivo de producción: malla cerrada, asientos de piedra y grosores mínimos para fundición.</li>
-              <li>Renders de estudio y video giratorio para clientes y redes.</li>
-              <li>Visor 3D para revisar la pieza desde cualquier ángulo.</li>
-            </ul>
-          </div>
+          <p class="eyebrow">Diseño 3D</p>
+          <h1>Anillos de compromiso</h1>
+          <p class="lead">Modelado 3D, renders y video.</p>
         </div>
       </section>
 
@@ -213,8 +175,9 @@
             <div>
               <span class="num">01 / 02</span>
               <h2 id="solitario-title">Solitario clásico</h2>
-              <p>Cuatro garras y galería, en oro amarillo. La pieza base de cualquier catálogo de compromiso.</p>
+              <p>Oro amarillo.</p>
             </div>
+            <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/solitario.glb" data-title="Solitario clásico"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
           </div>
           <div class="piece-main">
             <div class="stage">
@@ -223,28 +186,12 @@
               </video>
               <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
             </div>
-            <div class="spec">
-              <h3>Ficha técnica</h3>
-              <p class="sub">Medidas del archivo de producción</p>
-              <dl>
-                <dt>Metal</dt><dd>Oro amarillo 18k</dd>
-                <dt>Talla</dt><dd>6 US<small>Ø interior 16,5 mm</small></dd>
-                <dt>Aro</dt><dd>2,0 × 1,6 mm<small>Interior comfort fit</small></dd>
-                <dt>Piedra central</dt><dd>Brillante redondo 6,5 mm<small>≈ 1 ct</small></dd>
-                <dt>Engaste</dt><dd>4 garras de Ø 0,9 mm con galería y asientos cortados</dd>
-                <dt>Metal estimado</dt><dd>189,5 mm³<small>≈ 2,9 g en oro 18k</small></dd>
-                <dt>Archivo</dt><dd><span class="ok">Malla cerrada, sin errores</span><small>STL en milímetros, listo para resina castable</small></dd>
-              </dl>
-              <div class="actions">
-                <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/solitario.glb" data-title="Solitario clásico"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
-              </div>
+            <div class="gallery">
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/solitario-frente-800.webp" alt="Solitario de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/solitario-perfil-800.webp" alt="Solitario de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/solitario-arriba-800.webp" alt="Solitario visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-detalle.webp" aria-label="Ampliar detalle"><img src="/assets/joyeria/solitario-detalle-800.webp" alt="Detalle del solitario" loading="lazy" width="800" height="800" /></button><figcaption>Detalle</figcaption></figure>
             </div>
-          </div>
-          <div class="gallery">
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/solitario-frente-800.webp" alt="Solitario de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/solitario-perfil-800.webp" alt="Solitario de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/solitario-arriba-800.webp" alt="Solitario visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/solitario-detalle.webp" aria-label="Ampliar detalle del engaste"><img src="/assets/joyeria/solitario-detalle-800.webp" alt="Detalle de las garras y la galería del solitario" loading="lazy" width="800" height="800" /></button><figcaption>Detalle del engaste</figcaption></figure>
           </div>
         </div>
       </section>
@@ -256,8 +203,9 @@
             <div>
               <span class="num">02 / 02</span>
               <h2 id="halo-title">Halo de diamantes</h2>
-              <p>Piedra central rodeada por 22 brillantes, en oro blanco. Más presencia sin subir el tamaño de la piedra principal.</p>
+              <p>Oro blanco.</p>
             </div>
+            <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/halo.glb" data-title="Halo de diamantes"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
           </div>
           <div class="piece-main">
             <div class="stage">
@@ -266,42 +214,13 @@
               </video>
               <button type="button" class="reel-toggle" data-reel-toggle aria-pressed="false" aria-label="Pausar video"><svg class="i-pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
             </div>
-            <div class="spec">
-              <h3>Ficha técnica</h3>
-              <p class="sub">Medidas del archivo de producción</p>
-              <dl>
-                <dt>Metal</dt><dd>Oro blanco 18k</dd>
-                <dt>Talla</dt><dd>6 US<small>Ø interior 16,5 mm</small></dd>
-                <dt>Aro</dt><dd>1,8 × 1,5 mm<small>Interior comfort fit</small></dd>
-                <dt>Piedra central</dt><dd>Brillante redondo 6,5 mm<small>≈ 1 ct, 4 garras con galería</small></dd>
-                <dt>Halo</dt><dd>22 brillantes de 1,2 mm<small>Granos de sujeción y perforación inferior para la luz</small></dd>
-                <dt>Estructura</dt><dd>4 soportes entre el halo y el aro</dd>
-                <dt>Metal estimado</dt><dd>227,4 mm³<small>≈ 3,4 g en oro blanco 18k</small></dd>
-                <dt>Archivo</dt><dd><span class="ok">Malla cerrada, sin errores</span><small>STL en milímetros, listo para resina castable</small></dd>
-              </dl>
-              <div class="actions">
-                <button type="button" class="btn btn-yellow" data-viewer="/assets/joyeria/halo.glb" data-title="Halo de diamantes"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.3L18.7 8 12 11.7 5.3 8 12 4.3ZM5 9.7l6 3.3v6.7l-6-3.3V9.7Zm8 10v-6.7l6-3.3v6.7l-6 3.3Z" fill="currentColor"/></svg>Ver en 3D</button>
-              </div>
+            <div class="gallery">
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/halo-frente-800.webp" alt="Anillo halo de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/halo-perfil-800.webp" alt="Anillo halo de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/halo-arriba-800.webp" alt="Anillo halo visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
+              <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-detalle.webp" aria-label="Ampliar detalle"><img src="/assets/joyeria/halo-detalle-800.webp" alt="Detalle del halo" loading="lazy" width="800" height="800" /></button><figcaption>Detalle</figcaption></figure>
             </div>
           </div>
-          <div class="gallery">
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-frente.webp" aria-label="Ampliar vista de frente"><img src="/assets/joyeria/halo-frente-800.webp" alt="Anillo halo de frente" loading="lazy" width="800" height="800" /></button><figcaption>Frente</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-perfil.webp" aria-label="Ampliar vista de perfil"><img src="/assets/joyeria/halo-perfil-800.webp" alt="Anillo halo de perfil" loading="lazy" width="800" height="800" /></button><figcaption>Perfil</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-arriba.webp" aria-label="Ampliar vista superior"><img src="/assets/joyeria/halo-arriba-800.webp" alt="Anillo halo visto desde arriba" loading="lazy" width="800" height="800" /></button><figcaption>Vista superior</figcaption></figure>
-            <figure class="shot"><button type="button" data-zoom="/assets/joyeria/halo-detalle.webp" aria-label="Ampliar detalle del halo"><img src="/assets/joyeria/halo-detalle-800.webp" alt="Detalle del halo y los granos de sujeción" loading="lazy" width="800" height="800" /></button><figcaption>Detalle del halo</figcaption></figure>
-          </div>
-        </div>
-      </section>
-
-      <section id="proceso" class="process" aria-labelledby="proceso-title">
-        <div class="wrap">
-          <h2 id="proceso-title">Cómo trabajo cada pieza</h2>
-          <ol class="steps">
-            <li><b>Requerimientos</b><p>Talla, metal, medidas reales de la piedra y estilo que busca el cliente.</p></li>
-            <li><b>Modelado a medida</b><p>Aro, cabeza y engaste en milímetros, con asientos ajustados a la piedra.</p></li>
-            <li><b>Revisión técnica</b><p>Malla cerrada, grosores mínimos para fundir, volumen y peso estimado del metal.</p></li>
-            <li><b>Render y entrega</b><p>Renders y video para aprobar la propuesta, y el STL para impresión en resina castable.</p></li>
-          </ol>
         </div>
       </section>
 
