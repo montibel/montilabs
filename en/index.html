@@ -290,6 +290,10 @@
       .project-img { position: relative; aspect-ratio: 16/10; background: var(--line); overflow: hidden; border-radius: 4px; }
       .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
       .project:hover .project-img img { transform: scale(1.035); }
+      .project--featured { grid-column: 1 / -1; }
+      .project--featured .project-img { aspect-ratio: 16/9; background: #0B0B0D; }
+      .project--featured .project-body h3 { font-size: clamp(26px, 3vw, 34px); }
+      @media (min-width: 900px) { .project--featured { display: grid; grid-template-columns: 2fr 1fr; gap: 36px; align-items: end; } }
       .project-body { display: flex; flex-direction: column; gap: 6px; }
       .project-body .who { font-size: 13.5px; color: var(--muted); }
       .project-body h3 { margin: 0; font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
@@ -417,6 +421,10 @@
               </ul>
             </div>
             <div class="projects">
+              <a class="project project--featured" href="/assets/videos/tv-90.mp4" data-video data-title="TV 90">
+            <div class="project-img"><img src="/assets/screenshots/tv-90.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:16</span></div>
+            <div class="project-body"><span class="who">Featured, motion design</span><h3>TV 90</h3><p>A nineties TV set and the titles that defined the era.</p><span class="open">Watch video</span></div>
+          </a>
               <a class="project" href="/assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Concept: product animation">
             <div class="project-img"><img src="/assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
             <div class="project-body"><span class="who">Concept</span><h3>Cans in motion</h3><p>Product animation.</p><span class="open">Watch video</span></div>
