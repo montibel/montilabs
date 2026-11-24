@@ -2,7 +2,7 @@
 <html lang="es-CL">
   <head>
     <meta charset="UTF-8" />
-    <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('montilabs-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+    <script>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -11,8 +11,7 @@
     <meta name="description" content="Agencia creativa en Santiago de Chile. Hacemos experiencias interactivas, video, motion design y e-learning para empresas: cursos SCORM, onboarding corporativo y diseño UX/UI." />
     <meta name="keywords" content="onboarding corporativo Chile, onboarding empresas Chile, capacitación e-learning Chile, plataformas de inducción corporativa, cursos SCORM a medida, inducción laboral animada, capacitación Ley Karin e-learning" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0F1A2C" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#0F1A2C" />
     <link rel="canonical" href="https://montilabs.cl/" />
     <link rel="alternate" hreflang="es" href="https://montilabs.cl/" />
     <link rel="alternate" hreflang="en" href="https://montilabs.cl/en/" />
@@ -82,64 +81,27 @@
       :root {
         --display: 'Schibsted Grotesk', 'IBM Plex Sans', system-ui, sans-serif;
         --text: 'IBM Plex Sans', system-ui, sans-serif;
-        --ink: #15171C;
-        --ink-2: #474B55;
-        --muted: #7A7F8A;
-        --bg: #FFFFFF;
-        --bg-2: #F3F4F6;
-        --line: #E4E5E9;
-        --line-strong: #15171C;
+        --ink: #ECEEF2;
+        --ink-2: #B5BAC4;
+        --muted: #858B97;
+        --bg: #0F1A2C;
+        --bg-2: #15223A;
+        --line: #233250;
+        --line-strong: #ECEEF2;
         --blue: #1E4FD8;
-        --blue-ink: #1E4FD8;
-        --blue-soft: #EAF0FD;
-        --header-bg: rgba(255,255,255,0.92);
-        --card: #FFFFFF;
+        --blue-ink: #8FB0FF;
+        --blue-soft: #18284A;
+        --yellow: #F4C430;
+        --header-bg: rgba(15,26,44,0.92);
+        --card: #15223A;
         --field-bg: #FFFFFF;
         --field-fg: #15171C;
-        --ok: #13804B;
-        --ok-soft: #E7F6EE;
-        --bad: #C2412D;
-        --bad-soft: #FCEDEA;
-        --i-moon: block; --i-sun: none; color-scheme: light;
+        --ok: #4FD08F;
+        --ok-soft: #0F3324;
+        --bad: #FF8A75;
+        --bad-soft: #3A1813;
+        color-scheme: dark;
       }
-      @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-          --ink: #ECEEF2;
-          --ink-2: #B5BAC4;
-          --muted: #858B97;
-          --bg: #0F1A2C;
-          --bg-2: #15223A;
-          --line: #233250;
-          --line-strong: #ECEEF2;
-          --blue-ink: #8FB0FF;
-          --blue-soft: #18284A;
-          --header-bg: rgba(15,26,44,0.92);
-          --card: #15223A;
-          --field-bg: #FFFFFF;
-          --field-fg: #15171C;
-          --ok: #4FD08F;
-          --ok-soft: #0F3324;
-          --bad: #FF8A75;
-          --bad-soft: #3A1813;
-          color-scheme: dark; --i-moon: none; --i-sun: block; } }
-      :root[data-theme="dark"] {
-          --ink: #ECEEF2;
-          --ink-2: #B5BAC4;
-          --muted: #858B97;
-          --bg: #0F1A2C;
-          --bg-2: #15223A;
-          --line: #233250;
-          --line-strong: #ECEEF2;
-          --blue-ink: #8FB0FF;
-          --blue-soft: #18284A;
-          --header-bg: rgba(15,26,44,0.92);
-          --card: #15223A;
-          --field-bg: #FFFFFF;
-          --field-fg: #15171C;
-          --ok: #4FD08F;
-          --ok-soft: #0F3324;
-          --bad: #FF8A75;
-          --bad-soft: #3A1813;
-          color-scheme: dark; --i-moon: none; --i-sun: block; }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -167,26 +129,26 @@
       .lang:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
       .lang-short { display: none; }
       @media (max-width: 420px) { .lang-full { display: none; } .lang-short { display: inline; } .nav-end { gap: 12px; } .site-header .wrap { gap: 12px; } }
-      .theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); cursor: pointer; flex: none; }
-      .theme-toggle:hover { color: var(--ink); background: var(--bg-2); }
-      .theme-toggle .i-moon { display: var(--i-moon); }
-      .theme-toggle .i-sun { display: var(--i-sun); }
 
       /* Buttons */
       .btn { display: inline-block; border-radius: 3px; font-weight: 600; text-decoration: none; transition: background .15s, color .15s, box-shadow .15s; }
       .btn-blue { background: var(--blue); color: #fff; padding: 11px 18px; font-size: 14.5px; }
       .btn-blue:hover { background: #163BA6; color: #fff; }
       .btn-big { padding: 16px 26px; font-size: 16px; }
-      .btn-white { background: #fff; color: #15171C; padding: 15px 26px; font-size: 16px; font-weight: 700; }
-      .btn-white:hover { background: #15171C; color: #fff; }
+      .btn-white { background: var(--yellow); color: #15171C; padding: 15px 26px; font-size: 16px; font-weight: 700; }
+      .btn-white:hover { background: #fff; color: #15171C; }
 
-      /* Hero */
+      /* Hero: bloque amarillo, con colores fijos en modo claro y oscuro */
+      .hero { background: var(--yellow); color: #15171C; }
+      .hero h1 { color: #15171C; }
+      .hero .link { color: #15171C; text-decoration-color: #15171C; }
+      .hero .link:hover { color: #15171C; text-decoration-thickness: 3px; }
       .hero .wrap { padding-top: clamp(56px, 9vw, 128px); padding-bottom: clamp(48px, 6vw, 80px); }
       .hero h1 { margin: 0 0 clamp(24px, 3vw, 36px); font-family: var(--display); font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; text-wrap: balance; }
       .hero h1 em { font-style: normal; }
-      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
+      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid #15171C; padding-top: 28px; }
       @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
-      .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
+      .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: #3B3422; max-width: 560px; text-wrap: pretty; }
       .hero-ctas { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
       @media (max-width: 860px) { .hero-ctas { justify-content: flex-start; } }
 
@@ -263,7 +225,7 @@
       .wtabs::-webkit-scrollbar { display: none; }
       .wtab { flex: none; border: 0; background: none; padding: 0 0 16px; margin-bottom: -1px; border-bottom: 4px solid transparent; font: 800 clamp(22px, 6.6vw, 72px)/1 var(--display); letter-spacing: -0.045em; color: var(--muted); cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s; }
       .wtab:hover { color: var(--ink); }
-      .wtab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--blue); }
+      .wtab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--yellow); }
       .wpanel[hidden] { display: none; }
       .wpanel-title { margin: 0 0 24px; font-family: var(--display); font-size: clamp(32px, 5vw, 64px); line-height: 1; letter-spacing: -0.045em; font-weight: 800; }
       .js .wpanel-title { display: none; }
@@ -298,9 +260,9 @@
       .project-body p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
       .project-body .open { align-self: flex-start; margin-top: 8px; font-size: 14.5px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 5px; }
       .project:hover .open { color: var(--blue-ink); }
-      .play-badge { position: absolute; left: 14px; bottom: 14px; width: 46px; height: 46px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; transition: transform .15s; }
+      .play-badge { position: absolute; left: 14px; bottom: 14px; width: 46px; height: 46px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; transition: transform .15s; }
       .project:hover .play-badge { transform: scale(1.08); }
-      .duration { position: absolute; right: 12px; bottom: 12px; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: #15171C; background: #fff; padding: 4px 8px; border-radius: 2px; }
+      .duration { position: absolute; right: 12px; bottom: 12px; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: #15171C; background: var(--yellow); padding: 4px 8px; border-radius: 2px; }
       @media (prefers-reduced-motion: reduce) { .project-img img, .project:hover .project-img img, .play-badge, .project:hover .play-badge { transition: none; transform: none; } }
 
       /* Reproductor */
@@ -351,7 +313,6 @@
       .contact :focus-visible { outline-color: #fff; }
     </style>
   <script src="/assets/consent.js?v=5" defer></script>
-  <script src="/assets/theme.js" defer></script>
   <script src="/assets/contact-form.js?v=5" defer></script>
   </head>
   <body>
@@ -369,7 +330,6 @@
           </div>
           <div class="nav-end">
             <a href="/en/" class="lang" hreflang="en" lang="en"><span class="lang-full">English</span><span class="lang-short">EN</span></a>
-            <button type="button" class="theme-toggle" data-theme-toggle aria-label="Cambiar a modo oscuro" title="Cambiar a modo oscuro"><svg class="i-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.1A8.5 8.5 0 1 1 9.9 3.5a6.8 6.8 0 0 0 10.6 10.6z"/></svg><svg class="i-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg></button>
             <a href="#contacto" class="btn btn-blue">Contáctanos</a>
           </div>
         </nav>
