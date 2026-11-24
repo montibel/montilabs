@@ -138,17 +138,13 @@
       .btn-white { background: var(--yellow); color: #15171C; padding: 15px 26px; font-size: 16px; font-weight: 700; }
       .btn-white:hover { background: #fff; color: #15171C; }
 
-      /* Hero: bloque amarillo, con colores fijos en modo claro y oscuro */
-      .hero { background: var(--yellow); color: #15171C; }
-      .hero h1 { color: #15171C; }
-      .hero .link { color: #15171C; text-decoration-color: #15171C; }
-      .hero .link:hover { color: #15171C; text-decoration-thickness: 3px; }
+      /* Hero */
       .hero .wrap { padding-top: clamp(56px, 9vw, 128px); padding-bottom: clamp(48px, 6vw, 80px); }
       .hero h1 { margin: 0 0 clamp(24px, 3vw, 36px); font-family: var(--display); font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; text-wrap: balance; }
       .hero h1 em { font-style: normal; }
-      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid #15171C; padding-top: 28px; }
+      .hero-foot { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: end; border-top: 1.5px solid var(--line-strong); padding-top: 28px; }
       @media (max-width: 860px) { .hero-foot { grid-template-columns: minmax(0, 1fr); } }
-      .hero p { margin: 0; font-size: 19px; line-height: 1.6; color: #3B3422; max-width: 560px; text-wrap: pretty; }
+      .hero p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 560px; text-wrap: pretty; }
       .hero-ctas { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
       @media (max-width: 860px) { .hero-ctas { justify-content: flex-start; } }
 
@@ -221,9 +217,9 @@
       /* Trabajo: pestañas */
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
       .work .wrap { padding-top: clamp(24px, 4vw, 48px); padding-bottom: clamp(72px, 10vw, 128px); }
-      .wtabs { display: flex; gap: clamp(16px, 4.5vw, 64px); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; margin-bottom: clamp(40px, 5vw, 64px); }
+      .wtabs { display: flex; gap: clamp(20px, 3vw, 40px); border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; margin-bottom: clamp(40px, 5vw, 64px); }
       .wtabs::-webkit-scrollbar { display: none; }
-      .wtab { flex: none; border: 0; background: none; padding: 0 0 16px; margin-bottom: -1px; border-bottom: 4px solid transparent; font: 800 clamp(22px, 6.6vw, 72px)/1 var(--display); letter-spacing: -0.045em; color: var(--muted); cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s; }
+      .wtab { flex: none; border: 0; background: none; padding: 0 0 14px; margin-bottom: -1px; border-bottom: 3px solid transparent; font: 700 clamp(18px, 2vw, 24px)/1 var(--display); letter-spacing: -0.015em; color: var(--muted); cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s; }
       .wtab:hover { color: var(--ink); }
       .wtab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--yellow); }
       .wpanel[hidden] { display: none; }
@@ -238,14 +234,14 @@
       .wintro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px clamp(40px, 6vw, 88px); align-items: start; margin-bottom: clamp(56px, 7vw, 88px); }
       @media (max-width: 960px) { .wintro { grid-template-columns: minmax(0, 1fr); } }
       .wintro h3 { margin: 0 0 18px; font-family: var(--display); font-size: clamp(28px, 3.2vw, 42px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; text-wrap: balance; }
-      .wintro > div > p { margin: 0 0 28px; font-size: 18px; line-height: 1.6; color: var(--ink-2); max-width: 540px; text-wrap: pretty; }
+      .wintro > div > p { margin: 0 0 28px; font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 540px; text-wrap: pretty; }
       .points { list-style: none; margin: 0; padding: 0; }
-      .points li { padding: 16px 0 16px 26px; position: relative; font-size: 16px; line-height: 1.55; border-top: 1px solid var(--line); }
-      .points li::before { content: ""; position: absolute; left: 0; top: 24px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+      .points li { padding: 13px 0 13px 22px; position: relative; font-size: 15px; line-height: 1.55; border-top: 1px solid var(--line); }
+      .points li::before { content: ""; position: absolute; left: 0; top: 22px; width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
       .wintro > div > .points { margin-bottom: 8px; }
 
       /* Proyectos */
-      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 48px 28px; }
+      .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 48px 32px; }
       .project { display: flex; flex-direction: column; gap: 16px; color: var(--ink); text-decoration: none; }
       .project-img { position: relative; aspect-ratio: 16/10; background: var(--line); overflow: hidden; border-radius: 4px; }
       .project-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
@@ -256,7 +252,7 @@
       @media (min-width: 900px) { .project--featured { display: grid; grid-template-columns: 2fr 1fr; gap: 36px; align-items: end; } }
       .project-body { display: flex; flex-direction: column; gap: 6px; }
       .project-body .who { font-size: 13.5px; color: var(--muted); }
-      .project-body h3 { margin: 0; font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.15; }
+      .project-body h3 { margin: 0; font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.15; }
       .project-body p { margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink-2); }
       .project-body .open { align-self: flex-start; margin-top: 8px; font-size: 14.5px; font-weight: 600; text-decoration: underline; text-decoration-color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 5px; }
       .project:hover .open { color: var(--blue-ink); }
@@ -278,8 +274,8 @@
       .contact { background: #1E4FD8; color: #fff; }
       .contact .wrap { padding-top: clamp(72px, 10vw, 128px); padding-bottom: clamp(72px, 10vw, 128px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 88px); align-items: start; }
       @media (max-width: 860px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); } }
-      .contact h2 { margin: 0 0 24px; font-family: var(--display); font-size: clamp(44px, 6.6vw, 88px); line-height: 0.96; letter-spacing: -0.045em; font-weight: 800; color: #fff; }
-      .contact p { margin: 0; font-size: 19px; line-height: 1.6; color: #DCE5FB; max-width: 440px; }
+      .contact h2 { margin: 0 0 20px; font-family: var(--display); font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; color: #fff; }
+      .contact p { margin: 0; font-size: 17px; line-height: 1.6; color: #DCE5FB; max-width: 440px; }
       .contact a { color: #fff; text-underline-offset: 4px; }
       .contact p.contact-mail { margin-top: 28px; font-size: 16px; }
       .contact-form { display: grid; gap: 16px; }
@@ -324,6 +320,7 @@
         </a>
         <nav class="nav" aria-label="Principal">
           <div class="nav-links">
+            <a href="#motion">Motion Design &amp; VFX</a>
             <a href="#video">Video</a>
             <a href="#e-learning">E-learning</a>
             <a href="#ux-ui">UX/UI</a>
@@ -360,9 +357,39 @@
         <div class="wrap">
           <h2 id="trabajo-title" class="sr-only">Nuestro trabajo</h2>
           <div class="wtabs" role="tablist" aria-label="Áreas de trabajo">
-            <button class="wtab" role="tab" id="wtab-video" aria-controls="video" aria-selected="true">Video</button>
+            <button class="wtab" role="tab" id="wtab-motion" aria-controls="motion" aria-selected="true">Motion Design &amp; VFX</button>
+            <button class="wtab" role="tab" id="wtab-video" aria-controls="video" aria-selected="false" tabindex="-1">Video</button>
             <button class="wtab" role="tab" id="wtab-e-learning" aria-controls="e-learning" aria-selected="false" tabindex="-1">E-learning</button>
             <button class="wtab" role="tab" id="wtab-ux-ui" aria-controls="ux-ui" aria-selected="false" tabindex="-1">UX/UI</button>
+          </div>
+
+          <div class="wpanel" role="tabpanel" id="motion" aria-labelledby="wtab-motion" tabindex="0">
+            <h3 class="wpanel-title">Motion Design &amp; VFX</h3>
+            <div class="wintro">
+              <div>
+                <p>Animación, composición y efectos visuales para marcas.</p>
+              </div>
+              <ul class="points">
+                <li>Animación de producto y piezas de marca.</li>
+                <li>Composición 3D y efectos de pantalla.</li>
+                <li>Logos animados, cierres y transiciones.</li>
+                <li>Tipografía en movimiento.</li>
+              </ul>
+            </div>
+            <div class="projects">
+              <a class="project project--featured" href="assets/videos/tv-90.mp4" data-video data-title="TV 90">
+            <div class="project-img"><img src="assets/screenshots/tv-90.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:16</span></div>
+            <div class="project-body"><span class="who">Destacado, motion design</span><h3>TV 90</h3><p>Composición 3D de un televisor CRT con efecto de líneas de barrido y tipografía animada.</p><span class="open">Ver video</span></div>
+          </a>
+              <a class="project" href="assets/videos/atn-hitos.mp4" data-video data-title="ATN: Hitos">
+            <div class="project-img"><img src="assets/screenshots/atn-hitos.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:43</span></div>
+            <div class="project-body"><span class="who">ATN, motion design</span><h3>Hitos ATN</h3><p>Línea de tiempo animada con tipografía cinética, etiquetas de color y textura de pizarra.</p><span class="open">Ver video</span></div>
+          </a>
+              <a class="project" href="assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Concepto: animación de producto">
+            <div class="project-img"><img src="assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
+            <div class="project-body"><span class="who">Concepto</span><h3>Lata en movimiento</h3><p>Animación de producto.</p><span class="open">Ver video</span></div>
+          </a>
+            </div>
           </div>
 
           <div class="wpanel" role="tabpanel" id="video" aria-labelledby="wtab-video" tabindex="0">
@@ -372,21 +399,12 @@
                 <p>Videos cortos y claros para explicar lo que hace tu empresa.</p>
               </div>
               <ul class="points">
-                <li>Animación de producto y piezas de marca en motion design.</li>
                 <li>Explainers en motion design para flujos operativos y productos financieros.</li>
                 <li>Videotutoriales de plataformas, paso a paso y sin manuales.</li>
                 <li>Videos de bienvenida, cultura corporativa y cumplimiento normativo (Ley Karin, protocolos internos).</li>
               </ul>
             </div>
             <div class="projects">
-              <a class="project project--featured" href="assets/videos/tv-90.mp4" data-video data-title="TV 90">
-            <div class="project-img"><img src="assets/screenshots/tv-90.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:16</span></div>
-            <div class="project-body"><span class="who">Destacado, motion design</span><h3>TV 90</h3><p>Composición 3D de un televisor CRT con efecto de líneas de barrido y tipografía animada.</p><span class="open">Ver video</span></div>
-          </a>
-              <a class="project" href="assets/videos/coca-cola-animacion-producto.mp4" data-video data-title="Concepto: animación de producto">
-            <div class="project-img"><img src="assets/screenshots/coca-cola-animacion-producto.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">0:09</span></div>
-            <div class="project-body"><span class="who">Concepto</span><h3>Lata en movimiento</h3><p>Animación de producto.</p><span class="open">Ver video</span></div>
-          </a>
               <a class="project" href="assets/videos/metlife-portal-intermediarios.mp4" data-video data-title="MetLife: Portal de Intermediarios">
             <div class="project-img"><img src="assets/screenshots/metlife-portal-intermediarios.jpg" alt="" loading="lazy" /><span class="play-badge" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="#15171C"/></svg></span><span class="duration">2:24</span></div>
             <div class="project-body"><span class="who">MetLife, videotutorial</span><h3>Portal de Intermediarios</h3><p>Cómo ingresar al portal, validar la identidad y actualizar los datos de contacto.</p><span class="open">Ver video</span></div>
@@ -639,7 +657,7 @@
       })();
 
       (function () {
-        // Pestañas de trabajo (Video, E-learning, UX/UI). El enlace #video, #e-learning o #ux-ui abre su pestaña.
+        // Pestañas de trabajo (Motion, Video, E-learning, UX/UI). El enlace #motion, #video, #e-learning o #ux-ui abre su pestaña.
         var tabs = Array.prototype.slice.call(document.querySelectorAll('.wtab'));
         var section = document.getElementById('trabajo');
         function select(i, focus) {
